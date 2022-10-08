@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  background-color: var(--bg-header);
+}
+
+.logo {
+  display: flex;
+  padding: 18px 24px;
+}
+
+.front {
+  font-size: 32px;
+  font-weight: 700;
+  margin-right: 9px;
+}
+
+.back {
+  font-size: 32px;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.user {
+  display: flex;
+  margin: 0 24px;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.logout {
+  height: 40px;
+  width: 76.72px;
+  color: #FFFFFF;
+  font-weight: 500;
+  border: none;
+  background-color: #DC3E3E;
+}
