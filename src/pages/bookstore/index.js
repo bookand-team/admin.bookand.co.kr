@@ -1,7 +1,21 @@
-const BookStore = () => {
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import Main from '../../components/main';
+import { setPage } from '../../redux/reducers/page';
+
+const Bookstore = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPage({ section: 'bookstore' }));
+  }, []);
+
   return (
-    <div>BookStore</div>
+    <Main>
+      Bookstore
+    </Main>
   );
 };
 
-export default BookStore;
+export default Bookstore;

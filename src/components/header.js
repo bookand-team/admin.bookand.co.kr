@@ -5,7 +5,7 @@ import styles from '../styles/header.module.css';
 const Header = () => {
   return (
     <>
-      <div className={styles.container}>
+      <header className={styles.container}>
         <Link href='/dashboard'>
           <a>
             <div className={styles.logo}>
@@ -18,7 +18,7 @@ const Header = () => {
           <div className={styles.username}>{`username`}</div>
           <button className={styles.logout}>{`로그아웃`}</button>
         </div>
-      </div>
+      </header>
     </>
   );
 };

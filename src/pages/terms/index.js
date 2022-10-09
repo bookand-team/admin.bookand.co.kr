@@ -4,18 +4,18 @@ import { useDispatch } from 'react-redux';
 import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
 
-const Article = () => {
+const Terms = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setPage({ section: 'article' }));
+    dispatch(setPage({ section: 'terms' }));
   }, []);
 
   return (
     <Main>
-      Article
+      Terms
     </Main>
   );
 };
 
-export default Article;
+export default Terms;
