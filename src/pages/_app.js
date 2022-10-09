@@ -1,4 +1,5 @@
 import Header from '../components/header';
+import wrapper from '../redux/store';
 import '../styles/global.css';
 
 const App = ({ Component, pageProps }) => {
@@ -10,4 +11,4 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-export default App;
+export default wrapper.withRedux(App);
