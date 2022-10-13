@@ -1,0 +1,102 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container h2 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 100%;
+  margin: 25px 20px;
+}
+
+.search {
+  display: flex;
+  height: 40px;
+  margin-right: 34px;
+}
+
+.search>div {
+  display: flex;
+  width: 362px;
+  border: 1px solid #BEBEBE;
+  margin-right: 10px;
+}
+
+.search>div>div {
+  width: 150px;
+  text-align: center;
+  padding: 9px 0;
+  background-color: #E4E4E4;
+}
+
+.search input {
+  width: 212px;
+  border: none;
+  outline: none;
+  padding-left: 12px;
+}
+
+.search>button {
+  width: 72px;
+  color: #FFFFFF;
+  line-height: 100%;
+  font-weight: 500;
+  background-color: #333333;
+  border: none;
+  cursor: pointer;
+}
+
+.table {
+  margin-bottom: 30px;
+}
+
+.subjectRow {
+  display: flex;
+  height: 40px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid #000000;
+}
+
+.row {
+  display: flex;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid #BEBEBE;
+  cursor: pointer;
+}
+
+.id,
+.category,
+.view,
+.bookmark,
+.status {
+  flex-basis: 10%;
+}
+
+.title,
+.createdDate,
+.exposedDate,
+.modifiedDate {
+  flex-basis: 20%;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+.page>button {
+  border: none;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  margin: 0 8px;
+}
+
+.current {
+  font-weight: 600;
+}

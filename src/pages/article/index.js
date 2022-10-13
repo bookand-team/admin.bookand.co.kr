@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Management from '../../components/article/management';
+import Registration from '../../components/article/registration';
 import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
 
@@ -13,7 +15,8 @@ const Article = () => {
 
   return (
     <Main>
-      Article
+      <Management />
+      <Registration />
     </Main>
   );
 };
