@@ -1,3 +1,12 @@
+:root {
+  --bg-header: #D9D9D9;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR';
+}
+
 html,
 body,
 div,
@@ -8,13 +17,30 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+a,
+ol,
+ul,
+li {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+}
+
+html,
+body,
+div,
+span,
+p,
+a,
+ol,
+ul,
+li,
+button {
+  font-size: 14px;
 }
 
 a {
@@ -25,15 +51,6 @@ a {
 ol,
 ul {
   list-style: none;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR';
-}
-
-:root {
-  --bg-header: #D9D9D9;
 }
 
 main {

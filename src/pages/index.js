@@ -1,6 +1,17 @@
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+
 const Home = () => {
+  const router = useRouter();
+
+  const moveDashboard = useCallback(() => {
+    router.push('/dashboard');
+  });
+
   return (
-    <div>Home</div>
+    <div>
+      <button onClick={moveDashboard}>dashboard로</button>
+    </div>
   );
 };
 
