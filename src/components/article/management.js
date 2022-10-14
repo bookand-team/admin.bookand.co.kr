@@ -1,5 +1,5 @@
 import styles from '../../styles/article/management.module.css';
-import Page from './page';
+import Page from '../page';
 
 const Management = () => {
   return (
@@ -14,7 +14,7 @@ const Management = () => {
           <button>검색</button>
         </div>
       </div>
-      <div className={styles.table}>
+      <div className={styles.contents}>
         <div className={styles.subjectRow}>
           <div className={styles.id}>번호</div>
           <div className={styles.title}>아티클 제목</div>

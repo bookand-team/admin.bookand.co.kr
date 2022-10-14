@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.page>button {
+  border: none;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  margin: 0 8px;
+}
+
+.current {
+  font-weight: 600;
+}

@@ -1,13 +1,11 @@
-.container h2 {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 100%;
-  margin: 25px 20px;
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
 }
 
-.container>div {
+.contents {
   display: flex;
-  margin-bottom: 60px;
 }
 
 .section {
@@ -15,19 +13,18 @@
   height: 200px;
   border-radius: 30px;
   background-color: #E4E4E4;
-  padding-left: 16px;
-  margin: 0 44px;
+  padding: 18px;
+  margin: 10px 50px;
 }
 
-.section>h4 {
-  font-size: 30px;
+.section h4 {
+  font-size: 25px;
   font-weight: 700;
   line-height: 100%;
-  margin-top: 13px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
-.section>p {
+.section p {
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 400;

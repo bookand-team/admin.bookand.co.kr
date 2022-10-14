@@ -56,3 +56,10 @@ ul {
 main {
   margin: 40px 24px;
 }
+
+h2 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 100%;
+  margin: 25px 20px;
+}

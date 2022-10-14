@@ -1,4 +1,4 @@
-import styles from '../../styles/article/management.module.css';
+import styles from '../styles/page.module.css';
 
 const Page = () => {
   return (

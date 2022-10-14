@@ -3,8 +3,10 @@ import styles from '../../styles/dashboard/current_situation.module.css';
 const CurrentSituation = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles}>현황통계</h2>
-      <div>
+      <div className={styles.header}>
+        <h2>현황 통계</h2>
+      </div>
+      <div className={styles.contents}>
         <div className={styles.section}>
           <h4>아티클</h4>
           <p>총 게시글 수: 00</p>
