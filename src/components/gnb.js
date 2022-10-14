@@ -13,10 +13,10 @@ const Gnb = () => {
       <ul>
         {globalMenu.map((menu, idx) => {
           return (
-            <Link key={idx} href={`${menu[0]}`}>
+            <Link key={idx} href={`/${menu[0]}`}>
               {
                 section === menu[0]
-                  ? <a><li className={styles.current}>{`${menu[1]}`}</li></a>
+                  ? <a className={styles.current}><li>{`${menu[1]}`}</li></a>
                   : <a><li>{`${menu[1]}`}</li></a>
               }
             </Link>
