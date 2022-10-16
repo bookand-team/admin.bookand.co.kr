@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Management from '../../components/bookstore/management';
 import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
 
@@ -13,7 +14,7 @@ const Bookstore = () => {
 
   return (
     <Main>
-      Bookstore
+      <Management />
     </Main>
   );
 };
