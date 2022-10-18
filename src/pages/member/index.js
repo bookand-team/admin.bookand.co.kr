@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Main from '../../components/main';
+import Management from '../../components/member/management';
 import { setPage } from '../../redux/reducers/page';
 
 const Member = () => {
@@ -13,7 +14,7 @@ const Member = () => {
 
   return (
     <Main>
-      Member
+      <Management />
     </Main>
   );
 };
