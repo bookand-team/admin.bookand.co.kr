@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 80px);
+  margin: 0;
+}
+
+.header {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.container form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.id {
+  height: 50px;
+  border: 1px solid #868686;
+  border-radius: 10px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 6px 0;
+}
+
+.password {
+  height: 50px;
+  border: 1px solid #868686;
+  border-radius: 10px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 6px 0;
+}
+
+.container button {
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #121212;
+  border-radius: 10px;
+  margin: 20px 0;
+  cursor: pointer;
+}

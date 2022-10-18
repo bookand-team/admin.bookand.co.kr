@@ -1,17 +1,8 @@
-import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import Login from '../components/login';
 
 const Home = () => {
-  const router = useRouter();
-
-  const moveDashboard = useCallback(() => {
-    router.push('/dashboard');
-  });
-
   return (
-    <div>
-      <button onClick={moveDashboard}>dashboard로</button>
-    </div>
+    <Login />
   );
 };
 
