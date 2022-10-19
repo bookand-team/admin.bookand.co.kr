@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  height: 40px;
+  margin-right: 34px;
+}
+
+.search>div {
+  display: flex;
+  width: 362px;
+  border: 1px solid #BEBEBE;
+  margin-right: 10px;
+}
+
+.search>div>div {
+  width: 150px;
+  text-align: center;
+  padding: 9px 0;
+  background-color: #E4E4E4;
+}
+
+.search input {
+  width: 212px;
+  border: none;
+  outline: none;
+  padding-left: 12px;
+}
+
+.search>button {
+  width: 72px;
+  color: #FFFFFF;
+  line-height: 100%;
+  font-weight: 500;
+  background-color: #333333;
+  border: none;
+  cursor: pointer;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.id,
+.device,
+.feedbackNumber,
+.type {
+  flex: 1;
+}
+
+.email,
+.createdDate {
+  flex: 2;
+}
+
+.content {
+  flex: 3;
+}
