@@ -10,10 +10,10 @@ const Page = () => {
   return (
     <nav className={styles.page}>
       <button className={styles.left2}>
-        <Image Image src={leftArrow2Icon} alt='left arrow icon' />
+        <Image src={leftArrow2Icon} alt='left arrow icon' />
       </button>
       <button className={styles.left}>
-        <Image Image src={leftArrowIcon} alt='left arrow icon' />
+        <Image src={leftArrowIcon} alt='left arrow icon' />
       </button>
       <button className={styles.current}>1</button>
       <button>2</button>
@@ -21,10 +21,10 @@ const Page = () => {
       <button>4</button>
       <button>5</button>
       <button className={styles.right}>
-        <Image Image src={rightArrowIcon} alt='right arrow icon' />
+        <Image src={rightArrowIcon} alt='right arrow icon' />
       </button>
       <button className={styles.right2}>
-        <Image Image src={rightArrow2Icon} alt='right arrow icon' />
+        <Image src={rightArrow2Icon} alt='right arrow icon' />
       </button>
     </nav>
   );
