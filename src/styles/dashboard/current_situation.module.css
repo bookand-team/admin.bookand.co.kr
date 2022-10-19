@@ -6,28 +6,28 @@
 
 .contents {
   display: flex;
+  margin: 0 20px;
 }
 
 .section {
-  width: 250px;
+  width: 220px;
   height: 200px;
   border-radius: 30px;
   background-color: #E4E4E4;
-  padding: 18px;
-  margin: 10px 50px;
+  padding: 16px;
+  margin: 0 9px;
+  white-space: nowrap;
 }
 
 .section h4 {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 700;
-  line-height: 100%;
   margin-bottom: 30px;
 }
 
 .section p {
   font-family: 'Roboto';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 23px;
   align-items: center;
 }

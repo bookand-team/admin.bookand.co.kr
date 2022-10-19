@@ -32,6 +32,12 @@ const CurrentSituation = () => {
           <p>Android 회원수: 00</p>
           <p>IOS 회원수: 00</p>
         </div>
+        <div className={styles.section}>
+          <h4>서점제보 & 피드백</h4>
+          <p>미노출 서점제보 수: 00</p>
+          <p>오늘 접수된 피드백 수: 00</p>
+          <p>이번주 접수된 피드백 수: 00</p>
+        </div>
       </div>
     </div>
   );
