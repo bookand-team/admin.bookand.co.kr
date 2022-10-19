@@ -1,10 +1,10 @@
 .page {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  align-items: center;
 }
 
-.page>button {
+.page button {
   border: none;
   background-color: #FFFFFF;
   cursor: pointer;
@@ -13,4 +13,18 @@
 
 .current {
   font-weight: 600;
+}
+
+.left2 {
+  padding: 7px 0 0 0;
+}
+
+.left,
+.right {
+  padding-top: 6px;
+  padding-bottom: 0;
+}
+
+.right2 {
+  padding: 3px 0 0 0;
 }
