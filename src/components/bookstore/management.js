@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/bookstore/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
+import Search from '../search';
 
 const Management = () => {
   const router = useRouter();
@@ -27,13 +28,7 @@ const Management = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>서점 관리</h2>
-        <div className={styles.search}>
-          <div>
-            <div>서점명</div>
-            <input />
-          </div>
-          <button>검색</button>
-        </div>
+        <Search search='서점명' />
       </div>
       <div className={styles.contents}>
         <div className={tableStyles.table}>

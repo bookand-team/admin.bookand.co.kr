@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/article/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
+import Search from '../search';
 
 const Management = () => {
   const { articles, articlesLength } = useSelector(state => state.articles);
@@ -21,13 +22,7 @@ const Management = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>아티클 관리</h2>
-        <div className={styles.search}>
-          <div>
-            <div>아티클 제목</div>
-            <input />
-          </div>
-          <button>검색</button>
-        </div>
+        <Search search='아티클 제목' />
       </div>
       <div className={styles.contents}>
         <div className={tableStyles.table}>

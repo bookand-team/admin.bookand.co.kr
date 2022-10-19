@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/member/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
+import Search from '../search';
 
 const Management = () => {
   const { members, membersLength } = useSelector((state) => state.members);
@@ -21,13 +22,7 @@ const Management = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>회원 관리</h2>
-        <div className={styles.search}>
-          <div>
-            <div>닉네임</div>
-            <input />
-          </div>
-          <button>검색</button>
-        </div>
+        <Search search='닉네임' />
       </div>
       <div className={styles.contents}>
         <div className={tableStyles.table}>

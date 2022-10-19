@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  height: 40px;
+  margin-right: 34px;
+}
+
+.container>div {
+  display: flex;
+  width: 362px;
+  border: 1px solid #BEBEBE;
+  margin-right: 10px;
+}
+
+.container>div>div {
+  width: 150px;
+  text-align: center;
+  padding: 9px 0;
+  background-color: #E4E4E4;
+}
+
+.container input {
+  width: 212px;
+  border: none;
+  outline: none;
+  padding-left: 12px;
+}
+
+.container button {
+  width: 72px;
+  color: #FFFFFF;
+  line-height: 100%;
+  font-weight: 500;
+  background-color: #333333;
+  border: none;
+  cursor: pointer;
+}
