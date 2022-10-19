@@ -52,24 +52,6 @@
   flex-direction: column;
 }
 
-.subjectRow {
-  display: flex;
-  height: 40px;
-  font-weight: 600;
-  text-align: center;
-  align-items: center;
-  border-bottom: 1px solid #000000;
-}
-
-.row {
-  display: flex;
-  height: 40px;
-  text-align: center;
-  align-items: center;
-  border-bottom: 1px solid #BEBEBE;
-  cursor: pointer;
-}
-
 .id,
 .category,
 .view,

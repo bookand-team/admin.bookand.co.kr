@@ -1,0 +1,24 @@
+.table {
+  margin-bottom: 30px;
+}
+
+.thead {
+  font-weight: 600;
+  border-bottom: 1px solid #000000;
+}
+
+.tr {
+  display: flex;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid #BEBEBE;
+}
+
+.table ul .tr {
+  cursor: pointer;
+}
+
+.table ul .tr:hover {
+  background-color: #F1F1F1;
+}
