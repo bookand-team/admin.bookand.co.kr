@@ -64,7 +64,7 @@ const Management = () => {
           </ul>
         </div>
       </div>
-      <Page />
+      <Page tableRow={tableRow} contentsLength={bookstoresLength} />
       <div className={styles.buttons}>
         <button className={styles.registration} onClick={moveRegistration}>서점 추가하기</button>
         <button className={styles.removal}>삭제하기</button>

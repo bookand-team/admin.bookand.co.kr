@@ -53,7 +53,7 @@ const Management = () => {
           </ul>
         </div>
       </div>
-      <Page />
+      <Page tableRow={tableRow} contentsLength={reportsLength} />
     </div>
   );
 };
