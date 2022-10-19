@@ -1,22 +1,16 @@
-import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/feedback/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
 
 const Management = () => {
-  const { feedbacks, feedbacksLength } = useSelector(state => state.feedbacks);
+  const { feedbacks, feedbacksLength } = useSelector((state) => state.feedbacks);
+  const { page } = useSelector((state) => state.page);
 
-  const tableRows = 10;
-  const emptyArray = useCallback(() => {
-    const ret = [];
-    for (var i = 0; i < tableRows - feedbacksLength; i++) {
-      ret.push(null);
-    }
-    return ret;
-  }, []);
+  const tableRow = 10;
 
   return (
     <div className={styles.container}>
@@ -51,7 +45,7 @@ const Management = () => {
                 </li>
               );
             })}
-            {feedbacksLength !== tableRows && emptyArray().map((report, idx) => {
+            {isRowInsufficient(page, tableRow, feedbacksLength) && makeEmptyArray(page, tableRow, feedbacksLength).map((report, idx) => {
               return (
                 <li key={idx} className={tableStyles.tr}></li>
               );

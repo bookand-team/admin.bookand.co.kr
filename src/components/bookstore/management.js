@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/bookstore/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
@@ -10,15 +11,9 @@ import Search from '../search';
 const Management = () => {
   const router = useRouter();
   const { bookstores, bookstoresLength } = useSelector((state) => state.bookstores);
+  const { page } = useSelector((state) => state.page);
 
-  const tableRows = 10;
-  const emptyArray = useCallback(() => {
-    const ret = [];
-    for (var i = 0; i < tableRows - bookstoresLength; i++) {
-      ret.push(null);
-    }
-    return ret;
-  }, []);
+  const tableRow = 10;
 
   const moveRegistration = useCallback(() => {
     router.push('/bookstore/registration');
@@ -61,7 +56,7 @@ const Management = () => {
                 </li>
               );
             })}
-            {bookstoresLength !== tableRows && emptyArray().map((bookstore, idx) => {
+            {isRowInsufficient(page, tableRow, bookstoresLength) && makeEmptyArray(page, tableRow, bookstoresLength).map((bookstore, idx) => {
               return (
                 <li key={idx} className={tableStyles.tr}></li>
               );
