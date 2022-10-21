@@ -27,24 +27,28 @@ const Page = ({ tableRow = 5, maxSelection = 10, contentsLength }) => {
       }
     }
     return array;
-  }, [page]);
+  }, [page, contentsLength]);
 
   /** 이전 pages로 이동  */
   const moveToPreviousPages = useCallback(() => {
-    if (page > 10) {
-      const newQuery = changeQuery(router, search, parseInt((page - 1) / maxSelection) * maxSelection);
-      router.push(`${router.pathname}${newQuery}`);
-    } else {
-      const newQuery = changeQuery(router, search, 1);
-      router.push(`${router.pathname}${newQuery}`);
+    if (page !== null) {
+      if (page > 10) {
+        const newQuery = changeQuery(router, search, parseInt((page - 1) / maxSelection) * maxSelection);
+        router.push(`${router.pathname}${newQuery}`);
+      } else {
+        const newQuery = changeQuery(router, search, 1);
+        router.push(`${router.pathname}${newQuery}`);
+      }
     }
   }, [router, search, page]);
 
   /** 이전 page로 이동 */
   const moveToPreviousPage = useCallback(() => {
-    if (page > 1) {
-      const newQuery = changeQuery(router, search, page - 1);
-      router.push(`${router.pathname}${newQuery}`);
+    if (page !== null) {
+      if (page > 1) {
+        const newQuery = changeQuery(router, search, page - 1);
+        router.push(`${router.pathname}${newQuery}`);
+      }
     }
   }, [router, search, page]);
 
@@ -56,20 +60,33 @@ const Page = ({ tableRow = 5, maxSelection = 10, contentsLength }) => {
 
   /** 다음 page로 이동 */
   const moveToNextPage = useCallback(() => {
-    if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
-      const newQuery = changeQuery(router, search, page + 1);
-      router.push(`${router.pathname}${newQuery}`);
-    } else {
+    if (page === null) {
       const newQuery = changeQuery(router, search, 2);
+      router.push(`${router.pathname}${newQuery}`);
+    } else if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
+      const newQuery = changeQuery(router, search, page + 1);
       router.push(`${router.pathname}${newQuery}`);
     }
   }, [router, search, page, contentsLength]);
 
   /** 다음 pages로 이동 */
   const moveToNextPages = useCallback(() => {
-    if (parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
-      const newQuery = changeQuery(router, search, parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1);
-      router.push(`${router.pathname}${newQuery}`);
+    if (page === null) {
+      if (maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
+        const newQuery = changeQuery(router, search, maxSelection + 1);
+        router.push(`${router.pathname}${newQuery}`);
+      } else {
+        const newQuery = changeQuery(router, search, parseInt((contentsLength - 1) / tableRow) + 1);
+        router.push(`${router.pathname}${newQuery}`);
+      }
+    } else if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
+      if (parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
+        const newQuery = changeQuery(router, search, parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1);
+        router.push(`${router.pathname}${newQuery}`);
+      } else {
+        const newQuery = changeQuery(router, search, parseInt((contentsLength - 1) / tableRow) + 1);
+        router.push(`${router.pathname}${newQuery}`);
+      }
     }
   }, [router, search, page, contentsLength]);
 
