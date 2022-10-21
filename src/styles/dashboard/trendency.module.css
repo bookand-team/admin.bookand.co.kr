@@ -3,3 +3,18 @@
   flex-direction: column;
   margin-bottom: 60px;
 }
+
+.subcontents {
+  margin: 15px 50px;
+}
+
+.contents h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.graphWrapper {
+  width: 1100px;
+  margin: 0 auto;
+}

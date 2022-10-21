@@ -1,4 +1,5 @@
 import styles from '../../styles/dashboard/trendency.module.css';
+import Article from './graph/article';
 
 const Trendency = () => {
   return (
@@ -7,7 +8,12 @@ const Trendency = () => {
         <h2>추이 통계</h2>
       </div>
       <div className={styles.contents}>
-        그래프 자리
+        <div className={styles.subcontents}>
+          <h3>아티클</h3>
+          <div className={styles.graphWrapper}>
+            <Article />
+          </div>
+        </div>
       </div>
     </div>
   );
