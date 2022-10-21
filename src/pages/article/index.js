@@ -1,18 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
 import Management from '../../components/article/management';
 import Registration from '../../components/article/registration';
 import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
+import wrapper from '../../redux/store';
 
 const Article = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setPage({ section: 'article' }));
-  }, []);
-
   return (
     <Main>
       <Management />
@@ -20,5 +12,17 @@ const Article = () => {
     </Main>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  store.dispatch(setPage({
+    section: 'article',
+    search: context.query.search ? context.query.search : null,
+    page: context.query.page ? Number(context.query.page) : null,
+  }));
+
+  return {
+    props: {},
+  };
+});
 
 export default Article;

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   section: null,
   search: null,
-  page: 1,
+  page: null,
 };
 
 const pageSlice = createSlice({
