@@ -13,10 +13,7 @@ const Search = ({ search: searchTarget }) => {
   // 검색어
   const [searchText, changeSearchText] = useInput(search ? search : '');
 
-  /**검색 요청 함수
-   * 
-   * 2자 이상의 검색어 입력 후 검색 시 검색 결과 페이지로 이동
-   */
+  /** 입력된 검색어(2자 이상)를 검색 요청 */
   const searchHandler = useCallback((event) => {
     event.preventDefault();
 

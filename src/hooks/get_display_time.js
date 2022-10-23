@@ -1,3 +1,8 @@
+/**
+ * 날짜 데이터를 원하는 형식으로 변환
+ * @param {String} date 변환할 날짜 정보
+ * @param {String} method 변환할 형식, default: 00시간 전 ex)'yyyy-mm-dd hh:mm:ss', 'yyyy-mm-dd hh:mm', 'mm/dd hh:mm'
+ */
 const getDisplayTime = (date = '', method = 'timeDiff') => {
   const now = new Date();
   const pastDate = new Date(date);
