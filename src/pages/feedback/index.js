@@ -1,5 +1,6 @@
 import Management from '../../components/feedback/management';
 import Main from '../../components/main';
+import { loadDummyFeedbacks } from '../../redux/reducers/feedbacks';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
@@ -17,6 +18,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     search: context.query.search ? context.query.search : null,
     page: context.query.page ? Number(context.query.page) : null,
   }));
+
+  store.dispatch(loadDummyFeedbacks(store.getState().page));
 
   return {
     props: {},

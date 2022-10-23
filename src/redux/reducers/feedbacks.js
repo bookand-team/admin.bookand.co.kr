@@ -1,35 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyFeedbacks } from '../../hooks/dummy_data';
+
 const initialState = {
-  feedbacks: [
-    {
-      id: '0001',
-      email: 'emailEx01@gmail.com',
-      content: '서점 미등록 불만입니다.',
-      device: 'Android',
-      feedbackNumber: 3,
-      type: '정보누락',
-      createdDate: '2022-10-09 00:12',
-    },
-    {
-      id: '0002',
-      email: 'emailEx02@gmail.com',
-      content: '앱 업데이트 이후 접속불량 ...',
-      device: 'IOS',
-      feedbackNumber: 1,
-      type: '업데이트',
-      createdDate: '2022-10-09 00:12',
-    },
-  ],
-  feedbacksLength: 2,
+  feedbacks: null,
+  feedbacksLength: null,
 };
 
 const feedbacksSlice = createSlice({
   name: 'feedbacks',
   initialState,
   reducers: {
-
+    loadDummyFeedbacks: (state, action) => {
+      state.feedbacks = action.payload.page
+        ? dummyFeedbacks.slice((action.payload.page - 1) * 10, action.payload.page * 10)
+        : dummyFeedbacks.slice(0, 10);
+      state.feedbacksLength = dummyFeedbacks.length;
+    },
   },
 });
+
+export const { loadDummyFeedbacks } = feedbacksSlice.actions;
 
 export default feedbacksSlice;

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 
+import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/member/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -28,12 +29,12 @@ const Management = () => {
               <div className={styles.type}>타입</div>
               <div className={styles.email}>email</div>
               <div className={styles.createdDate}>가입일</div>
-              <div className={styles.connectedDate}>접속일</div>
+              <div className={styles.accessedDate}>접속일</div>
               <div className={styles.details}></div>
             </div>
           </div>
           <ul>
-            {members.map((member) => {
+            {members && members.map((member) => {
               return (
                 <li key={member.id} className={tableStyles.tr}>
                   <div className={styles.id}>{member.id && member.id}</div>
@@ -41,8 +42,8 @@ const Management = () => {
                   <div className={styles.status}>{member.status && member.status}</div>
                   <div className={styles.type}>{member.type && member.type}</div>
                   <div className={styles.email}>{member.email && member.email}</div>
-                  <div className={styles.createdDate}>{member.createdDate && member.createdDate}</div>
-                  <div className={styles.connectedDate}>{member.connectedDate && member.connectedDate}</div>
+                  <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.details}><button>상세</button></div>
                 </li>
               );

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 
+import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/push/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -29,15 +30,15 @@ const Management = () => {
             </div>
           </div>
           <ul>
-            {pushes.map((push) => {
+            {pushes && pushes.map((push) => {
               return (
                 <li key={push.id} className={tableStyles.tr}>
                   <div className={styles.id}>{push.id && push.id}</div>
                   <div className={styles.category}>{push.category && push.category}</div>
                   <div className={styles.title}>{push.title && push.title}</div>
                   <div className={styles.status}>{push.status && push.status}</div>
-                  <div className={styles.createdDate}>{push.createdDate && push.createdDate}</div>
-                  <div className={styles.sentDate}>{push.sentDate && push.sentDate}</div>
+                  <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
                 </li>
               );
             })}

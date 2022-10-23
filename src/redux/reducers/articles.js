@@ -1,72 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyArticles } from '../../hooks/dummy_data';
+
 const initialState = {
-  articles: [
-    {
-      id: '0001',
-      title: 'title0001',
-      category: '서점소개',
-      view: 10,
-      bookmark: 1,
-      status: '노출',
-      createdDate: '2022-10-09 00:12',
-      exposedDate: '2022-10-12 00:12',
-      modifiedDate: '2022-10-12 00:12',
-    },
-    {
-      id: '0002',
-      title: 'title0002',
-      category: '서점소개',
-      view: 10,
-      bookmark: 1,
-      status: '노출',
-      createdDate: '2022-10-09 00:12',
-      exposedDate: '2022-10-12 00:12',
-      modifiedDate: '2022-10-12 00:12',
-    },
-    {
-      id: '0003',
-      title: 'title0003',
-      category: '서점소개',
-      view: 10,
-      bookmark: 1,
-      status: '노출',
-      createdDate: '2022-10-09 00:12',
-      exposedDate: '2022-10-12 00:12',
-      modifiedDate: '2022-10-12 00:12',
-    },
-    {
-      id: '0004',
-      title: 'title0004',
-      category: '서점소개',
-      view: 10,
-      bookmark: 1,
-      status: '노출',
-      createdDate: '2022-10-09 00:12',
-      exposedDate: '2022-10-12 00:12',
-      modifiedDate: '2022-10-12 00:12',
-    },
-    // {
-    //   id: '0005',
-    //   title: 'title0005',
-    //   category: '서점소개',
-    //   view: 10,
-    //   bookmark: 1,
-    //   status: '노출',
-    //   createdDate: '2022-10-09 00:12',
-    //   exposedDate: '2022-10-12 00:12',
-    //   modifiedDate: '2022-10-12 00:12',
-    // },
-  ],
-  articlesLength: 4,
+  articles: null,
+  articlesLength: null,
 };
 
 const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-
+    loadDummyArticles: (state, action) => {
+      state.articles = action.payload.page
+        ? dummyArticles.slice((action.payload.page - 1) * 5, action.payload.page * 5)
+        : dummyArticles.slice(0, 5);
+      state.articlesLength = dummyArticles.length;
+    },
   },
 });
+
+export const { loadDummyArticles } = articlesSlice.actions;
 
 export default articlesSlice;

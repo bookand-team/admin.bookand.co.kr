@@ -5,6 +5,7 @@ import styles from '../../styles/report/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
+import getDisplayTime from '../../hooks/get_display_time';
 
 const Management = () => {
   const { reports, reportsLength } = useSelector((state) => state.reports);
@@ -32,16 +33,16 @@ const Management = () => {
             </div>
           </div>
           <ul>
-            {reports.map((report) => {
+            {reports && reports.map((report) => {
               return (
                 <li key={report.id} className={tableStyles.tr}>
                   <div className={styles.id}>{report.id && report.id}</div>
                   <div className={styles.email}>{report.email && report.email}</div>
                   <div className={styles.bookstoreName}>{report.bookstoreName && report.bookstoreName}</div>
-                  <div className={styles.reportedNumber}>{report.reportedNumber && report.reportedNumber}</div>
+                  <div className={styles.reportedCount}>{report.reportedCount && report.reportedCount}</div>
                   <div className={styles.status}>{report.status && report.status}</div>
-                  <div className={styles.createdDate}>{report.createdDate && report.createdDate}</div>
-                  <div className={styles.exposedDate}>{report.exposedDate && report.exposedDate}</div>
+                  <div className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                 </li>
               );
             })}

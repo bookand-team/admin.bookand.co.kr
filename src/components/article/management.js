@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 
+import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/article/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -34,7 +35,7 @@ const Management = () => {
             </div>
           </div>
           <ul>
-            {articles.map((article) => {
+            {articles && articles.map((article) => {
               return (
                 <li key={article.id} className={tableStyles.tr}>
                   <div className={styles.id}>{article.id && article.id}</div>
@@ -43,9 +44,9 @@ const Management = () => {
                   <div className={styles.view}>{article.view && article.view}</div>
                   <div className={styles.bookmark}>{article.bookmark && article.bookmark}</div>
                   <div className={styles.status}>{article.status && article.status}</div>
-                  <div className={styles.createdDate}>{article.createdDate && article.createdDate}</div>
-                  <div className={styles.exposedDate}>{article.exposedDate && article.exposedDate}</div>
-                  <div className={styles.modifiedDate}>{article.modifiedDate && article.modifiedDate}</div>
+                  <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
                 </li>
               );
             })}

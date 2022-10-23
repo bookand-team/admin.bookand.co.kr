@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/bookstore/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -30,7 +31,7 @@ const Management = () => {
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
               <div className={styles.id}>번호</div>
-              <div className={styles.title}>서점명</div>
+              <div className={styles.name}>서점명</div>
               <div className={styles.theme}>테마</div>
               <div className={styles.view}>누적뷰수</div>
               <div className={styles.bookmark}>북마크수</div>
@@ -41,18 +42,18 @@ const Management = () => {
             </div>
           </div>
           <ul>
-            {bookstores.map((bookstore) => {
+            {bookstores && bookstores.map((bookstore) => {
               return (
                 <li key={bookstore.id} className={tableStyles.tr}>
                   <div className={styles.id}>{bookstore.id && bookstore.id}</div>
-                  <div className={styles.title}>{bookstore.title && bookstore.title}</div>
+                  <div className={styles.name}>{bookstore.name && bookstore.name}</div>
                   <div className={styles.theme}>{bookstore.theme && bookstore.theme}</div>
                   <div className={styles.view}>{bookstore.view && bookstore.view}</div>
                   <div className={styles.bookmark}>{bookstore.bookmark && bookstore.bookmark}</div>
                   <div className={styles.status}>{bookstore.status && bookstore.status}</div>
-                  <div className={styles.createdDate}>{bookstore.createdDate && bookstore.createdDate}</div>
-                  <div className={styles.exposedDate}>{bookstore.exposedDate && bookstore.exposedDate}</div>
-                  <div className={styles.modifiedDate}>{bookstore.modifiedDate && bookstore.modifiedDate}</div>
+                  <div className={styles.createdDate}>{bookstore.createdDate && getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
                 </li>
               );
             })}

@@ -1,6 +1,7 @@
 import Management from '../../components/article/management';
 import Registration from '../../components/article/registration';
 import Main from '../../components/main';
+import { loadDummyArticles } from '../../redux/reducers/articles';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
@@ -19,6 +20,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     search: context.query.search ? context.query.search : null,
     page: context.query.page ? Number(context.query.page) : null,
   }));
+
+  store.dispatch(loadDummyArticles(store.getState().page));
 
   return {
     props: {},
