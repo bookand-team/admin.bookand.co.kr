@@ -13,13 +13,19 @@
 .category,
 .status {
   flex: 1;
-}
-
-.title {
-  flex: 4;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .createdDate,
 .sentDate {
-  flex: 1.5;
+  flex: 2;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.title {
+  flex: 6;
+  overflow: hidden;
+  white-space: nowrap;
 }

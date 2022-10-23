@@ -16,15 +16,24 @@
 }
 
 .id,
-.nickname,
 .status,
 .type,
 .details {
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.email,
+.nickname,
 .createdDate,
-.connectedDate {
+.accessedDate {
   flex: 2;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.email {
+  flex: 4;
+  overflow: hidden;
+  white-space: nowrap;
 }

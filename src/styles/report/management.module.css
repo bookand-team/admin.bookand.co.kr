@@ -16,14 +16,23 @@
 }
 
 .id,
-.reportedNumber,
+.reportedCount,
 .status {
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .email,
-.bookstoreName,
 .createdDate,
 .exposedDate {
   flex: 2;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bookstoreName {
+  flex: 4;
+  overflow: hidden;
+  white-space: nowrap;
 }
