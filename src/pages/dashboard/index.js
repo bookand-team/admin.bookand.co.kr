@@ -1,5 +1,6 @@
 import CurrentSituation from '../../components/dashboard/current_situation';
-import Trendency from '../../components/dashboard/trendency';
+import TrendStatistics from '../../components/dashboard/trend_statistics';
+import TypeStatistics from '../../components/dashboard/type_statistics';
 import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
@@ -8,7 +9,8 @@ const Dashboard = () => {
   return (
     <Main>
       <CurrentSituation />
-      <Trendency />
+      <TypeStatistics />
+      <TrendStatistics />
     </Main>
   );
 };
