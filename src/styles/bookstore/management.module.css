@@ -21,22 +21,16 @@
 .bookmark,
 .status {
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .createdDate,
 .exposedDate,
 .modifiedDate {
   flex: 2;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .name {
   flex: 4;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .buttons {

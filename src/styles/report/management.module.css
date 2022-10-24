@@ -19,20 +19,14 @@
 .reportedCount,
 .status {
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .email,
 .createdDate,
 .exposedDate {
   flex: 2;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .bookstoreName {
   flex: 4;
-  overflow: hidden;
-  white-space: nowrap;
 }

@@ -20,20 +20,14 @@
 .type,
 .details {
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .nickname,
 .createdDate,
 .accessedDate {
   flex: 2;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .email {
   flex: 4;
-  overflow: hidden;
-  white-space: nowrap;
 }

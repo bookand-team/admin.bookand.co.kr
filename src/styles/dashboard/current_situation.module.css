@@ -6,17 +6,27 @@
 
 .contents {
   display: flex;
+  width: 1750px;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: 0 20px;
 }
 
 .section {
-  width: 220px;
+  width: 250px;
   height: 200px;
+  flex-shrink: 0;
   border-radius: 30px;
   background-color: #E4E4E4;
   padding: 16px;
-  margin: 0 9px;
+  margin: 16px 9px;
   white-space: nowrap;
+}
+
+@media screen and (max-width:1750px) {
+  .contents {
+    width: 900px;
+  }
 }
 
 .section h4 {

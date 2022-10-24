@@ -20,19 +20,13 @@
 .feedbackCount,
 .type {
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .email,
 .createdDate {
   flex: 2;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .content {
   flex: 4;
-  overflow: hidden;
-  white-space: nowrap;
 }

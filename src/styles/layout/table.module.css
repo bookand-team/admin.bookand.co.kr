@@ -23,6 +23,12 @@
   cursor: pointer;
 }
 
+.table ul .tr>div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .table ul .tr:hover {
   background-color: #F1F1F1;
 }
