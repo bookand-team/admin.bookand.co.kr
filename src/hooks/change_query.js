@@ -52,6 +52,21 @@ const changeQuery = (router, filter) => {
     }
   }
 
+  // role 변경
+  if (filter.role) {
+    if (newQuery) {
+      newQuery += `&role=${filter.role}`;
+    } else {
+      newQuery += `role=${filter.role}`;
+    }
+  } else if (filter.role !== '' && router.query.role) {
+    if (newQuery) {
+      newQuery += `&role=${router.query.role}`;
+    } else {
+      newQuery += `role=${router.query.role}`;
+    }
+  }
+
   // search 변경
   if (filter.search) {
     if (newQuery) {
