@@ -8,7 +8,7 @@ import styles from '../styles/search.module.css';
 
 const Search = ({ search: searchTarget }) => {
   const router = useRouter();
-  const { search, page } = useSelector((state) => state.page);
+  const { search } = useSelector((state) => state.page);
 
   // 검색어
   const [searchText, changeSearchText] = useInput(search ? search : '');
@@ -23,9 +23,9 @@ const Search = ({ search: searchTarget }) => {
     }
 
     // 검색 결과 페이지로 이동
-    const newQuery = changeQuery(router, searchText, page);
+    const newQuery = changeQuery(router, { search: searchText });
     router.push(`${router.pathname}${newQuery}`);
-  }, [searchText, router, search, page]);
+  }, [searchText, router, search]);
 
   return (
     <form className={styles.container} onSubmit={searchHandler}>
