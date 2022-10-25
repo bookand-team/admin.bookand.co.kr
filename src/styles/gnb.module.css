@@ -1,3 +1,8 @@
+.gnb {
+  min-width: 1280px;
+  max-width: 1920px;
+}
+
 .gnb ul {
   display: flex;
   padding: 0;

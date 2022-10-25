@@ -54,7 +54,10 @@ ul {
 }
 
 main {
-  margin: 40px 24px;
+  min-width: 1280px;
+  max-width: 1920px;
+  padding: 0 24px;
+  margin: 40px 0;
 }
 
 h2 {
