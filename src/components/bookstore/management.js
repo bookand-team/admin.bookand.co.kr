@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import styles from '../../styles/bookstore/management.module.css';
+import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
@@ -66,9 +67,9 @@ const Management = () => {
         </div>
       </div>
       <Page tableRow={tableRow} contentsLength={bookstoresLength} />
-      <div className={styles.buttons}>
-        <button className={styles.registration} onClick={moveRegistration}>서점 추가하기</button>
-        <button className={styles.removal}>삭제하기</button>
+      <div className={buttonStyles.buttons}>
+        <button className={buttonStyles.registration} onClick={moveRegistration}>새 서점 등록</button>
+        <button className={buttonStyles.removal}>선택 서점 삭제</button>
       </div>
     </div>
   );

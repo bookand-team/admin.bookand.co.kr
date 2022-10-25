@@ -1,0 +1,26 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.registration {
+  width: 140px;
+  height: 40px;
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-right: 22px;
+}
+
+.removal {
+  width: 140px;
+  height: 40px;
+  background-color: #FF0000;
+  color: #FFFFFF;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
