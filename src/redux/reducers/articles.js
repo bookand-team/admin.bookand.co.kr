@@ -13,7 +13,7 @@ const articlesSlice = createSlice({
   reducers: {
     loadDummyArticles: (state, action) => {
       state.articles = action.payload.page
-        ? dummyArticles.slice((action.payload.page - 1) * 5, action.payload.page * 5)
+        ? dummyArticles.slice((action.payload.page - 1) * action.payload.row, action.payload.page * action.payload.row)
         : dummyArticles.slice(0, 5);
       state.articlesLength = dummyArticles.length;
     },

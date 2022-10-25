@@ -7,6 +7,21 @@
 const changeQuery = (router, filter) => {
   let newQuery = '';  // 이동할 url의 query
 
+  // category 변경
+  if (filter.category) {
+    if (newQuery) {
+      newQuery += `&category=${filter.category}`;
+    } else {
+      newQuery += `category=${filter.category}`;
+    }
+  } else if (filter.category !== '' && router.query.category) {
+    if (newQuery) {
+      newQuery += `&category=${router.query.category}`;
+    } else {
+      newQuery += `category=${router.query.category}`;
+    }
+  }
+
   // page 변경
   if (filter.page) {
     if (newQuery) {
@@ -34,6 +49,21 @@ const changeQuery = (router, filter) => {
       newQuery += `&search=${router.query.search}`;
     } else {
       newQuery += `search=${router.query.search}`;
+    }
+  }
+
+  // status 변경
+  if (filter.status) {
+    if (newQuery) {
+      newQuery += `&status=${filter.status}`;
+    } else {
+      newQuery += `status=${filter.status}`;
+    }
+  } else if (filter.status !== '' && router.query.status) {
+    if (newQuery) {
+      newQuery += `&status=${router.query.status}`;
+    } else {
+      newQuery += `status=${router.query.status}`;
     }
   }
 

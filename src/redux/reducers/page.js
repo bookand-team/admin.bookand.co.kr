@@ -2,8 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   section: null,
-  search: null,
+  category: null,
   page: null,
+  row: null,
+  search: null,
+  status: null,
 };
 
 const pageSlice = createSlice({
@@ -12,8 +15,11 @@ const pageSlice = createSlice({
   reducers: {
     setPage: (state, action) => {
       state.section = action.payload.section ? action.payload.section : null;
-      state.search = action.payload.search ? action.payload.search : null;
+      state.category = action.payload.category ? action.payload.category : null;
       state.page = action.payload.page ? action.payload.page : null;
+      state.row = action.payload.row ? action.payload.row : null;
+      state.search = action.payload.search ? action.payload.search : null;
+      state.status = action.payload.status ? action.payload.status : null;
     },
   },
 });

@@ -1,17 +1,35 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useInput from '../../hooks/use_input';
 import styles from '../../styles/article/management.module.css';
+import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
 
 const Management = () => {
+  const router = useRouter();
   const { articles, articlesLength } = useSelector((state) => state.articles);
-  const { page } = useSelector((state) => state.page);
+  const { page, row } = useSelector((state) => state.page);
 
-  const tableRow = 5;
+  // category 선택
+  const [selectCategory, changeSelectCategory] = useInput('');
+  useEffect(() => {
+    const newQuery = changeQuery(router, { category: selectCategory });
+    router.push(`${router.pathname}${newQuery}`);
+  }, [selectCategory]);
+
+  // status 선택
+  const [selectStatus, changeSelectStatus] = useInput('');
+  useEffect(() => {
+    const newQuery = changeQuery(router, { status: selectStatus });
+    router.push(`${router.pathname}${newQuery}`);
+  }, [selectStatus]);
 
   return (
     <div className={styles.container}>
@@ -25,10 +43,24 @@ const Management = () => {
             <div className={tableStyles.tr}>
               <div className={styles.id}>번호</div>
               <div className={styles.title}>아티클 제목</div>
-              <div className={styles.category}>카테고리</div>
+              <div className={styles.category}>
+                <select value={selectCategory} onChange={changeSelectCategory}>
+                  <option value=''>카테고리</option>
+                  <option value='서점소개'>서점소개</option>
+                  <option value='책소개'>책소개</option>
+                  <option value='인터뷰'>인터뷰</option>
+                  <option value='서점소개'>서점소개</option>
+                </select>
+              </div>
               <div className={styles.view}>누적뷰수</div>
               <div className={styles.bookmark}>북마크수</div>
-              <div className={styles.status}>노출상태</div>
+              <div className={styles.status}>
+                <select value={selectStatus} onChange={changeSelectStatus}>
+                  <option value=''>노출상태</option>
+                  <option value='노출'>노출</option>
+                  <option value='미노출'>미노출</option>
+                </select>
+              </div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
@@ -50,7 +82,7 @@ const Management = () => {
                 </li>
               );
             })}
-            {isRowInsufficient(page, tableRow, articlesLength) && makeEmptyArray(page, tableRow, articlesLength).map((article, idx) => {
+            {isRowInsufficient(page, row, articlesLength) && makeEmptyArray(page, row, articlesLength).map((article, idx) => {
               return (
                 <li key={idx} className={tableStyles.tr}></li>
               );
@@ -58,7 +90,11 @@ const Management = () => {
           </ul>
         </div>
       </div>
-      <Page tableRow={tableRow} contentsLength={articlesLength} />
+      <Page tableRow={row} contentsLength={articlesLength} />
+      <div className={buttonStyles.buttons}>
+        <button className={buttonStyles.registration}>새 아티클 작성</button>
+        <button className={buttonStyles.removal}>선택 아티클 삭제</button>
+      </div>
     </div>
   );
 };
