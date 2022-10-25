@@ -1,17 +1,27 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import changeQuery from '../../hooks/change_query';
+import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useInput from '../../hooks/use_input';
 import styles from '../../styles/report/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
-import getDisplayTime from '../../hooks/get_display_time';
 
 const Management = () => {
+  const router = useRouter();
   const { reports, reportsLength } = useSelector((state) => state.reports);
-  const { page } = useSelector((state) => state.page);
+  const { page, row } = useSelector((state) => state.page);
 
-  const tableRow = 10;
+  // status 선택
+  const [selectStatus, changeSelectStatus] = useInput('');
+  useEffect(() => {
+    const newQuery = changeQuery(router, { status: selectStatus });
+    router.push(`${router.pathname}${newQuery}`);
+  }, [selectStatus]);
 
   return (
     <div className={styles.container}>
@@ -27,7 +37,13 @@ const Management = () => {
               <div className={styles.email}>이메일</div>
               <div className={styles.bookstoreName}>서점명</div>
               <div className={styles.reportedNumber}>제보요청 수</div>
-              <div className={styles.status}>노출상태</div>
+              <div className={styles.status}>
+                <select value={selectStatus} onChange={changeSelectStatus}>
+                  <option value=''>노출상태</option>
+                  <option value='노출'>노출</option>
+                  <option value='미노출'>미노출</option>
+                </select>
+              </div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
             </div>
@@ -46,7 +62,7 @@ const Management = () => {
                 </li>
               );
             })}
-            {isRowInsufficient(page, tableRow, reportsLength) && makeEmptyArray(page, tableRow, reportsLength).map((report, idx) => {
+            {isRowInsufficient(page, row, reportsLength) && makeEmptyArray(page, row, reportsLength).map((report, idx) => {
               return (
                 <li key={idx} className={tableStyles.tr}></li>
               );
@@ -54,7 +70,7 @@ const Management = () => {
           </ul>
         </div>
       </div>
-      <Page tableRow={tableRow} contentsLength={reportsLength} />
+      <Page tableRow={row} contentsLength={reportsLength} />
     </div>
   );
 };

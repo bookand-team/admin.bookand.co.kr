@@ -49,7 +49,6 @@ const Management = () => {
                   <option value='서점소개'>서점소개</option>
                   <option value='책소개'>책소개</option>
                   <option value='인터뷰'>인터뷰</option>
-                  <option value='서점소개'>서점소개</option>
                 </select>
               </div>
               <div className={styles.view}>누적뷰수</div>

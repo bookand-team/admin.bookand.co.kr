@@ -15,8 +15,11 @@ const Member = () => {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
     section: 'member',
+    page: context.query.page ? Number(context.query.page) : 1,
+    role: context.query.role ? context.query.role : null,
+    row: 10,
     search: context.query.search ? context.query.search : null,
-    page: context.query.page ? Number(context.query.page) : null,
+    status: context.query.status ? context.query.status : null,
   }));
 
   store.dispatch(loadDummyMembers(store.getState().page));

@@ -1,16 +1,33 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useInput from '../../hooks/use_input';
 import styles from '../../styles/push/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 
 const Management = () => {
+  const router = useRouter();
   const { pushes, pushesLength } = useSelector((state) => state.pushes);
-  const { page } = useSelector((state) => state.page);
+  const { page, row } = useSelector((state) => state.page);
 
-  const tableRow = 5;
+  // category 선택
+  const [selectCategory, changeSelectCategory] = useInput('');
+  useEffect(() => {
+    const newQuery = changeQuery(router, { category: selectCategory });
+    router.push(`${router.pathname}${newQuery}`);
+  }, [selectCategory]);
+
+  // status 선택
+  const [selectStatus, changeSelectStatus] = useInput('');
+  useEffect(() => {
+    const newQuery = changeQuery(router, { status: selectStatus });
+    router.push(`${router.pathname}${newQuery}`);
+  }, [selectStatus]);
 
   return (
     <div className={styles.container}>
@@ -22,9 +39,24 @@ const Management = () => {
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
               <div className={styles.id}>번호</div>
-              <div className={styles.category}>카테고리</div>
+              <div className={styles.category}>
+                <select value={selectCategory} onChange={changeSelectCategory}>
+                  <option value=''>카테고리</option>
+                  <option value='업데이트'>업데이트</option>
+                  <option value='에러'>에러</option>
+                  <option value='프로모션'>프로모션</option>
+                  <option value='기타'>기타</option>
+                </select>
+              </div>
               <div className={styles.title}>제목</div>
-              <div className={styles.status}>전송상태</div>
+              <div className={styles.status}>
+                <select value={selectStatus} onChange={changeSelectStatus}>
+                  <option value=''>전송상태</option>
+                  <option value='전송완료'>전송완료</option>
+                  <option value='전송실패'>전송실패</option>
+                  <option value='전송대기'>전송대기</option>
+                </select>
+              </div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.sentDate}>전송날짜</div>
             </div>
@@ -42,7 +74,7 @@ const Management = () => {
                 </li>
               );
             })}
-            {isRowInsufficient(page, tableRow, pushesLength) && makeEmptyArray(page, tableRow, pushesLength).map((push, idx) => {
+            {isRowInsufficient(page, row, pushesLength) && makeEmptyArray(page, row, pushesLength).map((push, idx) => {
               return (
                 <li key={idx} className={tableStyles.tr}></li>
               );
@@ -50,7 +82,7 @@ const Management = () => {
           </ul>
         </div>
       </div>
-      <Page tableRow={tableRow} contentsLength={pushesLength} />
+      <Page tableRow={row} contentsLength={pushesLength} />
     </div>
   );
 };

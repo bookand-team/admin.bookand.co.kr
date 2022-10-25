@@ -22,6 +22,21 @@ const changeQuery = (router, filter) => {
     }
   }
 
+  // theme 변경
+  if (filter.theme) {
+    if (newQuery) {
+      newQuery += `&theme=${filter.theme}`;
+    } else {
+      newQuery += `theme=${filter.theme}`;
+    }
+  } else if (filter.theme !== '' && router.query.theme) {
+    if (newQuery) {
+      newQuery += `&theme=${router.query.theme}`;
+    } else {
+      newQuery += `theme=${router.query.theme}`;
+    }
+  }
+
   // page 변경
   if (filter.page) {
     if (newQuery) {
