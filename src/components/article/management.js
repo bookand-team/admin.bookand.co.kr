@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
@@ -16,6 +17,9 @@ const Management = () => {
   const router = useRouter();
   const { articles, articlesLength } = useSelector((state) => state.articles);
   const { page, row } = useSelector((state) => state.page);
+
+  // checkbox 선택
+  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // category 선택
   const [selectCategory, changeSelectCategory] = useInput('');
@@ -41,6 +45,7 @@ const Management = () => {
         <div className={tableStyles.table}>
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
+              <div className={styles.check}>선택</div>
               <div className={styles.id}>번호</div>
               <div className={styles.title}>아티클 제목</div>
               <div className={styles.category}>
@@ -51,8 +56,6 @@ const Management = () => {
                   <option value='인터뷰'>인터뷰</option>
                 </select>
               </div>
-              <div className={styles.view}>누적뷰수</div>
-              <div className={styles.bookmark}>북마크수</div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>노출상태</option>
@@ -60,6 +63,8 @@ const Management = () => {
                   <option value='미노출'>미노출</option>
                 </select>
               </div>
+              <div className={styles.view}>누적뷰수</div>
+              <div className={styles.bookmark}>북마크수</div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
@@ -69,12 +74,15 @@ const Management = () => {
             {articles && articles.map((article) => {
               return (
                 <li key={article.id} className={tableStyles.tr}>
+                  <div className={styles.check}>
+                    <input type='checkbox' checked={checkBoxes.includes(article.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, article.id)} />
+                  </div>
                   <div className={styles.id}>{article.id && article.id}</div>
                   <div className={styles.title}>{article.title && article.title}</div>
                   <div className={styles.category}>{article.category && article.category}</div>
+                  <div className={styles.status}>{article.status && article.status}</div>
                   <div className={styles.view}>{article.view && article.view}</div>
                   <div className={styles.bookmark}>{article.bookmark && article.bookmark}</div>
-                  <div className={styles.status}>{article.status && article.status}</div>
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>

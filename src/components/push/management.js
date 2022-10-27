@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/push/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -14,6 +15,9 @@ const Management = () => {
   const router = useRouter();
   const { pushes, pushesLength } = useSelector((state) => state.pushes);
   const { page, row } = useSelector((state) => state.page);
+
+  // checkbox 선택
+  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // category 선택
   const [selectCategory, changeSelectCategory] = useInput('');
@@ -38,7 +42,9 @@ const Management = () => {
         <div className={tableStyles.table}>
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
+              <div className={styles.check}>선택</div>
               <div className={styles.id}>번호</div>
+              <div className={styles.title}>제목</div>
               <div className={styles.category}>
                 <select value={selectCategory} onChange={changeSelectCategory}>
                   <option value=''>카테고리</option>
@@ -48,7 +54,6 @@ const Management = () => {
                   <option value='기타'>기타</option>
                 </select>
               </div>
-              <div className={styles.title}>제목</div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>전송상태</option>
@@ -65,9 +70,12 @@ const Management = () => {
             {pushes && pushes.map((push) => {
               return (
                 <li key={push.id} className={tableStyles.tr}>
+                  <div className={styles.check}>
+                    <input type='checkbox' checked={checkBoxes.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
+                  </div>
                   <div className={styles.id}>{push.id && push.id}</div>
-                  <div className={styles.category}>{push.category && push.category}</div>
                   <div className={styles.title}>{push.title && push.title}</div>
+                  <div className={styles.category}>{push.category && push.category}</div>
                   <div className={styles.status}>{push.status && push.status}</div>
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>

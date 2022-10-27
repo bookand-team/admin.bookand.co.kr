@@ -15,18 +15,32 @@
   flex-direction: column;
 }
 
-.id,
-.device,
-.feedbackCount,
-.type {
+.check,
+.id {
   flex: 1;
 }
 
-.email,
-.createdDate {
+.device,
+.feedbackCount {
   flex: 2;
 }
 
-.content {
+.type {
+  flex: 3;
+}
+
+.createdDate {
   flex: 4;
+}
+
+.email {
+  flex: 5;
+  text-align: left;
+  padding-left: 16px;
+}
+
+.content {
+  flex: 8;
+  text-align: left;
+  padding-left: 16px;
 }

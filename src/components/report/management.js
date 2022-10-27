@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
+import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/report/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -15,6 +16,9 @@ const Management = () => {
   const router = useRouter();
   const { reports, reportsLength } = useSelector((state) => state.reports);
   const { page, row } = useSelector((state) => state.page);
+
+  // checkbox 선택
+  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // status 선택
   const [selectStatus, changeSelectStatus] = useInput('');
@@ -33,10 +37,10 @@ const Management = () => {
         <div className={tableStyles.table}>
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
+              <div className={styles.check}>선택</div>
               <div className={styles.id}>번호</div>
-              <div className={styles.email}>이메일</div>
               <div className={styles.bookstoreName}>서점명</div>
-              <div className={styles.reportedNumber}>제보요청 수</div>
+              <div className={styles.email}>이메일</div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>노출상태</option>
@@ -44,6 +48,7 @@ const Management = () => {
                   <option value='미노출'>미노출</option>
                 </select>
               </div>
+              <div className={styles.reportedCount}>제보요청 수</div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
             </div>
@@ -52,11 +57,14 @@ const Management = () => {
             {reports && reports.map((report) => {
               return (
                 <li key={report.id} className={tableStyles.tr}>
+                  <div className={styles.check}>
+                    <input type='checkbox' checked={checkBoxes.includes(report.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, report.id)} />
+                  </div>
                   <div className={styles.id}>{report.id && report.id}</div>
-                  <div className={styles.email}>{report.email && report.email}</div>
                   <div className={styles.bookstoreName}>{report.bookstoreName && report.bookstoreName}</div>
-                  <div className={styles.reportedCount}>{report.reportedCount && report.reportedCount}</div>
+                  <div className={styles.email}>{report.email && report.email}</div>
                   <div className={styles.status}>{report.status && report.status}</div>
+                  <div className={styles.reportedCount}>{report.reportedCount && report.reportedCount}</div>
                   <div className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                 </li>

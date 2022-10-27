@@ -15,19 +15,27 @@
   flex-direction: column;
 }
 
-.id,
-.status,
-.type,
-.details {
+.check,
+.id {
   flex: 1;
 }
 
-.nickname,
-.createdDate,
-.accessedDate {
+.type {
   flex: 2;
 }
 
-.email {
+.status {
+  flex: 3;
+}
+
+.createdDate,
+.accessedDate {
   flex: 4;
+}
+
+.nickname,
+.email {
+  flex: 6;
+  text-align: left;
+  padding-left: 16px;
 }

@@ -15,20 +15,26 @@
   flex-direction: column;
 }
 
-.id,
+.check,
+.id {
+  flex: 1;
+}
+
 .category,
 .view,
 .bookmark,
 .status {
-  flex: 1;
+  flex: 2;
 }
 
 .createdDate,
 .exposedDate,
 .modifiedDate {
-  flex: 2;
+  flex: 3;
 }
 
 .title {
-  flex: 4;
+  flex: 8;
+  text-align: left;
+  padding-left: 16px;
 }
