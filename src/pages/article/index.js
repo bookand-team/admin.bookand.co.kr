@@ -1,5 +1,6 @@
 import Management from '../../components/article/management';
 import Main from '../../components/main';
+import { loadArticles } from '../../redux/actions/articles';
 import { loadDummyArticles } from '../../redux/reducers/articles';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
@@ -23,6 +24,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   }));
 
   store.dispatch(loadDummyArticles(store.getState().page));
+  // await store.dispatch(loadArticles(store.getState().page));
 
   return {
     props: {},

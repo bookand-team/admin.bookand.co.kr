@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
+import { deleteArticles } from '../../redux/actions/articles';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -15,6 +16,7 @@ import Search from '../search';
 
 const Management = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { articles, articlesLength } = useSelector((state) => state.articles);
   const { page, row } = useSelector((state) => state.page);
 
@@ -34,6 +36,12 @@ const Management = () => {
     const newQuery = changeQuery(router, { status: selectStatus });
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
+
+  // articles 삭제 요청
+  const deleteArticlesHandler = useCallback(() => {
+    dispatch(deleteArticles({ articleIds: checkBoxes }));
+    alert(`${checkBoxes}번 아티클 삭제 완료`);
+  }, [checkBoxes]);
 
   return (
     <div className={styles.container}>
@@ -100,7 +108,7 @@ const Management = () => {
       <Page tableRow={row} contentsLength={articlesLength} />
       <div className={buttonStyles.buttons}>
         <button className={buttonStyles.registration}>새 아티클 작성</button>
-        <button className={buttonStyles.removal}>선택 아티클 삭제</button>
+        <button className={buttonStyles.removal} onClick={deleteArticlesHandler}>선택 아티클 삭제</button>
       </div>
     </div>
   );
