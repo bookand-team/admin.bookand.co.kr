@@ -37,7 +37,12 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
 
-  // articles 삭제 요청
+  /** 아티클 작성 페이지 이동 */
+  const moveRegistrationHandler = useCallback(() => {
+    router.push('/article/registration');
+  }, []);
+
+  /** articles 삭제 요청 */
   const deleteArticlesHandler = useCallback(() => {
     dispatch(deleteArticles({ articleIds: checkBoxes }));
     alert(`${checkBoxes}번 아티클 삭제 완료`);
@@ -107,7 +112,7 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={articlesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration}>새 아티클 작성</button>
+        <button className={buttonStyles.registration} onClick={moveRegistrationHandler}>새 아티클 작성</button>
         <button className={buttonStyles.removal} onClick={deleteArticlesHandler}>선택 아티클 삭제</button>
       </div>
     </div>
