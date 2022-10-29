@@ -3,3 +3,54 @@
   flex-direction: column;
   margin-bottom: 60px;
 }
+
+.workspace {
+  display: flex;
+  border-top: 1px solid #D9D9D9;
+}
+
+.editor {
+  width: 50%;
+  border-right: 1px solid #D9D9D9;
+  padding: 24px;
+}
+
+.editor textarea {
+  width: 100%;
+  height: 500px;
+  font-size: 14px;
+  padding: 0;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.preview {
+  width: 50%;
+  overflow: auto;
+  padding: 24px;
+}
+
+.preview h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 20px 14px;
+}
+
+.preview h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 12px 14px;
+}
+
+.preview h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 9px 14px;
+}
+
+.preview h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 8px 14px;
+}
