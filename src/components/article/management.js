@@ -7,6 +7,7 @@ import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
+import { putArticle } from '../../redux/actions/article';
 import { deleteArticles } from '../../redux/actions/articles';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
@@ -36,6 +37,16 @@ const Management = () => {
     const newQuery = changeQuery(router, { status: selectStatus });
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
+
+  /** 아티클 노출상태 변경 요청 */
+  const changeStatusHandler = useCallback((id) => () => {
+    if (confirm('해당 아티클을 노출 처리하시겠습니까?\n노출 전 아티클 정보를 꼼꼼히 확인해주세요.')) {
+      dispatch(putArticle({
+        id,
+        status: '노출'
+      }));
+    }
+  }, []);
 
   /** 아티클 작성 페이지 이동 */
   const moveRegistrationHandler = useCallback(() => {
@@ -81,6 +92,7 @@ const Management = () => {
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
+              <div className={styles.button}></div>
             </div>
           </div>
           <ul>
@@ -99,6 +111,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.button}><button onClick={changeStatusHandler(article.id)}>노출전환</button></div>
                 </li>
               );
             })}

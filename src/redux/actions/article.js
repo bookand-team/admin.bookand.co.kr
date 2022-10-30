@@ -16,3 +16,13 @@ export const postArticle = createAsyncThunk('postArticle', async (data, { reject
     return rejectWithValue(error.response.data);
   }
 });
+
+// article 수정하기
+export const putArticle = createAsyncThunk('putArticle', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.put('/article', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});

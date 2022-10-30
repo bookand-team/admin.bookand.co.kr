@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { postArticle } from '../actions/article';
+import { postArticle, putArticle } from '../actions/article';
 
 const initialState = {
   article: null,
@@ -8,6 +8,10 @@ const initialState = {
   postArticleLoading: null,
   postArticleDone: null,
   postArticleError: null,
+
+  putArticleLoading: null,
+  putArticleDone: null,
+  putArticleError: null,
 };
 
 const articleSlice = createSlice({
@@ -31,6 +35,20 @@ const articleSlice = createSlice({
     builder.addCase(postArticle.rejected, (state, action) => {
       state.postArticleLoading = false;
       state.postArticleError = action.payload.message ? action.payload.message : true;
+    })
+    // article 수정하기
+    builder.addCase(putArticle.pending, (state) => {
+      state.putArticleLoading = true;
+      state.putArticleDone = null;
+      state.putArticleError = null;
+    })
+    builder.addCase(putArticle.fulfilled, (state, action) => {
+      state.putArticleLoading = false;
+      state.putArticleDone = action.payload.message ? action.payload.message : true;
+    })
+    builder.addCase(putArticle.rejected, (state, action) => {
+      state.putArticleLoading = false;
+      state.putArticleError = action.payload.message ? action.payload.message : true;
     })
   }
 });

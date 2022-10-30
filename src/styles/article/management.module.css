@@ -23,7 +23,8 @@
 .category,
 .view,
 .bookmark,
-.status {
+.status,
+.button {
   flex: 2;
 }
 
@@ -37,4 +38,8 @@
   flex: 8;
   text-align: left;
   padding-left: 16px;
+}
+
+.button button {
+  cursor: pointer;
 }
