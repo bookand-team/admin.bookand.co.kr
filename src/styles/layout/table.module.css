@@ -26,10 +26,6 @@
   white-space: nowrap;
 }
 
-.table ul .tr {
-  cursor: pointer;
-}
-
 .table ul .tr>div {
   overflow: hidden;
   text-overflow: ellipsis;
