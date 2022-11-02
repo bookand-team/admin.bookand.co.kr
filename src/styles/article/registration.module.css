@@ -24,11 +24,17 @@
   border-bottom: 1px solid #D9D9D9;
 }
 
-.category {
-  margin: 14px 0;
+.select_area {
+  display: flex;
+  margin: 16px 0;
 }
 
-.category select {
+.select_area>div {
+  margin-right: 20px;
+}
+
+.select_area select {
+  width: 120px;
   font-size: 16px;
 }
 

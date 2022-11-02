@@ -1,14 +1,12 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
-import { putArticle } from '../../redux/actions/article';
-import { deleteArticles } from '../../redux/actions/articles';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -17,12 +15,8 @@ import Search from '../search';
 
 const Management = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const { articles, articlesLength } = useSelector((state) => state.articles);
   const { page, row } = useSelector((state) => state.page);
-
-  // checkbox 선택
-  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // category 선택
   const [selectCategory, changeSelectCategory] = useInput('');
@@ -38,13 +32,17 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
 
+  // checkbox 선택
+  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
+
   /** 아티클 노출상태 변경 요청 */
-  const changeStatusHandler = useCallback((id) => () => {
-    if (confirm('해당 아티클을 노출 처리하시겠습니까?\n노출 전 아티클 정보를 꼼꼼히 확인해주세요.')) {
-      dispatch(putArticle({
-        id,
-        status: '노출'
-      }));
+  const changeStatusHandler = useCallback((id, status) => () => {
+    if (status === '미노출' && confirm('해당 아티클을 노출 처리하시겠습니까?\n노출 전 아티클 정보를 꼼꼼히 확인해주세요.')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
+    } else if (status === '노출' && confirm('해당 아티클을 미노출 처리하시겠습니까?')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
     }
   }, []);
 
@@ -53,10 +51,17 @@ const Management = () => {
     router.push('/article/registration');
   }, []);
 
-  /** articles 삭제 요청 */
+  /** 선택한 아티클들 삭제 요청 */
   const deleteArticlesHandler = useCallback(() => {
-    dispatch(deleteArticles({ articleIds: checkBoxes }));
-    alert(`${checkBoxes}번 아티클 삭제 완료`);
+    if (checkBoxes.length === 0) {
+      alert('선택된 아티클이 존재하지 않습니다.');
+    } else {
+      const sortedCheckboxes = [...checkBoxes];
+      if (confirm(`${sortedCheckboxes.sort()}번 아티클을 삭제 처리하시겠습니까?\n삭제한 아티클은 저장되지 않습니다.`)) {
+        // feature
+        alert('현재 지원하지 않는 기능입니다.');
+      }
+    }
   }, [checkBoxes]);
 
   return (
@@ -111,7 +116,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button onClick={changeStatusHandler(article.id)}>노출전환</button></div>
+                  <div className={styles.button}><button onClick={changeStatusHandler(article.id, article.status)}>노출전환</button></div>
                 </li>
               );
             })}

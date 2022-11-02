@@ -1,28 +1,28 @@
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useDispatch } from 'react-redux';
 
 import useInput from '../../hooks/use_input';
-import { postArticle } from '../../redux/actions/article';
 import styles from '../../styles/article/registration.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 
 const Registration = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
-  // 입력받은 아티클 내용 (제목, 카테고리, 본문)
+  // 입력받은 아티클 내용 (제목, 카테고리, 노출 디바이스, 노출 멤버 식별자, 본문)
   const [inputTitle, changeInputTitle] = useInput('');
   const [selectCategory, changeSelectCategory] = useInput('');
-  const [inputText, changeInputText, setInputText] = useInput(`마크다운 작성 미리보기\n\n# 제목1\n## 제목2\n### 제목3\n#### 제목4\n\n기본적인 글\n**진하게** 표시된 글\n*기울여진* 글\n***진하게 + 기울여진*** 글\n\n![logo](https://user-images.githubusercontent.com/79047370/198820062-19addd6b-2a80-487a-800e-c5a0ef51bb6a.png)`);
-
-  const textareaRef = useRef(null);
-  const imageRef = useRef(null);
+  const [selectTargetDevice, changeSelectTargetDevice] = useInput('');
+  const [selectTargetMemberId, changeSelectTargetMemberId] = useInput('');
+  const [inputText, changeInputText, setInputText] = useInput('');
 
   // 마크다운 형식의 아티클 내용
   const [viewText, setViewText] = useState('');
+
+  // 선택자 (썸네일 이미지 생성 버튼, 아티클 본문, 아티클 본문 이미지 생성 버튼)
+  const thumbnailImageRef = useRef(null);
+  const textareaRef = useRef(null);
+  const imageRef = useRef(null);
 
   // 아티클 본문 줄바꿈을 마크다운 줄바꿈으로 변환
   useEffect(() => {
@@ -55,21 +55,17 @@ const Registration = () => {
   }, [textareaRef]);
 
   /** 이미지 가져오기 버튼 */
-  const inputImageHandler = useCallback(() => {
-    imageRef.current.click();
-  }, [imageRef.current]);
+  const inputImageHandler = useCallback((ref) => () => {
+    ref.current.click();
+  }, []);
 
   /** 가져온 이미지 업로드 요청 */
   const uploadImageHandler = useCallback(async (event) => {
     if (event.target.files) {
       const formData = new FormData();
       formData.append('image', event.target.files[0]);
-      try {
-        const response = await axios.post('/image', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-        console.log(response.data);  // 미완성 (서버 설계 완료된 후에 작업예정)
-      } catch (error) {
-        console.log(error.response.data);  // 미완성 (서버 설계 완료된 후에 작업예정)
-      }
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
     }
   }, []);
 
@@ -82,24 +78,56 @@ const Registration = () => {
 
   /** 아티클 작성 완료 버튼 */
   const completeRegistrationHandler = useCallback(() => {
-    dispatch(postArticle({
-
-    }));
-  }, []);
+    if (inputTitle === '') {
+      return alert('아티클 제목을 입력해주세요.');
+    } else if (selectCategory === '') {
+      return alert('카테고리를 선택해주세요.');
+    } else if (selectTargetDevice === '') {
+      return alert('노출할 디바이스를 선택해주세요.');
+    } else if (selectTargetMemberId === '') {
+      return alert('노출할 멤버 식별자를 선택해주세요.');
+    } else if (inputText === '') {
+      return alert('아티클 본문을 입력해주세요.');
+    }
+    // feature
+    alert('현재 지원하지 않는 기능입니다.');
+  }, [inputTitle, selectCategory, selectTargetDevice, selectTargetMemberId, inputText]);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.title}>
-          <input type='textarea' value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목' />
+          <input type='textarea' value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' />
         </div>
-        <div className={styles.category}>
-          <select value={selectCategory} onChange={changeSelectCategory}>
-            <option value=''>카테고리</option>
-            <option value='서점소개'>서점소개</option>
-            <option value='책소개'>책소개</option>
-            <option value='인터뷰'>인터뷰</option>
-          </select>
+        <div>
+          <input ref={thumbnailImageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
+          <button onClick={inputImageHandler(thumbnailImageRef)}>썸네일 이미지 선택</button>
+        </div>
+        <div className={styles.select_area}>
+          <div>
+            <select value={selectCategory} onChange={changeSelectCategory}>
+              <option value=''>카테고리</option>
+              <option value='서점소개'>서점소개</option>
+              <option value='책소개'>책소개</option>
+              <option value='인터뷰'>인터뷰</option>
+            </select>
+          </div>
+          <div>
+            <select value={selectTargetDevice} onChange={changeSelectTargetDevice}>
+              <option value=''>Device</option>
+              <option value='전체'>전체</option>
+              <option value='Android'>Android</option>
+              <option value='IOS'>IOS</option>
+            </select>
+          </div>
+          <div>
+            <select value={selectTargetMemberId} onChange={changeSelectTargetMemberId}>
+              <option value=''>Member ID</option>
+              <option value='전체'>전체</option>
+              <option value='홀수'>홀수</option>
+              <option value='짝수'>짝수</option>
+            </select>
+          </div>
         </div>
       </div>
       <div className={styles.editor}>
@@ -107,11 +135,11 @@ const Registration = () => {
           <button onClick={borderHandler}>진하게</button>
           <button onClick={italicHandler}>기울임</button>
           <input ref={imageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
-          <button onClick={inputImageHandler}>이미지</button>
+          <button onClick={inputImageHandler(imageRef)}>이미지</button>
         </div>
         <div className={styles.workspace}>
           <div className={styles.edit_area}>
-            <textarea ref={textareaRef} value={inputText} onChange={changeInputText} />
+            <textarea ref={textareaRef} value={inputText} onChange={changeInputText} placeholder='아티클 본문을 입력해주세요' />
           </div>
           <div className={styles.preview_area}>
             <ReactMarkdown children={viewText} />
