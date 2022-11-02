@@ -4,7 +4,7 @@ import { loadDummyMembers } from '../../redux/reducers/members';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const Member = () => {
+const MemberPage = () => {
   return (
     <Main>
       <Management />
@@ -29,4 +29,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Member;
+export default MemberPage;

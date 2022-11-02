@@ -1,10 +1,9 @@
 import Modification from '../../components/bookstore/modification';
 import Main from '../../components/main';
-import { loadBookstore } from '../../redux/actions/bookstore';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const BookstoreModificationPage = () => {
+const ModificationPage = () => {
   return (
     <Main>
       <Modification />
@@ -17,11 +16,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     section: 'bookstore',
   }));
 
-  store.dispatch(loadBookstore(context.params.id));
-
   return {
     props: {},
   };
 });
 
-export default BookstoreModificationPage;
+export default ModificationPage;

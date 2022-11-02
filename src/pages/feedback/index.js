@@ -4,7 +4,7 @@ import { loadDummyFeedbacks } from '../../redux/reducers/feedbacks';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const Feedback = () => {
+const FeedbackPage = () => {
   return (
     <Main>
       <Management />
@@ -28,4 +28,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Feedback;
+export default FeedbackPage;

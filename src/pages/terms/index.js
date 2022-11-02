@@ -2,7 +2,7 @@ import Main from '../../components/main';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const Terms = () => {
+const TermsPage = () => {
   return (
     <Main>
       Terms
@@ -13,8 +13,6 @@ const Terms = () => {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
     section: 'terms',
-    search: context.query.search ? context.query.search : null,
-    page: context.query.page ? Number(context.query.page) : null,
   }));
 
   return {
@@ -22,4 +20,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Terms;
+export default TermsPage;

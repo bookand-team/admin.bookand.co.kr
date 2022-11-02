@@ -4,7 +4,7 @@ import { loadDummyBookstores } from '../../redux/reducers/bookstores';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const Bookstore = () => {
+const BookstorePage = () => {
   return (
     <Main>
       <Management />
@@ -29,4 +29,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Bookstore;
+export default BookstorePage;

@@ -1,19 +1,19 @@
-import Registration from '../../components/article/registration';
 import Main from '../../components/main';
+import Details from '../../components/member/details';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const RegistrationPage = () => {
+const DetailsPage = () => {
   return (
     <Main>
-      <Registration />
+      <Details />
     </Main>
   );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
-    section: 'article',
+    section: 'member',
   }));
 
   return {
@@ -21,4 +21,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default RegistrationPage;
+export default DetailsPage;

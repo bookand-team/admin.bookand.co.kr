@@ -5,7 +5,7 @@ import { setPage } from '../../redux/reducers/page';
 import { loadDummyPushes } from '../../redux/reducers/pushes';
 import wrapper from '../../redux/store';
 
-const Push = () => {
+const PushPage = () => {
   return (
     <Main>
       <Management />
@@ -31,4 +31,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Push;
+export default PushPage;

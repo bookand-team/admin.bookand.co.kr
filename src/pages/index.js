@@ -2,7 +2,7 @@ import Login from '../components/login';
 import { setPage } from '../redux/reducers/page';
 import wrapper from '../redux/store';
 
-const Home = () => {
+const LoginPage = () => {
   return (
     <Login />
   );
@@ -10,9 +10,7 @@ const Home = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
-    section: null,
-    search: null,
-    page: null,
+    section: 'login',
   }));
 
   return {
@@ -20,4 +18,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Home;
+export default LoginPage;

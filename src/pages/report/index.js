@@ -4,7 +4,7 @@ import { setPage } from '../../redux/reducers/page';
 import { loadDummyReports } from '../../redux/reducers/reports';
 import wrapper from '../../redux/store';
 
-const Report = () => {
+const ReportPage = () => {
   return (
     <Main>
       <Management />
@@ -28,4 +28,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Report;
+export default ReportPage;
