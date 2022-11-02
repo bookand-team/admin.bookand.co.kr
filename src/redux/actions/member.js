@@ -7,20 +7,20 @@ import { backendBaseUrl } from '../../../config/config';
 axios.defaults.baseURL = backendBaseUrl;
 axios.defaults.withCredentials = true;  // front <-> backend 쿠키공유
 
-// 여러 아티클 조회하기
-export const readArticles = createAsyncThunk('readArticles', async (data, { rejectWithValue }) => {
+// 멤버 조회하기
+export const readMember = createAsyncThunk('readMember', async (id, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/articles', data);
+    const response = await axios.get(`/member/${id}`);
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
   }
 });
 
-// 여러 아티클 삭제하기
-export const deleteArticles = createAsyncThunk('deleteArticles', async (data, { rejectWithValue }) => {
+// 멤버 수정하기
+export const updateMember = createAsyncThunk('updateMember', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.delete('/articles', { data });
+    const response = await axios.put('/member', data);
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);

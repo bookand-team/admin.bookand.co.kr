@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { dummyMembers } from '../../hooks/dummy_data';
+import { readMembers } from '../actions/members';
 
 const initialState = {
   members: null,
   membersLength: null,
+
+  readMembersLoading: null,
+  readMembersDone: null,
+  readMembersError: null,
 };
 
 const membersSlice = createSlice({
@@ -18,6 +23,24 @@ const membersSlice = createSlice({
       state.membersLength = dummyMembers.length;
     },
   },
+  extraReducers: (builder) => {
+    // 여러 멤버 조회하기
+    builder.addCase(readMembers.pending, (state) => {
+      state.readMembersLoading = true;
+      state.readMembersDone = null;
+      state.readMembersError = null;
+    })
+    builder.addCase(readMembers.fulfilled, (state, action) => {
+      state.readMembersLoading = false;
+      state.readMembersDone = action.payload.message ? action.payload.message : true;
+      state.members = action.payload.members;
+      state.membersLength = action.payload.members_length;
+    })
+    builder.addCase(readMembers.rejected, (state, action) => {
+      state.readMembersLoading = false;
+      state.readMembersError = action.payload.message ? action.payload.message : true;
+    })
+  }
 });
 
 export const { loadDummyMembers } = membersSlice.actions;

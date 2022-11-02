@@ -7,20 +7,20 @@ import { backendBaseUrl } from '../../../config/config';
 axios.defaults.baseURL = backendBaseUrl;
 axios.defaults.withCredentials = true;  // front <-> backend 쿠키공유
 
-// 여러 아티클 조회하기
-export const readArticles = createAsyncThunk('readArticles', async (data, { rejectWithValue }) => {
+// 여러 피드백 조회하기
+export const readFeedbacks = createAsyncThunk('readFeedbacks', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/articles', data);
+    const response = await axios.post('/feedbacks', data);
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
   }
 });
 
-// 여러 아티클 삭제하기
-export const deleteArticles = createAsyncThunk('deleteArticles', async (data, { rejectWithValue }) => {
+// 여러 피드백 삭제하기
+export const deleteFeedbacks = createAsyncThunk('deleteFeedbacks', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.delete('/articles', { data });
+    const response = await axios.delete('/feedbacks', { data });
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);

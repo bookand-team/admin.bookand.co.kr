@@ -1,17 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { postArticle, putArticle } from '../actions/article';
+import { createArticle, readArticle, updateArticle, deleteArticle } from '../actions/article';
 
 const initialState = {
   article: null,
 
-  postArticleLoading: null,
-  postArticleDone: null,
-  postArticleError: null,
+  createArticleLoading: null,
+  createArticleDone: null,
+  createArticleError: null,
 
-  putArticleLoading: null,
-  putArticleDone: null,
-  putArticleError: null,
+  readArticleLoading: null,
+  readArticleDone: null,
+  readArticleError: null,
+
+  updateArticleLoading: null,
+  updateArticleDone: null,
+  updateArticleError: null,
+
+  deleteArticleLoading: null,
+  deleteArticleDone: null,
+  deleteArticleError: null,
 };
 
 const articleSlice = createSlice({
@@ -21,34 +29,62 @@ const articleSlice = createSlice({
 
   },
   extraReducers: (builder) => {
-    // article 생성하기
-    builder.addCase(postArticle.pending, (state) => {
-      state.postArticleLoading = true;
-      state.postArticleDone = null;
-      state.postArticleError = null;
+    // 아티클 생성하기
+    builder.addCase(createArticle.pending, (state) => {
+      state.createArticleLoading = true;
+      state.createArticleDone = null;
+      state.createArticleError = null;
     })
-    builder.addCase(postArticle.fulfilled, (state, action) => {
-      state.postArticleLoading = false;
-      state.postArticleDone = action.payload.message ? action.payload.message : true;
+    builder.addCase(createArticle.fulfilled, (state, action) => {
+      state.createArticleLoading = false;
+      state.createArticleDone = action.payload.id ? action.payload.id : true;
+    })
+    builder.addCase(createArticle.rejected, (state, action) => {
+      state.createArticleLoading = false;
+      state.createArticleError = action.payload.message ? action.payload.message : true;
+    })
+    // 아티클 조회하기
+    builder.addCase(readArticle.pending, (state) => {
+      state.readArticleLoading = true;
+      state.readArticleDone = null;
+      state.readArticleError = null;
+    })
+    builder.addCase(readArticle.fulfilled, (state, action) => {
+      state.readArticleLoading = false;
+      state.readArticleDone = action.payload.message ? action.payload.message : true;
       state.article = action.payload.article;
     })
-    builder.addCase(postArticle.rejected, (state, action) => {
-      state.postArticleLoading = false;
-      state.postArticleError = action.payload.message ? action.payload.message : true;
+    builder.addCase(readArticle.rejected, (state, action) => {
+      state.readArticleLoading = false;
+      state.readArticleError = action.payload.message ? action.payload.message : true;
     })
-    // article 수정하기
-    builder.addCase(putArticle.pending, (state) => {
-      state.putArticleLoading = true;
-      state.putArticleDone = null;
-      state.putArticleError = null;
+    // 아티클 수정하기
+    builder.addCase(updateArticle.pending, (state) => {
+      state.updateArticleLoading = true;
+      state.updateArticleDone = null;
+      state.updateArticleError = null;
     })
-    builder.addCase(putArticle.fulfilled, (state, action) => {
-      state.putArticleLoading = false;
-      state.putArticleDone = action.payload.message ? action.payload.message : true;
+    builder.addCase(updateArticle.fulfilled, (state, action) => {
+      state.updateArticleLoading = false;
+      state.updateArticleDone = action.payload.id ? action.payload.id : true;
     })
-    builder.addCase(putArticle.rejected, (state, action) => {
-      state.putArticleLoading = false;
-      state.putArticleError = action.payload.message ? action.payload.message : true;
+    builder.addCase(updateArticle.rejected, (state, action) => {
+      state.updateArticleLoading = false;
+      state.updateArticleError = action.payload.message ? action.payload.message : true;
+    })
+    // 아티클 삭제하기
+    builder.addCase(deleteArticle.pending, (state) => {
+      state.deleteArticleLoading = true;
+      state.deleteArticleDone = null;
+      state.deleteArticleError = null;
+    })
+    builder.addCase(deleteArticle.fulfilled, (state, action) => {
+      state.deleteArticleLoading = false;
+      state.deleteArticleDone = action.payload.message ? action.payload.message : true;
+    })
+    builder.addCase(deleteArticle.rejected, (state, action) => {
+      state.deleteArticleLoading = false;
+      state.deleteArticleError = action.payload.message ? action.payload.message : true;
     })
   }
 });

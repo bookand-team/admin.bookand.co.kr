@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { dummyArticles } from '../../hooks/dummy_data';
-import { deleteArticles, loadArticles } from '../actions/articles';
+import { readArticles, deleteArticles } from '../actions/articles';
 
 const initialState = {
   articles: null,
   articlesLength: null,
 
-  loadArticlesLoading: null,
-  loadArticlesDone: null,
-  loadArticlesError: null,
+  readArticlesLoading: null,
+  readArticlesDone: null,
+  readArticlesError: null,
 
   deleteArticlesLoading: null,
   deleteArticlesDone: null,
@@ -23,28 +23,28 @@ const articlesSlice = createSlice({
     loadDummyArticles: (state, action) => {
       state.articles = action.payload.page
         ? dummyArticles.slice((action.payload.page - 1) * action.payload.row, action.payload.page * action.payload.row)
-        : dummyArticles.slice(0, 5);
+        : dummyArticles.slice(0, row);
       state.articlesLength = dummyArticles.length;
     },
   },
   extraReducers: (builder) => {
-    // articles 불러오기
-    builder.addCase(loadArticles.pending, (state) => {
-      state.loadArticlesLoading = true;
-      state.loadArticlesDone = null;
-      state.loadArticlesError = null;
+    // 여러 아티클 조회하기
+    builder.addCase(readArticles.pending, (state) => {
+      state.readArticlesLoading = true;
+      state.readArticlesDone = null;
+      state.readArticlesError = null;
     })
-    builder.addCase(loadArticles.fulfilled, (state, action) => {
-      state.loadArticlesLoading = false;
-      state.loadArticlesDone = action.payload.message ? action.payload.message : true;
+    builder.addCase(readArticles.fulfilled, (state, action) => {
+      state.readArticlesLoading = false;
+      state.readArticlesDone = action.payload.message ? action.payload.message : true;
       state.articles = action.payload.articles;
-      state.articlesLength = action.payload.articlesLength;
+      state.articlesLength = action.payload.articles_length;
     })
-    builder.addCase(loadArticles.rejected, (state, action) => {
-      state.loadArticlesLoading = false;
-      state.loadArticlesError = action.payload.message ? action.payload.message : true;
+    builder.addCase(readArticles.rejected, (state, action) => {
+      state.readArticlesLoading = false;
+      state.readArticlesError = action.payload.message ? action.payload.message : true;
     })
-    // articles 삭제하기
+    // 여러 아티클 삭제하기
     builder.addCase(deleteArticles.pending, (state) => {
       state.deleteArticlesLoading = true;
       state.deleteArticlesDone = null;
