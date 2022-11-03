@@ -18,9 +18,6 @@ const Management = () => {
   const { bookstores, bookstoresLength } = useSelector((state) => state.bookstores);
   const { page, row } = useSelector((state) => state.page);
 
-  // checkbox 선택
-  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
-
   // theme 선택
   const [selectTheme, changeSelectTheme] = useInput('');
   useEffect(() => {
@@ -35,10 +32,42 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
 
-  /** 새 컨텐츠 등록 페이지 이동 */
-  const moveRegistration = useCallback(() => {
+  // checkbox 선택
+  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
+
+  /** 서점 노출상태 변경 요청 */
+  const changeStatusHandler = useCallback((id, status) => () => {
+    if (status === '미노출' && confirm('해당 서점을 노출 처리하시겠습니까?\n노출 전 서점 정보를 꼼꼼히 확인해주세요.')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
+    } else if (status === '노출' && confirm('해당 서점을 미노출 처리하시겠습니까?')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
+    }
+  }, []);
+
+  /** 서점 수정 페이지 이동 */
+  const moveModificationHandler = useCallback((id) => () => {
+    router.push(`/bookstore/${id}`);
+  }, []);
+
+  /** 서점 작성 페이지 이동 */
+  const moveRegistrationHandler = useCallback(() => {
     router.push('/bookstore/registration');
   }, []);
+
+  /** 선택한 서점들 삭제 요청 */
+  const deleteArticlesHandler = useCallback(() => {
+    if (checkBoxes.length === 0) {
+      alert('선택된 서점이 존재하지 않습니다.');
+    } else {
+      const sortedCheckboxes = [...checkBoxes];
+      if (confirm(`${sortedCheckboxes.sort()}번 서점을 삭제 처리하시겠습니까?\n삭제한 서점은 저장되지 않습니다.`)) {
+        // feature
+        alert('현재 지원하지 않는 기능입니다.');
+      }
+    }
+  }, [checkBoxes]);
 
   return (
     <div className={styles.container}>
@@ -76,6 +105,8 @@ const Management = () => {
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
+              <div className={styles.button}></div>
+              <div className={styles.button}></div>
             </div>
           </div>
           <ul>
@@ -94,6 +125,8 @@ const Management = () => {
                   <div className={styles.createdDate}>{bookstore.createdDate && getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.button}><button onClick={changeStatusHandler(bookstore.id, bookstore.status)}>노출전환</button></div>
+                  <div className={styles.button}><button onClick={moveModificationHandler(bookstore.id)}>수정</button></div>
                 </li>
               );
             })}
@@ -107,8 +140,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={bookstoresLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveRegistration}>새 서점 등록</button>
-        <button className={buttonStyles.removal}>선택 서점 삭제</button>
+        <button className={buttonStyles.registration} onClick={moveRegistrationHandler}>새 서점 등록</button>
+        <button className={buttonStyles.removal} onClick={deleteArticlesHandler}>선택 서점 삭제</button>
       </div>
     </div>
   );

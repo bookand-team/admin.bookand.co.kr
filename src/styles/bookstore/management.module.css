@@ -23,7 +23,8 @@
 .theme,
 .view,
 .bookmark,
-.status {
+.status,
+.button {
   flex: 2;
 }
 

@@ -16,23 +16,22 @@
 
 .search>div {
   display: flex;
-  width: 362px;
+  width: 400px;
   border: 1px solid #BEBEBE;
-  margin-right: 10px;
+  margin-right: 16px;
 }
 
-.search>div>div {
+.search .key {
   width: 150px;
   text-align: center;
   padding: 9px 0;
   background-color: #E4E4E4;
 }
 
-.search input {
-  width: 212px;
-  border: none;
-  outline: none;
-  padding-left: 12px;
+.search .value {
+  width: 250px;
+  padding: 9px 0;
+  padding-left: 16px;
 }
 
 .search>button {
@@ -63,40 +62,23 @@
   align-items: center;
 }
 
-.info>div>div>div {
+.info .key {
   width: 100px;
   font-weight: 500;
 }
 
-.info input {
+.info .value {
   border: none;
   outline: none;
   flex: 1;
 }
 
-.buttons {
+.info ul {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
 }
 
-.registration {
-  width: 140px;
-  height: 40px;
-  background-color: #333333;
-  color: #FFFFFF;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  margin-right: 22px;
-}
-
-.removal {
-  width: 140px;
-  height: 40px;
-  background-color: #FF0000;
-  color: #FFFFFF;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
+.info ul li {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
 }
