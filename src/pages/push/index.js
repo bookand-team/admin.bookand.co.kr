@@ -1,6 +1,5 @@
 import Main from '../../components/main';
 import Management from '../../components/push/management';
-import Registration from '../../components/push/registration';
 import { setPage } from '../../redux/reducers/page';
 import { loadDummyPushes } from '../../redux/reducers/pushes';
 import wrapper from '../../redux/store';
@@ -9,7 +8,6 @@ const PushPage = () => {
   return (
     <Main>
       <Management />
-      <Registration />
     </Main>
   );
 };

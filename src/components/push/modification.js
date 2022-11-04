@@ -1,5 +1,5 @@
 import useInput from '../../hooks/use_input';
-import styles from '../../styles/push/registration.module.css';
+import styles from '../../styles/push/modification.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import { useCallback } from 'react';
 
@@ -15,7 +15,7 @@ const Registration = () => {
 
   /** 푸시 작성 취소 버튼 */
   const cancelRegistrationHandler = useCallback(() => {
-    if (confirm('작성을 취소하면 작성 중인 PUSH는 저장되지 않습니다.\nPUSH 작성을 취소하시겠습니까?')) {
+    if (confirm('수정을 취소하면 수정 중인 PUSH는 저장되지 않습니다.\nPUSH 수정을 취소하시겠습니까?')) {
       router.push('/push');
     }
   }, []);
@@ -42,7 +42,7 @@ const Registration = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>PUSH 등록</h2>
+        <h2>PUSH 수정</h2>
       </div>
       <div className={styles.contents}>
         <div className={styles.title}>
@@ -80,8 +80,8 @@ const Registration = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>등록취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>등록완료</button>
+        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>수정취소</button>
+        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>수정완료</button>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
 }
 
 .contents {
@@ -14,9 +13,13 @@
   flex: 1;
 }
 
+.button {
+  flex: 2;
+}
+
 .category,
 .status {
-  flex: 2;
+  flex: 3;
 }
 
 .createdDate,
