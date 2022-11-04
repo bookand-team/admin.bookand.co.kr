@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
-import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/report/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -16,9 +15,6 @@ const Management = () => {
   const router = useRouter();
   const { reports, reportsLength } = useSelector((state) => state.reports);
   const { page, row } = useSelector((state) => state.page);
-
-  // checkbox 선택
-  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // status 선택
   const [selectStatus, changeSelectStatus] = useInput('');
@@ -37,7 +33,6 @@ const Management = () => {
         <div className={tableStyles.table}>
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
-              <div className={styles.check}>선택</div>
               <div className={styles.id}>번호</div>
               <div className={styles.bookstoreName}>서점명</div>
               <div className={styles.email}>이메일</div>
@@ -57,9 +52,6 @@ const Management = () => {
             {reports && reports.map((report) => {
               return (
                 <li key={report.id} className={tableStyles.tr}>
-                  <div className={styles.check}>
-                    <input type='checkbox' checked={checkBoxes.includes(report.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, report.id)} />
-                  </div>
                   <div className={styles.id}>{report.id && report.id}</div>
                   <div className={styles.bookstoreName}>{report.bookstoreName && report.bookstoreName}</div>
                   <div className={styles.email}>{report.email && report.email}</div>

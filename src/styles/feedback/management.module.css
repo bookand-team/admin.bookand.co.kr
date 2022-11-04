@@ -15,16 +15,16 @@
   flex-direction: column;
 }
 
-.check,
 .id {
   flex: 1;
 }
 
-.device,
-.feedbackCount {
+.feedbackCount,
+.button {
   flex: 2;
 }
 
+.device,
 .type {
   flex: 3;
 }
