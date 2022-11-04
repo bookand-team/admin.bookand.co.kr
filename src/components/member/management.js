@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
-import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/member/management.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
@@ -16,9 +15,6 @@ const Management = () => {
   const router = useRouter();
   const { members, membersLength } = useSelector((state) => state.members);
   const { page, row } = useSelector((state) => state.page);
-
-  // checkbox 선택
-  const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
   // role 선택
   const [selectRole, changeSelectRole] = useInput('');
@@ -34,6 +30,22 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
 
+  /** 회원 역할 변경 요청 */
+  const changeRoleHandler = useCallback((id, role) => () => {
+    if (role === '일반' && confirm('회원에게 관리자 권한을 허용 하시겠습니까?\n변경 전 정보를 꼼꼼히 확인해주세요.')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
+    } else if (role === '관리자' && confirm('회원의 관리자 권한을 허용하지 않으시겠습니까?\n변경 전 정보를 꼼꼼히 확인해주세요.')) {
+      // feature
+      alert('현재 지원하지 않는 기능입니다.');
+    }
+  }, []);
+
+  /** 회원 상세정보 페이지 이동 */
+  const moveDetailsHandler = useCallback((id) => () => {
+    router.push(`/member/${id}`);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -44,7 +56,6 @@ const Management = () => {
         <div className={tableStyles.table}>
           <div className={tableStyles.thead}>
             <div className={tableStyles.tr}>
-              <div className={styles.check}>선택</div>
               <div className={styles.id}>번호</div>
               <div className={styles.nickname}>닉네임</div>
               <div className={styles.email}>email</div>
@@ -65,15 +76,14 @@ const Management = () => {
               </div>
               <div className={styles.createdDate}>가입일</div>
               <div className={styles.accessedDate}>접속일</div>
+              <div className={styles.button}></div>
+              <div className={styles.button}></div>
             </div>
           </div>
           <ul>
             {members && members.map((member) => {
               return (
                 <li key={member.id} className={tableStyles.tr}>
-                  <div className={styles.check}>
-                    <input type='checkbox' checked={checkBoxes.includes(member.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, member.id)} />
-                  </div>
                   <div className={styles.id}>{member.id && member.id}</div>
                   <div className={styles.nickname}>{member.nickname && member.nickname}</div>
                   <div className={styles.email}>{member.email && member.email}</div>
@@ -81,6 +91,8 @@ const Management = () => {
                   <div className={styles.status}>{member.status && member.status}</div>
                   <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.button}><button onClick={changeRoleHandler(member.id, member.type)}>역할전환</button></div>
+                  <div className={styles.button}><button onClick={moveDetailsHandler(member.id)}>상세정보</button></div>
                 </li>
               );
             })}

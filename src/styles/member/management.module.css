@@ -20,7 +20,8 @@
   flex: 1;
 }
 
-.type {
+.type,
+.button {
   flex: 2;
 }
 
