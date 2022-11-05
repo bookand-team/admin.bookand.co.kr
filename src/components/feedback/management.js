@@ -23,7 +23,7 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectCategory]);
 
-  /** 피드백 상세정보 보기 */
+  /** 상세정보 보기 요청 */
   const moveDetailsHandler = useCallback((id) => () => {
     // feature
     alert('현재 지원하지 않는 기능입니다.');

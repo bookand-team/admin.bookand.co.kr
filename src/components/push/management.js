@@ -34,7 +34,7 @@ const Management = () => {
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
-  /** 푸시 전송상태 변경 요청 */
+  /** status(전송상태) 변경 요청 */
   const changeStatusHandler = useCallback((id, status) => () => {
     if (status === '전송실패' && confirm('해당 PUSH를 재전송 처리하시겠습니까?\n전송 전 PUSH 정보를 꼼꼼히 확인해주세요.')) {
       // feature
@@ -45,18 +45,13 @@ const Management = () => {
     }
   }, []);
 
-  /** 푸시 수정 페이지 이동 */
-  const moveModificationHandler = useCallback((id) => () => {
-    router.push(`/push/${id}`);
+  /** 원하는 페이지로 이동*/
+  const moveToOtherPageHandler = useCallback((url) => () => {
+    router.push(url);
   }, []);
 
-  /** 푸시 작성 페이지 이동 */
-  const moveRegistrationHandler = useCallback(() => {
-    router.push('/push/registration');
-  }, []);
-
-  /** 선택한 푸시들들 삭제 요청 */
-  const deletePushesHandler = useCallback(() => {
+  /** 선택 항목 삭제 요청 */
+  const deleteSelectionHandler = useCallback(() => {
     if (checkBoxes.length === 0) {
       alert('선택된 PUSH가 존재하지 않습니다.');
     } else {
@@ -117,7 +112,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}><button onClick={changeStatusHandler(push.id, push.status)}>{push.status && push.status === '전송전' ? '전송' : '재전송'}</button></div>
-                  <div className={styles.button}><button onClick={moveModificationHandler(push.id)}>수정</button></div>
+                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -131,8 +126,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={pushesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveRegistrationHandler}>새 푸시 작성</button>
-        <button className={buttonStyles.removal} onClick={deletePushesHandler}>선택 푸시 삭제</button>
+        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/push/registration')}>새 푸시 작성</button>
+        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 푸시 삭제</button>
       </div>
     </div>
   );

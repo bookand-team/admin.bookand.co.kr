@@ -30,7 +30,7 @@ const Management = () => {
     router.push(`${router.pathname}${newQuery}`);
   }, [selectStatus]);
 
-  /** 회원 역할 변경 요청 */
+  /** role 변경 요청 */
   const changeRoleHandler = useCallback((id, role) => () => {
     if (role === '일반' && confirm('회원에게 관리자 권한을 허용 하시겠습니까?\n변경 전 정보를 꼼꼼히 확인해주세요.')) {
       // feature
@@ -41,9 +41,9 @@ const Management = () => {
     }
   }, []);
 
-  /** 회원 상세정보 페이지 이동 */
-  const moveDetailsHandler = useCallback((id) => () => {
-    router.push(`/member/${id}`);
+  /** 원하는 페이지로 이동*/
+  const moveToOtherPageHandler = useCallback((url) => () => {
+    router.push(url);
   }, []);
 
   return (
@@ -92,7 +92,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}><button onClick={changeRoleHandler(member.id, member.type)}>역할전환</button></div>
-                  <div className={styles.button}><button onClick={moveDetailsHandler(member.id)}>상세정보</button></div>
+                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/member/${member.id}`)}>상세정보</button></div>
                 </li>
               );
             })}

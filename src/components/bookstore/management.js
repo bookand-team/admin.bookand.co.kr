@@ -35,7 +35,7 @@ const Management = () => {
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
-  /** 서점 노출상태 변경 요청 */
+  /** status(노출상태) 변경 요청 */
   const changeStatusHandler = useCallback((id, status) => () => {
     if (status === '미노출' && confirm('해당 서점을 노출 처리하시겠습니까?\n노출 전 서점 정보를 꼼꼼히 확인해주세요.')) {
       // feature
@@ -46,18 +46,13 @@ const Management = () => {
     }
   }, []);
 
-  /** 서점 수정 페이지 이동 */
-  const moveModificationHandler = useCallback((id) => () => {
-    router.push(`/bookstore/${id}`);
+  /** 원하는 페이지로 이동*/
+  const moveToOtherPageHandler = useCallback((url) => () => {
+    router.push(url);
   }, []);
 
-  /** 서점 작성 페이지 이동 */
-  const moveRegistrationHandler = useCallback(() => {
-    router.push('/bookstore/registration');
-  }, []);
-
-  /** 선택한 서점들 삭제 요청 */
-  const deleteArticlesHandler = useCallback(() => {
+  /** 선택 항목 삭제 요청 */
+  const deleteSelectionHandler = useCallback(() => {
     if (checkBoxes.length === 0) {
       alert('선택된 서점이 존재하지 않습니다.');
     } else {
@@ -126,7 +121,7 @@ const Management = () => {
                   <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}><button onClick={changeStatusHandler(bookstore.id, bookstore.status)}>노출전환</button></div>
-                  <div className={styles.button}><button onClick={moveModificationHandler(bookstore.id)}>수정</button></div>
+                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/bookstore/${bookstore.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -140,8 +135,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={bookstoresLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveRegistrationHandler}>새 서점 등록</button>
-        <button className={buttonStyles.removal} onClick={deleteArticlesHandler}>선택 서점 삭제</button>
+        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/bookstore/registration')}>새 서점 등록</button>
+        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 서점 삭제</button>
       </div>
     </div>
   );
