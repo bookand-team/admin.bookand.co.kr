@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/bookstore/registration.module.css';
@@ -10,11 +10,11 @@ import buttonStyles from '../../styles/layout/button.module.css';
 const Modification = () => {
   const router = useRouter();
 
-  // 입력받은 추가정보 (한줄소개, 테마, 이미지 파일, 이미지 파일 미리보기 리스트)
+  // 입력받은 추가정보 (한줄소개, 테마, 대표 이미지 미리보기, 서브 이미지들 미리보기)
   const [inputInformation, changeInputInformation] = useInput();
   const [selectTheme, changeSelectTheme] = useInput();
-  const [imageSource, setImageSource] = useState('');
-  const [imageSources, setImageSources] = useState([]);
+  const [mainImage, setMainImage] = useState('');
+  const [subImages, setSubImages] = useState([]);
 
   /** 서점 이름을 통한 서점 검색 */
   const searchNameHandler = useCallback(() => {
@@ -22,30 +22,40 @@ const Modification = () => {
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
 
-  /** 이미지 파일 선택 */
-  const encodeFileToBase64 = useCallback((event) => {
+  /** 이미지 미리보기 생성 함수 */
+  const encodeFileToBase64 = useCallback((fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+    });
+  }, []);
+
+  /** 메인 이미지 미리보기 생성 */
+  const mainImageHandler = useCallback(async (event) => {
     if (event.target.files[0]) {
-      const fileBlob = event.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(fileBlob);
-      return new Promise((resolve) => {
-        reader.onload = () => {
-          setImageSource(reader.result);
-          resolve();
-        };
-      });
+      const result = await encodeFileToBase64(event.target.files[0]);
+      setMainImage(result);
     } else {
-      setImageSource('');
+      setMainImage('');
     }
   }, []);
 
-  /** 선택한 파일 미리보기 리스트에 추가 */
-  useEffect(() => {
-    if (imageSource !== '') {
-      setImageSources([...imageSources, imageSource]);
-      setImageSource('');
+  /** 서브 이미지들 미리보기 생성 */
+  const subImageHandler = useCallback(async (event) => {
+    if (event.target.files.length !== 0) {
+      const results = [];
+      for (let i = 0; i < event.target.files.length; i++) {
+        const result = await encodeFileToBase64(event.target.files[i]);
+        results.push(result);
+      }
+      setSubImages(results);
+    } else {
+      setSubImages([]);
     }
-  }, [imageSource]);
+  }, []);
 
   /** 서점 수정 취소 버튼 */
   const cancelRegistrationHandler = useCallback(() => {
@@ -111,9 +121,8 @@ const Modification = () => {
               <input className={styles.value} value={inputInformation} onChange={changeInputInformation} />
             </div>
             <div>
-              <div className={styles.key}>테마</div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
-                <option value=''></option>
+                <option value='' disabled>테마 선택</option>
                 <option value='여행'>여행</option>
                 <option value='음악'>음악</option>
                 <option value='그림'>그림</option>
@@ -124,18 +133,42 @@ const Modification = () => {
               </select>
             </div>
             <div>
-              <div>서점 상세페이지 노출 이미지 관리</div>
-              <div><input type='file' onChange={encodeFileToBase64} /></div>
+              <div className={styles.title}>서점 상세페이지 노출 이미지 관리</div>
+              <div>
+                <input id='main-image' type='file' accept='image/*' hidden onChange={mainImageHandler} />
+                <input id='sub-image' type='file' accept='image/*' multiple hidden onChange={subImageHandler} />
+              </div>
             </div>
             <ul>
+              <li>
+                <label htmlFor='main-image'>
+                  {
+                    mainImage
+                      ? <Image src={mainImage} alt='preview-image' width={150} height={150} />
+                      : <div className={styles.main}>대표 이미지</div>
+                  }
+                </label>
+              </li>
               {
-                imageSources && imageSources.map((imageSrc) => {
-                  return (
-                    <li key={nanoid()}>
-                      <Image src={imageSrc} alt='preview-img' width={150} height={150} />
-                    </li>
-                  );
-                })
+                subImages.length === 0
+                  ?
+                  <>
+                    <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                    <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                    <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                    <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                    <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                  </>
+                  :
+                  subImages.map((imageSrc) => {
+                    return (
+                      <li key={nanoid()}>
+                        <label htmlFor='sub-image'>
+                          <Image src={imageSrc} alt='preview-image' width={150} height={150} />
+                        </label>
+                      </li>
+                    );
+                  })
               }
             </ul>
           </div>

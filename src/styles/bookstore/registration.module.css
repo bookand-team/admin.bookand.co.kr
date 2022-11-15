@@ -65,6 +65,7 @@
 .info .key {
   width: 100px;
   font-weight: 500;
+  margin-left: 4px;
 }
 
 .info .value {
@@ -77,8 +78,31 @@
   display: flex;
 }
 
+.info select {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.info .title {
+  margin-left: 4px;
+}
+
 .info ul li {
   width: 150px;
   height: 150px;
   margin: 10px;
+}
+
+.info ul li div {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  background-color: #FCACAC;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.info .main {
+  background-color: #F46262;
 }
