@@ -101,7 +101,7 @@ const Management = () => {
           <ul>
             {pushes && pushes.map((push) => {
               return (
-                <li key={push.id} className={tableStyles.tr}>
+                <li key={push.id} className={checkBoxes.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
                   <div className={styles.check}>
                     <input type='checkbox' checked={checkBoxes.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
                   </div>
@@ -111,8 +111,8 @@ const Management = () => {
                   <div className={styles.status}>{push.status && push.status}</div>
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button onClick={changeStatusHandler(push.id, push.status)}>{push.status && push.status === '전송전' ? '전송' : '재전송'}</button></div>
-                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
+                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(push.id, push.status)}>{push.status && push.status === '전송전' ? '전송' : '재전송'}</button></div>
+                  <div className={styles.button}><button className={buttonStyles.modification} onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
                 </li>
               );
             })}

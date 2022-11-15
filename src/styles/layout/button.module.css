@@ -12,7 +12,7 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-right: 22px;
+  margin: 0 12px;
 }
 
 .removal {
@@ -23,6 +23,7 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
+  margin: 0 12px;
 }
 
 .cancellation {
@@ -33,7 +34,7 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
-  margin-right: 22px;
+  margin: 0 12px;
 }
 
 .completion {
@@ -42,6 +43,26 @@
   background-color: #1BC47D;
   color: #FFFFFF;
   font-weight: 500;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.status {
+  width: 70px;
+  height: 30px;
+  color: #FFFFFF;
+  background-color: #1BC47D;
+  border: none;
+  cursor: pointer;
+}
+
+.details,
+.modification {
+  width: 70px;
+  height: 30px;
+  color: #FFFFFF;
+  background-color: #F46262;
   border: none;
   cursor: pointer;
 }

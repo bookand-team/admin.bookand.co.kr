@@ -107,7 +107,7 @@ const Management = () => {
           <ul>
             {bookstores && bookstores.map((bookstore) => {
               return (
-                <li key={bookstore.id} className={tableStyles.tr}>
+                <li key={bookstore.id} className={checkBoxes.includes(bookstore.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
                   <div className={styles.check}>
                     <input type='checkbox' checked={checkBoxes.includes(bookstore.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, bookstore.id)} />
                   </div>
@@ -120,8 +120,8 @@ const Management = () => {
                   <div className={styles.createdDate}>{bookstore.createdDate && getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button onClick={changeStatusHandler(bookstore.id, bookstore.status)}>노출전환</button></div>
-                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/bookstore/${bookstore.id}`)}>수정</button></div>
+                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(bookstore.id, bookstore.status)}>노출전환</button></div>
+                  <div className={styles.button}><button className={buttonStyles.modification} onClick={moveToOtherPageHandler(`/bookstore/${bookstore.id}`)}>수정</button></div>
                 </li>
               );
             })}

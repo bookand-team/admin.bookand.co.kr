@@ -7,6 +7,7 @@ import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/member/management.module.css';
+import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import Page from '../page';
 import Search from '../search';
@@ -91,8 +92,8 @@ const Management = () => {
                   <div className={styles.status}>{member.status && member.status}</div>
                   <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button onClick={changeRoleHandler(member.id, member.type)}>역할전환</button></div>
-                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/member/${member.id}`)}>상세정보</button></div>
+                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeRoleHandler(member.id, member.type)}>역할전환</button></div>
+                  <div className={styles.button}><button className={buttonStyles.details} onClick={moveToOtherPageHandler(`/member/${member.id}`)}>상세정보</button></div>
                 </li>
               );
             })}

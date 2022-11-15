@@ -34,3 +34,7 @@
 .table ul .tr:hover {
   background-color: #F1F1F1;
 }
+
+.checked {
+  background-color: #FF9090 !important;
+}
