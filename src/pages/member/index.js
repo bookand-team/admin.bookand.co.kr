@@ -19,13 +19,13 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     role: context.query.role ? context.query.role : null,
     row: 10,
     search: context.query.search ? context.query.search : null,
-    status: context.query.status ? context.query.status : null,
+    status: context.query.status ? context.query.status : null
   }));
 
   store.dispatch(loadDummyMembers(store.getState().page));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

@@ -9,7 +9,7 @@ const initialState = {
 
   readMembersLoading: null,
   readMembersDone: null,
-  readMembersError: null,
+  readMembersError: null
 };
 
 const membersSlice = createSlice({
@@ -21,7 +21,7 @@ const membersSlice = createSlice({
         ? dummyMembers.slice((action.payload.page - 1) * 10, action.payload.page * 10)
         : dummyMembers.slice(0, 10);
       state.membersLength = dummyMembers.length;
-    },
+    }
   },
   extraReducers: (builder) => {
     // 여러 멤버 조회하기
@@ -29,17 +29,17 @@ const membersSlice = createSlice({
       state.readMembersLoading = true;
       state.readMembersDone = null;
       state.readMembersError = null;
-    })
+    });
     builder.addCase(readMembers.fulfilled, (state, action) => {
       state.readMembersLoading = false;
       state.readMembersDone = action.payload.message ? action.payload.message : true;
       state.members = action.payload.members;
       state.membersLength = action.payload.members_length;
-    })
+    });
     builder.addCase(readMembers.rejected, (state, action) => {
       state.readMembersLoading = false;
       state.readMembersError = action.payload.message ? action.payload.message : true;
-    })
+    });
   }
 });
 

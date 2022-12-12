@@ -25,6 +25,7 @@ const Management = () => {
   }, [selectCategory]);
 
   /** 상세정보 보기 요청 */
+  // eslint-disable-next-line no-unused-vars
   const moveDetailsHandler = useCallback((id) => () => {
     // feature
     alert('현재 지원하지 않는 기능입니다.');

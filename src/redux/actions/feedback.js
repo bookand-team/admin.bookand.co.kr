@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // axios 기본 설정
 axios.defaults.baseURL = process.env.BACKEND_BASE_URL;

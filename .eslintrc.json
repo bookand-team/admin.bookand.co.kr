@@ -1,0 +1,83 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [],
+  "rules": {
+    "no-unused-vars": "warn",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          [
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "type",
+          "unknown"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  },
+  "overrides": []
+}

@@ -39,7 +39,7 @@ const Details = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Details;

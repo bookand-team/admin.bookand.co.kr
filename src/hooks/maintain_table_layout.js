@@ -11,11 +11,11 @@ export const isRowInsufficient = (page, tableRow, contentsLength) => {
 export const makeEmptyArray = (page, tableRow, contentsLength) => {
   const ret = [];
   if (page === null) {
-    for (var i = 0; i < tableRow - contentsLength; i++) {
+    for (let i = 0; i < tableRow - contentsLength; i++) {
       ret.push(null);
     }
   } else {
-    for (var i = 0; i < tableRow * page - contentsLength; i++) {
+    for (let i = 0; i < tableRow * page - contentsLength; i++) {
       ret.push(null);
     }
   }

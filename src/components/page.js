@@ -18,11 +18,11 @@ const Page = ({ tableRow = 5, maxSelection = 10, contentsLength }) => {
   const selectionRange = useCallback(() => {
     const array = [];
     if (page) {
-      for (var i = parseInt((page - 1) / maxSelection) * maxSelection + 1; i <= parseInt((page - 1) / maxSelection) * maxSelection + maxSelection && i <= parseInt((contentsLength - 1) / tableRow) + 1; i++) {
+      for (let i = parseInt((page - 1) / maxSelection) * maxSelection + 1; i <= parseInt((page - 1) / maxSelection) * maxSelection + maxSelection && i <= parseInt((contentsLength - 1) / tableRow) + 1; i++) {
         array.push(i);
       }
     } else {
-      for (var i = 1; i <= maxSelection && i <= parseInt((contentsLength - 1) / tableRow) + 1; i++) {
+      for (let i = 1; i <= maxSelection && i <= parseInt((contentsLength - 1) / tableRow) + 1; i++) {
         array.push(i);
       }
     }

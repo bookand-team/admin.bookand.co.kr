@@ -10,13 +10,13 @@ const TermsPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'terms',
+    section: 'terms'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

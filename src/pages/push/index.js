@@ -19,13 +19,13 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     page: context.query.page ? Number(context.query.page) : 1,
     row: 10,
     search: context.query.search ? context.query.search : null,
-    status: context.query.status ? context.query.status : null,
+    status: context.query.status ? context.query.status : null
   }));
 
   store.dispatch(loadDummyPushes(store.getState().page));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

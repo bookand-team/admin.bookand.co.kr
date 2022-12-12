@@ -13,7 +13,6 @@ import membersSlice from './members';
 import pageSlice from './page';
 import pushSlice from './push';
 import pushesSlice from './pushes';
-import reportSlice from './report';
 import reportsSlice from './reports';
 
 const rootReducer = (state, action) => {
@@ -34,8 +33,7 @@ const rootReducer = (state, action) => {
         page: pageSlice.reducer,
         push: pushSlice.reducer,
         pushes: pushesSlice.reducer,
-        report: reportSlice.reducer,
-        reports: reportsSlice.reducer,
+        reports: reportsSlice.reducer
       });
       return combineReducer(state, action);
     }

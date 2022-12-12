@@ -1,9 +1,12 @@
-import useInput from '../../hooks/use_input';
-import styles from '../../styles/push/registration.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
+import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
+import useInput from '../../hooks/use_input';
+import buttonStyles from '../../styles/layout/button.module.css';
+import styles from '../../styles/push/registration.module.css';
+
 const Registration = () => {
+  const router = useRouter();
 
   // 입력받은 푸시 내용 (제목, 카테고리, 노출범위, 본문)
   const [inputTitle, changeInputTitle] = useInput('');

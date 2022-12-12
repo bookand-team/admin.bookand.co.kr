@@ -8,13 +8,13 @@ const LoginPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'login',
+    section: 'login'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

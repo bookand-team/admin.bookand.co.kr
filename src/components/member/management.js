@@ -6,9 +6,9 @@ import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
-import styles from '../../styles/member/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
+import styles from '../../styles/member/management.module.css';
 import Page from '../page';
 import Search from '../search';
 

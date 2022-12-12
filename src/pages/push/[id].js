@@ -1,5 +1,5 @@
-import Modification from '../../components/push/modification';
 import Main from '../../components/main';
+import Modification from '../../components/push/modification';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
@@ -11,13 +11,13 @@ const ModificationPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'push',
+    section: 'push'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

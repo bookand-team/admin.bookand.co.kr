@@ -15,13 +15,13 @@ const DashboardPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'dashboard',
+    section: 'dashboard'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

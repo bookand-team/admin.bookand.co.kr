@@ -13,14 +13,14 @@ const createStore = () => {
     const store = configureStore({
       reducer: rootReducer,
       middleware: middleware,
-      devTools: isDev,
+      devTools: isDev
     });
     return store;
   }
 
   const store = configureStore({
     reducer: rootReducer,
-    devTools: isDev,
+    devTools: isDev
   });
   return store;
 };

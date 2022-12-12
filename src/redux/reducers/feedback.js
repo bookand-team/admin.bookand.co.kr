@@ -7,7 +7,7 @@ const initialState = {
 
   readFeedbackLoading: null,
   readFeedbackDone: null,
-  readFeedbackError: null,
+  readFeedbackError: null
 };
 
 const feedbackSlice = createSlice({
@@ -22,16 +22,16 @@ const feedbackSlice = createSlice({
       state.readFeedbackLoading = true;
       state.readFeedbackDone = null;
       state.readFeedbackError = null;
-    })
+    });
     builder.addCase(readFeedback.fulfilled, (state, action) => {
       state.readFeedbackLoading = false;
       state.readFeedbackDone = action.payload.message ? action.payload.message : true;
       state.feedback = action.payload.feedback;
-    })
+    });
     builder.addCase(readFeedback.rejected, (state, action) => {
       state.readFeedbackLoading = false;
       state.readFeedbackError = action.payload.message ? action.payload.message : true;
-    })
+    });
   }
 });
 

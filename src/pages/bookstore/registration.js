@@ -11,13 +11,13 @@ const RegistrationPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'bookstore',
+    section: 'bookstore'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

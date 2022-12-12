@@ -7,9 +7,9 @@ import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useCheckBoxes from '../../hooks/use_checkboxes';
 import useInput from '../../hooks/use_input';
-import styles from '../../styles/push/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
+import styles from '../../styles/push/management.module.css';
 import Page from '../page';
 
 const Management = () => {

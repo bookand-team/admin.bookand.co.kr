@@ -8,7 +8,7 @@ const initialState = {
   role: null,
   row: null,
   search: null,
-  status: null,
+  status: null
 };
 
 const pageSlice = createSlice({
@@ -24,8 +24,8 @@ const pageSlice = createSlice({
       state.row = action.payload.row ? action.payload.row : null;
       state.search = action.payload.search ? action.payload.search : null;
       state.status = action.payload.status ? action.payload.status : null;
-    },
-  },
+    }
+  }
 });
 
 export const { setPage } = pageSlice.actions;

@@ -10,13 +10,13 @@ const NoticePage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   store.dispatch(setPage({
-    section: 'notice',
+    section: 'notice'
   }));
 
   return {
-    props: {},
+    props: {}
   };
 });
 

@@ -7,7 +7,7 @@ const initialState = {
 
   createImageUrlLoading: null,
   createImageUrlDone: null,
-  createImageUrlError: null,
+  createImageUrlError: null
 };
 
 const imageSlice = createSlice({
@@ -22,16 +22,16 @@ const imageSlice = createSlice({
       state.createImageUrlLoading = true;
       state.createImageUrlDone = null;
       state.createImageUrlError = null;
-    })
+    });
     builder.addCase(createImageUrl.fulfilled, (state, action) => {
       state.createImageUrlLoading = false;
       state.createImageUrlDone = action.payload.message ? action.payload.message : true;
       state.imageUrl = action.payload.imageUrl;
-    })
+    });
     builder.addCase(createImageUrl.rejected, (state, action) => {
       state.createImageUrlLoading = false;
       state.createImageUrlError = action.payload.message ? action.payload.message : true;
-    })
+    });
   }
 });
 

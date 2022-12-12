@@ -26,7 +26,7 @@ const Registration = () => {
 
   // 아티클 본문 줄바꿈을 마크다운 줄바꿈으로 변환
   useEffect(() => {
-    const markdown = inputText.replace(/\n/g, '\n\n');
+    let markdown = inputText.replace(/\n/g, '\n\n');
     markdown = markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n');
     markdown = markdown.includes('\n\n\n\n') ? markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n') : markdown;
     setViewText(markdown);
@@ -141,8 +141,10 @@ const Registration = () => {
           <div className={styles.edit_area}>
             <textarea ref={textareaRef} value={inputText} onChange={changeInputText} placeholder='아티클 본문을 입력해주세요' />
           </div>
-          <div className={styles.preview_area}>
-            <ReactMarkdown children={viewText} />
+          <div className={styles.preview_area} >
+            <ReactMarkdown >
+              {viewText}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
