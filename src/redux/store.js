@@ -6,25 +6,22 @@ import rootReducer from './reducers';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const createStore = () => {
+const makeStore = () => {
   // 개발환경인 경우 logger 미들웨어 추가
-  if (isDev) {
-    const middleware = (getDefaultMiddleware) => getDefaultMiddleware().concat(logger);
-    const store = configureStore({
+  const store = isDev
+    ? configureStore({
       reducer: rootReducer,
-      middleware: middleware,
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+      devTools: isDev
+    })
+    : configureStore({
+      reducer: rootReducer,
       devTools: isDev
     });
-    return store;
-  }
 
-  const store = configureStore({
-    reducer: rootReducer,
-    devTools: isDev
-  });
   return store;
 };
 
-const wrapper = createWrapper(createStore, { debug: isDev });
+const wrapper = createWrapper(makeStore, { debug: isDev });
 
 export default wrapper;

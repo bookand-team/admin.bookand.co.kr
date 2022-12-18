@@ -1,6 +1,11 @@
-/.next
+# dependencies
 /node_modules
 
-# images
-# /public/images
-# /src/images
+# next.js
+/.next
+
+# production
+/build
+
+# .env
+.env*.local
