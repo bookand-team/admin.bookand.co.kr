@@ -10,7 +10,17 @@
     "plugin:import/recommended",
     "plugin:react/recommended"
   ],
-  "plugins": [],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11
+  },
   "rules": {
     "no-unused-vars": "warn",
     "quotes": [
