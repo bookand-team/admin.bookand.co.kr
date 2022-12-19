@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyBookstores } from '../../hooks/dummy_data';
+import { dummyBookstores } from '../../dummy_data';
 import { readBookstores, deleteBookstores } from '../actions/bookstores';
 
 const initialState = {

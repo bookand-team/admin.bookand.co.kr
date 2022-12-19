@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyArticles } from '../../hooks/dummy_data';
+import { dummyArticles } from '../../dummy_data';
 import { readArticles, deleteArticles } from '../actions/articles';
 
 const initialState = {
