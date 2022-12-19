@@ -16,11 +16,12 @@ const Management = () => {
   const { reports, reportsLength } = useSelector((state) => state.reports);
   const { page, row } = useSelector((state) => state.page);
 
-  // status 선택
+  // 선택한 데이터 (노출상태)
   const [selectStatus, changeSelectStatus] = useInput('');
+
   useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
+    const newQuery = changeQuery(router.query, { status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
   }, [selectStatus]);
 
   return (

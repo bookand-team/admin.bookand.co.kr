@@ -17,19 +17,9 @@ const Management = () => {
   const { members, membersLength } = useSelector((state) => state.members);
   const { page, row } = useSelector((state) => state.page);
 
-  // role 선택
+  // 선택한 데이터 (역할, 상태)
   const [selectRole, changeSelectRole] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { role: selectRole });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectRole]);
-
-  // status 선택
   const [selectStatus, changeSelectStatus] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectStatus]);
 
   /** role 변경 요청 */
   const changeRoleHandler = useCallback((id, role) => () => {
@@ -46,6 +36,11 @@ const Management = () => {
   const moveToOtherPageHandler = useCallback((url) => () => {
     router.push(url);
   }, []);
+
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { role: selectRole, status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectRole, selectStatus]);
 
   return (
     <div className={styles.container}>

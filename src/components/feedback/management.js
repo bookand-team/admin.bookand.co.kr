@@ -17,12 +17,8 @@ const Management = () => {
   const { feedbacks, feedbacksLength } = useSelector((state) => state.feedbacks);
   const { page, row } = useSelector((state) => state.page);
 
-  // category 선택
+  // 선택한 데이터 (유형분류)
   const [selectCategory, changeSelectCategory] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { category: selectCategory });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectCategory]);
 
   /** 상세정보 보기 요청 */
   // eslint-disable-next-line no-unused-vars
@@ -30,6 +26,11 @@ const Management = () => {
     // feature
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
+
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { category: selectCategory });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectCategory]);
 
   return (
     <div className={styles.container}>

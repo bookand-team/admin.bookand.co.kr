@@ -17,22 +17,12 @@ const Management = () => {
   const { pushes, pushesLength } = useSelector((state) => state.pushes);
   const { page, row } = useSelector((state) => state.page);
 
-  // category 선택
-  const [selectCategory, changeSelectCategory] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { category: selectCategory });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectCategory]);
-
-  // status 선택
-  const [selectStatus, changeSelectStatus] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectStatus]);
-
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
+
+  // 선택한 데이터 (카테고리, 전송상태)
+  const [selectCategory, changeSelectCategory] = useInput('');
+  const [selectStatus, changeSelectStatus] = useInput('');
 
   /** status(전송상태) 변경 요청 */
   const changeStatusHandler = useCallback((id, status) => () => {
@@ -62,6 +52,11 @@ const Management = () => {
       }
     }
   }, [checkBoxes]);
+
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { category: selectCategory, status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectCategory, selectStatus]);
 
   return (
     <div className={styles.container}>

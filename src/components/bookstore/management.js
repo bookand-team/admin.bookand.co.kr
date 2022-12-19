@@ -18,22 +18,12 @@ const Management = () => {
   const { bookstores, bookstoresLength } = useSelector((state) => state.bookstores);
   const { page, row } = useSelector((state) => state.page);
 
-  // theme 선택
-  const [selectTheme, changeSelectTheme] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { theme: selectTheme });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectTheme]);
-
-  // status 선택
-  const [selectStatus, changeSelectStatus] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectStatus]);
-
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
+
+  // 선택한 데이터 (테마, 노출상태)
+  const [selectTheme, changeSelectTheme] = useInput('');
+  const [selectStatus, changeSelectStatus] = useInput('');
 
   /** status(노출상태) 변경 요청 */
   const changeStatusHandler = useCallback((id, status) => () => {
@@ -63,6 +53,11 @@ const Management = () => {
       }
     }
   }, [checkBoxes]);
+
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { theme: selectTheme, status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectTheme, selectStatus]);
 
   return (
     <div className={styles.container}>
