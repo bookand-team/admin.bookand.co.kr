@@ -16,31 +16,37 @@
 }
 
 .id {
-  flex: 1;
-}
-
-.feedbackCount,
-.button {
-  flex: 2;
-}
-
-.device,
-.type {
-  flex: 3;
-}
-
-.createdDate {
-  flex: 4;
-}
-
-.email {
-  flex: 5;
-  text-align: left;
-  padding-left: 16px;
+  flex: 0 0 50px;
 }
 
 .content {
-  flex: 8;
+  flex: 6 0 350px;
   text-align: left;
-  padding-left: 16px;
+  padding: 0 12px;
+}
+
+.email {
+  flex: 2 0 250px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.type {
+  flex: 1 0 120px;
+}
+
+.device {
+  flex: 1 0 120px;
+}
+
+.feedbackCount {
+  flex: 1 0 100px;
+}
+
+.createdDate {
+  flex: 1 0 140px;
+}
+
+.button {
+  flex: 0 0 90px;
 }

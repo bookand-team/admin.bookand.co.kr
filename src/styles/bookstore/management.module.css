@@ -15,27 +15,42 @@
   flex-direction: column;
 }
 
-.check,
-.id {
-  flex: 1;
+.check {
+  flex: 0 0 40px;
 }
 
-.theme,
-.view,
-.bookmark,
-.status,
-.button {
-  flex: 2;
+.id {
+  flex: 0 0 50px;
+}
+
+.name {
+  flex: 7 0 180px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.theme {
+  flex: 1 0 100px;
+}
+
+.status {
+  flex: 1 0 100px;
+}
+
+.view {
+  flex: 1 0 80px;
+}
+
+.bookmark {
+  flex: 1 0 80px;
 }
 
 .createdDate,
 .exposedDate,
 .modifiedDate {
-  flex: 4;
+  flex: 1 0 140px;
 }
 
-.name {
-  flex: 6;
-  text-align: left;
-  padding-left: 16px;
+.button {
+  flex: 0 0 90px;
 }
