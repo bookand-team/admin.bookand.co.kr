@@ -111,7 +111,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(article.id, article.status)}>노출전환</button></div>
+                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/article/${article.id}`)}>상세정보</button></div>
                 </li>
               );
             })}

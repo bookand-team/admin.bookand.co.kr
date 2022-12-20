@@ -1,25 +1,27 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useSelector } from 'react-redux';
 
 import useInput from '../../hooks/use_input';
-import styles from '../../styles/article/registration.module.css';
+import styles from '../../styles/article/details.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 
-const Registration = () => {
+const Details = () => {
   const router = useRouter();
+  const { article } = useSelector((state) => state.article);
 
-  // 입력받은 아티클 내용 (제목, 카테고리, 노출 디바이스, 노출 멤버 식별자, 본문)
-  const [inputTitle, changeInputTitle] = useInput('');
-  const [selectCategory, changeSelectCategory] = useInput('');
-  const [selectTargetDevice, changeSelectTargetDevice] = useInput('');
-  const [selectTargetMemberId, changeSelectTargetMemberId] = useInput('');
-  const [inputContent, changeInputContent, setInputContent] = useInput('');
+  // 입력받은 아티클 정보 (제목, 카테고리, 노출 디바이스, 노출 멤버 식별자, 본문)
+  const [inputTitle, changeInputTitle] = useInput(article?.title ? article.title : '');
+  const [selectCategory, changeSelectCategory] = useInput(article?.category ? article.category : '');
+  const [selectTargetDevice, changeSelectTargetDevice] = useInput(article?.targetDevice ? article.targetDevice : '');
+  const [selectTargetMemberId, changeSelectTargetMemberId] = useInput(article?.targetMemberId ? article.targetMemberId : '');
+  const [inputContent, changeInputContent, setInputContent] = useInput(article?.content ? article.content : '');
 
-  // 마크다운 형식의 아티클 내용
+  // 마크다운 형식의 아티클 본문
   const [markdownContent, setMarkdownContent] = useState('');
 
-  // 선택자 (썸네일 이미지 생성 버튼, 아티클 본문, 아티클 본문 이미지 생성 버튼)
+  // 선택자 (썸네일 이미지 선택 버튼, 이미지 url 생성 버튼, 아티클 본문 입력구역)
   const thumbnailImageRef = useRef(null);
   const imageRef = useRef(null);
   const contentRef = useRef(null);
@@ -70,16 +72,16 @@ const Registration = () => {
     }
   }, [contentRef]);
 
-  /** 작성취소 버튼 */
+  /** 뒤로가기 버튼 */
   const backBtnHandler = useCallback(() => {
-    if (confirm('아티클 작성을 취소하면 작성 중인 아티클은 저장되지 않습니다.\n아티클 작성을 취소하시겠습니까?')) {
+    if (confirm('수정된 아티클 내용은 저장되지 않습니다.\n이전 페이지로 돌아가시겠습니까?')) {
       router.back();
     }
   }, []);
 
-  /** 작성완료 버튼 */
+  /** 수정하기 버튼 */
   const submitBtnHandler = useCallback(() => {
-    // TODO: 아티클 작성 버튼 기능 구현
+    // TODO: 아티클 수정 버튼 기능 구현
     if (inputTitle === '') {
       return alert('아티클 제목을 입력해주세요.');
     } else if (selectCategory === '') {
@@ -155,11 +157,11 @@ const Registration = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={backBtnHandler}>작성취소</button>
-        <button className={buttonStyles.completion} onClick={submitBtnHandler}>작성완료</button>
+        <button className={buttonStyles.cancellation} onClick={backBtnHandler}>돌아가기</button>
+        <button className={buttonStyles.completion} onClick={submitBtnHandler}>수정하기</button>
       </div>
     </div>
   );
 };
 
-export default Registration;
+export default Details;
