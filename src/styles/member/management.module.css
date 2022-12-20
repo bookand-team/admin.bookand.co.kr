@@ -31,7 +31,7 @@
   padding: 0 12px;
 }
 
-.type {
+.role {
   flex: 1 0 100px;
 }
 
@@ -42,4 +42,8 @@
 .createdDate,
 .accessedDate {
   flex: 1 0 140px;
+}
+
+.button {
+  flex: 0 0 90px;
 }

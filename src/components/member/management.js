@@ -1,16 +1,17 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
-import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/member/management.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
@@ -21,20 +22,12 @@ const Management = () => {
   const [selectRole, changeSelectRole] = useInput('');
   const [selectStatus, changeSelectStatus] = useInput('');
 
-  /** role 변경 요청 */
-  const changeRoleHandler = useCallback((id, role) => () => {
-    if (role === '일반' && confirm('회원에게 관리자 권한을 허용 하시겠습니까?\n변경 전 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    } else if (role === '관리자' && confirm('회원의 관리자 권한을 허용하지 않으시겠습니까?\n변경 전 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    }
-  }, []);
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
 
-  /** 원하는 페이지로 이동*/
-  const moveToOtherPageHandler = useCallback((url) => () => {
-    router.push(url);
+  /** 모달창 열기 */
+  const openModal = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
   useEffect(() => {
@@ -54,8 +47,8 @@ const Management = () => {
             <div className={tableStyles.tr}>
               <div className={styles.id}>번호</div>
               <div className={styles.nickname}>닉네임</div>
-              <div className={styles.email}>email</div>
-              <div className={styles.type}>
+              <div className={styles.email}>접속 이메일</div>
+              <div className={styles.role}>
                 <select value={selectRole} onChange={changeSelectRole}>
                   <option value=''>역할</option>
                   <option value='일반'>일반</option>
@@ -64,15 +57,15 @@ const Management = () => {
               </div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
-                  <option value=''>상태</option>
-                  <option value='activated'>activated</option>
-                  <option value='deactivated'>deactivated</option>
-                  <option value='sleep'>sleep</option>
+                  <option value=''>이용상태</option>
+                  <option value='정상'>정상</option>
+                  <option value='휴면'>휴면</option>
+                  <option value='징계정지'>징계정지</option>
+                  <option value='징계탈퇴'>징계탈퇴</option>
                 </select>
               </div>
               <div className={styles.createdDate}>가입일</div>
               <div className={styles.accessedDate}>접속일</div>
-              <div className={styles.button}></div>
               <div className={styles.button}></div>
             </div>
           </div>
@@ -83,12 +76,16 @@ const Management = () => {
                   <div className={styles.id}>{member.id && member.id}</div>
                   <div className={styles.nickname}>{member.nickname && member.nickname}</div>
                   <div className={styles.email}>{member.email && member.email}</div>
-                  <div className={styles.type}>{member.type && member.type}</div>
+                  <div className={styles.role}>{member.role && member.role}</div>
                   <div className={styles.status}>{member.status && member.status}</div>
                   <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeRoleHandler(member.id, member.type)}>역할전환</button></div>
-                  <div className={styles.button}><button className={buttonStyles.details} onClick={moveToOtherPageHandler(`/member/${member.id}`)}>상세정보</button></div>
+                  <div className={styles.button}>
+                    <button onClick={openModal(member.id)}>상세정보</button>
+                    <Modal id={member.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details member={member} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
                 </li>
               );
             })}

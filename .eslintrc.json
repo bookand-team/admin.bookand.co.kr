@@ -11,6 +11,9 @@
     "plugin:react/recommended"
   ],
   "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
   "rules": {
     "no-unused-vars": "warn",
     "quotes": [
