@@ -76,7 +76,7 @@ const Management = () => {
               <div className={styles.button}></div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {members && members.map((member) => {
               return (
                 <li key={member.id} className={tableStyles.tr}>

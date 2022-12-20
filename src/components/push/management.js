@@ -93,7 +93,7 @@ const Management = () => {
               <div className={styles.button}></div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {pushes && pushes.map((push) => {
               return (
                 <li key={push.id} className={checkBoxes.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>

@@ -49,7 +49,7 @@ const Management = () => {
               <div className={styles.exposedDate}>노출일자</div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {reports && reports.map((report) => {
               return (
                 <li key={report.id} className={tableStyles.tr}>
