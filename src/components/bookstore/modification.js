@@ -2,6 +2,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/bookstore/registration.module.css';
@@ -9,16 +10,17 @@ import buttonStyles from '../../styles/layout/button.module.css';
 
 const Modification = () => {
   const router = useRouter();
+  const { bookstore } = useSelector((state) => state.bookstore);
 
   // 입력받은 추가정보 (한줄소개, 테마, 대표 이미지 미리보기, 서브 이미지들 미리보기)
-  const [inputInformation, changeInputInformation] = useInput();
-  const [selectTheme, changeSelectTheme] = useInput();
-  const [mainImage, setMainImage] = useState('');
-  const [subImages, setSubImages] = useState([]);
+  const [inputIntroduction, changeInputIntroduction] = useInput(bookstore?.introduction ? bookstore.introduction : '');
+  const [selectTheme, changeSelectTheme] = useInput(bookstore?.theme ? bookstore.theme : '');
+  const [mainImage, setMainImage] = useState(bookstore?.mainImage ? bookstore.mainImage : '');
+  const [subImages, setSubImages] = useState(bookstore?.subImages ? bookstore.subImages : '');
 
-  /** 서점 이름을 통한 서점 검색 */
-  const searchNameHandler = useCallback(() => {
-    // feature
+  /** 검색 버튼 */
+  const searchBtnHandler = useCallback(() => {
+    // TODO: api를 이용해 서점 이름으로 검색
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
 
@@ -33,8 +35,8 @@ const Modification = () => {
     });
   }, []);
 
-  /** 메인 이미지 미리보기 생성 */
-  const mainImageHandler = useCallback(async (event) => {
+  /** 대표 이미지 버튼 */
+  const mainImageBtnHandler = useCallback(async (event) => {
     if (event.target.files[0]) {
       const result = await encodeFileToBase64(event.target.files[0]);
       setMainImage(result);
@@ -43,8 +45,8 @@ const Modification = () => {
     }
   }, []);
 
-  /** 서브 이미지들 미리보기 생성 */
-  const subImageHandler = useCallback(async (event) => {
+  /** 서브 이미지 버튼 */
+  const subImageBtnHandler = useCallback(async (event) => {
     if (event.target.files.length !== 0) {
       const results = [];
       for (let i = 0; i < event.target.files.length; i++) {
@@ -57,23 +59,23 @@ const Modification = () => {
     }
   }, []);
 
-  /** 서점 수정 취소 버튼 */
-  const cancelRegistrationHandler = useCallback(() => {
+  /** 뒤로가기 버튼 */
+  const backBtnHandler = useCallback(() => {
     if (confirm('서점 수정을 취소하면 변경사항은 저장되지 않습니다.\n서점 수정을 취소하시겠습니까?')) {
-      router.push('/bookstore');
+      router.back();
     }
   }, []);
 
-  /** 서점 수정 완료 버튼 */
-  const completeRegistrationHandler = useCallback(() => {
-    if (inputInformation === '') {
+  /** 저장하기 버튼 */
+  const submitBtnHandler = useCallback(() => {
+    // TODO:
+    if (inputIntroduction === '') {
       return alert('서점 한줄소개를 입력해주세요.');
     } else if (selectTheme === '') {
       return alert('서점 테마를 선택해주세요.');
     }
-    // feature
     alert('현재 지원하지 않는 기능입니다.');
-  }, [inputInformation, selectTheme]);
+  }, [inputIntroduction, selectTheme]);
 
   return (
     <div className={styles.container}>
@@ -84,9 +86,9 @@ const Modification = () => {
         <div className={styles.search}>
           <div>
             <div className={styles.key}>서점 이름</div>
-            <div className={styles.value} onClick={searchNameHandler}></div>
+            <div className={styles.value} onClick={searchBtnHandler}></div>
           </div>
-          <button onClick={searchNameHandler}>검색</button>
+          <button onClick={searchBtnHandler}>검색</button>
         </div>
         <div className={styles.info}>
           <h3 className={styles.h3}>API 정보관리</h3>
@@ -118,7 +120,7 @@ const Modification = () => {
           <div>
             <div>
               <div className={styles.key}>한줄소개</div>
-              <input className={styles.value} value={inputInformation} onChange={changeInputInformation} />
+              <input className={styles.value} value={inputIntroduction} onChange={changeInputIntroduction} />
             </div>
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
@@ -135,8 +137,8 @@ const Modification = () => {
             <div>
               <div className={styles.title}>서점 상세페이지 노출 이미지 관리</div>
               <div>
-                <input id='main-image' type='file' accept='image/*' hidden onChange={mainImageHandler} />
-                <input id='sub-image' type='file' accept='image/*' multiple hidden onChange={subImageHandler} />
+                <input id='main-image' type='file' accept='image/*' hidden onChange={mainImageBtnHandler} />
+                <input id='sub-image' type='file' accept='image/*' multiple hidden onChange={subImageBtnHandler} />
               </div>
             </div>
             <ul>
@@ -175,8 +177,8 @@ const Modification = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>수정취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>수정완료</button>
+        <button className={buttonStyles.cancellation} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.completion} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

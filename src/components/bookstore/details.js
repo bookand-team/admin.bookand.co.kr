@@ -4,13 +4,13 @@ import { useCallback } from 'react';
 import closeButton from '../../images/close_icon.svg';
 import styles from '../../styles/layout/modal/details.module.css';
 
-const Details = ({ article, setOpenModalId }) => {
+const Details = ({ bookstore, setOpenModalId }) => {
   /** 닫기 버튼 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
   }, []);
 
-  /** 적용 버튼 */
+  /** 수정사항 적용 버튼 */
   const submitBtnHandler = useCallback(() => {
     // TODO: 수정사항 적용 기능
     alert('현재 지원하지 않는 기능입니다.');
@@ -21,37 +21,37 @@ const Details = ({ article, setOpenModalId }) => {
       <button className={styles.close} onClick={closeBtnHandler}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
-      <h3>아티클 상세 정보</h3>
+      <h3>서점 상세 정보</h3>
       <div className={styles.contents}>
         <div className={styles.row}>
           <div className={styles.key}>번호</div>
-          <div className={styles.value}>{article?.id ? article.id : null}</div>
+          <div className={styles.value}>{bookstore?.id ? bookstore.id : null}</div>
           <div className={styles.key}>북마크 수</div>
-          <div className={styles.value}>{article?.bookmark ? article.bookmark : null}</div>
+          <div className={styles.value}>{bookstore?.bookmarkArticle ? bookstore.bookmarkArticle : null}</div>
         </div>
         <div className={styles.row}>
-          <div className={styles.key}>아티클 제목</div>
-          <div className={styles.value}>{article?.title ? article.title : null}</div>
+          <div className={styles.key}>서점명</div>
+          <div className={styles.value}>{bookstore?.name ? bookstore.name : null}</div>
           <div className={styles.key}>누적 조회수</div>
-          <div className={styles.value}>{article?.view ? article.view : null}</div>
+          <div className={styles.value}>{bookstore?.view ? bookstore.view : null}</div>
         </div>
         <div className={styles.row}>
-          <div className={styles.key}>카테고리</div>
-          <div className={styles.value}>{article?.category ? article.category : null}</div>
+          <div className={styles.key}>테마</div>
+          <div className={styles.value}>{bookstore?.theme ? bookstore.theme : null}</div>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{article?.createdDate ? article.createdDate : null}</div>
+          <div className={styles.value}>{bookstore?.createdDate ? bookstore.createdDate : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>노출 상태</div>
-          <div className={styles.value}>{article?.status ? article.status : null}</div>
+          <div className={styles.value}>{bookstore?.status ? bookstore.status : null}</div>
           <div className={styles.key}>노출 일자</div>
-          <div className={styles.value}>{article?.exposedDate ? article.exposedDate : null}</div>
+          <div className={styles.value}>{bookstore?.exposedDate ? bookstore.exposedDate : null}</div>
         </div>
         <div className={styles.row}>
-          <div className={styles.key}>작성자</div>
-          <div className={styles.value}>{article?.writer ? article.writer : null}</div>
+          <div className={styles.key}>연락처</div>
+          <div className={styles.value}>{bookstore?.contact ? bookstore.contact : null}</div>
           <div className={styles.key}>최종 수정일자</div>
-          <div className={styles.value}>{article?.modifiedDate ? article.modifiedDate : null}</div>
+          <div className={styles.value}>{bookstore?.modifiedDate ? bookstore.modifiedDate : null}</div>
         </div>
       </div>
       <div className={styles.buttons}>

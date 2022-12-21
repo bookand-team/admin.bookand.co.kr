@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -10,8 +10,10 @@ import useInput from '../../hooks/use_input';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
@@ -25,30 +27,27 @@ const Management = () => {
   const [selectCategory, changeSelectCategory] = useInput('');
   const [selectStatus, changeSelectStatus] = useInput('');
 
-  /** status(노출상태) 변경 요청 */
-  const changeStatusHandler = useCallback((id, status) => () => {
-    if (status === '미노출' && confirm('해당 아티클을 노출 처리하시겠습니까?\n노출 전 아티클 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    } else if (status === '노출' && confirm('해당 아티클을 미노출 처리하시겠습니까?')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    }
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 모달창 열기 */
+  const openModal = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
   /** 원하는 페이지로 이동*/
-  const moveToOtherPageHandler = useCallback((url) => () => {
+  const routePage = useCallback((url) => () => {
     router.push(url);
   }, []);
 
-  /** 선택 항목 삭제 요청 */
-  const deleteSelectionHandler = useCallback(() => {
+  /** 선택 아티클 삭제 버튼 */
+  const deleteSelectionBtnHandler = useCallback(() => {
+    // TODO:
     if (checkBoxes.length === 0) {
       alert('선택된 아티클이 존재하지 않습니다.');
     } else {
       const sortedCheckboxes = [...checkBoxes];
       if (confirm(`${sortedCheckboxes.sort()}번 아티클을 삭제 처리하시겠습니까?\n삭제한 아티클은 저장되지 않습니다.`)) {
-        // feature
         alert('현재 지원하지 않는 기능입니다.');
       }
     }
@@ -93,6 +92,7 @@ const Management = () => {
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
               <div className={styles.button}></div>
+              <div className={styles.button}></div>
             </div>
           </div>
           <ul className={tableStyles.tbody}>
@@ -111,7 +111,13 @@ const Management = () => {
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/article/${article.id}`)}>상세정보</button></div>
+                  <div className={styles.button}>
+                    <button onClick={openModal(article.id)}>상세정보</button>
+                    <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details article={article} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
+                  <div className={styles.button}><button onClick={routePage(`/article/${article.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -125,8 +131,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={articlesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/article/registration')}>새 아티클 작성</button>
-        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 아티클 삭제</button>
+        <button className={buttonStyles.registration} onClick={routePage('/article/registration')}>새 아티클 작성</button>
+        <button className={buttonStyles.removal} onClick={deleteSelectionBtnHandler}>선택 아티클 삭제</button>
       </div>
     </div>
   );

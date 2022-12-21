@@ -1,4 +1,4 @@
-import Details from '../../components/article/details';
+import Modification from '../../components/article/modification';
 import Main from '../../components/main';
 import { loadDummyArticle } from '../../redux/reducers/acticle';
 import { setPage } from '../../redux/reducers/page';
@@ -7,7 +7,7 @@ import wrapper from '../../redux/store';
 const DetailsPage = () => {
   return (
     <Main>
-      <Details />
+      <Modification />
     </Main>
   );
 };
