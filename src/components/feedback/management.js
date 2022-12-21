@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -7,10 +7,11 @@ import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
 import styles from '../../styles/feedback/management.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
@@ -20,11 +21,12 @@ const Management = () => {
   // 선택한 데이터 (유형분류)
   const [selectCategory, changeSelectCategory] = useInput('');
 
-  /** 상세정보 보기 요청 */
-  // eslint-disable-next-line no-unused-vars
-  const moveDetailsHandler = useCallback((id) => () => {
-    // feature
-    alert('현재 지원하지 않는 기능입니다.');
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 모달창 열기 */
+  const openModal = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
   useEffect(() => {
@@ -75,7 +77,12 @@ const Management = () => {
                   <div className={styles.device}>{feedback.device && feedback.device}</div>
                   <div className={styles.feedbackCount}>{feedback.feedbackCount && feedback.feedbackCount}</div>
                   <div className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.details} onClick={moveDetailsHandler(feedback.id)}>상세정보</button></div>
+                  <div className={styles.button}>
+                    <button onClick={openModal(feedback.id)}>상세정보</button>
+                    <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details feedback={feedback} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
                 </li>
               );
             })}

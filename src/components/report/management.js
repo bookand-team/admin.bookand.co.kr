@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -8,8 +8,10 @@ import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_la
 import useInput from '../../hooks/use_input';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/report/management.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
@@ -18,6 +20,14 @@ const Management = () => {
 
   // 선택한 데이터 (노출상태)
   const [selectStatus, changeSelectStatus] = useInput('');
+
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 모달창 열기 */
+  const openModal = useCallback((id) => () => {
+    setOpenModalId(id);
+  }, []);
 
   useEffect(() => {
     const newQuery = changeQuery(router.query, { status: selectStatus });
@@ -47,6 +57,7 @@ const Management = () => {
               <div className={styles.reportedCount}>제보요청 수</div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
+              <div className={styles.button}></div>
             </div>
           </div>
           <ul className={tableStyles.tbody}>
@@ -60,6 +71,12 @@ const Management = () => {
                   <div className={styles.reportedCount}>{report.reportedCount && report.reportedCount}</div>
                   <div className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.button}>
+                    <button onClick={openModal(report.id)}>상세정보</button>
+                    <Modal id={report.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details report={report} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
                 </li>
               );
             })}

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -10,7 +10,9 @@ import useInput from '../../hooks/use_input';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/push/management.module.css';
+import Modal from '../modal';
 import Page from '../page';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
@@ -24,15 +26,12 @@ const Management = () => {
   const [selectCategory, changeSelectCategory] = useInput('');
   const [selectStatus, changeSelectStatus] = useInput('');
 
-  /** status(전송상태) 변경 요청 */
-  const changeStatusHandler = useCallback((id, status) => () => {
-    if (status === '전송실패' && confirm('해당 PUSH를 재전송 처리하시겠습니까?\n전송 전 PUSH 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    } else if (status === '전송전' && confirm('해당 PUSH를 전송 처리하시겠습니까?\n전송 전 PUSH 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    }
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 모달창 열기 */
+  const openModal = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
   /** 원하는 페이지로 이동*/
@@ -61,7 +60,7 @@ const Management = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>PUSH 관리</h2>
+        <h2>푸시 관리</h2>
       </div>
       <div className={styles.contents}>
         <div className={tableStyles.table}>
@@ -106,8 +105,13 @@ const Management = () => {
                   <div className={styles.status}>{push.status && push.status}</div>
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(push.id, push.status)}>{push.status && push.status === '전송전' ? '전송' : '재전송'}</button></div>
-                  <div className={styles.button}><button className={buttonStyles.modification} onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
+                  <div className={styles.button}>
+                    <button onClick={openModal(push.id)}>상세정보</button>
+                    <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details push={push} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
+                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
                 </li>
               );
             })}
