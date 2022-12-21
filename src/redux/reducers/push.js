@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyPushes } from '../../dummy_data';
 import { createPush, readPush, updatePush, deletePush } from '../actions/push';
 
 const initialState = {
@@ -26,7 +27,9 @@ const pushSlice = createSlice({
   name: 'push',
   initialState,
   reducers: {
-
+    loadDummyPush: (state, action) => {
+      state.push = dummyPushes[action.payload - 1];
+    }
   },
   extraReducers: (builder) => {
     // 푸시 생성하기
@@ -88,5 +91,7 @@ const pushSlice = createSlice({
     });
   }
 });
+
+export const { loadDummyPush } = pushSlice.actions;
 
 export default pushSlice;

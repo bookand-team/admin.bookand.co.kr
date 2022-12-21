@@ -30,19 +30,19 @@ const Management = () => {
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState(null);
 
-  /** 모달창 열기 */
-  const openModal = useCallback((id) => () => {
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
     setOpenModalId(id);
   }, []);
 
-  /** 원하는 페이지로 이동*/
+  /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
   const routePage = useCallback((url) => () => {
     router.push(url);
   }, []);
 
-  /** 선택 아티클 삭제 버튼 */
-  const deleteSelectionBtnHandler = useCallback(() => {
-    // TODO:
+  /** 삭제 버튼 - 선택한 서점 삭제 요청 */
+  const deleteBtnHandler = useCallback(() => {
+    // TODO: 선택한 서점 삭제 요청 기능
     if (checkBoxes.length === 0) {
       alert('선택된 서점이 존재하지 않습니다.');
     } else {
@@ -115,12 +115,12 @@ const Management = () => {
                   <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}>
-                    <button onClick={openModal(bookstore.id)}>상세정보</button>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
                     <Modal id={bookstore.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <Details bookstore={bookstore} setOpenModalId={setOpenModalId} />
                     </Modal>
                   </div>
-                  <div className={styles.button}><button onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button></div>
+                  <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -134,8 +134,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={bookstoresLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
-        <button className={buttonStyles.removal} onClick={deleteSelectionBtnHandler}>선택 서점 삭제</button>
+        <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
       </div>
     </div>
   );

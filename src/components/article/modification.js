@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 
 import useInput from '../../hooks/use_input';
-import styles from '../../styles/article/details.module.css';
+import styles from '../../styles/article/modification.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 
 const Modification = () => {
@@ -26,15 +26,32 @@ const Modification = () => {
   const imageRef = useRef(null);
   const contentRef = useRef(null);
 
-  /** 이미지 가져오기 버튼 */
-  const inputImageHandler = useCallback((ref) => () => {
-    // TODO: 가져온 이미지 처리
+  /** 썸네일 이미지 선택 버튼, 이미지 버튼 - 파일 선택창 열기 */
+  const openFileSelectionWindow = useCallback((ref) => () => {
     ref.current.click();
   }, []);
 
-  /** 가져온 이미지 업로드 요청 */
-  const uploadImageHandler = useCallback(async (event) => {
-    // TODO: 가져온 이미지 처리
+  /** 
+   * 썸네일 이미지 선택 버튼
+   * 
+   * 선택한 이미지 파일을 서버에 저장 요청 후, 받아온 이미지 파일의 url 저장
+   */
+  const storeThumbnailImageUrl = useCallback(async (event) => {
+    // TODO: 이미지 파일 서버 저장 요청
+    if (event.target.files) {
+      const formData = new FormData();
+      formData.append('image', event.target.files[0]);
+      alert('현재 지원하지 않는 기능입니다.');
+    }
+  }, []);
+
+  /** 
+   * 이미지 버튼
+   * 
+   * 선택한 이미지 파일을 서버에 저장 요청 후, 받아온 이미지 파일의 url 불러오기
+   */
+  const getImageUrl = useCallback(async (event) => {
+    // TODO: 이미지 파일 서버 저장 요청
     if (event.target.files) {
       const formData = new FormData();
       formData.append('image', event.target.files[0]);
@@ -50,7 +67,7 @@ const Modification = () => {
     setMarkdownContent(markdown);
   }, []);
 
-  /** 마크다운 형식의 진한 글씨체로 변환 */
+  /** 진하게 버튼 - 마크다운 형식의 진한 글씨체로 변환 */
   const convertBorder = useCallback(() => {
     if (contentRef.current) {
       const startLocation = contentRef.current.selectionStart;
@@ -61,7 +78,7 @@ const Modification = () => {
     }
   }, [contentRef]);
 
-  /** 마크다운 형식의 기울임체로 변환 */
+  /** 기울임 버튼 - 마크다운 형식의 기울임체로 변환 */
   const convertItalic = useCallback(() => {
     if (contentRef.current) {
       const startLocation = contentRef.current.selectionStart;
@@ -72,16 +89,16 @@ const Modification = () => {
     }
   }, [contentRef]);
 
-  /** 뒤로가기 버튼 */
+  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
   const backBtnHandler = useCallback(() => {
     if (confirm('수정된 아티클 내용은 저장되지 않습니다.\n이전 페이지로 돌아가시겠습니까?')) {
       router.back();
     }
   }, []);
 
-  /** 수정하기 버튼 */
+  /** 저장하기 버튼 - 수정사항 저장 요청 */
   const submitBtnHandler = useCallback(() => {
-    // TODO: 아티클 수정 버튼 기능 구현
+    // TODO: 수정사항 저장 요청 기능
     if (inputTitle === '') {
       return alert('아티클 제목을 입력해주세요.');
     } else if (selectCategory === '') {
@@ -108,8 +125,10 @@ const Modification = () => {
           <input type='textarea' value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' />
         </div>
         <div>
-          <input ref={thumbnailImageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
-          <button onClick={inputImageHandler(thumbnailImageRef)}>썸네일 이미지 선택</button>
+          <label>
+            <input ref={thumbnailImageRef} type='file' accept='image/*' hidden onChange={storeThumbnailImageUrl} />
+            <button onClick={openFileSelectionWindow(thumbnailImageRef)}>썸네일 이미지 선택</button>
+          </label>
         </div>
         <div className={styles.select_area}>
           <div>
@@ -142,8 +161,8 @@ const Modification = () => {
         <div className={styles.handler}>
           <button onClick={convertBorder}>진하게</button>
           <button onClick={convertItalic}>기울임</button>
-          <input ref={imageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
-          <button onClick={inputImageHandler(imageRef)}>이미지</button>
+          <input ref={imageRef} type='file' accept='image/*' hidden onChange={getImageUrl} />
+          <button onClick={openFileSelectionWindow(imageRef)}>이미지</button>
         </div>
         <div className={styles.workspace}>
           <div className={styles.edit_area}>
@@ -157,8 +176,8 @@ const Modification = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={backBtnHandler}>뒤로가기</button>
-        <button className={buttonStyles.completion} onClick={submitBtnHandler}>저장하기</button>
+        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

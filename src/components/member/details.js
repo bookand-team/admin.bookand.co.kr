@@ -2,23 +2,24 @@ import Image from 'next/image';
 import { useCallback } from 'react';
 
 import closeButton from '../../images/close_icon.svg';
+import buttonStyles from '../../styles/layout/button.module.css';
 import styles from '../../styles/layout/modal/details.module.css';
 
 const Details = ({ member, setOpenModalId }) => {
-  /** 닫기 버튼 */
+  /** 닫기 버튼 - 모달창 닫기 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
   }, []);
 
-  /** 적용 버튼 */
+  /** 적용 버튼 - 수정사항 저장 요청 */
   const submitBtnHandler = useCallback(() => {
-    // TODO: 수정사항 적용 기능
+    // TODO: 수정사항 저장 요청 기능
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
 
-  /** 탈퇴 버튼 */
+  /** 탈퇴 버튼 - 회원 탈퇴 처리 요청 */
   const withdrawBtnHandler = useCallback(() => {
-    // TODO: 탈퇴 기능
+    // TODO: 회원 탈퇴 처리 요청 기능
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
 
@@ -66,10 +67,10 @@ const Details = ({ member, setOpenModalId }) => {
           <div className={styles.value}>{member?.disciplineReason ? member.disciplineReason : null}</div>
         </div>
       </div>
-      <div className={styles.buttons}>
-        <button className={styles.close_btn} onClick={closeBtnHandler}>닫기</button>
-        <button className={styles.apply_btn} onClick={submitBtnHandler}>적용</button>
-        <button className={styles.withdraw_btn} onClick={withdrawBtnHandler}>탈퇴</button>
+      <div className={buttonStyles.modal_buttons}>
+        <button className={buttonStyles.modal_close_btn} onClick={closeBtnHandler}>닫기</button>
+        <button className={buttonStyles.modal_apply_btn} onClick={submitBtnHandler}>적용</button>
+        <button className={buttonStyles.modal_withdraw_btn} onClick={withdrawBtnHandler}>탈퇴</button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
+import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/report/management.module.css';
 import Modal from '../modal';
@@ -24,8 +25,8 @@ const Management = () => {
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState(null);
 
-  /** 모달창 열기 */
-  const openModal = useCallback((id) => () => {
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
     setOpenModalId(id);
   }, []);
 
@@ -72,7 +73,7 @@ const Management = () => {
                   <div className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}>
-                    <button onClick={openModal(report.id)}>상세정보</button>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(report.id)}>상세정보</button>
                     <Modal id={report.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <Details report={report} setOpenModalId={setOpenModalId} />
                     </Modal>

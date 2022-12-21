@@ -6,7 +6,7 @@ import styles from '../styles/gnb.module.css';
 const Gnb = () => {
   const { section } = useSelector((state) => state.page);
 
-  const globalMenu = [['dashboard', '대시보드'], ['article', '아티클'], ['bookstore', '등록서점관리'], ['member', '회원관리'], ['terms', '약관 및 정책'], ['notice', '공지사항'], ['push', 'PUSH'], ['report', '서점제보'], ['feedback', '피드백']];
+  const globalMenu = [['dashboard', '대시보드'], ['article', '아티클'], ['bookstore', '서점'], ['member', '회원'], ['push', '푸시'], ['feedback', '피드백'], ['report', '제보서점'], ['notice', '공지사항'], ['terms', '약관 및 정책']];
 
   return (
     <nav className={styles.gnb}>

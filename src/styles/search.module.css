@@ -25,13 +25,3 @@
   font-size: 14px;
   padding: 0 20px;
 }
-
-.container button {
-  width: 72px;
-  color: #FFFFFF;
-  line-height: 100%;
-  font-weight: 500;
-  background-color: #333333;
-  border: none;
-  cursor: pointer;
-}

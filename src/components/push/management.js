@@ -29,18 +29,19 @@ const Management = () => {
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState(null);
 
-  /** 모달창 열기 */
-  const openModal = useCallback((id) => () => {
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
     setOpenModalId(id);
   }, []);
 
-  /** 원하는 페이지로 이동*/
-  const moveToOtherPageHandler = useCallback((url) => () => {
+  /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
+  const routePage = useCallback((url) => () => {
     router.push(url);
   }, []);
 
-  /** 선택 항목 삭제 요청 */
-  const deleteSelectionHandler = useCallback(() => {
+  /** 삭제 버튼 - 선택한 푸시 삭제 요청 */
+  const deleteHandler = useCallback(() => {
+    // TODO: 선택한 푸시 삭제 요청 기능
     if (checkBoxes.length === 0) {
       alert('선택된 PUSH가 존재하지 않습니다.');
     } else {
@@ -106,12 +107,12 @@ const Management = () => {
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}>
-                    <button onClick={openModal(push.id)}>상세정보</button>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
                     <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <Details push={push} setOpenModalId={setOpenModalId} />
                     </Modal>
                   </div>
-                  <div className={styles.button}><button onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
+                  <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -125,8 +126,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={pushesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/push/registration')}>새 푸시 작성</button>
-        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 푸시 삭제</button>
+        <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
       </div>
     </div>
   );

@@ -4,65 +4,136 @@
   margin-top: 30px;
 }
 
-.registration {
+.register_btn {
   width: 140px;
   height: 40px;
   background-color: #333333;
   color: #FFFFFF;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   border: none;
   margin: 0 12px;
 }
 
-.removal {
-  width: 140px;
-  height: 40px;
-  background-color: #FF0000;
-  color: #FFFFFF;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  margin: 0 12px;
-}
-
-.cancellation {
+.back_btn {
   width: 140px;
   height: 40px;
   background-color: #D9D9D9;
   color: #646464;
-  font-weight: 500;
+  font-weight: 400;
   border: none;
   cursor: pointer;
   margin: 0 12px;
 }
 
-.completion {
+.submit_btn {
   width: 140px;
+  height: 40px;
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.delete_btn {
+  width: 140px;
+  height: 40px;
+  background-color: #DC3E3E;
+  color: #FFFFFF;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.table_details_btn {
+  width: 70px;
+  height: 30px;
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+}
+
+.table_modify_btn {
+  width: 70px;
+  height: 30px;
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+}
+
+.modal_buttons {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+}
+
+.modal_close_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #D9D9D9;
+  color: #646464;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.modal_apply_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.modal_send_btn {
+  width: 100px;
   height: 40px;
   background-color: #1BC47D;
   color: #FFFFFF;
-  font-weight: 500;
+  font-weight: 400;
   border: none;
   cursor: pointer;
   margin: 0 12px;
 }
 
-.status {
-  width: 70px;
-  height: 30px;
+.modal_withdraw_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #DC3E3E;
   color: #FFFFFF;
-  background-color: #1BC47D;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+.logout {
+  width: 80px;
+  height: 40px;
+  background-color: #DC3E3E;
+  color: #FFFFFF;
+  font-weight: 400;
   border: none;
   cursor: pointer;
 }
 
-.details,
-.modification {
-  width: 70px;
-  height: 30px;
+.search {
+  width: 80px;
+  height: 40px;
+  background-color: #333333;
   color: #FFFFFF;
-  background-color: #F46262;
+  font-weight: 400;
   border: none;
   cursor: pointer;
 }

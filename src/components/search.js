@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 
 import changeQuery from '../hooks/change_query';
 import useInput from '../hooks/use_input';
+import buttonStyles from '../styles/layout/button.module.css';
 import styles from '../styles/search.module.css';
 
 const Search = ({ search: searchTarget }) => {
@@ -31,7 +32,7 @@ const Search = ({ search: searchTarget }) => {
         <div>{searchTarget}</div>
         <input type='text' name='inputSearch' value={searchText} onChange={changeSearchText} />
       </div>
-      <button type='submit'>검색</button>
+      <button className={buttonStyles.search} type='submit'>검색</button>
     </form>
   );
 };
