@@ -3,11 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyReports } from '../../dummy_data';
 import { readReports } from '../actions/reports';
 
-const initialState = {
+export type ReportState = {
+  reports: any;
+  reportsLength: number | null;
+
+  readReportsLoading: boolean;
+  readReportsDone: any;
+  readReportsError: any;
+};
+
+const initialState: ReportState = {
   reports: null,
   reportsLength: null,
 
-  readReportsLoading: null,
+  readReportsLoading: false,
   readReportsDone: null,
   readReportsError: null
 };

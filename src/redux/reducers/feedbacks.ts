@@ -3,15 +3,28 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyFeedbacks } from '../../dummy_data';
 import { readFeedbacks, deleteFeedbacks } from '../actions/feedbacks';
 
-const initialState = {
+export type FeedbacksState = {
+  feedbacks: any;
+  feedbacksLength: number | null;
+
+  readFeedbacksLoading: boolean;
+  readFeedbacksDone: any;
+  readFeedbacksError: any;
+
+  deleteFeedbacksLoading: boolean;
+  deleteFeedbacksDone: any;
+  deleteFeedbacksError: any;
+};
+
+const initialState: FeedbacksState = {
   feedbacks: null,
   feedbacksLength: null,
 
-  readFeedbacksLoading: null,
+  readFeedbacksLoading: false,
   readFeedbacksDone: null,
   readFeedbacksError: null,
 
-  deleteFeedbacksLoading: null,
+  deleteFeedbacksLoading: false,
   deleteFeedbacksDone: null,
   deleteFeedbacksError: null
 };

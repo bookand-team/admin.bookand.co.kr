@@ -2,10 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createImageUrl } from '../actions/image';
 
-const initialState = {
+export type ImageState = {
+  imageUrl: string | null;
+
+  createImageUrlLoading: boolean;
+  createImageUrlDone: any;
+  createImageUrlError: any;
+};
+
+const initialState: ImageState = {
   imageUrl: null,
 
-  createImageUrlLoading: null,
+  createImageUrlLoading: false,
   createImageUrlDone: null,
   createImageUrlError: null
 };

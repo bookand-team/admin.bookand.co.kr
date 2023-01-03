@@ -3,22 +3,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyBookstores } from '../../dummy_data';
 import { createBookstore, readBookstore, updateBookstore, deleteBookstore } from '../actions/bookstore';
 
-const initialState = {
+export type BookstoreState = {
+  bookstore: any;
+
+  createBookstoreLoading: boolean;
+  createBookstoreDone: any;
+  createBookstoreError: any;
+
+  readBookstoreLoading: boolean;
+  readBookstoreDone: any;
+  readBookstoreError: any;
+
+  updateBookstoreLoading: boolean;
+  updateBookstoreDone: any;
+  updateBookstoreError: any;
+
+  deleteBookstoreLoading: boolean;
+  deleteBookstoreDone: any;
+  deleteBookstoreError: any;
+};
+
+const initialState: BookstoreState = {
   bookstore: null,
 
-  createBookstoreLoading: null,
+  createBookstoreLoading: false,
   createBookstoreDone: null,
   createBookstoreError: null,
 
-  readBookstoreLoading: null,
+  readBookstoreLoading: false,
   readBookstoreDone: null,
   readBookstoreError: null,
 
-  updateBookstoreLoading: null,
+  updateBookstoreLoading: false,
   updateBookstoreDone: null,
   updateBookstoreError: null,
 
-  deleteBookstoreLoading: null,
+  deleteBookstoreLoading: false,
   deleteBookstoreDone: null,
   deleteBookstoreError: null
 };

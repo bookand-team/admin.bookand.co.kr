@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import type { AxiosError } from 'axios';
+
 // axios 기본 설정
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 axios.defaults.withCredentials = true;  // front <-> backend 쿠키공유
@@ -11,7 +13,7 @@ export const readBookstores = createAsyncThunk('readBookstores', async (data, { 
     const response = await axios.post('/bookstores', data);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });
 
@@ -21,6 +23,6 @@ export const deleteBookstores = createAsyncThunk('deleteBookstores', async (data
     const response = await axios.delete('/bookstores', { data });
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });

@@ -3,15 +3,28 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyArticles } from '../../dummy_data';
 import { readArticles, deleteArticles } from '../actions/articles';
 
-const initialState = {
+export type ArticlesState = {
+  articles: any;
+  articlesLength: number | null;
+
+  readArticlesLoading: boolean;
+  readArticlesDone: any;
+  readArticlesError: any;
+
+  deleteArticlesLoading: boolean;
+  deleteArticlesDone: any;
+  deleteArticlesError: any;
+};
+
+const initialState: ArticlesState = {
   articles: null,
   articlesLength: null,
 
-  readArticlesLoading: null,
+  readArticlesLoading: false,
   readArticlesDone: null,
   readArticlesError: null,
 
-  deleteArticlesLoading: null,
+  deleteArticlesLoading: false,
   deleteArticlesDone: null,
   deleteArticlesError: null
 };

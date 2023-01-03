@@ -2,14 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { readMember, updateMember } from '../actions/member';
 
-const initialState = {
+export type MemberState = {
+  member: any;
+
+  readMemberLoading: boolean;
+  readMemberDone: any;
+  readMemberError: any;
+
+  updateMemberLoading: boolean;
+  updateMemberDone: any;
+  updateMemberError: any;
+};
+
+const initialState: MemberState = {
   member: null,
 
-  readMemberLoading: null,
+  readMemberLoading: false,
   readMemberDone: null,
   readMemberError: null,
 
-  updateMemberLoading: null,
+  updateMemberLoading: false,
   updateMemberDone: null,
   updateMemberError: null
 };

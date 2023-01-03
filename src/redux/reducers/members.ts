@@ -3,11 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyMembers } from '../../dummy_data';
 import { readMembers } from '../actions/members';
 
-const initialState = {
+export type MembersState = {
+  members: any;
+  membersLength: number | null;
+
+  readMembersLoading: boolean;
+  readMembersDone: any;
+  readMembersError: any;
+};
+
+const initialState: MembersState = {
   members: null,
   membersLength: null,
 
-  readMembersLoading: null,
+  readMembersLoading: false,
   readMembersDone: null,
   readMembersError: null
 };

@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import type { AxiosError } from 'axios';
+
 // axios 기본 설정
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 axios.defaults.withCredentials = true;  // front <-> backend 쿠키공유
@@ -11,7 +13,7 @@ export const createPush = createAsyncThunk('createPush', async (data, { rejectWi
     const response = await axios.post('/push', data);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });
 
@@ -21,7 +23,7 @@ export const readPush = createAsyncThunk('readPush', async (id, { rejectWithValu
     const response = await axios.get(`/push/${id}`);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });
 
@@ -31,7 +33,7 @@ export const updatePush = createAsyncThunk('updatePush', async (data, { rejectWi
     const response = await axios.put('/push', data);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });
 
@@ -41,6 +43,6 @@ export const deletePush = createAsyncThunk('deletePush', async (id, { rejectWith
     const response = await axios.delete(`/push/${id}`);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue((error as AxiosError).response?.data);
   }
 });

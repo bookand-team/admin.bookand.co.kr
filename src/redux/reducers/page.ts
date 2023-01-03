@@ -1,6 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export type PageState = {
+  section: string | null;
+  category: string | null;
+  theme: string | null;
+  page: number | null;
+  role: string | null;
+  row: number | null;
+  search: string | null;
+  status: string | null;
+};
+
+const initialState: PageState = {
   section: null,
   category: null,
   theme: null,

@@ -2,10 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { readFeedback } from '../actions/feedback';
 
-const initialState = {
+export type FeedbackState = {
+  feedback: any;
+
+  readFeedbackLoading: boolean;
+  readFeedbackDone: any;
+  readFeedbackError: any;
+};
+
+const initialState: FeedbackState = {
   feedback: null,
 
-  readFeedbackLoading: null,
+  readFeedbackLoading: false,
   readFeedbackDone: null,
   readFeedbackError: null
 };

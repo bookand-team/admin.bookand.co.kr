@@ -3,22 +3,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyArticles } from '../../dummy_data';
 import { createArticle, readArticle, updateArticle, deleteArticle } from '../actions/article';
 
-const initialState = {
+export type ArticleState = {
+  article: any;
+
+  createArticleLoading: boolean;
+  createArticleDone: any;
+  createArticleError: any;
+
+  readArticleLoading: boolean;
+  readArticleDone: any;
+  readArticleError: any;
+
+  updateArticleLoading: boolean;
+  updateArticleDone: any;
+  updateArticleError: any;
+
+  deleteArticleLoading: boolean;
+  deleteArticleDone: any;
+  deleteArticleError: any;
+};
+
+const initialState: ArticleState = {
   article: null,
 
-  createArticleLoading: null,
+  createArticleLoading: false,
   createArticleDone: null,
   createArticleError: null,
 
-  readArticleLoading: null,
+  readArticleLoading: false,
   readArticleDone: null,
   readArticleError: null,
 
-  updateArticleLoading: null,
+  updateArticleLoading: false,
   updateArticleDone: null,
   updateArticleError: null,
 
-  deleteArticleLoading: null,
+  deleteArticleLoading: false,
   deleteArticleDone: null,
   deleteArticleError: null
 };

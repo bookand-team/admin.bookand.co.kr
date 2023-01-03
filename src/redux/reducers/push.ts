@@ -3,22 +3,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyPushes } from '../../dummy_data';
 import { createPush, readPush, updatePush, deletePush } from '../actions/push';
 
-const initialState = {
+export type PushState = {
+  push: any;
+
+  createPushLoading: boolean;
+  createPushDone: any;
+  createPushError: any;
+
+  readPushLoading: boolean;
+  readPushDone: any;
+  readPushError: any;
+
+  updatePushLoading: boolean;
+  updatePushDone: any;
+  updatePushError: any;
+
+  deletePushLoading: boolean;
+  deletePushDone: any;
+  deletePushError: any;
+};
+
+const initialState: PushState = {
   push: null,
 
-  createPushLoading: null,
+  createPushLoading: false,
   createPushDone: null,
   createPushError: null,
 
-  readPushLoading: null,
+  readPushLoading: false,
   readPushDone: null,
   readPushError: null,
 
-  updatePushLoading: null,
+  updatePushLoading: false,
   updatePushDone: null,
   updatePushError: null,
 
-  deletePushLoading: null,
+  deletePushLoading: false,
   deletePushDone: null,
   deletePushError: null
 };
