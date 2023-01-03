@@ -1,10 +1,10 @@
-import Modification from '../../components/bookstore/modification';
+import Modification from '../../components/article/modification';
 import Main from '../../components/main';
-import { loadDummyBookstore } from '../../redux/reducers/bookstore';
+import { loadDummyArticle } from '../../redux/reducers/acticle';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
-const ModificationPage = () => {
+const DetailsPage = () => {
   return (
     <Main>
       <Modification />
@@ -14,14 +14,14 @@ const ModificationPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
-    section: 'bookstore'
+    section: 'article'
   }));
 
-  store.dispatch(loadDummyBookstore(context.params.id));
+  store.dispatch(loadDummyArticle(context.params?.id));
 
   return {
     props: {}
   };
 });
 
-export default ModificationPage;
+export default DetailsPage;

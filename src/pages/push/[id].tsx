@@ -1,10 +1,10 @@
-import Modification from '../../components/article/modification';
 import Main from '../../components/main';
-import { loadDummyArticle } from '../../redux/reducers/acticle';
+import Modification from '../../components/push/modification';
 import { setPage } from '../../redux/reducers/page';
+import { loadDummyPush } from '../../redux/reducers/push';
 import wrapper from '../../redux/store';
 
-const DetailsPage = () => {
+const ModificationPage = () => {
   return (
     <Main>
       <Modification />
@@ -14,14 +14,14 @@ const DetailsPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   store.dispatch(setPage({
-    section: 'article'
+    section: 'push'
   }));
 
-  store.dispatch(loadDummyArticle(context.params.id));
+  store.dispatch(loadDummyPush(context.params?.id));
 
   return {
     props: {}
   };
 });
 
-export default DetailsPage;
+export default ModificationPage;
