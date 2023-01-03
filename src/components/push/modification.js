@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import useInput from '../../hooks/use_input';
 import buttonStyles from '../../styles/layout/button.module.css';
@@ -7,24 +8,26 @@ import styles from '../../styles/push/modification.module.css';
 
 const Registration = () => {
   const router = useRouter();
+  const { push } = useSelector((state) => state.push);
 
   // 입력받은 푸시 내용 (제목, 카테고리, 노출범위, 본문)
-  const [inputTitle, changeInputTitle] = useInput('');
-  const [selectCategory, changeSelectCategory] = useInput('');
-  const [selectTargetMemberId, changeSelectTargetMemberId] = useInput('');
-  const [selectTargetDevice, changeSelectTargetDevice] = useInput('');
-  const [selectTargetMemberRole, changeSelectTargetMemberRole] = useInput('');
-  const [inputContent, changeInputContent] = useInput('');
+  const [inputTitle, changeInputTitle] = useInput(push?.title ? push.title : '');
+  const [selectCategory, changeSelectCategory] = useInput(push?.category ? push.category : '');
+  const [selectTargetMemberId, changeSelectTargetMemberId] = useInput(push?.targetMemberId ? push.targetMemberId : '');
+  const [selectTargetDevice, changeSelectTargetDevice] = useInput(push?.TargetDevice ? push.TargetDevice : '');
+  const [selectTargetMemberRole, changeSelectTargetMemberRole] = useInput(push?.TargetMemberRole ? push.TargetMemberRole : '');
+  const [inputContent, changeInputContent] = useInput(push?.content ? push.content : '');
 
-  /** 푸시 작성 취소 버튼 */
-  const cancelRegistrationHandler = useCallback(() => {
+  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
+  const backBtnHandler = useCallback(() => {
     if (confirm('수정을 취소하면 수정 중인 PUSH는 저장되지 않습니다.\nPUSH 수정을 취소하시겠습니까?')) {
-      router.push('/push');
+      router.back();
     }
   }, []);
 
-  /** 푸시 작성 완료 버튼 */
-  const completeRegistrationHandler = useCallback(() => {
+  /** 저장하기 버튼 - 수정사항 저장 요청 */
+  const submitBtnHandler = useCallback(() => {
+    // TODO: 수정사항 저장 요청 기능
     if (inputTitle === '') {
       return alert('제목을 입력해주세요.');
     } else if (selectCategory === '') {
@@ -38,7 +41,6 @@ const Registration = () => {
     } else if (inputContent === '') {
       return alert('본문을 입력해주세요.');
     }
-    // feature
     alert('현재 지원하지 않는 기능입니다.');
   }, [inputTitle, selectCategory, selectTargetMemberId, selectTargetDevice, selectTargetMemberRole, inputContent]);
 
@@ -83,8 +85,8 @@ const Registration = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>수정취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>수정완료</button>
+        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

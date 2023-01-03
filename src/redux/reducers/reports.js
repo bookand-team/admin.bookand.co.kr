@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyReports } from '../../hooks/dummy_data';
+import { dummyReports } from '../../dummy_data';
 import { readReports } from '../actions/reports';
 
 const initialState = {

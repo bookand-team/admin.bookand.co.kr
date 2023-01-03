@@ -8,27 +8,33 @@
   flex-direction: column;
 }
 
-.check,
+.check {
+  flex: 0 0 40px;
+}
+
 .id {
-  flex: 1;
+  flex: 0 0 50px;
 }
 
-.button {
-  flex: 2;
+.title {
+  flex: 7 0 482px;
+  text-align: left;
+  padding: 0 12px;
 }
 
-.category,
+.category {
+  flex: 1 0 100px;
+}
+
 .status {
-  flex: 3;
+  flex: 1 0 100px;
 }
 
 .createdDate,
 .sentDate {
-  flex: 4;
+  flex: 1 0 140px;
 }
 
-.title {
-  flex: 8;
-  text-align: left;
-  padding-left: 16px;
+.button {
+  flex: 0 0 90px;
 }

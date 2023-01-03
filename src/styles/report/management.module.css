@@ -15,29 +15,35 @@
   flex-direction: column;
 }
 
-.check,
 .id {
-  flex: 1;
+  flex: 0 0 50px;
 }
 
-.reportedCount,
+.bookstoreName {
+  flex: 2 0 362px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.email {
+  flex: 2 0 250px;
+  text-align: left;
+  padding: 0 12px;
+}
+
 .status {
-  flex: 2;
+  flex: 1 0 100px;
+}
+
+.reportedCount {
+  flex: 1 0 100px;
 }
 
 .createdDate,
 .exposedDate {
-  flex: 4;
+  flex: 1 0 140px;
 }
 
-.email {
-  flex: 5;
-  text-align: left;
-  padding-left: 16px;
-}
-
-.bookstoreName {
-  flex: 6;
-  text-align: left;
-  padding-left: 16px;
+.button {
+  flex: 0 0 90px
 }

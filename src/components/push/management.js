@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -10,48 +10,38 @@ import useInput from '../../hooks/use_input';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/push/management.module.css';
+import Modal from '../modal';
 import Page from '../page';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
   const { pushes, pushesLength } = useSelector((state) => state.pushes);
   const { page, row } = useSelector((state) => state.page);
 
-  // category 선택
-  const [selectCategory, changeSelectCategory] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { category: selectCategory });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectCategory]);
-
-  // status 선택
-  const [selectStatus, changeSelectStatus] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectStatus]);
-
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
-  /** status(전송상태) 변경 요청 */
-  const changeStatusHandler = useCallback((id, status) => () => {
-    if (status === '전송실패' && confirm('해당 PUSH를 재전송 처리하시겠습니까?\n전송 전 PUSH 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    } else if (status === '전송전' && confirm('해당 PUSH를 전송 처리하시겠습니까?\n전송 전 PUSH 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    }
+  // 선택한 데이터 (카테고리, 전송상태)
+  const [selectCategory, changeSelectCategory] = useInput('');
+  const [selectStatus, changeSelectStatus] = useInput('');
+
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
-  /** 원하는 페이지로 이동*/
-  const moveToOtherPageHandler = useCallback((url) => () => {
+  /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
+  const routePage = useCallback((url) => () => {
     router.push(url);
   }, []);
 
-  /** 선택 항목 삭제 요청 */
-  const deleteSelectionHandler = useCallback(() => {
+  /** 삭제 버튼 - 선택한 푸시 삭제 요청 */
+  const deleteHandler = useCallback(() => {
+    // TODO: 선택한 푸시 삭제 요청 기능
     if (checkBoxes.length === 0) {
       alert('선택된 PUSH가 존재하지 않습니다.');
     } else {
@@ -63,10 +53,15 @@ const Management = () => {
     }
   }, [checkBoxes]);
 
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { category: selectCategory, status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectCategory, selectStatus]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>PUSH 관리</h2>
+        <h2>푸시 관리</h2>
       </div>
       <div className={styles.contents}>
         <div className={tableStyles.table}>
@@ -98,7 +93,7 @@ const Management = () => {
               <div className={styles.button}></div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {pushes && pushes.map((push) => {
               return (
                 <li key={push.id} className={checkBoxes.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
@@ -111,8 +106,13 @@ const Management = () => {
                   <div className={styles.status}>{push.status && push.status}</div>
                   <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(push.id, push.status)}>{push.status && push.status === '전송전' ? '전송' : '재전송'}</button></div>
-                  <div className={styles.button}><button className={buttonStyles.modification} onClick={moveToOtherPageHandler(`/push/${push.id}`)}>수정</button></div>
+                  <div className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
+                    <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details push={push} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
+                  <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -126,8 +126,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={pushesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/push/registration')}>새 푸시 작성</button>
-        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 푸시 삭제</button>
+        <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
       </div>
     </div>
   );

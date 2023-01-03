@@ -16,14 +16,14 @@ const Registration = () => {
   const [mainImage, setMainImage] = useState('');
   const [subImages, setSubImages] = useState([]);
 
-  /** 서점 이름을 통한 서점 검색 */
+  /** 검색 버튼 - 서점이름을 검색해 서점 정보 불러오기 요청 */
   const searchNameHandler = useCallback(() => {
-    // feature
+    // TODO: 서점이름을 검색해 서점 정보 불러오기 요청
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
 
-  /** 이미지 미리보기 생성 함수 */
-  const encodeFileToBase64 = useCallback((fileBlob) => {
+  /** 이미지 파일을 인코딩해 이미지 미리보기 생성 */
+  const createImagePreview = useCallback((fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
@@ -33,22 +33,22 @@ const Registration = () => {
     });
   }, []);
 
-  /** 메인 이미지 미리보기 생성 */
-  const mainImageHandler = useCallback(async (event) => {
+  /** 대표 이미지 버튼 - 대표 이미지 저장, 미리보기 저장 */
+  const mainImageBtnHandler = useCallback(async (event) => {
     if (event.target.files[0]) {
-      const result = await encodeFileToBase64(event.target.files[0]);
+      const result = await createImagePreview(event.target.files[0]);
       setMainImage(result);
     } else {
       setMainImage('');
     }
   }, []);
 
-  /** 서브 이미지들 미리보기 생성 */
-  const subImageHandler = useCallback(async (event) => {
+  /** 서브 이미지 버튼 - 서브 이미지 저장, 미리보기 저장 */
+  const subImageBtnHandler = useCallback(async (event) => {
     if (event.target.files.length !== 0) {
       const results = [];
       for (let i = 0; i < event.target.files.length; i++) {
-        const result = await encodeFileToBase64(event.target.files[i]);
+        const result = await createImagePreview(event.target.files[i]);
         results.push(result);
       }
       setSubImages(results);
@@ -57,15 +57,16 @@ const Registration = () => {
     }
   }, []);
 
-  /** 서점 등록 취소 버튼 */
-  const cancelRegistrationHandler = useCallback(() => {
+  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
+  const backBtnHandler = useCallback(() => {
     if (confirm('서점 등록을 취소하면 등록 중인 서점은 저장되지 않습니다.\n서점 등록을 취소하시겠습니까?')) {
-      router.push('/bookstore');
+      router.back();
     }
   }, []);
 
-  /** 서점 등록 완료 버튼 */
-  const completeRegistrationHandler = useCallback(() => {
+  /** 저장하기 버튼 - 수정사항 저장 요청 */
+  const submitBtnHandler = useCallback(() => {
+    // TODO: 수정사항 저장 요청 기능
     if (inputInformation === '') {
       return alert('서점 한줄소개를 입력해주세요.');
     } else if (selectTheme === '') {
@@ -135,8 +136,8 @@ const Registration = () => {
             <div>
               <div className={styles.title}>서점 상세페이지 노출 이미지 관리</div>
               <div>
-                <input id='main-image' type='file' accept='image/*' hidden onChange={mainImageHandler} />
-                <input id='sub-image' type='file' accept='image/*' multiple hidden onChange={subImageHandler} />
+                <input id='main-image' type='file' accept='image/*' hidden onChange={mainImageBtnHandler} />
+                <input id='sub-image' type='file' accept='image/*' multiple hidden onChange={subImageBtnHandler} />
               </div>
             </div>
             <ul>
@@ -175,8 +176,8 @@ const Registration = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>등록취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>등록완료</button>
+        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

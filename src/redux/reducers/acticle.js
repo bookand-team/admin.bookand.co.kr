@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyArticles } from '../../dummy_data';
 import { createArticle, readArticle, updateArticle, deleteArticle } from '../actions/article';
 
 const initialState = {
@@ -26,7 +27,9 @@ const articleSlice = createSlice({
   name: 'article',
   initialState,
   reducers: {
-
+    loadDummyArticle: (state, action) => {
+      state.article = dummyArticles[action.payload - 1];
+    }
   },
   extraReducers: (builder) => {
     // 아티클 생성하기
@@ -88,5 +91,7 @@ const articleSlice = createSlice({
     });
   }
 });
+
+export const { loadDummyArticle } = articleSlice.actions;
 
 export default articleSlice;

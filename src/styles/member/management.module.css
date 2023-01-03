@@ -15,28 +15,35 @@
   flex-direction: column;
 }
 
-.check,
 .id {
-  flex: 1;
+  flex: 0 0 50px;
 }
 
-.type,
-.button {
-  flex: 2;
+.nickname {
+  flex: 2 0 362px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.email {
+  flex: 2 0 250px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.role {
+  flex: 1 0 100px;
 }
 
 .status {
-  flex: 3;
+  flex: 1 0 100px;
 }
 
 .createdDate,
 .accessedDate {
-  flex: 4;
+  flex: 1 0 140px;
 }
 
-.nickname,
-.email {
-  flex: 6;
-  text-align: left;
-  padding-left: 16px;
+.button {
+  flex: 0 0 90px;
 }

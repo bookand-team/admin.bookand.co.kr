@@ -14,70 +14,89 @@ const Registration = () => {
   const [selectCategory, changeSelectCategory] = useInput('');
   const [selectTargetDevice, changeSelectTargetDevice] = useInput('');
   const [selectTargetMemberId, changeSelectTargetMemberId] = useInput('');
-  const [inputText, changeInputText, setInputText] = useInput('');
+  const [inputContent, changeInputContent, setInputContent] = useInput('');
 
   // 마크다운 형식의 아티클 내용
-  const [viewText, setViewText] = useState('');
+  const [markdownContent, setMarkdownContent] = useState('');
 
-  // 선택자 (썸네일 이미지 생성 버튼, 아티클 본문, 아티클 본문 이미지 생성 버튼)
+  // 선택자 (썸네일 이미지 선택 버튼, 이미지 url 생성 버튼, 아티클 본문 입력구역)
   const thumbnailImageRef = useRef(null);
-  const textareaRef = useRef(null);
   const imageRef = useRef(null);
+  const contentRef = useRef(null);
 
-  // 아티클 본문 줄바꿈을 마크다운 줄바꿈으로 변환
-  useEffect(() => {
-    let markdown = inputText.replace(/\n/g, '\n\n');
-    markdown = markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n');
-    markdown = markdown.includes('\n\n\n\n') ? markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n') : markdown;
-    setViewText(markdown);
-  }, [inputText]);
-
-  /** 선택한 글자 진하게 변환 */
-  const borderHandler = useCallback(() => {
-    if (textareaRef.current) {
-      const startLocation = textareaRef.current.selectionStart;
-      const endLocation = textareaRef.current.selectionEnd;
-
-      const changedText = textareaRef.current.value.substring(0, startLocation) + '**' + textareaRef.current.value.substring(startLocation, endLocation) + '**' + textareaRef.current.value.substring(endLocation);
-      setInputText(changedText);
-    }
-  }, [textareaRef]);
-
-  /** 선택한 글자 기울임체로 변환 */
-  const italicHandler = useCallback(() => {
-    if (textareaRef.current) {
-      const startLocation = textareaRef.current.selectionStart;
-      const endLocation = textareaRef.current.selectionEnd;
-
-      const changedText = textareaRef.current.value.substring(0, startLocation) + '*' + textareaRef.current.value.substring(startLocation, endLocation) + '*' + textareaRef.current.value.substring(endLocation);
-      setInputText(changedText);
-    }
-  }, [textareaRef]);
-
-  /** 이미지 가져오기 버튼 */
-  const inputImageHandler = useCallback((ref) => () => {
+  /** 썸네일 이미지 선택 버튼, 이미지 버튼 - 파일 선택창 열기 */
+  const openFileSelectionWindow = useCallback((ref) => () => {
     ref.current.click();
   }, []);
 
-  /** 가져온 이미지 업로드 요청 */
-  const uploadImageHandler = useCallback(async (event) => {
+  /** 
+   * 썸네일 이미지 선택 버튼
+   * 
+   * 선택한 이미지 파일을 서버에 저장 요청 후, 받아온 이미지 파일의 url 저장
+   */
+  const storeThumbnailImageUrl = useCallback(async (event) => {
+    // TODO: 이미지 파일 서버 저장 요청
     if (event.target.files) {
       const formData = new FormData();
       formData.append('image', event.target.files[0]);
-      // feature
       alert('현재 지원하지 않는 기능입니다.');
     }
   }, []);
 
-  /** 아티클 작성 취소 버튼 */
-  const cancelRegistrationHandler = useCallback(() => {
-    if (confirm('아티클 작성을 취소하면 작성 중인 아티클은 저장되지 않습니다.\n아티클 작성을 취소하시겠습니까?')) {
-      router.push('/article');
+  /** 
+   * 이미지 버튼
+   * 
+   * 선택한 이미지 파일을 서버에 저장 요청 후, 받아온 이미지 파일의 url 불러오기
+   */
+  const getImageUrl = useCallback(async (event) => {
+    // TODO: 이미지 파일 서버 저장 요청
+    if (event.target.files) {
+      const formData = new FormData();
+      formData.append('image', event.target.files[0]);
+      alert('현재 지원하지 않는 기능입니다.');
     }
   }, []);
 
-  /** 아티클 작성 완료 버튼 */
-  const completeRegistrationHandler = useCallback(() => {
+  /** 마크다운 형식의 줄바꿈으로 변환 */
+  const convertEndOfLine = useCallback((inputContent) => {
+    let markdown = inputContent.replace(/\n/g, '\n\n');
+    markdown = markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n');
+    markdown = markdown.includes('\n\n\n\n') ? markdown.replace(/\n\n\n\n/g, '\n\n&nbsp;\n\n') : markdown;
+    setMarkdownContent(markdown);
+  }, []);
+
+  /** 진하게 버튼 - 마크다운 형식의 진한 글씨체로 변환 */
+  const convertBorder = useCallback(() => {
+    if (contentRef.current) {
+      const startLocation = contentRef.current.selectionStart;
+      const endLocation = contentRef.current.selectionEnd;
+
+      const changedText = contentRef.current.value.substring(0, startLocation) + '**' + contentRef.current.value.substring(startLocation, endLocation) + '**' + contentRef.current.value.substring(endLocation);
+      setInputContent(changedText);
+    }
+  }, [contentRef]);
+
+  /** 기울임 버튼 - 마크다운 형식의 기울임체로 변환 */
+  const convertItalic = useCallback(() => {
+    if (contentRef.current) {
+      const startLocation = contentRef.current.selectionStart;
+      const endLocation = contentRef.current.selectionEnd;
+
+      const changedText = contentRef.current.value.substring(0, startLocation) + '*' + contentRef.current.value.substring(startLocation, endLocation) + '*' + contentRef.current.value.substring(endLocation);
+      setInputContent(changedText);
+    }
+  }, [contentRef]);
+
+  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
+  const backBtnHandler = useCallback(() => {
+    if (confirm('아티클 작성을 취소하면 작성 중인 아티클은 저장되지 않습니다.\n아티클 작성을 취소하시겠습니까?')) {
+      router.back();
+    }
+  }, []);
+
+  /** 저장하기 버튼 - 작성한 내용 저장 요청 */
+  const submitBtnHandler = useCallback(() => {
+    // TODO: 작성한 내용 저장 요청 기능
     if (inputTitle === '') {
       return alert('아티클 제목을 입력해주세요.');
     } else if (selectCategory === '') {
@@ -86,12 +105,16 @@ const Registration = () => {
       return alert('노출할 디바이스를 선택해주세요.');
     } else if (selectTargetMemberId === '') {
       return alert('노출할 멤버 식별자를 선택해주세요.');
-    } else if (inputText === '') {
+    } else if (inputContent === '') {
       return alert('아티클 본문을 입력해주세요.');
     }
-    // feature
     alert('현재 지원하지 않는 기능입니다.');
-  }, [inputTitle, selectCategory, selectTargetDevice, selectTargetMemberId, inputText]);
+  }, [inputTitle, selectCategory, selectTargetDevice, selectTargetMemberId, inputContent]);
+
+  // 입력한 줄바꿈을 마크다운 줄바꿈으로 자동 변환
+  useEffect(() => {
+    convertEndOfLine(inputContent);
+  }, [inputContent]);
 
   return (
     <div className={styles.container}>
@@ -100,8 +123,8 @@ const Registration = () => {
           <input type='textarea' value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' />
         </div>
         <div>
-          <input ref={thumbnailImageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
-          <button onClick={inputImageHandler(thumbnailImageRef)}>썸네일 이미지 선택</button>
+          <input ref={thumbnailImageRef} type='file' accept='image/*' hidden onChange={storeThumbnailImageUrl} />
+          <button onClick={openFileSelectionWindow(thumbnailImageRef)}>썸네일 이미지 선택</button>
         </div>
         <div className={styles.select_area}>
           <div>
@@ -132,25 +155,25 @@ const Registration = () => {
       </div>
       <div className={styles.editor}>
         <div className={styles.handler}>
-          <button onClick={borderHandler}>진하게</button>
-          <button onClick={italicHandler}>기울임</button>
-          <input ref={imageRef} type='file' accept='image/*' hidden onChange={uploadImageHandler} />
-          <button onClick={inputImageHandler(imageRef)}>이미지</button>
+          <button onClick={convertBorder}>진하게</button>
+          <button onClick={convertItalic}>기울임</button>
+          <input ref={imageRef} type='file' accept='image/*' hidden onChange={getImageUrl} />
+          <button onClick={openFileSelectionWindow(imageRef)}>이미지</button>
         </div>
         <div className={styles.workspace}>
           <div className={styles.edit_area}>
-            <textarea ref={textareaRef} value={inputText} onChange={changeInputText} placeholder='아티클 본문을 입력해주세요' />
+            <textarea ref={contentRef} value={inputContent} onChange={changeInputContent} placeholder='아티클 본문을 입력해주세요' />
           </div>
           <div className={styles.preview_area} >
             <ReactMarkdown >
-              {viewText}
+              {markdownContent}
             </ReactMarkdown>
           </div>
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>작성취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>작성완료</button>
+        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

@@ -1,26 +1,38 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
 import getDisplayTime from '../../hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
 import useInput from '../../hooks/use_input';
+import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
 import styles from '../../styles/report/management.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
   const { reports, reportsLength } = useSelector((state) => state.reports);
   const { page, row } = useSelector((state) => state.page);
 
-  // status 선택
+  // 선택한 데이터 (노출상태)
   const [selectStatus, changeSelectStatus] = useInput('');
+
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
+    setOpenModalId(id);
+  }, []);
+
   useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
+    const newQuery = changeQuery(router.query, { status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
   }, [selectStatus]);
 
   return (
@@ -46,9 +58,10 @@ const Management = () => {
               <div className={styles.reportedCount}>제보요청 수</div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.exposedDate}>노출일자</div>
+              <div className={styles.button}></div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {reports && reports.map((report) => {
               return (
                 <li key={report.id} className={tableStyles.tr}>
@@ -59,6 +72,12 @@ const Management = () => {
                   <div className={styles.reportedCount}>{report.reportedCount && report.reportedCount}</div>
                   <div className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
+                  <div className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(report.id)}>상세정보</button>
+                    <Modal id={report.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details report={report} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
                 </li>
               );
             })}

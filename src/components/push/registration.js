@@ -16,15 +16,16 @@ const Registration = () => {
   const [selectTargetMemberRole, changeSelectTargetMemberRole] = useInput('');
   const [inputContent, changeInputContent] = useInput('');
 
-  /** 푸시 작성 취소 버튼 */
-  const cancelRegistrationHandler = useCallback(() => {
+  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
+  const backBtnHandler = useCallback(() => {
     if (confirm('작성을 취소하면 작성 중인 PUSH는 저장되지 않습니다.\nPUSH 작성을 취소하시겠습니까?')) {
-      router.push('/push');
+      router.back();
     }
   }, []);
 
-  /** 푸시 작성 완료 버튼 */
-  const completeRegistrationHandler = useCallback(() => {
+  /** 저장하기 버튼 - 수정사항 저장 요청 */
+  const submitBtnHandler = useCallback(() => {
+    // TODO: 수정사항 저장 요청 기능
     if (inputTitle === '') {
       return alert('제목을 입력해주세요.');
     } else if (selectCategory === '') {
@@ -38,7 +39,6 @@ const Registration = () => {
     } else if (inputContent === '') {
       return alert('본문을 입력해주세요.');
     }
-    // feature
     alert('현재 지원하지 않는 기능입니다.');
   }, [inputTitle, selectCategory, selectTargetMemberId, selectTargetDevice, selectTargetMemberRole, inputContent]);
 
@@ -83,8 +83,8 @@ const Registration = () => {
         </div>
       </div>
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.cancellation} onClick={cancelRegistrationHandler}>등록취소</button>
-        <button className={buttonStyles.completion} onClick={completeRegistrationHandler}>등록완료</button>
+        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
     </div>
   );

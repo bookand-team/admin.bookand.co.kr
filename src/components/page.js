@@ -10,7 +10,7 @@ import rightArrowIcon from '../images/right_arrow_icon.svg';
 import rightArrow2Icon from '../images/right_arrow_icon2.svg';
 import styles from '../styles/page.module.css';
 
-const Page = ({ tableRow = 5, maxSelection = 10, contentsLength }) => {
+const Page = ({ tableRow = 10, maxSelection = 10, contentsLength }) => {
   const router = useRouter();
   const { page } = useSelector((state) => state.page);
 
@@ -31,64 +31,59 @@ const Page = ({ tableRow = 5, maxSelection = 10, contentsLength }) => {
 
   /** 이전 pages로 이동  */
   const moveToPreviousPages = useCallback(() => {
-    if (page !== null) {
-      if (page > 10) {
-        const newQuery = changeQuery(router, { page: parseInt((page - 1) / maxSelection) * maxSelection });
-        router.push(`${router.pathname}${newQuery}`);
-      } else {
-        const newQuery = changeQuery(router, { page: 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      }
+    let newQuery;
+    if (page > 10) {
+      newQuery = changeQuery(router.query, { page: parseInt((page - 1) / maxSelection) * maxSelection });
+    } else if (page > 1) {
+      newQuery = changeQuery(router.query, { page: 1 });
+    } else if (page === 1) {
+      return alert('이전 페이지가 존재하지 않습니다.');
     }
-  }, [router, page]);
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [page]);
 
   /** 이전 page로 이동 */
   const moveToPreviousPage = useCallback(() => {
-    if (page !== null) {
-      if (page > 1) {
-        const newQuery = changeQuery(router, { page: page - 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      }
+    let newQuery;
+    if (page > 1) {
+      newQuery = changeQuery(router.query, { page: page - 1 });
+    } else if (page === 1) {
+      return alert('이전 페이지가 존재하지 않습니다.');
     }
-  }, [router, page]);
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [page]);
 
   /** 선택한 숫자의 page로 이동 */
   const moveToNumberPage = useCallback((pageNumber) => () => {
-    const newQuery = changeQuery(router, { page: pageNumber });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [router]);
+    const newQuery = changeQuery(router.query, { page: pageNumber });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, []);
 
   /** 다음 page로 이동 */
   const moveToNextPage = useCallback(() => {
-    if (page === null) {
-      const newQuery = changeQuery(router, { page: 2 });
-      router.push(`${router.pathname}${newQuery}`);
-    } else if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
-      const newQuery = changeQuery(router, { page: page + 1 });
-      router.push(`${router.pathname}${newQuery}`);
+    let newQuery;
+    if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
+      newQuery = changeQuery(router.query, { page: page + 1 });
+    } else if (page === parseInt((contentsLength - 1) / tableRow) + 1) {
+      return alert('다음 페이지가 존재하지 않습니다.');
     }
-  }, [router, page, contentsLength]);
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [page, contentsLength]);
 
   /** 다음 pages로 이동 */
   const moveToNextPages = useCallback(() => {
-    if (page === null) {
-      if (maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
-        const newQuery = changeQuery(router, { page: maxSelection + 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      } else {
-        const newQuery = changeQuery(router, { page: parseInt((contentsLength - 1) / tableRow) + 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      }
+    let newQuery;
+    if (parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
+      newQuery = changeQuery(router.query, { page: parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 });
+      router.push({ pathname: router.pathname, query: newQuery });
     } else if (page < parseInt((contentsLength - 1) / tableRow) + 1) {
-      if (parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 <= parseInt((contentsLength - 1) / tableRow) + 1) {
-        const newQuery = changeQuery(router, { page: parseInt((page - 1) / maxSelection) * maxSelection + maxSelection + 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      } else {
-        const newQuery = changeQuery(router, { page: parseInt((contentsLength - 1) / tableRow) + 1 });
-        router.push(`${router.pathname}${newQuery}`);
-      }
+      newQuery = changeQuery(router.query, { page: parseInt((contentsLength - 1) / tableRow) + 1 });
+      router.push({ pathname: router.pathname, query: newQuery });
+    } else if (page === parseInt((contentsLength - 1) / tableRow) + 1) {
+      return alert('다음 페이지가 존재하지 않습니다.');
     }
-  }, [router, page, contentsLength]);
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [page, contentsLength]);
 
   return (
     <nav className={styles.page}>

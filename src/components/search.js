@@ -1,17 +1,16 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 
 import changeQuery from '../hooks/change_query';
 import useInput from '../hooks/use_input';
+import buttonStyles from '../styles/layout/button.module.css';
 import styles from '../styles/search.module.css';
 
 const Search = ({ search: searchTarget }) => {
   const router = useRouter();
-  const { search } = useSelector((state) => state.page);
 
   // 검색어
-  const [searchText, changeSearchText] = useInput(search ? search : '');
+  const [searchText, changeSearchText] = useInput('');
 
   /** 입력된 검색어(2자 이상)를 검색 요청 */
   const searchHandler = useCallback((event) => {
@@ -23,9 +22,9 @@ const Search = ({ search: searchTarget }) => {
     }
 
     // 검색 결과 페이지로 이동
-    const newQuery = changeQuery(router, { search: searchText });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [searchText, router, search]);
+    const newQuery = changeQuery(router.query, { search: searchText });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [searchText]);
 
   return (
     <form className={styles.container} onSubmit={searchHandler}>
@@ -33,7 +32,7 @@ const Search = ({ search: searchTarget }) => {
         <div>{searchTarget}</div>
         <input type='text' name='inputSearch' value={searchText} onChange={changeSearchText} />
       </div>
-      <button type='submit'>검색</button>
+      <button className={buttonStyles.search} type='submit'>검색</button>
     </form>
   );
 };

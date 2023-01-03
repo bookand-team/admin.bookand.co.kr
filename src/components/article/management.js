@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../../hooks/change_query';
@@ -10,59 +10,53 @@ import useInput from '../../hooks/use_input';
 import styles from '../../styles/article/management.module.css';
 import buttonStyles from '../../styles/layout/button.module.css';
 import tableStyles from '../../styles/layout/table.module.css';
+import Modal from '../modal';
 import Page from '../page';
 import Search from '../search';
+import Details from './details';
 
 const Management = () => {
   const router = useRouter();
   const { articles, articlesLength } = useSelector((state) => state.articles);
   const { page, row } = useSelector((state) => state.page);
 
-  // category 선택
-  const [selectCategory, changeSelectCategory] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { category: selectCategory });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectCategory]);
-
-  // status 선택
-  const [selectStatus, changeSelectStatus] = useInput('');
-  useEffect(() => {
-    const newQuery = changeQuery(router, { status: selectStatus });
-    router.push(`${router.pathname}${newQuery}`);
-  }, [selectStatus]);
-
   // checkbox 선택
   const [checkBoxes, checkBoxHandler] = useCheckBoxes(page);
 
-  /** status(노출상태) 변경 요청 */
-  const changeStatusHandler = useCallback((id, status) => () => {
-    if (status === '미노출' && confirm('해당 아티클을 노출 처리하시겠습니까?\n노출 전 아티클 정보를 꼼꼼히 확인해주세요.')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    } else if (status === '노출' && confirm('해당 아티클을 미노출 처리하시겠습니까?')) {
-      // feature
-      alert('현재 지원하지 않는 기능입니다.');
-    }
+  // 선택한 데이터 (카테고리, 노출상태)
+  const [selectCategory, changeSelectCategory] = useInput('');
+  const [selectStatus, changeSelectStatus] = useInput('');
+
+  // 열려있는 모달창 식별자 상태
+  const [openModalId, setOpenModalId] = useState(null);
+
+  /** 상세정보 버튼 - 모달창 열기 */
+  const detailsBtnHandler = useCallback((id) => () => {
+    setOpenModalId(id);
   }, []);
 
-  /** 원하는 페이지로 이동*/
-  const moveToOtherPageHandler = useCallback((url) => () => {
+  /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
+  const routePage = useCallback((url) => () => {
     router.push(url);
   }, []);
 
-  /** 선택 항목 삭제 요청 */
-  const deleteSelectionHandler = useCallback(() => {
+  /** 삭제 버튼 - 선택한 아티클 삭제 요청 */
+  const deleteBtnHandler = useCallback(() => {
+    // TODO: 선택한 아티클 삭제 요청 기능
     if (checkBoxes.length === 0) {
       alert('선택된 아티클이 존재하지 않습니다.');
     } else {
       const sortedCheckboxes = [...checkBoxes];
       if (confirm(`${sortedCheckboxes.sort()}번 아티클을 삭제 처리하시겠습니까?\n삭제한 아티클은 저장되지 않습니다.`)) {
-        // feature
         alert('현재 지원하지 않는 기능입니다.');
       }
     }
   }, [checkBoxes]);
+
+  useEffect(() => {
+    const newQuery = changeQuery(router.query, { category: selectCategory, status: selectStatus });
+    router.push({ pathname: router.pathname, query: newQuery });
+  }, [selectCategory, selectStatus]);
 
   return (
     <div className={styles.container}>
@@ -98,9 +92,10 @@ const Management = () => {
               <div className={styles.exposedDate}>노출일자</div>
               <div className={styles.modifiedDate}>최종 수정일자</div>
               <div className={styles.button}></div>
+              <div className={styles.button}></div>
             </div>
           </div>
-          <ul>
+          <ul className={tableStyles.tbody}>
             {articles && articles.map((article) => {
               return (
                 <li key={article.id} className={checkBoxes.includes(article.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
@@ -116,7 +111,13 @@ const Management = () => {
                   <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}><button className={buttonStyles.status} onClick={changeStatusHandler(article.id, article.status)}>노출전환</button></div>
+                  <div className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
+                    <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <Details article={article} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </div>
+                  <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button></div>
                 </li>
               );
             })}
@@ -130,8 +131,8 @@ const Management = () => {
       </div>
       <Page tableRow={row} contentsLength={articlesLength} />
       <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.registration} onClick={moveToOtherPageHandler('/article/registration')}>새 아티클 작성</button>
-        <button className={buttonStyles.removal} onClick={deleteSelectionHandler}>선택 아티클 삭제</button>
+        <button className={buttonStyles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
       </div>
     </div>
   );

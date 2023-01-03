@@ -6,31 +6,22 @@
 
 .container>div {
   display: flex;
-  width: 362px;
   border: 1px solid #BEBEBE;
-  margin-right: 10px;
+  margin-right: 16px;
 }
 
 .container>div>div {
+  display: flex;
   width: 150px;
-  text-align: center;
-  padding: 9px 0;
+  justify-content: center;
+  align-items: center;
   background-color: #E4E4E4;
 }
 
 .container input {
-  width: 212px;
+  width: 200px;
   border: none;
   outline: none;
-  padding-left: 12px;
-}
-
-.container button {
-  width: 72px;
-  color: #FFFFFF;
-  line-height: 100%;
-  font-weight: 500;
-  background-color: #333333;
-  border: none;
-  cursor: pointer;
+  font-size: 14px;
+  padding: 0 20px;
 }

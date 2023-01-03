@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyFeedbacks } from '../../hooks/dummy_data';
+import { dummyFeedbacks } from '../../dummy_data';
 import { readFeedbacks, deleteFeedbacks } from '../actions/feedbacks';
 
 const initialState = {

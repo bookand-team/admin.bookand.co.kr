@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyBookstores } from '../../dummy_data';
 import { createBookstore, readBookstore, updateBookstore, deleteBookstore } from '../actions/bookstore';
 
 const initialState = {
@@ -26,7 +27,9 @@ const bookstoreSlice = createSlice({
   name: 'bookstore',
   initialState,
   reducers: {
-
+    loadDummyBookstore: (state, action) => {
+      state.bookstore = dummyBookstores[action.payload - 1];
+    }
   },
   extraReducers: (builder) => {
     // 서점 생성하기
@@ -88,5 +91,7 @@ const bookstoreSlice = createSlice({
     });
   }
 });
+
+export const { loadDummyBookstore } = bookstoreSlice.actions;
 
 export default bookstoreSlice;
