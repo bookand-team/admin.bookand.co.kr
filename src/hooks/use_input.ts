@@ -5,7 +5,6 @@ import React, { useCallback, useState } from 'react';
  * @param initialValue 초기값
  * @returns [value, changeValue, setValue]
  */
-// eslint-disable-next-line no-unused-vars
 export const useInputText = (initialValue: string): [string, (event: React.ChangeEvent<HTMLInputElement>) => void, React.Dispatch<React.SetStateAction<string>>] => {
   const [value, setValue] = useState(initialValue);
   const changeValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +18,6 @@ export const useInputText = (initialValue: string): [string, (event: React.Chang
  * @param initialValue 초기값
  * @returns [value, changeValue, setValue]
  */
-// eslint-disable-next-line no-unused-vars
 export const useInputRadio = <T extends string>(initialValue: T): [T, (event: React.ChangeEvent<HTMLInputElement>) => void, React.Dispatch<React.SetStateAction<T>>] => {
   const [value, setValue] = useState(initialValue);
   const changeValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +31,6 @@ export const useInputRadio = <T extends string>(initialValue: T): [T, (event: Re
  * @param initialChecked 초기값
  * @returns [checked, changeChecked, setChecked]
  */
-// eslint-disable-next-line no-unused-vars
 export const useInputCheckbox = (initialChecked: boolean): [boolean, (event: React.ChangeEvent<HTMLInputElement>) => void, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [checked, setChecked] = useState(initialChecked);
   const changeChecked = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +44,6 @@ export const useInputCheckbox = (initialChecked: boolean): [boolean, (event: Rea
  * @param initialValue 초기값
  * @returns [value, changeValue, setValue]
  */
-// eslint-disable-next-line no-unused-vars
 export const useInputTextArea = (initialValue: string): [string, (event: React.ChangeEvent<HTMLTextAreaElement>) => void, React.Dispatch<React.SetStateAction<string>>] => {
   const [value, setValue] = useState(initialValue);
   const changeValue = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,7 +57,6 @@ export const useInputTextArea = (initialValue: string): [string, (event: React.C
  * @param initialValue 초기값
  * @returns [value, changeValue, setValue]
  */
-// eslint-disable-next-line no-unused-vars
 export const useInputSelect = <T extends string>(initialValue: T): [T, (event: React.ChangeEvent<HTMLSelectElement>) => void, React.Dispatch<React.SetStateAction<T>>] => {
   const [value, setValue] = useState<T>(initialValue);
   const changeValue = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
