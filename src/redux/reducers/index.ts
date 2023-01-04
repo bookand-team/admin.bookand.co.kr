@@ -15,19 +15,7 @@ import pushSlice from './push';
 import pushesSlice from './pushes';
 import reportsSlice from './reports';
 
-import type { ArticleState } from './acticle';
-import type { ArticlesState } from './articles';
-import type { BookstoreState } from './bookstore';
-import type { BookstoresState } from './bookstores';
-import type { FeedbackState } from './feedback';
-import type { FeedbacksState } from './feedbacks';
-import type { ImageState } from './image';
-import type { MemberState } from './member';
-import type { MembersState } from './members';
-import type { PageState } from './page';
-import type { PushState } from './push';
-import type { PushesState } from './pushes';
-import type { ReportState } from './reports';
+import type { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackState, FeedbacksState, ImageState, MemberState, MembersState, PageState, PushState, PushesState, ReportState } from 'src/types';
 
 const rootReducer = (state: any, action: any) => {
   switch (action.type) {

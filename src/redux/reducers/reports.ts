@@ -3,14 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyReports } from '../../dummy_data';
 import { readReports } from '../actions/reports';
 
-export type ReportState = {
-  reports: any;
-  reportsLength: number | null;
-
-  readReportsLoading: boolean;
-  readReportsDone: any;
-  readReportsError: any;
-};
+import type { ReportState } from 'src/types';
 
 const initialState: ReportState = {
   reports: null,

@@ -13,7 +13,7 @@ type Query = {
  * @param changePart 추가/수정/제거하려는 url query
  * @returns 추가/수정/제거된 url query
  */
-const changeQuery = (currentQuery: { [key: string]: string }, changePart: Query) => {
+const changeQuery = <T extends Query>(currentQuery: T, changePart: Query): Query => {
   const changedQuery: Query = {};  // 이동할 url의 query
 
   // category

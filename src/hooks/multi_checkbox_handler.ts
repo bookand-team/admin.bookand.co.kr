@@ -5,7 +5,8 @@ import { useCallback, useEffect, useState } from 'react';
  * @param page 현재 페이지 번호
  * @returns [checkedBoxIds, checkBoxHandler]
  */
-const multiCheckBoxHandler = (page: number) => {
+// eslint-disable-next-line no-unused-vars
+const multiCheckBoxHandler = (page: number): [number[], (isChecked: boolean, boxId: number) => void] => {
   // 체크된 박스의 id값들 상태
   const [checkedBoxIds, setCheckedBoxIds] = useState<number[]>([]);
 

@@ -3,18 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyPushes } from '../../dummy_data';
 import { readPushes, deletePushes } from '../actions/pushes';
 
-export type PushesState = {
-  pushes: any;
-  pushesLength: number | null;
-
-  readPushesLoading: boolean;
-  readPushesDone: any;
-  readPushesError: any;
-
-  deletePushesLoading: boolean;
-  deletePushesDone: any;
-  deletePushesError: any;
-};
+import type { PushesState } from 'src/types';
 
 const initialState: PushesState = {
   pushes: null,

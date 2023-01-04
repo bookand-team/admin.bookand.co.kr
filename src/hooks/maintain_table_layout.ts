@@ -4,7 +4,7 @@
  * @param tableRow 표 행 개수
  * @param contentsLength 전체 데이터 개수
  */
-export const isRowInsufficient = (page: number | null, tableRow: number, contentsLength: number) => {
+export const isRowInsufficient = (page: number | null, tableRow: number, contentsLength: number): boolean => {
   if ((page === null && contentsLength < tableRow) || (page === Math.floor((contentsLength - 1) / tableRow) + 1 && contentsLength < tableRow * page)) {
     return true;
   } else {
@@ -18,7 +18,7 @@ export const isRowInsufficient = (page: number | null, tableRow: number, content
  * @param tableRow 표 행 개수
  * @param contentsLength 전체 데이터 개수
  */
-export const makeEmptyArray = (page: number | null, tableRow: number, contentsLength: number) => {
+export const makeEmptyArray = (page: number | null, tableRow: number, contentsLength: number): null[] => {
   const nullArray = [];
   if (page === null) {
     for (let i = 0; i < tableRow - contentsLength; i++) {

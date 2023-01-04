@@ -3,18 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dummyBookstores } from '../../dummy_data';
 import { readBookstores, deleteBookstores } from '../actions/bookstores';
 
-export type BookstoresState = {
-  bookstores: any;
-  bookstoresLength: number | null;
-
-  readBookstoresLoading: boolean;
-  readBookstoresDone: any;
-  readBookstoresError: any;
-
-  deleteBookstoresLoading: boolean;
-  deleteBookstoresDone: any;
-  deleteBookstoresError: any;
-};
+import type { BookstoresState } from 'src/types';
 
 const initialState: BookstoresState = {
   bookstores: null,
