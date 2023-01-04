@@ -1,4 +1,6 @@
-export const dummyBookstores = [
+import type { Bookstore } from 'src/types';
+
+export const dummyBookstores: Bookstore[] = [
   {
     'id': 1,
     'name': 'Franey Group',

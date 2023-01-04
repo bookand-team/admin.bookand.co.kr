@@ -1,10 +1,12 @@
-export const dummyReports = [
+import type { Report } from 'src/types';
+
+export const dummyReports: Report[] = [
   {
     'id': 1,
     'email': 'Taryn53@hotmail.com',
     'bookstoreName': 'Harvey, Becker and Ruecker',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-27T23:27:19.424Z',
     'exposedDate': '2022-08-22T17:48:58.649Z'
   },
@@ -22,7 +24,7 @@ export const dummyReports = [
     'email': 'Donny_Mayert@yahoo.com',
     'bookstoreName': 'Kilback, Considine and Nienow',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-31T19:09:30.333Z',
     'exposedDate': '2022-10-10T05:48:00.173Z'
   },
@@ -139,7 +141,7 @@ export const dummyReports = [
     'email': 'Sandy_Monahan@hotmail.com',
     'bookstoreName': 'Parisian, Greenfelder and Emard',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-06T05:02:07.583Z',
     'exposedDate': '2022-07-13T17:06:41.746Z'
   },
@@ -166,7 +168,7 @@ export const dummyReports = [
     'email': 'Hassan.Schimmel@yahoo.com',
     'bookstoreName': 'Spinka, Ebert and Connelly',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-31T15:08:06.961Z',
     'exposedDate': '2022-09-04T11:59:30.320Z'
   },
@@ -193,7 +195,7 @@ export const dummyReports = [
     'email': 'Josefa_Strosin@hotmail.com',
     'bookstoreName': 'Reynolds, Koss and Donnelly',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-10-22T00:04:59.464Z',
     'exposedDate': '2022-10-22T01:46:17.418Z'
   },
@@ -220,7 +222,7 @@ export const dummyReports = [
     'email': 'Piper.Spinka4@hotmail.com',
     'bookstoreName': 'Kuphal LLC',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-04T23:25:53.022Z',
     'exposedDate': '2022-07-20T17:53:39.813Z'
   },
@@ -238,7 +240,7 @@ export const dummyReports = [
     'email': 'Friedrich.Rath3@yahoo.com',
     'bookstoreName': 'Dooley - Turcotte',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-24T13:22:01.597Z',
     'exposedDate': '2022-05-03T02:33:46.333Z'
   },
@@ -328,7 +330,7 @@ export const dummyReports = [
     'email': 'Ila79@yahoo.com',
     'bookstoreName': 'Hartmann, Beer and Kuvalis',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-19T18:18:09.516Z',
     'exposedDate': '2022-08-06T08:30:48.307Z'
   },
@@ -391,7 +393,7 @@ export const dummyReports = [
     'email': 'Marley_Bashirian@gmail.com',
     'bookstoreName': 'Hoppe Group',
     'reportedCount': 1,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-02-26T08:04:15.296Z',
     'exposedDate': '2022-05-20T03:51:36.250Z'
   },
@@ -400,7 +402,7 @@ export const dummyReports = [
     'email': 'Kristian_Wiegand@yahoo.com',
     'bookstoreName': 'Welch, Stanton and Ferry',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-20T17:50:51.852Z',
     'exposedDate': '2022-07-11T22:39:56.124Z'
   },
@@ -418,7 +420,7 @@ export const dummyReports = [
     'email': 'Drew.Heathcote47@hotmail.com',
     'bookstoreName': 'Dooley, Renner and Boehm',
     'reportedCount': 1,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-30T14:29:51.704Z',
     'exposedDate': '2022-09-04T05:28:02.207Z'
   },
@@ -445,7 +447,7 @@ export const dummyReports = [
     'email': 'Talon34@yahoo.com',
     'bookstoreName': 'Yundt, White and Treutel',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-08T05:37:20.424Z',
     'exposedDate': '2022-10-12T14:33:44.984Z'
   },
@@ -526,7 +528,7 @@ export const dummyReports = [
     'email': 'Nathanael.Conn87@yahoo.com',
     'bookstoreName': 'Koelpin - Bergstrom',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-22T12:08:00.717Z',
     'exposedDate': '2022-05-06T09:07:32.959Z'
   },
@@ -535,7 +537,7 @@ export const dummyReports = [
     'email': 'Rita.Berge@hotmail.com',
     'bookstoreName': 'Jones, VonRueden and Stokes',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-11T12:55:27.143Z',
     'exposedDate': '2022-10-13T19:16:05.766Z'
   },
@@ -580,7 +582,7 @@ export const dummyReports = [
     'email': 'Cristopher.Klocko66@yahoo.com',
     'bookstoreName': 'Mraz - Macejkovic',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-24T13:28:32.357Z',
     'exposedDate': '2022-10-07T06:31:18.789Z'
   },
@@ -607,7 +609,7 @@ export const dummyReports = [
     'email': 'Kiana53@gmail.com',
     'bookstoreName': "D'Amore LLC",
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-19T16:28:21.769Z',
     'exposedDate': '2022-10-17T13:01:25.997Z'
   },
@@ -625,7 +627,7 @@ export const dummyReports = [
     'email': 'Foster.Kuhn11@gmail.com',
     'bookstoreName': 'Bashirian Group',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-06T11:02:17.702Z',
     'exposedDate': '2022-07-31T11:01:56.434Z'
   },
@@ -634,7 +636,7 @@ export const dummyReports = [
     'email': 'Valentin13@gmail.com',
     'bookstoreName': 'Hahn - Gleichner',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-03T22:41:18.750Z',
     'exposedDate': '2022-08-28T04:54:52.255Z'
   },
@@ -715,7 +717,7 @@ export const dummyReports = [
     'email': 'Angie41@yahoo.com',
     'bookstoreName': "Littel, O'Connell and Pacocha",
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-25T19:57:52.052Z',
     'exposedDate': '2022-01-29T04:17:30.944Z'
   },
@@ -859,7 +861,7 @@ export const dummyReports = [
     'email': 'Nicola62@gmail.com',
     'bookstoreName': 'Thompson, Shanahan and Altenwerth',
     'reportedCount': 5,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-10-06T11:17:37.240Z',
     'exposedDate': '2022-10-21T21:05:45.662Z'
   },
@@ -922,7 +924,7 @@ export const dummyReports = [
     'email': 'Alessandro.Kris62@gmail.com',
     'bookstoreName': 'Heller Group',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-11T00:41:27.876Z',
     'exposedDate': '2022-09-18T00:04:59.719Z'
   },
@@ -949,7 +951,7 @@ export const dummyReports = [
     'email': 'Hellen.Auer@yahoo.com',
     'bookstoreName': 'Wolf, Weimann and Bauch',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-11T18:47:04.407Z',
     'exposedDate': '2022-06-30T01:50:46.828Z'
   },
@@ -1021,7 +1023,7 @@ export const dummyReports = [
     'email': 'Roberta.Wiegand@hotmail.com',
     'bookstoreName': 'Jaskolski, Rodriguez and Connelly',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-09T09:39:38.964Z',
     'exposedDate': '2022-09-07T05:30:56.750Z'
   },
@@ -1048,7 +1050,7 @@ export const dummyReports = [
     'email': 'Mohammad_Murphy@yahoo.com',
     'bookstoreName': 'Kautzer Group',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-05-10T22:30:29.164Z',
     'exposedDate': '2022-07-05T18:26:46.385Z'
   },
@@ -1075,7 +1077,7 @@ export const dummyReports = [
     'email': 'Savannah.Rolfson@yahoo.com',
     'bookstoreName': 'Herzog - Kemmer',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-10-01T19:13:57.039Z',
     'exposedDate': '2022-10-10T05:57:54.931Z'
   },
@@ -1102,7 +1104,7 @@ export const dummyReports = [
     'email': 'Sage_Schulist95@hotmail.com',
     'bookstoreName': 'Torphy, Emmerich and Marquardt',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-16T08:48:06.456Z',
     'exposedDate': '2022-10-03T07:08:37.617Z'
   },
@@ -1183,7 +1185,7 @@ export const dummyReports = [
     'email': 'Karley4@yahoo.com',
     'bookstoreName': 'Gulgowski and Sons',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-26T00:36:53.174Z',
     'exposedDate': '2022-07-05T03:05:14.026Z'
   },
@@ -1228,7 +1230,7 @@ export const dummyReports = [
     'email': 'Bianka90@gmail.com',
     'bookstoreName': 'White - Smitham',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-29T12:57:31.885Z',
     'exposedDate': '2022-08-06T16:03:05.954Z'
   },
@@ -1255,7 +1257,7 @@ export const dummyReports = [
     'email': 'Carole18@hotmail.com',
     'bookstoreName': 'Waelchi, Kub and Bayer',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-14T15:55:17.027Z',
     'exposedDate': '2022-09-05T04:49:17.666Z'
   },
@@ -1282,7 +1284,7 @@ export const dummyReports = [
     'email': 'Payton.Abshire16@gmail.com',
     'bookstoreName': 'Konopelski, Kessler and Altenwerth',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-05-31T01:53:25.685Z',
     'exposedDate': '2022-08-18T06:29:20.636Z'
   },
@@ -1327,7 +1329,7 @@ export const dummyReports = [
     'email': 'Pat_Cassin@gmail.com',
     'bookstoreName': 'Kreiger Inc',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-20T23:48:45.217Z',
     'exposedDate': '2022-10-17T10:57:12.495Z'
   },
@@ -1336,7 +1338,7 @@ export const dummyReports = [
     'email': 'Stephon_Jacobson@hotmail.com',
     'bookstoreName': 'Daugherty - Wilderman',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-08T23:30:37.191Z',
     'exposedDate': '2022-09-17T09:55:00.860Z'
   },
@@ -1372,7 +1374,7 @@ export const dummyReports = [
     'email': 'Cecil48@gmail.com',
     'bookstoreName': 'Dach - Reichel',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-08T02:00:10.287Z',
     'exposedDate': '2022-08-29T08:35:22.383Z'
   },
@@ -1435,7 +1437,7 @@ export const dummyReports = [
     'email': 'Jaime6@hotmail.com',
     'bookstoreName': 'Lindgren Inc',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-24T01:29:37.591Z',
     'exposedDate': '2022-07-23T21:03:34.760Z'
   },
@@ -1480,7 +1482,7 @@ export const dummyReports = [
     'email': 'Leo.Turcotte3@hotmail.com',
     'bookstoreName': 'Jaskolski - Klein',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-09T03:02:41.700Z',
     'exposedDate': '2022-03-28T03:17:57.861Z'
   },
@@ -1525,7 +1527,7 @@ export const dummyReports = [
     'email': 'Osbaldo.Deckow82@yahoo.com',
     'bookstoreName': 'Kreiger - Rolfson',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-02-17T06:39:10.323Z',
     'exposedDate': '2022-05-10T01:46:38.452Z'
   },
@@ -1543,7 +1545,7 @@ export const dummyReports = [
     'email': 'Joanny.Stroman98@yahoo.com',
     'bookstoreName': 'Klocko, Hettinger and Goodwin',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-14T11:13:06.419Z',
     'exposedDate': '2022-10-08T04:32:33.730Z'
   },
@@ -1552,7 +1554,7 @@ export const dummyReports = [
     'email': 'Jerry.Skiles38@hotmail.com',
     'bookstoreName': 'Kuhn Inc',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-10T17:44:22.507Z',
     'exposedDate': '2022-10-05T14:49:33.097Z'
   },
@@ -1561,7 +1563,7 @@ export const dummyReports = [
     'email': 'Reed_Berge@hotmail.com',
     'bookstoreName': 'Hudson Group',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-21T00:16:41.020Z',
     'exposedDate': '2022-10-02T01:07:27.232Z'
   },
@@ -1570,7 +1572,7 @@ export const dummyReports = [
     'email': 'Trevor_Kuhn66@gmail.com',
     'bookstoreName': 'Ernser, Greenholt and Stroman',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-06T15:58:02.271Z',
     'exposedDate': '2022-09-25T11:12:31.701Z'
   },
@@ -1579,7 +1581,7 @@ export const dummyReports = [
     'email': 'Janet_Vandervort@hotmail.com',
     'bookstoreName': 'Osinski - Shields',
     'reportedCount': 5,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-30T21:26:45.620Z',
     'exposedDate': '2022-09-06T11:47:14.216Z'
   },
@@ -1642,7 +1644,7 @@ export const dummyReports = [
     'email': 'Kris.Heaney@yahoo.com',
     'bookstoreName': 'Breitenberg LLC',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-05-20T07:35:15.888Z',
     'exposedDate': '2022-06-05T06:17:40.335Z'
   },
@@ -1678,7 +1680,7 @@ export const dummyReports = [
     'email': 'Leo75@gmail.com',
     'bookstoreName': 'Hermann, Howell and Mertz',
     'reportedCount': 2,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-24T02:48:45.688Z',
     'exposedDate': '2022-04-20T09:57:54.340Z'
   },
@@ -1786,7 +1788,7 @@ export const dummyReports = [
     'email': 'Nicholaus_McDermott13@hotmail.com',
     'bookstoreName': 'Murazik, Brown and Renner',
     'reportedCount': 5,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-12T19:55:21.525Z',
     'exposedDate': '2022-08-31T20:11:43.934Z'
   },
@@ -1822,7 +1824,7 @@ export const dummyReports = [
     'email': 'Kelton.Gleason93@gmail.com',
     'bookstoreName': 'Lebsack and Sons',
     'reportedCount': 1,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-28T18:19:37.217Z',
     'exposedDate': '2022-08-13T03:29:34.528Z'
   },
@@ -1840,7 +1842,7 @@ export const dummyReports = [
     'email': 'Abigail68@yahoo.com',
     'bookstoreName': 'Jast, Nienow and Hand',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-14T19:04:31.546Z',
     'exposedDate': '2022-09-12T10:30:11.873Z'
   },
@@ -1984,7 +1986,7 @@ export const dummyReports = [
     'email': 'Rhiannon.Stoltenberg13@gmail.com',
     'bookstoreName': 'Emard - Emard',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-24T08:46:44.147Z',
     'exposedDate': '2022-08-05T08:55:18.233Z'
   },
@@ -2020,7 +2022,7 @@ export const dummyReports = [
     'email': 'Travon_Durgan@hotmail.com',
     'bookstoreName': 'Kertzmann, Gleichner and Balistreri',
     'reportedCount': 5,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-05-12T17:36:51.656Z',
     'exposedDate': '2022-10-12T16:03:14.061Z'
   },
@@ -2047,7 +2049,7 @@ export const dummyReports = [
     'email': 'Princess.Runolfsdottir2@gmail.com',
     'bookstoreName': 'Huel, Denesik and Heller',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-16T13:20:56.849Z',
     'exposedDate': '2022-10-14T03:47:42.183Z'
   },
@@ -2128,7 +2130,7 @@ export const dummyReports = [
     'email': 'Mellie_McDermott65@gmail.com',
     'bookstoreName': 'Lindgren - Ryan',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-10-04T05:10:17.672Z',
     'exposedDate': '2022-10-09T03:03:58.192Z'
   },
@@ -2164,7 +2166,7 @@ export const dummyReports = [
     'email': 'Mya77@gmail.com',
     'bookstoreName': 'Kohler - Murray',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-10-07T11:02:25.150Z',
     'exposedDate': '2022-10-21T12:20:36.281Z'
   },
@@ -2182,7 +2184,7 @@ export const dummyReports = [
     'email': 'Maybell_Carter93@hotmail.com',
     'bookstoreName': 'Schuster - Kutch',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-06T01:10:14.054Z',
     'exposedDate': '2022-09-14T04:13:52.399Z'
   },
@@ -2209,7 +2211,7 @@ export const dummyReports = [
     'email': 'Lloyd8@yahoo.com',
     'bookstoreName': 'Osinski - Fisher',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-05-31T20:59:20.869Z',
     'exposedDate': '2022-07-24T22:07:32.863Z'
   },
@@ -2227,7 +2229,7 @@ export const dummyReports = [
     'email': 'Noe_Hills30@hotmail.com',
     'bookstoreName': 'Schinner LLC',
     'reportedCount': 4,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-21T10:55:30.800Z',
     'exposedDate': '2022-08-13T05:47:07.958Z'
   },
@@ -2281,7 +2283,7 @@ export const dummyReports = [
     'email': 'Shanna_Watsica10@hotmail.com',
     'bookstoreName': 'Rau LLC',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-22T15:18:20.702Z',
     'exposedDate': '2022-06-20T14:18:33.222Z'
   },
@@ -2290,7 +2292,7 @@ export const dummyReports = [
     'email': 'Melisa27@hotmail.com',
     'bookstoreName': 'Schumm and Sons',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-12T19:45:25.821Z',
     'exposedDate': '2022-10-18T05:20:28.132Z'
   },
@@ -2326,7 +2328,7 @@ export const dummyReports = [
     'email': 'Dallin.Ortiz@gmail.com',
     'bookstoreName': 'Lebsack - Mueller',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-26T18:06:32.193Z',
     'exposedDate': '2022-05-21T21:32:17.160Z'
   },
@@ -2335,7 +2337,7 @@ export const dummyReports = [
     'email': 'Rahul_Romaguera@yahoo.com',
     'bookstoreName': 'Johnston, Koch and Feeney',
     'reportedCount': 6,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-03T08:00:43.480Z',
     'exposedDate': '2022-04-21T12:37:11.192Z'
   },
@@ -2353,7 +2355,7 @@ export const dummyReports = [
     'email': 'Jessie42@yahoo.com',
     'bookstoreName': 'Pollich, Stoltenberg and Grady',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-26T21:05:39.849Z',
     'exposedDate': '2022-09-14T13:05:06.152Z'
   },
@@ -2407,7 +2409,7 @@ export const dummyReports = [
     'email': 'Bertrand_Williamson1@gmail.com',
     'bookstoreName': 'Walter Inc',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-08-29T22:57:35.323Z',
     'exposedDate': '2022-10-17T23:19:59.166Z'
   },
@@ -2416,7 +2418,7 @@ export const dummyReports = [
     'email': 'Anais_Gleichner@hotmail.com',
     'bookstoreName': 'Metz, Schimmel and Crooks',
     'reportedCount': 8,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-09-24T04:21:56.226Z',
     'exposedDate': '2022-10-19T17:58:23.736Z'
   },
@@ -2470,7 +2472,7 @@ export const dummyReports = [
     'email': 'Elyse.Rau23@hotmail.com',
     'bookstoreName': 'Pagac and Sons',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-25T08:10:01.187Z',
     'exposedDate': '2022-06-09T18:37:07.773Z'
   },
@@ -2479,7 +2481,7 @@ export const dummyReports = [
     'email': 'Ardella39@gmail.com',
     'bookstoreName': 'West - Hills',
     'reportedCount': 3,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-04-02T00:47:00.918Z',
     'exposedDate': '2022-08-05T07:36:49.928Z'
   },
@@ -2506,7 +2508,7 @@ export const dummyReports = [
     'email': 'Sally_Walter@yahoo.com',
     'bookstoreName': 'Hoppe, Reichert and Windler',
     'reportedCount': 10,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-07-21T03:41:16.766Z',
     'exposedDate': '2022-10-08T07:33:38.435Z'
   },
@@ -2533,7 +2535,7 @@ export const dummyReports = [
     'email': 'Rick55@hotmail.com',
     'bookstoreName': 'Collins, Boyer and Kreiger',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-02-04T23:19:20.942Z',
     'exposedDate': '2022-08-12T22:56:48.593Z'
   },
@@ -2551,7 +2553,7 @@ export const dummyReports = [
     'email': 'Lempi.McLaughlin@yahoo.com',
     'bookstoreName': 'Kertzmann Group',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-01T10:36:29.260Z',
     'exposedDate': '2022-06-10T00:34:44.417Z'
   },
@@ -2587,7 +2589,7 @@ export const dummyReports = [
     'email': 'Oleta.Zulauf64@gmail.com',
     'bookstoreName': 'Feeney - Emmerich',
     'reportedCount': 7,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-06-30T16:45:11.110Z',
     'exposedDate': '2022-07-03T07:26:42.873Z'
   },
@@ -2605,7 +2607,7 @@ export const dummyReports = [
     'email': 'Odie5@hotmail.com',
     'bookstoreName': 'Brekke Group',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-03-09T09:49:45.322Z',
     'exposedDate': '2022-07-28T20:59:04.610Z'
   },
@@ -2668,7 +2670,7 @@ export const dummyReports = [
     'email': 'Boyd72@yahoo.com',
     'bookstoreName': 'Abernathy, Grady and Runolfsdottir',
     'reportedCount': 9,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-30T23:10:15.231Z',
     'exposedDate': '2022-02-01T23:15:49.748Z'
   },
@@ -2695,7 +2697,7 @@ export const dummyReports = [
     'email': 'Flossie55@hotmail.com',
     'bookstoreName': 'Ondricka, Medhurst and McGlynn',
     'reportedCount': 5,
-    'status': '삭제',
+    'status': '미노출',
     'createdDate': '2022-01-31T18:56:10.302Z',
     'exposedDate': '2022-03-04T13:39:06.848Z'
   }

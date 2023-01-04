@@ -1,4 +1,6 @@
-export const dummyPushes = [
+import type { Push } from 'src/types';
+
+export const dummyPushes: Push[] = [
   {
     'id': 1,
     'category': '기타',

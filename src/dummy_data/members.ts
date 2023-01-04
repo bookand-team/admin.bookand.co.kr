@@ -1,4 +1,6 @@
-export const dummyMembers = [
+import type { Member } from 'src/types';
+
+export const dummyMembers: Member[] = [
   {
     'id': 1,
     'nickname': 'Mckenzie.Ruecker',

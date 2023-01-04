@@ -1,4 +1,6 @@
-export const dummyArticles = [
+import type { Article } from 'src/types';
+
+export const dummyArticles: Article[] = [
   {
     'id': 1,
     'title': 'Labore repellat assumenda facere.',
