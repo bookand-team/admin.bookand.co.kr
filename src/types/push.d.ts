@@ -1,4 +1,4 @@
-import type { TargetDevice, TargetMemberId, TargetRole } from './filter';
+import { TargetDevice, TargetMemberId, TargetRole } from './filter';
 
 export type Push = {
   id: number;  // 식별자

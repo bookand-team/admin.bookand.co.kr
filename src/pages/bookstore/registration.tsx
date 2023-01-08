@@ -1,7 +1,7 @@
-import Registration from '../../components/bookstore/registration';
-import Main from '../../components/main';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Registration from '@components/bookstore/registration';
+import Main from '@components/common/main';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const RegistrationPage = () => {
   return (

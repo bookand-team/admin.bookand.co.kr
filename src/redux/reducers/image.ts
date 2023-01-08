@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { createImageUrl } from '../actions/image';
-
-import type { ImageState } from 'src/types';
+import { createImageUrl } from '@redux/actions/image';
+import { ImageState } from '@types';
 
 const initialState: ImageState = {
   imageUrl: null,

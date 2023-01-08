@@ -1,8 +1,8 @@
-import Main from '../../components/main';
-import Management from '../../components/member/management';
-import { loadDummyMembers } from '../../redux/reducers/members';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Main from '@components/common/main';
+import Management from '@components/member/management';
+import { loadDummyMembers } from '@redux/reducers/members';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const MemberPage = () => {
   return (

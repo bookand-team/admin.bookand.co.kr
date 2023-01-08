@@ -1,8 +1,8 @@
-import Main from '../../components/main';
-import Management from '../../components/push/management';
-import { setPage } from '../../redux/reducers/page';
-import { loadDummyPushes } from '../../redux/reducers/pushes';
-import wrapper from '../../redux/store';
+import Main from '@components/common/main';
+import Management from '@components/push/management';
+import { setPage } from '@redux/reducers/page';
+import { loadDummyPushes } from '@redux/reducers/pushes';
+import wrapper from '@redux/store';
 
 const PushPage = () => {
   return (

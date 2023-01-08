@@ -1,4 +1,4 @@
-import type { Bookstore } from 'src/types';
+import { Bookstore } from '@types';
 
 export const dummyBookstores: Bookstore[] = [
   {

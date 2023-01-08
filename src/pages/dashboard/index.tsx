@@ -1,9 +1,9 @@
-import CurrentSituation from '../../components/dashboard/current_situation';
-import TrendStatistics from '../../components/dashboard/trend_statistics';
-import TypeStatistics from '../../components/dashboard/type_statistics';
-import Main from '../../components/main';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Main from '@components/common/main';
+import CurrentSituation from '@components/dashboard/current_situation';
+import TrendStatistics from '@components/dashboard/trend_statistics';
+import TypeStatistics from '@components/dashboard/type_statistics';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const DashboardPage = () => {
   return (

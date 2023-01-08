@@ -1,6 +1,6 @@
 import React, { ReactNode, useCallback, useRef } from 'react';
 
-import styles from '../styles/modal.module.css';
+import styles from '@styles/modal.module.css';
 
 type Props = {
   children: ReactNode;

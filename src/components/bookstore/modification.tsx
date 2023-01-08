@@ -4,12 +4,11 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useInputSelect, useInputText } from '../../hooks/use_input';
-import styles from '../../styles/bookstore/registration.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
-
-import type { RootState } from 'src/redux/reducers';
-import type { BookstoreTheme } from 'src/types';
+import { useInputSelect, useInputText } from '@hooks/use_input';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/bookstore/registration.module.css';
+import buttonStyles from '@styles/layout/button.module.css';
+import { BookstoreTheme } from '@types';
 
 const Modification = () => {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import styles from '../../styles/dashboard/current_situation.module.css';
+import styles from '@styles/dashboard/current_situation.module.css';
 
 const CurrentSituation = () => {
   return (

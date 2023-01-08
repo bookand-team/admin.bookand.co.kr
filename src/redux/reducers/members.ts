@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyMembers } from '../../dummy_data';
-import { readMembers } from '../actions/members';
-
-import type { MembersState } from 'src/types';
+import { dummyMembers } from '@assets/dummy';
+import { readMembers } from '@redux/actions/members';
+import { MembersState } from '@types';
 
 const initialState: MembersState = {
   members: null,

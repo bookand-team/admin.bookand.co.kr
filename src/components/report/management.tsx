@@ -2,20 +2,19 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import changeQuery from '../../hooks/change_query';
-import getDisplayTime from '../../hooks/get_display_time';
-import { isRowInsufficient, makeEmptyArray } from '../../hooks/maintain_table_layout';
-import { useInputSelect } from '../../hooks/use_input';
-import buttonStyles from '../../styles/layout/button.module.css';
-import tableStyles from '../../styles/layout/table.module.css';
-import styles from '../../styles/report/management.module.css';
-import Modal from '../modal';
-import Page from '../page';
-import Search from '../search';
-import Details from './details';
-
-import type { RootState } from 'src/redux/reducers';
-import type { ReportStatus } from 'src/types';
+import Modal from '@components/common/modal';
+import Page from '@components/common/page';
+import Search from '@components/common/search';
+import Details from '@components/report/details';
+import changeQuery from '@hooks/change_query';
+import getDisplayTime from '@hooks/get_display_time';
+import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
+import { useInputSelect } from '@hooks/use_input';
+import { RootState } from '@redux/reducers';
+import buttonStyles from '@styles/layout/button.module.css';
+import tableStyles from '@styles/layout/table.module.css';
+import styles from '@styles/report/management.module.css';
+import { ReportStatus } from '@types';
 
 const Management = () => {
   const router = useRouter();

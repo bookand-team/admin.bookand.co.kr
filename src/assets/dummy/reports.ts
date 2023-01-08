@@ -1,4 +1,4 @@
-import type { Report } from 'src/types';
+import { Report } from '@types';
 
 export const dummyReports: Report[] = [
   {

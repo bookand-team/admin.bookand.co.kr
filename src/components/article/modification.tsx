@@ -3,12 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 
-import { useInputSelect, useInputText, useInputTextArea } from '../../hooks/use_input';
-import styles from '../../styles/article/modification.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
-
-import type { RootState } from 'src/redux/reducers';
-import type { ArticleCategory, TargetDevice, TargetMemberId } from 'src/types';
+import { useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/article/modification.module.css';
+import buttonStyles from '@styles/layout/button.module.css';
+import { ArticleCategory, TargetDevice, TargetMemberId } from '@types';
 
 const Modification = () => {
   const router = useRouter();

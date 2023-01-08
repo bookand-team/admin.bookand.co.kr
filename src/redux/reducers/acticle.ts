@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyArticles } from '../../dummy_data';
-import { createArticle, readArticle, updateArticle, deleteArticle } from '../actions/article';
-
-import type { ArticleState } from 'src/types';
+import { dummyArticles } from '@assets/dummy';
+import { createArticle, readArticle, updateArticle, deleteArticle } from '@redux/actions/article';
+import { ArticleState } from '@types';
 
 const initialState: ArticleState = {
   article: null,

@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import React, { useCallback } from 'react';
 
-import closeButton from '../../images/close_icon.svg';
-import buttonStyles from '../../styles/layout/button.module.css';
-import styles from '../../styles/layout/modal/details.module.css';
-
-import type { Member } from 'src/types';
+import closeButton from '@images/close_icon.svg';
+import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/layout/modal/details.module.css';
+import { Member } from '@types';
 
 type Props = {
   member: Member;

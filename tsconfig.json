@@ -4,7 +4,6 @@
       "ES2020",
       "DOM"
     ],
-    "baseUrl": ".",
     "target": "ES6",
     "strict": true,
     "allowJs": true,
@@ -17,7 +16,34 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "incremental": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@images/*": [
+        "src/images/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@redux/*": [
+        "src/redux/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@types": [
+        "src/types"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",

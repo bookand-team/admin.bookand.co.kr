@@ -1,6 +1,6 @@
-import styles from '../../styles/dashboard/type_statistics.module.css';
-import DummyDoughnut from './graph/doughnut';
-import DummyPie from './graph/pie';
+import DummyDoughnut from '@components/dashboard/graph/doughnut';
+import DummyPie from '@components/dashboard/graph/pie';
+import styles from '@styles/dashboard/type_statistics.module.css';
 
 const TypeStatistics = () => {
   return (

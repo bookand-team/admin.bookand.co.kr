@@ -1,8 +1,8 @@
-import Management from '../../components/article/management';
-import Main from '../../components/main';
-import { loadDummyArticles } from '../../redux/reducers/articles';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Management from '@components/article/management';
+import Main from '@components/common/main';
+import { loadDummyArticles } from '@redux/reducers/articles';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const ArticlePage = () => {
   return (

@@ -1,9 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend , ChartData } from 'chart.js';
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-
-import type { ChartData } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

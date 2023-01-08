@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 
-import changeQuery from '../hooks/change_query';
-import { useInputText } from '../hooks/use_input';
-import buttonStyles from '../styles/layout/button.module.css';
-import styles from '../styles/search.module.css';
+import changeQuery from '@hooks/change_query';
+import { useInputText } from '@hooks/use_input';
+import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/search.module.css';
 
 type Props = {
   search: string;

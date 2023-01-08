@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
-import styles from '../styles/gnb.module.css';
-
-import type { RootState } from 'src/redux/reducers';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/gnb.module.css';
 
 const Gnb = () => {
   const { section } = useSelector((state: RootState) => state.page);

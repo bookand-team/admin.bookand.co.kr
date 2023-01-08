@@ -1,4 +1,4 @@
-import type { TargetDevice, TargetMemberId } from './filter';
+import { TargetDevice, TargetMemberId } from './filter';
 
 export type Article = {
   id: number;  // 식별자

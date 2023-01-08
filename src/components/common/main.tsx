@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import Gnb from './gnb';
+import Gnb from '@components/common/gnb';
 
 type Props = {
   children: ReactNode;

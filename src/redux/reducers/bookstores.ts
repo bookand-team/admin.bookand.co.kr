@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyBookstores } from '../../dummy_data';
-import { readBookstores, deleteBookstores } from '../actions/bookstores';
-
-import type { BookstoresState } from 'src/types';
+import { dummyBookstores } from '@assets/dummy';
+import { readBookstores, deleteBookstores } from '@redux/actions/bookstores';
+import { BookstoresState } from '@types';
 
 const initialState: BookstoresState = {
   bookstores: null,

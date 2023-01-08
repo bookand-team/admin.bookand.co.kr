@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import React, { useCallback } from 'react';
 
-import closeButton from '../../images/close_icon.svg';
-import buttonStyles from '../../styles/layout/button.module.css';
-import styles from '../../styles/layout/modal/details.module.css';
-
-import type { Push } from 'src/types';
+import closeButton from '@images/close_icon.svg';
+import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/layout/modal/details.module.css';
+import { Push } from '@types';
 
 type Props = {
   push: Push;

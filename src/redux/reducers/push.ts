@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyPushes } from '../../dummy_data';
-import { createPush, readPush, updatePush, deletePush } from '../actions/push';
-
-import type { PushState } from 'src/types';
+import { dummyPushes } from '@assets/dummy';
+import { createPush, readPush, updatePush, deletePush } from '@redux/actions/push';
+import { PushState } from '@types';
 
 const initialState: PushState = {
   push: null,

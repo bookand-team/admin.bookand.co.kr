@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 
-import styles from '../styles/login.module.css';
+import styles from '@styles/login.module.css';
 
 const Login = () => {
   const router = useRouter();

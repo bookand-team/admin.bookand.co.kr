@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { PageState } from 'src/types';
+import { PageState } from '@types';
 
 const initialState: PageState = {
   section: null,

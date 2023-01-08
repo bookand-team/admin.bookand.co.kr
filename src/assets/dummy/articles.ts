@@ -1,4 +1,4 @@
-import type { Article } from 'src/types';
+import { Article } from '@types';
 
 export const dummyArticles: Article[] = [
   {

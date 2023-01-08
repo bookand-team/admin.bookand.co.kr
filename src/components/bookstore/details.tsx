@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import React, { useCallback } from 'react';
 
-import closeButton from '../../images/close_icon.svg';
-import buttonStyles from '../../styles/layout/button.module.css';
-import styles from '../../styles/layout/modal/details.module.css';
-
-import type { Bookstore } from 'src/types';
+import closeButton from '@images/close_icon.svg';
+import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/layout/modal/details.module.css';
+import { Bookstore } from '@types';
 
 type Props = {
   bookstore: Bookstore;

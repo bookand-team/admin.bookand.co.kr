@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { readMember, updateMember } from '../actions/member';
-
-import type { MemberState } from 'src/types';
+import { readMember, updateMember } from '@redux/actions/member';
+import { MemberState } from '@types';
 
 const initialState: MemberState = {
   member: null,

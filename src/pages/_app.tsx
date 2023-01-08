@@ -1,10 +1,9 @@
-import Header from '../components/header';
-import Seo from '../components/seo';
-import wrapper from '../redux/store';
+import { AppProps } from 'next/app';
 
-import '../styles/global.css';
-
-import type { AppProps } from 'next/app';
+import Header from '@components/common/header';
+import Seo from '@components/common/seo';
+import wrapper from '@redux/store';
+import '@styles/global.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

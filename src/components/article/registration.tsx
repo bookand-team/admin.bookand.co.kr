@@ -2,11 +2,10 @@ import React, { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import { useInputSelect, useInputText, useInputTextArea } from '../../hooks/use_input';
-import styles from '../../styles/article/registration.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
-
-import type { ArticleCategory, TargetDevice, TargetMemberId } from 'src/types';
+import { useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
+import styles from '@styles/article/registration.module.css';
+import buttonStyles from '@styles/layout/button.module.css';
+import { ArticleCategory, TargetDevice, TargetMemberId } from '@types';
 
 const Registration = () => {
   const router = useRouter();

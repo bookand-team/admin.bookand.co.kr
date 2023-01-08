@@ -1,4 +1,4 @@
-import type { Feedback } from 'src/types';
+import { Feedback } from '@types';
 
 export const dummyFeedbacks: Feedback[] = [
   {

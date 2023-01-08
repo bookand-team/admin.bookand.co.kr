@@ -1,9 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { Chart as ChartJS, LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip, LineController, BarController } from 'chart.js';
+import { Chart as ChartJS, LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip, LineController, BarController , ChartData, ChartOptions } from 'chart.js';
 import React from 'react';
 import { Chart } from 'react-chartjs-2';
-
-import type { ChartData, ChartOptions } from 'chart.js';
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip, LineController, BarController);
 

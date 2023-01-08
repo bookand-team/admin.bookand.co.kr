@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import styles from '../styles/header.module.css';
-import buttonStyles from '../styles/layout/button.module.css';
-
-import type { RootState } from 'src/redux/reducers';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/header.module.css';
+import buttonStyles from '@styles/layout/button.module.css';
 
 const Header = () => {
   const router = useRouter();

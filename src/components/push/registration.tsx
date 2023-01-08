@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '../../hooks/use_input';
-import buttonStyles from '../../styles/layout/button.module.css';
-import styles from '../../styles/push/registration.module.css';
-
-import type { PushCategory, TargetDevice, TargetMemberId, TargetRole } from 'src/types';
+import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
+import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/push/registration.module.css';
+import { PushCategory, TargetDevice, TargetMemberId, TargetRole } from '@types';
 
 const Registration = () => {
   const router = useRouter();

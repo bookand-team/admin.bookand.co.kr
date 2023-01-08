@@ -1,8 +1,8 @@
-import Modification from '../../components/bookstore/modification';
-import Main from '../../components/main';
-import { loadDummyBookstore } from '../../redux/reducers/bookstore';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Modification from '@components/bookstore/modification';
+import Main from '@components/common/main';
+import { loadDummyBookstore } from '@redux/reducers/bookstore';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const ModificationPage = () => {
   return (

@@ -3,14 +3,13 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import changeQuery from '../hooks/change_query';
-import leftArrowIcon from '../images/left_arrow_icon.svg';
-import leftArrow2Icon from '../images/left_arrow_icon2.svg';
-import rightArrowIcon from '../images/right_arrow_icon.svg';
-import rightArrow2Icon from '../images/right_arrow_icon2.svg';
-import styles from '../styles/page.module.css';
-
-import type { RootState } from 'src/redux/reducers';
+import changeQuery from '@hooks/change_query';
+import leftArrowIcon from '@images/left_arrow_icon.svg';
+import leftArrow2Icon from '@images/left_arrow_icon2.svg';
+import rightArrowIcon from '@images/right_arrow_icon.svg';
+import rightArrow2Icon from '@images/right_arrow_icon2.svg';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/page.module.css';
 
 type Props = {
   maxSelection?: number;

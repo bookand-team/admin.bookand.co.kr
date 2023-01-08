@@ -1,8 +1,8 @@
-import Management from '../../components/feedback/management';
-import Main from '../../components/main';
-import { loadDummyFeedbacks } from '../../redux/reducers/feedbacks';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Main from '@components/common/main';
+import Management from '@components/feedback/management';
+import { loadDummyFeedbacks } from '@redux/reducers/feedbacks';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const FeedbackPage = () => {
   return (

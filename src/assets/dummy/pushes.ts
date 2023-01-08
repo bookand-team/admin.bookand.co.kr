@@ -1,4 +1,4 @@
-import type { Push } from 'src/types';
+import { Push } from '@types';
 
 export const dummyPushes: Push[] = [
   {

@@ -1,8 +1,8 @@
-import Main from '../../components/main';
-import Management from '../../components/report/management';
-import { setPage } from '../../redux/reducers/page';
-import { loadDummyReports } from '../../redux/reducers/reports';
-import wrapper from '../../redux/store';
+import Main from '@components/common/main';
+import Management from '@components/report/management';
+import { setPage } from '@redux/reducers/page';
+import { loadDummyReports } from '@redux/reducers/reports';
+import wrapper from '@redux/store';
 
 const ReportPage = () => {
   return (

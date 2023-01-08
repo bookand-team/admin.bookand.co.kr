@@ -1,8 +1,8 @@
-import Modification from '../../components/article/modification';
-import Main from '../../components/main';
-import { loadDummyArticle } from '../../redux/reducers/acticle';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Modification from '@components/article/modification';
+import Main from '@components/common/main';
+import { loadDummyArticle } from '@redux/reducers/acticle';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const DetailsPage = () => {
   return (

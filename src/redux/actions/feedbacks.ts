@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-import type { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 // axios 기본 설정
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;

@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { dummyFeedbacks } from '../../dummy_data';
-import { readFeedbacks, deleteFeedbacks } from '../actions/feedbacks';
-
-import type { FeedbacksState } from 'src/types';
+import { dummyFeedbacks } from '@assets/dummy';
+import { readFeedbacks, deleteFeedbacks } from '@redux/actions/feedbacks';
+import { FeedbacksState } from '@types';
 
 const initialState: FeedbacksState = {
   feedbacks: null,

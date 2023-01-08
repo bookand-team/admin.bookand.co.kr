@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { readFeedback } from '../actions/feedback';
-
-import type { FeedbackState } from 'src/types';
+import { readFeedback } from '@redux/actions/feedback';
+import { FeedbackState } from '@types';
 
 const initialState: FeedbackState = {
   feedback: null,

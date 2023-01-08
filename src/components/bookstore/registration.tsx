@@ -3,11 +3,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 
-import { useInputSelect, useInputText } from '../../hooks/use_input';
-import styles from '../../styles/bookstore/registration.module.css';
-import buttonStyles from '../../styles/layout/button.module.css';
-
-import type { BookstoreTheme } from 'src/types';
+import { useInputSelect, useInputText } from '@hooks/use_input';
+import styles from '@styles/bookstore/registration.module.css';
+import buttonStyles from '@styles/layout/button.module.css';
+import { BookstoreTheme } from '@types';
 
 const Registration = () => {
   const router = useRouter();

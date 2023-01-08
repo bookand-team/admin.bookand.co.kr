@@ -1,10 +1,10 @@
-import styles from '../../styles/dashboard/trend_statistics.module.css';
-import DummyArea from './graph/area';
-import DummyBar from './graph/bar';
-import DummyComplex from './graph/complex';
-import DummyGroupBar from './graph/group_bar';
-import DummyMultiaxis from './graph/multiaxis';
-import DummyStackBar from './graph/stack_bar';
+import DummyArea from '@components/dashboard/graph/area';
+import DummyBar from '@components/dashboard/graph/bar';
+import DummyComplex from '@components/dashboard/graph/complex';
+import DummyGroupBar from '@components/dashboard/graph/group_bar';
+import DummyMultiaxis from '@components/dashboard/graph/multiaxis';
+import DummyStackBar from '@components/dashboard/graph/stack_bar';
+import styles from '@styles/dashboard/trend_statistics.module.css';
 
 const TrendStatistics = () => {
   return (

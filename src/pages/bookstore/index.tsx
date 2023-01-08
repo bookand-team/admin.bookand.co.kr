@@ -1,8 +1,8 @@
-import Management from '../../components/bookstore/management';
-import Main from '../../components/main';
-import { loadDummyBookstores } from '../../redux/reducers/bookstores';
-import { setPage } from '../../redux/reducers/page';
-import wrapper from '../../redux/store';
+import Management from '@components/bookstore/management';
+import Main from '@components/common/main';
+import { loadDummyBookstores } from '@redux/reducers/bookstores';
+import { setPage } from '@redux/reducers/page';
+import wrapper from '@redux/store';
 
 const BookstorePage = () => {
   return (
