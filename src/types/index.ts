@@ -7,3 +7,4 @@ export * from './member';
 export * from './page';
 export * from './push';
 export * from './report';
+export * from './user';

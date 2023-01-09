@@ -14,7 +14,8 @@ import pageSlice from '@redux/reducers/page';
 import pushSlice from '@redux/reducers/push';
 import pushesSlice from '@redux/reducers/pushes';
 import reportsSlice from '@redux/reducers/reports';
-import { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackState, FeedbacksState, ImageState, MemberState, MembersState, PageState, PushState, PushesState, ReportState } from '@types';
+import userSlice from '@redux/reducers/user';
+import { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackState, FeedbacksState, ImageState, MemberState, MembersState, PageState, PushState, PushesState, ReportState, UserState } from '@types';
 
 const rootReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -34,7 +35,8 @@ const rootReducer = (state: any, action: any) => {
         page: pageSlice.reducer,
         push: pushSlice.reducer,
         pushes: pushesSlice.reducer,
-        reports: reportsSlice.reducer
+        reports: reportsSlice.reducer,
+        user: userSlice.reducer
       });
       return combineReducer(state, action);
     }
@@ -55,6 +57,7 @@ export type RootState = {
   push: PushState;
   pushes: PushesState;
   reports: ReportState;
+  user: UserState;
 };
 
 export default rootReducer;

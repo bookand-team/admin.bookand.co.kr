@@ -1,4 +1,4 @@
-import Login from '@components/common/login';
+import Login from '@components/login';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
