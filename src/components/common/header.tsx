@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@redux/reducers';
-import styles from '@styles/header.module.css';
+import styles from '@styles/common/header.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
 
 const Header = () => {
