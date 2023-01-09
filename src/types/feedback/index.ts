@@ -14,8 +14,8 @@ export type FeedbackState = {
   feedback: Feedback | null;
 
   readFeedbackLoading: boolean;
-  readFeedbackDone: any;
-  readFeedbackError: any;
+  readFeedbackDone: unknown;
+  readFeedbackError: unknown;
 };
 
 export type FeedbacksState = {
@@ -23,10 +23,10 @@ export type FeedbacksState = {
   feedbacksLength: number | null;
 
   readFeedbacksLoading: boolean;
-  readFeedbacksDone: any;
-  readFeedbacksError: any;
+  readFeedbacksDone: unknown;
+  readFeedbacksError: unknown;
 
   deleteFeedbacksLoading: boolean;
-  deleteFeedbacksDone: any;
-  deleteFeedbacksError: any;
+  deleteFeedbacksDone: unknown;
+  deleteFeedbacksError: unknown;
 };

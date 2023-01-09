@@ -20,12 +20,12 @@ export type MemberState = {
   member: Member | null;
 
   readMemberLoading: boolean;
-  readMemberDone: any;
-  readMemberError: any;
+  readMemberDone: unknown;
+  readMemberError: unknown;
 
   updateMemberLoading: boolean;
-  updateMemberDone: any;
-  updateMemberError: any;
+  updateMemberDone: unknown;
+  updateMemberError: unknown;
 };
 
 export type MembersState = {
@@ -33,6 +33,6 @@ export type MembersState = {
   membersLength: number | null;
 
   readMembersLoading: boolean;
-  readMembersDone: any;
-  readMembersError: any;
+  readMembersDone: unknown;
+  readMembersError: unknown;
 };

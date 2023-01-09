@@ -30,12 +30,11 @@ const memberSlice = createSlice({
     });
     builder.addCase(readMember.fulfilled, (state, action) => {
       state.readMemberLoading = false;
-      state.readMemberDone = action.payload.message ? action.payload.message : true;
-      state.member = action.payload.member;
+      state.readMemberDone = action.payload;
     });
     builder.addCase(readMember.rejected, (state, action) => {
       state.readMemberLoading = false;
-      state.readMemberError = action.payload.message ? action.payload.message : true;
+      state.readMemberError = action.payload;
     });
     // 멤버 수정하기
     builder.addCase(updateMember.pending, (state) => {
@@ -45,11 +44,11 @@ const memberSlice = createSlice({
     });
     builder.addCase(updateMember.fulfilled, (state, action) => {
       state.updateMemberLoading = false;
-      state.updateMemberDone = action.payload.id ? action.payload.id : true;
+      state.updateMemberDone = action.payload;
     });
     builder.addCase(updateMember.rejected, (state, action) => {
       state.updateMemberLoading = false;
-      state.updateMemberError = action.payload.message ? action.payload.message : true;
+      state.updateMemberError = action.payload;
     });
   }
 });

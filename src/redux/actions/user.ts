@@ -19,3 +19,16 @@ export const login = createAsyncThunk('login', async (data: LoginReq, { rejectWi
     return rejectWithValue(error);
   }
 });
+
+// 로그인 상태 확인
+export const getAccessToken = createAsyncThunk('getAccessToken', async (data: LoginReq, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/auth/login', data);
+    return response.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return rejectWithValue(error.response ? error.response.data : error.message);
+    }
+    return rejectWithValue(error);
+  }
+});

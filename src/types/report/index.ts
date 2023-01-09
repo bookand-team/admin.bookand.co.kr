@@ -15,6 +15,6 @@ export type ReportState = {
   reportsLength: number | null;
 
   readReportsLoading: boolean;
-  readReportsDone: any;
-  readReportsError: any;
+  readReportsDone: unknown;
+  readReportsError: unknown;
 };

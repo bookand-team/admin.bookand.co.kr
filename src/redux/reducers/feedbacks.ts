@@ -37,13 +37,11 @@ const feedbacksSlice = createSlice({
     });
     builder.addCase(readFeedbacks.fulfilled, (state, action) => {
       state.readFeedbacksLoading = false;
-      state.readFeedbacksDone = action.payload.message ? action.payload.message : true;
-      state.feedbacks = action.payload.feedbacks;
-      state.feedbacksLength = action.payload.feedbacks_length;
+      state.readFeedbacksDone = action.payload;
     });
     builder.addCase(readFeedbacks.rejected, (state, action) => {
       state.readFeedbacksLoading = false;
-      state.readFeedbacksError = action.payload.message ? action.payload.message : true;
+      state.readFeedbacksError = action.payload;
     });
     // 여러 피드백 삭제하기
     builder.addCase(deleteFeedbacks.pending, (state) => {
@@ -53,11 +51,11 @@ const feedbacksSlice = createSlice({
     });
     builder.addCase(deleteFeedbacks.fulfilled, (state, action) => {
       state.deleteFeedbacksLoading = false;
-      state.deleteFeedbacksDone = action.payload.message ? action.payload.message : true;
+      state.deleteFeedbacksDone = action.payload;
     });
     builder.addCase(deleteFeedbacks.rejected, (state, action) => {
       state.deleteFeedbacksLoading = false;
-      state.deleteFeedbacksError = action.payload.message ? action.payload.message : true;
+      state.deleteFeedbacksError = action.payload;
     });
   }
 });

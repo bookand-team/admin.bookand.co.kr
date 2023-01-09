@@ -33,13 +33,11 @@ const membersSlice = createSlice({
     });
     builder.addCase(readMembers.fulfilled, (state, action) => {
       state.readMembersLoading = false;
-      state.readMembersDone = action.payload.message ? action.payload.message : true;
-      state.members = action.payload.members;
-      state.membersLength = action.payload.members_length;
+      state.readMembersDone = action.payload;
     });
     builder.addCase(readMembers.rejected, (state, action) => {
       state.readMembersLoading = false;
-      state.readMembersError = action.payload.message ? action.payload.message : true;
+      state.readMembersError = action.payload;
     });
   }
 });

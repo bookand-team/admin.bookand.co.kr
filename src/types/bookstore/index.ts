@@ -21,20 +21,20 @@ export type BookstoreState = {
   bookstore: Bookstore | null;
 
   createBookstoreLoading: boolean;
-  createBookstoreDone: any;
-  createBookstoreError: any;
+  createBookstoreDone: unknown;
+  createBookstoreError: unknown;
 
   readBookstoreLoading: boolean;
-  readBookstoreDone: any;
-  readBookstoreError: any;
+  readBookstoreDone: unknown;
+  readBookstoreError: unknown;
 
   updateBookstoreLoading: boolean;
-  updateBookstoreDone: any;
-  updateBookstoreError: any;
+  updateBookstoreDone: unknown;
+  updateBookstoreError: unknown;
 
   deleteBookstoreLoading: boolean;
-  deleteBookstoreDone: any;
-  deleteBookstoreError: any;
+  deleteBookstoreDone: unknown;
+  deleteBookstoreError: unknown;
 };
 
 export type BookstoresState = {
@@ -42,10 +42,10 @@ export type BookstoresState = {
   bookstoresLength: number | null;
 
   readBookstoresLoading: boolean;
-  readBookstoresDone: any;
-  readBookstoresError: any;
+  readBookstoresDone: unknown;
+  readBookstoresError: unknown;
 
   deleteBookstoresLoading: boolean;
-  deleteBookstoresDone: any;
-  deleteBookstoresError: any;
+  deleteBookstoresDone: unknown;
+  deleteBookstoresError: unknown;
 };

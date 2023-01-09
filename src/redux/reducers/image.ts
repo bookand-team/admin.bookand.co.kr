@@ -26,12 +26,11 @@ const imageSlice = createSlice({
     });
     builder.addCase(createImageUrl.fulfilled, (state, action) => {
       state.createImageUrlLoading = false;
-      state.createImageUrlDone = action.payload.message ? action.payload.message : true;
-      state.imageUrl = action.payload.imageUrl;
+      state.createImageUrlDone = action.payload;
     });
     builder.addCase(createImageUrl.rejected, (state, action) => {
       state.createImageUrlLoading = false;
-      state.createImageUrlError = action.payload.message ? action.payload.message : true;
+      state.createImageUrlError = action.payload;
     });
   }
 });

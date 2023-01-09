@@ -37,13 +37,11 @@ const articlesSlice = createSlice({
     });
     builder.addCase(readArticles.fulfilled, (state, action) => {
       state.readArticlesLoading = false;
-      state.readArticlesDone = action.payload.message ? action.payload.message : true;
-      state.articles = action.payload.articles;
-      state.articlesLength = action.payload.articles_length;
+      state.readArticlesDone = action.payload;
     });
     builder.addCase(readArticles.rejected, (state, action) => {
       state.readArticlesLoading = false;
-      state.readArticlesError = action.payload.message ? action.payload.message : true;
+      state.readArticlesError = action.payload;
     });
     // 여러 아티클 삭제하기
     builder.addCase(deleteArticles.pending, (state) => {
@@ -53,11 +51,11 @@ const articlesSlice = createSlice({
     });
     builder.addCase(deleteArticles.fulfilled, (state, action) => {
       state.deleteArticlesLoading = false;
-      state.deleteArticlesDone = action.payload.message ? action.payload.message : true;
+      state.deleteArticlesDone = action.payload;
     });
     builder.addCase(deleteArticles.rejected, (state, action) => {
       state.deleteArticlesLoading = false;
-      state.deleteArticlesError = action.payload.message ? action.payload.message : true;
+      state.deleteArticlesError = action.payload;
     });
   }
 });

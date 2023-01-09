@@ -23,20 +23,20 @@ export type ArticleState = {
   article: Article | null;
 
   createArticleLoading: boolean;
-  createArticleDone: any;
-  createArticleError: any;
+  createArticleDone: unknown;
+  createArticleError: unknown;
 
   readArticleLoading: boolean;
-  readArticleDone: any;
-  readArticleError: any;
+  readArticleDone: unknown;
+  readArticleError: unknown;
 
   updateArticleLoading: boolean;
-  updateArticleDone: any;
-  updateArticleError: any;
+  updateArticleDone: unknown;
+  updateArticleError: unknown;
 
   deleteArticleLoading: boolean;
-  deleteArticleDone: any;
-  deleteArticleError: any;
+  deleteArticleDone: unknown;
+  deleteArticleError: unknown;
 };
 
 export type ArticlesState = {
@@ -44,10 +44,10 @@ export type ArticlesState = {
   articlesLength: number | null;
 
   readArticlesLoading: boolean;
-  readArticlesDone: any;
-  readArticlesError: any;
+  readArticlesDone: unknown;
+  readArticlesError: unknown;
 
   deleteArticlesLoading: boolean;
-  deleteArticlesDone: any;
-  deleteArticlesError: any;
+  deleteArticlesDone: unknown;
+  deleteArticlesError: unknown;
 };

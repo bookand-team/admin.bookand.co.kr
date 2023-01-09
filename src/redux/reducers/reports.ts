@@ -33,13 +33,11 @@ const reportsSlice = createSlice({
     });
     builder.addCase(readReports.fulfilled, (state, action) => {
       state.readReportsLoading = false;
-      state.readReportsDone = action.payload.message ? action.payload.message : true;
-      state.reports = action.payload.reports;
-      state.reportsLength = action.payload.reports_length;
+      state.readReportsDone = action.payload;
     });
     builder.addCase(readReports.rejected, (state, action) => {
       state.readReportsLoading = false;
-      state.readReportsError = action.payload.message ? action.payload.message : true;
+      state.readReportsError = action.payload;
     });
   }
 });

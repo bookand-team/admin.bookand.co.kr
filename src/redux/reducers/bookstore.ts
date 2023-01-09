@@ -41,11 +41,11 @@ const bookstoreSlice = createSlice({
     });
     builder.addCase(createBookstore.fulfilled, (state, action) => {
       state.createBookstoreLoading = false;
-      state.createBookstoreDone = action.payload.id ? action.payload.id : true;
+      state.createBookstoreDone = action.payload;
     });
     builder.addCase(createBookstore.rejected, (state, action) => {
       state.createBookstoreLoading = false;
-      state.createBookstoreError = action.payload.message ? action.payload.message : true;
+      state.createBookstoreError = action.payload;
     });
     // 서점 조회하기
     builder.addCase(readBookstore.pending, (state) => {
@@ -55,12 +55,11 @@ const bookstoreSlice = createSlice({
     });
     builder.addCase(readBookstore.fulfilled, (state, action) => {
       state.readBookstoreLoading = false;
-      state.readBookstoreDone = action.payload.message ? action.payload.message : true;
-      state.bookstore = action.payload.bookstore;
+      state.readBookstoreDone = action.payload;
     });
     builder.addCase(readBookstore.rejected, (state, action) => {
       state.readBookstoreLoading = false;
-      state.readBookstoreError = action.payload.message ? action.payload.message : true;
+      state.readBookstoreError = action.payload;
     });
     // 서점 수정하기
     builder.addCase(updateBookstore.pending, (state) => {
@@ -70,11 +69,11 @@ const bookstoreSlice = createSlice({
     });
     builder.addCase(updateBookstore.fulfilled, (state, action) => {
       state.updateBookstoreLoading = false;
-      state.updateBookstoreDone = action.payload.id ? action.payload.id : true;
+      state.updateBookstoreDone = action.payload;
     });
     builder.addCase(updateBookstore.rejected, (state, action) => {
       state.updateBookstoreLoading = false;
-      state.updateBookstoreError = action.payload.message ? action.payload.message : true;
+      state.updateBookstoreError = action.payload;
     });
     // 서점 삭제하기
     builder.addCase(deleteBookstore.pending, (state) => {
@@ -84,11 +83,11 @@ const bookstoreSlice = createSlice({
     });
     builder.addCase(deleteBookstore.fulfilled, (state, action) => {
       state.deleteBookstoreLoading = false;
-      state.deleteBookstoreDone = action.payload.message ? action.payload.message : true;
+      state.deleteBookstoreDone = action.payload;
     });
     builder.addCase(deleteBookstore.rejected, (state, action) => {
       state.deleteBookstoreLoading = false;
-      state.deleteBookstoreError = action.payload.message ? action.payload.message : true;
+      state.deleteBookstoreError = action.payload;
     });
   }
 });

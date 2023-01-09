@@ -41,11 +41,11 @@ const pushSlice = createSlice({
     });
     builder.addCase(createPush.fulfilled, (state, action) => {
       state.createPushLoading = false;
-      state.createPushDone = action.payload.message ? action.payload.message : true;
+      state.createPushDone = action.payload;
     });
     builder.addCase(createPush.rejected, (state, action) => {
       state.createPushLoading = false;
-      state.createPushError = action.payload.message ? action.payload.message : true;
+      state.createPushError = action.payload;
     });
     // 푸시 조회하기
     builder.addCase(readPush.pending, (state) => {
@@ -55,12 +55,11 @@ const pushSlice = createSlice({
     });
     builder.addCase(readPush.fulfilled, (state, action) => {
       state.readPushLoading = false;
-      state.readPushDone = action.payload.message ? action.payload.message : true;
-      state.push = action.payload.push;
+      state.readPushDone = action.payload;
     });
     builder.addCase(readPush.rejected, (state, action) => {
       state.readPushLoading = false;
-      state.readPushError = action.payload.message ? action.payload.message : true;
+      state.readPushError = action.payload;
     });
     // 푸시 수정하기
     builder.addCase(updatePush.pending, (state) => {
@@ -70,11 +69,11 @@ const pushSlice = createSlice({
     });
     builder.addCase(updatePush.fulfilled, (state, action) => {
       state.updatePushLoading = false;
-      state.updatePushDone = action.payload.message ? action.payload.message : true;
+      state.updatePushDone = action.payload;
     });
     builder.addCase(updatePush.rejected, (state, action) => {
       state.updatePushLoading = false;
-      state.updatePushError = action.payload.message ? action.payload.message : true;
+      state.updatePushError = action.payload;
     });
     // 푸시 삭제하기
     builder.addCase(deletePush.pending, (state) => {
@@ -84,11 +83,11 @@ const pushSlice = createSlice({
     });
     builder.addCase(deletePush.fulfilled, (state, action) => {
       state.deletePushLoading = false;
-      state.deletePushDone = action.payload.message ? action.payload.message : true;
+      state.deletePushDone = action.payload;
     });
     builder.addCase(deletePush.rejected, (state, action) => {
       state.deletePushLoading = false;
-      state.deletePushError = action.payload.message ? action.payload.message : true;
+      state.deletePushError = action.payload;
     });
   }
 });

@@ -21,20 +21,20 @@ export type PushState = {
   push: Push | null;
 
   createPushLoading: boolean;
-  createPushDone: any;
-  createPushError: any;
+  createPushDone: unknown;
+  createPushError: unknown;
 
   readPushLoading: boolean;
-  readPushDone: any;
-  readPushError: any;
+  readPushDone: unknown;
+  readPushError: unknown;
 
   updatePushLoading: boolean;
-  updatePushDone: any;
-  updatePushError: any;
+  updatePushDone: unknown;
+  updatePushError: unknown;
 
   deletePushLoading: boolean;
-  deletePushDone: any;
-  deletePushError: any;
+  deletePushDone: unknown;
+  deletePushError: unknown;
 };
 
 export type PushesState = {
@@ -42,10 +42,10 @@ export type PushesState = {
   pushesLength: number | null;
 
   readPushesLoading: boolean;
-  readPushesDone: any;
-  readPushesError: any;
+  readPushesDone: unknown;
+  readPushesError: unknown;
 
   deletePushesLoading: boolean;
-  deletePushesDone: any;
-  deletePushesError: any;
+  deletePushesDone: unknown;
+  deletePushesError: unknown;
 };

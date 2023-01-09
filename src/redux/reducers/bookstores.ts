@@ -37,13 +37,11 @@ const bookstoresSlice = createSlice({
     });
     builder.addCase(readBookstores.fulfilled, (state, action) => {
       state.readBookstoresLoading = false;
-      state.readBookstoresDone = action.payload.message ? action.payload.message : true;
-      state.bookstores = action.payload.bookstores;
-      state.bookstoresLength = action.payload.bookstores_length;
+      state.readBookstoresDone = action.payload;
     });
     builder.addCase(readBookstores.rejected, (state, action) => {
       state.readBookstoresLoading = false;
-      state.readBookstoresError = action.payload.message ? action.payload.message : true;
+      state.readBookstoresError = action.payload;
     });
     // 여러 서점 삭제하기
     builder.addCase(deleteBookstores.pending, (state) => {
@@ -53,11 +51,11 @@ const bookstoresSlice = createSlice({
     });
     builder.addCase(deleteBookstores.fulfilled, (state, action) => {
       state.deleteBookstoresLoading = false;
-      state.deleteBookstoresDone = action.payload.message ? action.payload.message : true;
+      state.deleteBookstoresDone = action.payload;
     });
     builder.addCase(deleteBookstores.rejected, (state, action) => {
       state.deleteBookstoresLoading = false;
-      state.deleteBookstoresError = action.payload.message ? action.payload.message : true;
+      state.deleteBookstoresError = action.payload;
     });
   }
 });

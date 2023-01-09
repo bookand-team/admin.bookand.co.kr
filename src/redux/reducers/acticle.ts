@@ -41,11 +41,11 @@ const articleSlice = createSlice({
     });
     builder.addCase(createArticle.fulfilled, (state, action) => {
       state.createArticleLoading = false;
-      state.createArticleDone = action.payload.id ? action.payload.id : true;
+      state.createArticleDone = action.payload;
     });
     builder.addCase(createArticle.rejected, (state, action) => {
       state.createArticleLoading = false;
-      state.createArticleError = action.payload.message ? action.payload.message : true;
+      state.createArticleError = action.payload;
     });
     // 아티클 조회하기
     builder.addCase(readArticle.pending, (state) => {
@@ -55,12 +55,11 @@ const articleSlice = createSlice({
     });
     builder.addCase(readArticle.fulfilled, (state, action) => {
       state.readArticleLoading = false;
-      state.readArticleDone = action.payload.message ? action.payload.message : true;
-      state.article = action.payload.article;
+      state.readArticleDone = action.payload;
     });
     builder.addCase(readArticle.rejected, (state, action) => {
       state.readArticleLoading = false;
-      state.readArticleError = action.payload.message ? action.payload.message : true;
+      state.readArticleError = action.payload;
     });
     // 아티클 수정하기
     builder.addCase(updateArticle.pending, (state) => {
@@ -70,11 +69,11 @@ const articleSlice = createSlice({
     });
     builder.addCase(updateArticle.fulfilled, (state, action) => {
       state.updateArticleLoading = false;
-      state.updateArticleDone = action.payload.id ? action.payload.id : true;
+      state.updateArticleDone = action.payload;
     });
     builder.addCase(updateArticle.rejected, (state, action) => {
       state.updateArticleLoading = false;
-      state.updateArticleError = action.payload.message ? action.payload.message : true;
+      state.updateArticleError = action.payload;
     });
     // 아티클 삭제하기
     builder.addCase(deleteArticle.pending, (state) => {
@@ -84,11 +83,11 @@ const articleSlice = createSlice({
     });
     builder.addCase(deleteArticle.fulfilled, (state, action) => {
       state.deleteArticleLoading = false;
-      state.deleteArticleDone = action.payload.message ? action.payload.message : true;
+      state.deleteArticleDone = action.payload;
     });
     builder.addCase(deleteArticle.rejected, (state, action) => {
       state.deleteArticleLoading = false;
-      state.deleteArticleError = action.payload.message ? action.payload.message : true;
+      state.deleteArticleError = action.payload;
     });
   }
 });

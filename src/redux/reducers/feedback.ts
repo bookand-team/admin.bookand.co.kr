@@ -26,12 +26,11 @@ const feedbackSlice = createSlice({
     });
     builder.addCase(readFeedback.fulfilled, (state, action) => {
       state.readFeedbackLoading = false;
-      state.readFeedbackDone = action.payload.message ? action.payload.message : true;
-      state.feedback = action.payload.feedback;
+      state.readFeedbackDone = action.payload;
     });
     builder.addCase(readFeedback.rejected, (state, action) => {
       state.readFeedbackLoading = false;
-      state.readFeedbackError = action.payload.message ? action.payload.message : true;
+      state.readFeedbackError = action.payload;
     });
   }
 });

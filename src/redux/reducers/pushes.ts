@@ -37,13 +37,11 @@ const pushesSlice = createSlice({
     });
     builder.addCase(readPushes.fulfilled, (state, action) => {
       state.readPushesLoading = false;
-      state.readPushesDone = action.payload.message ? action.payload.message : true;
-      state.pushes = action.payload.pushes;
-      state.pushesLength = action.payload.pushes_length;
+      state.readPushesDone = action.payload;
     });
     builder.addCase(readPushes.rejected, (state, action) => {
       state.readPushesLoading = false;
-      state.readPushesError = action.payload.message ? action.payload.message : true;
+      state.readPushesError = action.payload;
     });
     // 여러 푸시 삭제하기
     builder.addCase(deletePushes.pending, (state) => {
@@ -53,11 +51,11 @@ const pushesSlice = createSlice({
     });
     builder.addCase(deletePushes.fulfilled, (state, action) => {
       state.deletePushesLoading = false;
-      state.deletePushesDone = action.payload.message ? action.payload.message : true;
+      state.deletePushesDone = action.payload;
     });
     builder.addCase(deletePushes.rejected, (state, action) => {
       state.deletePushesLoading = false;
-      state.deletePushesError = action.payload.message ? action.payload.message : true;
+      state.deletePushesError = action.payload;
     });
   }
 });
