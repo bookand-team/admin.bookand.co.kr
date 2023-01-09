@@ -30,7 +30,7 @@ const Details = ({ push, setOpenModalId }: Props) => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <button className={styles.close} onClick={closeBtnHandler}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
@@ -68,7 +68,7 @@ const Details = ({ push, setOpenModalId }: Props) => {
         <button className={buttonStyles.modal_apply_btn} onClick={submitBtnHandler}>적용</button>
         <button className={buttonStyles.modal_send_btn} onClick={sendBtnHandler}>{push?.status === '전송전' ? '전송' : '재전송'}</button>
       </div>
-    </div>
+    </section>
   );
 };
 

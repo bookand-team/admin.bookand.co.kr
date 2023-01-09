@@ -8,7 +8,7 @@ import styles from '@styles/dashboard/trend_statistics.module.css';
 
 const TrendStatistics = () => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>추이 통계</h2>
       </div>
@@ -50,7 +50,7 @@ const TrendStatistics = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

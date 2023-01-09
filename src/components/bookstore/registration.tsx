@@ -78,7 +78,7 @@ const Registration = () => {
   }, [inputInformation, selectTheme]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>서점 등록</h2>
       </div>
@@ -180,7 +180,7 @@ const Registration = () => {
         <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
         <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
-    </div>
+    </section>
   );
 };
 

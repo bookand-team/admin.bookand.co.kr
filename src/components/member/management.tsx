@@ -39,7 +39,7 @@ const Management = () => {
   }, [selectRole, selectStatus]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>회원 관리</h2>
         <Search search='닉네임' />
@@ -101,7 +101,7 @@ const Management = () => {
         </div>
       </div>
       {membersLength ? <Page contentsLength={membersLength} /> : null}
-    </div>
+    </section>
   );
 };
 

@@ -61,7 +61,7 @@ const Management = () => {
   }, [selectTheme, selectStatus]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>서점 관리</h2>
         <Search search='서점명' />
@@ -139,7 +139,7 @@ const Management = () => {
         <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
         <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
       </div>
-    </div>
+    </section>
   );
 };
 

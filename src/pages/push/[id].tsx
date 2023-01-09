@@ -1,15 +1,10 @@
-import Main from '@components/common/main';
 import Modification from '@components/push/modification';
 import { setPage } from '@redux/reducers/page';
 import { loadDummyPush } from '@redux/reducers/push';
 import wrapper from '@redux/store';
 
 const ModificationPage = () => {
-  return (
-    <Main>
-      <Modification />
-    </Main>
-  );
+  return (<Modification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

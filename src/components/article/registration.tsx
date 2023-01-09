@@ -118,7 +118,7 @@ const Registration = () => {
   }, [inputContent]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.title}>
           <input type='textarea' value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' />
@@ -176,7 +176,7 @@ const Registration = () => {
         <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
         <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
-    </div>
+    </section>
   );
 };
 

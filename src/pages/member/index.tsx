@@ -1,15 +1,10 @@
-import Main from '@components/common/main';
 import Management from '@components/member/management';
 import { loadDummyMembers } from '@redux/reducers/members';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const MemberPage = () => {
-  return (
-    <Main>
-      <Management />
-    </Main>
-  );
+  return (<Management />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

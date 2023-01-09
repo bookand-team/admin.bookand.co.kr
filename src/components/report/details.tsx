@@ -24,7 +24,7 @@ const Details = ({ report, setOpenModalId }: Props) => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <button className={styles.close} onClick={closeBtnHandler}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
@@ -59,7 +59,7 @@ const Details = ({ report, setOpenModalId }: Props) => {
         <button className={buttonStyles.modal_close_btn} onClick={closeBtnHandler}>닫기</button>
         <button className={buttonStyles.modal_apply_btn} onClick={submitBtnHandler}>적용</button>
       </div>
-    </div>
+    </section>
   );
 };
 

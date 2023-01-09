@@ -1,15 +1,10 @@
 import Modification from '@components/article/modification';
-import Main from '@components/common/main';
 import { loadDummyArticle } from '@redux/reducers/acticle';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const DetailsPage = () => {
-  return (
-    <Main>
-      <Modification />
-    </Main>
-  );
+  return (<Modification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

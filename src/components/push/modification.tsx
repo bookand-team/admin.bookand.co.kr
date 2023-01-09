@@ -47,7 +47,7 @@ const Registration = () => {
   }, [inputTitle, selectCategory, selectTargetMemberId, selectTargetDevice, selectTargetMemberRole, inputContent]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>PUSH 수정</h2>
       </div>
@@ -90,7 +90,7 @@ const Registration = () => {
         <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
         <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
       </div>
-    </div>
+    </section>
   );
 };
 

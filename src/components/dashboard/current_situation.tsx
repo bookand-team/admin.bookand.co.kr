@@ -2,7 +2,7 @@ import styles from '@styles/dashboard/current_situation.module.css';
 
 const CurrentSituation = () => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>현황 통계</h2>
       </div>
@@ -45,7 +45,7 @@ const CurrentSituation = () => {
           <p>IOS 회원수: 00</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

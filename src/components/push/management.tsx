@@ -61,7 +61,7 @@ const Management = () => {
   }, [selectCategory, selectStatus]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>푸시 관리</h2>
       </div>
@@ -131,7 +131,7 @@ const Management = () => {
         <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
         <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
       </div>
-    </div>
+    </section>
   );
 };
 

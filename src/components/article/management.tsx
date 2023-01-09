@@ -61,7 +61,7 @@ const Management = () => {
   }, [selectCategory, selectStatus]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>아티클 관리</h2>
         <Search search='아티클 제목' />
@@ -136,7 +136,7 @@ const Management = () => {
         <button className={buttonStyles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
         <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
       </div>
-    </div>
+    </section>
   );
 };
 

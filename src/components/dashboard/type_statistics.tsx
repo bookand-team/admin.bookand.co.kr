@@ -4,7 +4,7 @@ import styles from '@styles/dashboard/type_statistics.module.css';
 
 const TypeStatistics = () => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>유형 통계</h2>
       </div>
@@ -22,7 +22,7 @@ const TypeStatistics = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

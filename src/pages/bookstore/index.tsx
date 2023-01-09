@@ -1,15 +1,10 @@
 import Management from '@components/bookstore/management';
-import Main from '@components/common/main';
 import { loadDummyBookstores } from '@redux/reducers/bookstores';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const BookstorePage = () => {
-  return (
-    <Main>
-      <Management />
-    </Main>
-  );
+  return (<Management />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

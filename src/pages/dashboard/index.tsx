@@ -1,4 +1,3 @@
-import Main from '@components/common/main';
 import CurrentSituation from '@components/dashboard/current_situation';
 import TrendStatistics from '@components/dashboard/trend_statistics';
 import TypeStatistics from '@components/dashboard/type_statistics';
@@ -7,11 +6,11 @@ import wrapper from '@redux/store';
 
 const DashboardPage = () => {
   return (
-    <Main>
+    <>
       <CurrentSituation />
       <TypeStatistics />
       <TrendStatistics />
-    </Main>
+    </>
   );
 };
 

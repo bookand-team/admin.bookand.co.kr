@@ -38,7 +38,7 @@ const Management = () => {
   }, [selectStatus]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>서점제보 관리</h2>
         <Search search='서점명' />
@@ -92,7 +92,7 @@ const Management = () => {
         </div>
       </div>
       {reportsLength ? <Page contentsLength={reportsLength} /> : null}
-    </div>
+    </section>
   );
 };
 

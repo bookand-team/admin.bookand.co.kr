@@ -1,15 +1,10 @@
-import Main from '@components/common/main';
 import Management from '@components/push/management';
 import { setPage } from '@redux/reducers/page';
 import { loadDummyPushes } from '@redux/reducers/pushes';
 import wrapper from '@redux/store';
 
 const PushPage = () => {
-  return (
-    <Main>
-      <Management />
-    </Main>
-  );
+  return (<Management />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

@@ -30,7 +30,7 @@ const Details = ({ member, setOpenModalId }: Props) => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <button className={styles.close} onClick={closeBtnHandler}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
@@ -78,7 +78,7 @@ const Details = ({ member, setOpenModalId }: Props) => {
         <button className={buttonStyles.modal_apply_btn} onClick={submitBtnHandler}>적용</button>
         <button className={buttonStyles.modal_withdraw_btn} onClick={withdrawBtnHandler}>탈퇴</button>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,15 +1,10 @@
 import Management from '@components/article/management';
-import Main from '@components/common/main';
 import { loadDummyArticles } from '@redux/reducers/articles';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const ArticlePage = () => {
-  return (
-    <Main>
-      <Management />
-    </Main>
-  );
+  return (<Management />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

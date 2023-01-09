@@ -3,9 +3,7 @@ import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const LoginPage = () => {
-  return (
-    <Login />
-  );
+  return (<Login />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {

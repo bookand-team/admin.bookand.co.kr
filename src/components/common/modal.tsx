@@ -19,9 +19,13 @@ const Modal = ({ children, id, openModalId, setOpenModalId }: Props) => {
   }, [openModalId, modalRef.current]);
 
   return (
-    <div className={id === openModalId ? `${styles.container} ${styles.opend}` : styles.container} ref={modalRef} onClick={closeModal}>
-      {children}
-    </div>
+    <>
+      {id === openModalId &&
+        <div className={styles.background} ref={modalRef} onClick={closeModal}>
+          {children}
+        </div>
+      }
+    </>
   );
 };
 

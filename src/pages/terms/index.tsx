@@ -1,13 +1,8 @@
-import Main from '@components/common/main';
 import { setPage } from '@redux/reducers/page';
 import wrapper from '@redux/store';
 
 const TermsPage = () => {
-  return (
-    <Main>
-      Terms
-    </Main>
-  );
+  return (<>Terms</>);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {

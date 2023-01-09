@@ -38,7 +38,7 @@ const Management = () => {
   }, [selectCategory]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
         <h2>피드백 관리</h2>
         <Search search='피드백 내용' />
@@ -98,7 +98,7 @@ const Management = () => {
         </div>
       </div>
       {feedbacksLength ? <Page contentsLength={feedbacksLength} /> : null}
-    </div>
+    </section>
   );
 };
 
