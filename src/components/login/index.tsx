@@ -1,10 +1,10 @@
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { login } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
-import { setAccessTokne } from '@redux/reducers/user';
 import { AppDispatch } from '@redux/store';
 import styles from '@styles/login/login.module.css';
 import { isLoginSucRes } from '@types';
@@ -25,8 +25,7 @@ const Login = () => {
   // 로그인 요청 결과 처리
   useEffect(() => {
     if (loginDone && isLoginSucRes(loginDone)) {
-      dispatch(setAccessTokne(loginDone.accessToken));
-      localStorage.setItem('refreshToken', loginDone.refreshToken);
+      Cookies.set('refreshToken', loginDone.refreshToken);  // refreshToken 저장
       router.replace('/dashboard');
     }
   }, [loginDone]);
