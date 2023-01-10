@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { isAxiosError } from 'axios';
 
-import { LoginReq } from '@types';
+import { LoginReq, RefreshLoginReq } from '@types';
 
 // axios 기본 설정
 axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_AXIOS_PROTOCOL}${process.env.NEXT_PUBLIC_AXIOS_HOST}${process.env.NEXT_PUBLIC_AXIOS_COMMON_PATH}`;
@@ -20,10 +20,10 @@ export const login = createAsyncThunk('login', async (data: LoginReq, { rejectWi
   }
 });
 
-// 로그인 상태 확인
-export const getAccessToken = createAsyncThunk('getAccessToken', async (data: LoginReq, { rejectWithValue }) => {
+// 로그인 상태 확인 및 유지
+export const refreshLogin = createAsyncThunk('refreshLogin', async (data: RefreshLoginReq, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/auth/login', data);
+    const response = await axios.post('/auth/reissue', data);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {

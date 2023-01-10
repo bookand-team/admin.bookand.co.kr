@@ -4,6 +4,10 @@ export interface UserState {
   myInfo: unknown;
 
   loginLoading: boolean;
-  loginDone:unknown;
-  loginError:unknown;
+  loginDone: unknown;
+  loginError: unknown;
+
+  refreshLoginLoading: boolean;
+  refreshLoginDone: unknown;
+  refreshLoginError: unknown;
 }

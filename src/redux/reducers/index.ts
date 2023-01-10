@@ -20,7 +20,7 @@ import { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackS
 const rootReducer = (state: any, action: any) => {
   switch (action.type) {
     case HYDRATE:
-      return action.payload;
+      return { ...state, ...action.payload };
     default: {
       const combineReducer = combineReducers({
         article: articleSlice.reducer,
