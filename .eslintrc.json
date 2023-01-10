@@ -39,8 +39,18 @@
       "prefer-single"
     ],
     "semi": [
-      "error",
+      "off",
       "always"
+    ],
+    "@typescript-eslint/semi": "warn",
+    "@typescript-eslint/member-delimiter-style": [
+      "warn",
+      {
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": true
+        }
+      }
     ],
     "comma-dangle": [
       "error",
