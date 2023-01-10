@@ -5,7 +5,7 @@ const Seo = () => {
     <Head>
       <title>관리자 페이지</title>
 
-      <link rel='shortcut icon' href='/images/favicon/favicon.ico' />
+      {/* <link rel='shortcut icon' href='/images/favicon/favicon.ico' />
       <link rel='apple-touch-icon' sizes='57x57' href='/images/favicon/apple-icon-57x57.png' />
       <link rel='apple-touch-icon' sizes='60x60' href='/images/favicon/apple-icon-60x60.png' />
       <link rel='apple-touch-icon' sizes='72x72' href='/images/favicon/apple-icon-72x72.png' />
@@ -22,7 +22,7 @@ const Seo = () => {
       <link rel='manifest' href='/images/favicon/manifest.json' />
       <meta name='msapplication-TileColor' content='#ffffff' />
       <meta name='msapplication-TileImage' content='/img/favi/ms-icon-144x144.png' />
-      <meta name='theme-color' content='#ffffff' />
+      <meta name='theme-color' content='#ffffff' /> */}
     </Head>
   );
 };
