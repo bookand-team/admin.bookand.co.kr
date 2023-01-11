@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -9,11 +10,11 @@ import buttonStyles from '@styles/layout/button.module.css';
 
 const Header = () => {
   const router = useRouter();
-  const { section } = useSelector((state: RootState) => state.page);
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
   /** 로그아웃 버튼 - 로그아웃 요청 */
   const logoutBtnHandler = useCallback(() => {
-    // TODO: 로그아웃 요청 기능
+    Cookies.remove('refreshToken');
     router.push('/');
   }, []);
   return (
@@ -26,7 +27,7 @@ const Header = () => {
           </div>
         </a>
       </Link>
-      {section === 'login' ? null :
+      {isLoggedIn &&
         <div className={styles.user}>
           <div className={styles.username}>username</div>
           <button className={buttonStyles.logout} onClick={logoutBtnHandler}>로그아웃</button>
