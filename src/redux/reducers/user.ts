@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
+import jwt from 'jsonwebtoken';
 
 import { login, refreshLogin } from '@redux/actions/user';
-import { UserState } from '@types';
+import { isLoginSucRes, UserState } from '@types';
 
 const initialState: UserState = {
   isLoggedIn: false,
@@ -23,9 +25,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setAccessTokne: (state, action) => {
-      state.accessToken = action.payload;
-    }
+
   },
   extraReducers: (builder) => {
     // 로그인
@@ -37,6 +37,9 @@ const userSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loginLoading = false;
       state.loginDone = action.payload;
+      if (isLoginSucRes(action.payload)) {
+        Cookies.set('refreshToken', action.payload.refreshToken);
+      }
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loginLoading = false;
@@ -51,6 +54,11 @@ const userSlice = createSlice({
     builder.addCase(refreshLogin.fulfilled, (state, action) => {
       state.refreshLoginLoading = false;
       state.refreshLoginDone = action.payload;
+      if (isLoginSucRes(action.payload)) {
+        state.isLoggedIn = true;
+        state.accessToken = action.payload.accessToken;
+        state.myInfo = jwt.decode(action.payload.accessToken);
+      }
     });
     builder.addCase(refreshLogin.rejected, (state, action) => {
       state.refreshLoginLoading = false;
@@ -58,7 +66,5 @@ const userSlice = createSlice({
     });
   }
 });
-
-export const { setAccessTokne } = userSlice.actions;
 
 export default userSlice;

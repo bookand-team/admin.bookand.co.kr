@@ -8,3 +8,7 @@ export type PageState = {
   search: string | null;
   status: string | null;
 };
+
+export interface PagePropsType {
+  refreshToken: string;
+}
