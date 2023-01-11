@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true;  // front <-> backend 쿠키공유
 // 로그인
 export const login = createAsyncThunk('login', async (data: LoginReq, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/auth/login', data);
+    const response = await axios.post('/auth/admin', data);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
