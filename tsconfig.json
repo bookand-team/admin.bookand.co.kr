@@ -42,7 +42,10 @@
       ],
       "@types": [
         "src/types"
-      ]
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
     }
   },
   "include": [

@@ -26,3 +26,12 @@ export function isLoginSucRes(res: unknown): res is LoginSucRes {
   if (!('refreshToken' in res && typeof res.accessToken === 'string')) { return false; }
   return true;
 }
+
+export interface SilentLoginReq {
+  refreshToken: string;
+}
+
+export interface SilentLoginRes {
+  accessToken: string;
+  refreshToken: string;
+}

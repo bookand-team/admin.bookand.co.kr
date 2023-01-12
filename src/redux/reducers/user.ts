@@ -25,7 +25,11 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-
+    setLoginUser: (state, action) => {
+      state.isLoggedIn = true;
+      state.accessToken = action.payload;
+      state.myInfo = jwt.decode(action.payload);
+    }
   },
   extraReducers: (builder) => {
     // 로그인
@@ -66,5 +70,7 @@ const userSlice = createSlice({
     });
   }
 });
+
+export const { setLoginUser } = userSlice.actions;
 
 export default userSlice;
