@@ -55,20 +55,24 @@ ul {
   list-style: none;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 #__next {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 main {
-  flex: 1 0;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   min-width: 1280px;
   max-width: 1920px;
-  padding: 0 24px;
-  margin: 40px 0;
+  padding: 40px 24px;
 }
 
 h2 {
@@ -76,4 +80,8 @@ h2 {
   font-weight: 700;
   line-height: 100%;
   margin: 25px 20px;
+}
+
+button {
+  cursor: pointer;
 }
