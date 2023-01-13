@@ -1,24 +1,30 @@
-import { TargetDevice, TargetMemberId, TargetRole } from '../filter';
+import { DeviceOSFilter, MemberIdFilter } from '../filter';
+import { MemberRoleFilter } from '../member';
 
-export type Push = {
+export const PushCategoryArr = ['업데이트', '에러', '프로모션', '홍보', '기타'] as const;
+export type PushCategory = typeof PushCategoryArr[number];
+
+export const PushStatusArr = ['전송전', '전송완료', '전송실패'] as const;
+export type PushStatus = typeof PushStatusArr[number];
+
+export interface PushDTO {
   id: number;  // 식별자
-  title?: string;  // 제목
-  category?: PushCategory;  // 유형 분류
-  status?: PushStatus;  // 전송 상태
-  createdDate?: string;  // 가입 날짜
-  sentDate?: string;  // 전송 날짜
-  targetMemberId?: TargetMemberId;  // 멤버 식별자 필터값
-  targetDevice?: TargetDevice;  // 디바이스 필터값
-  targetMemberRole?: TargetRole;  // 멤버 역할 필터값
-  content?: string;  // 본문
-  writer?: string;  // 작성자
-};
+  title: string;  // 제목
+  category: PushCategory;  // 유형 분류
+  status: PushStatus;  // 전송 상태
+  createdDate: string;  // 작성 날짜
+  sentDate: string | null;  // 전송 날짜
+  content: string;  // 내용
+  writer: string;  // 작성자
+  filter: {
+    deviceOS: DeviceOSFilter;  // 디바이스 운영체제 필터값
+    memberId: MemberIdFilter;  // 멤버 식별자 필터값
+    memberRole: MemberRoleFilter;  // 멤버 역할 필터값
+  };
+}
 
-export type PushCategory = '' | '업데이트' | '에러' | '프로모션' | '홍보' | '기타';
-export type PushStatus = '' | '전송전' | '전송완료' | '전송실패' | '전송대기';
-
-export type PushState = {
-  push: Push | null;
+export interface PushState {
+  push: PushDTO | null;
 
   createPushLoading: boolean;
   createPushDone: unknown;
@@ -35,10 +41,10 @@ export type PushState = {
   deletePushLoading: boolean;
   deletePushDone: unknown;
   deletePushError: unknown;
-};
+}
 
-export type PushesState = {
-  pushes: Push[] | null;
+export interface PushesState {
+  pushes: PushDTO[] | null;
   pushesLength: number | null;
 
   readPushesLoading: boolean;
@@ -48,4 +54,4 @@ export type PushesState = {
   deletePushesLoading: boolean;
   deletePushesDone: unknown;
   deletePushesError: unknown;
-};
+}

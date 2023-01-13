@@ -1,25 +1,28 @@
-export type Feedback = {
+import { DeviceOSChoice } from '../filter';
+
+export const FeedbackCategoryArr = ['정보오류', '정보누락', '업데이트', '로그인', '보안', 'PUSH', 'UI/UX', '에러', '기타'] as const;
+export type FeedbackCategory = typeof FeedbackCategoryArr[number];
+
+export interface FeedbackDTO {
   id: number;  // 식별자
-  content?: string;  // 본문
-  email?: string;  // 이메일
-  category?: FeedbackCategory;  // 유형 분류
-  device?: string;  // 디바이스 종류
-  feedbackCount?: number;  // 조회수
-  createdDate?: string;  // 작성 날짜
-};
+  category: FeedbackCategory;  // 유형 분류
+  content: string;  // 내용
+  score: number;  // 평점(별점)
+  createdDate: string;  // 작성 날짜
+  email: string;  // 이메일
+  deviceOS: DeviceOSChoice;  // 디바이스 운영체제
+}
 
-export type FeedbackCategory = '' | '정보오류' | '정보누락' | '업데이트' | '로그인' | '보안' | 'PUSH' | 'UI/UX' | '에러' | '기타';
-
-export type FeedbackState = {
-  feedback: Feedback | null;
+export interface FeedbackState {
+  feedback: FeedbackDTO | null;
 
   readFeedbackLoading: boolean;
   readFeedbackDone: unknown;
   readFeedbackError: unknown;
-};
+}
 
-export type FeedbacksState = {
-  feedbacks: Feedback[] | null;
+export interface FeedbacksState {
+  feedbacks: FeedbackDTO[] | null;
   feedbacksLength: number | null;
 
   readFeedbacksLoading: boolean;
@@ -29,4 +32,4 @@ export type FeedbacksState = {
   deleteFeedbacksLoading: boolean;
   deleteFeedbacksDone: unknown;
   deleteFeedbacksError: unknown;
-};
+}
