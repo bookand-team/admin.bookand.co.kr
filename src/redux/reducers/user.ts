@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 
-import { login, refreshLogin } from '@redux/actions/user';
+import { login } from '@redux/actions/user';
 import { isLoginSucRes, UserState } from '@types';
 
 const initialState: UserState = {
@@ -13,12 +13,7 @@ const initialState: UserState = {
   // 로그인
   loginLoading: false,
   loginDone: null,
-  loginError: null,
-
-  // 로그인 상태 확인 및 유지
-  refreshLoginLoading: false,
-  refreshLoginDone: null,
-  refreshLoginError: null
+  loginError: null
 };
 
 const userSlice = createSlice({
@@ -48,25 +43,6 @@ const userSlice = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.loginLoading = false;
       state.loginError = action.payload;
-    });
-    // 로그인 상태 확인 및 유지
-    builder.addCase(refreshLogin.pending, (state) => {
-      state.refreshLoginLoading = true;
-      state.refreshLoginDone = null;
-      state.refreshLoginError = null;
-    });
-    builder.addCase(refreshLogin.fulfilled, (state, action) => {
-      state.refreshLoginLoading = false;
-      state.refreshLoginDone = action.payload;
-      if (isLoginSucRes(action.payload)) {
-        state.isLoggedIn = true;
-        state.accessToken = action.payload.accessToken;
-        state.myInfo = jwt.decode(action.payload.accessToken);
-      }
-    });
-    builder.addCase(refreshLogin.rejected, (state, action) => {
-      state.refreshLoginLoading = false;
-      state.refreshLoginError = action.payload;
     });
   }
 });

@@ -6,8 +6,4 @@ export interface UserState {
   loginLoading: boolean;
   loginDone: unknown;
   loginError: unknown;
-
-  refreshLoginLoading: boolean;
-  refreshLoginDone: unknown;
-  refreshLoginError: unknown;
 }

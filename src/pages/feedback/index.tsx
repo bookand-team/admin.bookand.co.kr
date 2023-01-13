@@ -1,12 +1,12 @@
 import Cookies from 'js-cookie';
 
+import { redirectLoginPage, silentLogin } from '@api/user/silent_login';
 import Management from '@components/feedback/management';
 import { loadDummyFeedbacks } from '@redux/reducers/feedbacks';
 import { setPage } from '@redux/reducers/page';
 import { setLoginUser } from '@redux/reducers/user';
 import wrapper from '@redux/store';
 import { PagePropsType } from '@types';
-import { redirectLoginPage, silentLogin } from '@utils/silent_login';
 
 const FeedbackPage = ({ refreshToken }: PagePropsType) => {
   Cookies.set('refreshToken', refreshToken);

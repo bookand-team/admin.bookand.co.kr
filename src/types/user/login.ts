@@ -8,15 +8,6 @@ export interface LoginSucRes {
   refreshToken: string;
 }
 
-export interface RefreshLoginReq {
-  refreshToken: string;
-}
-
-export interface RefreshLoginSucRes {
-  accessToken: string;
-  refreshToken: string;
-}
-
 export function isLoginSucRes(res: unknown): res is LoginSucRes {
   // res가 객체인지 확인
   if (!(res !== null && typeof res === 'object')) { return false; }
@@ -27,11 +18,11 @@ export function isLoginSucRes(res: unknown): res is LoginSucRes {
   return true;
 }
 
-export interface SilentLoginReq {
+export interface SilentLoginReqDTO {
   refreshToken: string;
 }
 
-export interface SilentLoginRes {
+export interface SilentLoginResDTO {
   accessToken: string;
   refreshToken: string;
 }

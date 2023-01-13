@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 
+import { redirectLoginPage, silentLogin } from '@api/user/silent_login';
 import CurrentSituation from '@components/dashboard/current_situation';
 import TrendStatistics from '@components/dashboard/trend_statistics';
 import TypeStatistics from '@components/dashboard/type_statistics';
@@ -7,7 +8,6 @@ import { setPage } from '@redux/reducers/page';
 import { setLoginUser } from '@redux/reducers/user';
 import wrapper from '@redux/store';
 import { PagePropsType } from '@types';
-import { redirectLoginPage, silentLogin } from '@utils/silent_login';
 
 const DashboardPage = ({ refreshToken }: PagePropsType) => {
   Cookies.set('refreshToken', refreshToken);
