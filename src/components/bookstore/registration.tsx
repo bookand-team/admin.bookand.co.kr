@@ -6,14 +6,14 @@ import React, { useCallback, useState } from 'react';
 import { useInputSelect, useInputText } from '@hooks/use_input';
 import styles from '@styles/bookstore/registration.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
-import { BookstoreTheme } from '@types';
+import { BookstoreTheme, BookstoreThemeArr } from '@types';
 
 const Registration = () => {
   const router = useRouter();
 
   // 입력받은 추가정보 (한줄소개, 테마, 대표 이미지 미리보기, 서브 이미지들 미리보기)
   const [inputInformation, changeInputInformation] = useInputText('');
-  const [selectTheme, changeSelectTheme] = useInputSelect<BookstoreTheme>('');
+  const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>('');
   const [mainImage, setMainImage] = useState('');
   const [subImages, setSubImages] = useState<string[]>([]);
 
@@ -125,13 +125,9 @@ const Registration = () => {
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
                 <option value='' disabled>테마 선택</option>
-                <option value='여행'>여행</option>
-                <option value='음악'>음악</option>
-                <option value='그림'>그림</option>
-                <option value='애완동물'>애완동물</option>
-                <option value='영화'>영화</option>
-                <option value='추리'>추리</option>
-                <option value='역사'>역사</option>
+                {BookstoreThemeArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
               </select>
             </div>
             <div>

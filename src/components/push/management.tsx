@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import { RootState } from '@redux/reducers';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
 import styles from '@styles/push/management.module.css';
-import { PushCategory, PushStatus } from '@types';
+import { PushCategory, PushCategoryArr, PushStatus, PushStatusArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -25,8 +26,8 @@ const Management = () => {
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
 
   // 선택한 데이터 (카테고리, 전송상태)
-  const [selectCategory, changeSelectCategory] = useInputSelect<PushCategory>('');
-  const [selectStatus, changeSelectStatus] = useInputSelect<PushStatus>('');
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | PushCategory>('');
+  const [selectStatus, changeSelectStatus] = useInputSelect<'' | PushStatus>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -75,18 +76,17 @@ const Management = () => {
               <div className={styles.category}>
                 <select value={selectCategory} onChange={changeSelectCategory}>
                   <option value=''>카테고리</option>
-                  <option value='업데이트'>업데이트</option>
-                  <option value='에러'>에러</option>
-                  <option value='프로모션'>프로모션</option>
-                  <option value='기타'>기타</option>
+                  {PushCategoryArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>전송상태</option>
-                  <option value='전송완료'>전송완료</option>
-                  <option value='전송실패'>전송실패</option>
-                  <option value='전송대기'>전송대기</option>
+                  {PushStatusArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.createdDate}>등록일자</div>

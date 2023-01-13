@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { dummyReports } from '@assets/dummy';
 import { readReports } from '@redux/actions/reports';
-import { ReportState } from '@types';
+import { ReportsState } from '@types';
 
-const initialState: ReportState = {
+const initialState: ReportsState = {
   reports: null,
   reportsLength: null,
 

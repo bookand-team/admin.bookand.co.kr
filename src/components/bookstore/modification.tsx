@@ -8,7 +8,7 @@ import { useInputSelect, useInputText } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/bookstore/registration.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
-import { BookstoreTheme } from '@types';
+import { BookstoreTheme, BookstoreThemeArr } from '@types';
 
 const Modification = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const Modification = () => {
 
   // 입력받은 추가정보 (한줄소개, 테마, 대표 이미지 미리보기, 서브 이미지들 미리보기)
   const [inputIntroduction, changeInputIntroduction] = useInputText(bookstore?.introduction ? bookstore.introduction : '');
-  const [selectTheme, changeSelectTheme] = useInputSelect<BookstoreTheme>(bookstore?.theme ? bookstore.theme : '');
+  const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>(bookstore?.theme ? bookstore.theme : '');
   const [mainImageSrc, setMainImageSrc] = useState(bookstore?.mainImage ? bookstore.mainImage : '');
   const [subImagesSrc, setSubImagesSrc] = useState<string[]>(bookstore?.subImages ? bookstore.subImages : []);
 
@@ -127,13 +127,9 @@ const Modification = () => {
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
                 <option value='' disabled>테마 선택</option>
-                <option value='여행'>여행</option>
-                <option value='음악'>음악</option>
-                <option value='그림'>그림</option>
-                <option value='애완동물'>애완동물</option>
-                <option value='영화'>영화</option>
-                <option value='추리'>추리</option>
-                <option value='역사'>역사</option>
+                {BookstoreThemeArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
               </select>
             </div>
             <div>

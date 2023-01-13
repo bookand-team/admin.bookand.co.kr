@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import { RootState } from '@redux/reducers';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
 import styles from '@styles/member/management.module.css';
-import { MemberRole, MemberStatus } from '@types';
+import { MemberRole, MemberRoleArr, MemberStatus, MemberStatusArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -22,8 +23,8 @@ const Management = () => {
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (역할, 상태)
-  const [selectRole, changeSelectRole] = useInputSelect<MemberRole>('');
-  const [selectStatus, changeSelectStatus] = useInputSelect<MemberStatus>('');
+  const [selectRole, changeSelectRole] = useInputSelect<'' | MemberRole>('');
+  const [selectStatus, changeSelectStatus] = useInputSelect<'' | MemberStatus>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -54,17 +55,17 @@ const Management = () => {
               <div className={styles.role}>
                 <select value={selectRole} onChange={changeSelectRole}>
                   <option value=''>역할</option>
-                  <option value='일반'>일반</option>
-                  <option value='관리자'>관리자</option>
+                  {MemberRoleArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>이용상태</option>
-                  <option value='정상'>정상</option>
-                  <option value='휴면'>휴면</option>
-                  <option value='징계정지'>징계정지</option>
-                  <option value='징계탈퇴'>징계탈퇴</option>
+                  {MemberStatusArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.createdDate}>가입일</div>

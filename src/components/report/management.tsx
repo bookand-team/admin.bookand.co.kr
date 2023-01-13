@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import { RootState } from '@redux/reducers';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
 import styles from '@styles/report/management.module.css';
-import { ReportStatus } from '@types';
+import { ReportStatus, ReportStatusArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Management = () => {
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (노출상태)
-  const [selectStatus, changeSelectStatus] = useInputSelect<ReportStatus>('');
+  const [selectStatus, changeSelectStatus] = useInputSelect<'' | ReportStatus>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -53,8 +54,7 @@ const Management = () => {
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>노출상태</option>
-                  <option value='노출'>노출</option>
-                  <option value='미노출'>미노출</option>
+                  {ReportStatusArr.map((value) => <option key={nanoid()} value={value}>{value}</option>)}
                 </select>
               </div>
               <div className={styles.reportedCount}>제보요청 수</div>

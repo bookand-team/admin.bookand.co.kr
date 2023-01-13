@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import { RootState } from '@redux/reducers';
 import styles from '@styles/feedback/management.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
-import { FeedbackCategory } from '@types';
+import { FeedbackCategory, FeedbackCategoryArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Management = () => {
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (유형분류)
-  const [selectCategory, changeSelectCategory] = useInputSelect<FeedbackCategory>('');
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | FeedbackCategory>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -53,18 +54,13 @@ const Management = () => {
               <div className={styles.category}>
                 <select value={selectCategory} onChange={changeSelectCategory}>
                   <option value=''>유형분류</option>
-                  <option value='정보누락'>정보누락</option>
-                  <option value='업데이트'>업데이트</option>
-                  <option value='로그인'>로그인</option>
-                  <option value='보안'>보안</option>
-                  <option value='PUSH'>PUSH</option>
-                  <option value='UI/UX 개선'>UI/UX 개선</option>
-                  <option value='에러'>에러</option>
-                  <option value='기타'>기타</option>
+                  {FeedbackCategoryArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.device}>디바이스 유형</div>
-              <div className={styles.feedbackCount}>피드백 횟수</div>
+              <div className={styles.feedbackCount}>별점 평가</div>
               <div className={styles.createdDate}>등록일자</div>
               <div className={styles.button}></div>
             </div>
@@ -77,8 +73,8 @@ const Management = () => {
                   <div className={styles.content}>{feedback.content && feedback.content}</div>
                   <div className={styles.email}>{feedback.email && feedback.email}</div>
                   <div className={styles.category}>{feedback.category && feedback.category}</div>
-                  <div className={styles.device}>{feedback.device && feedback.device}</div>
-                  <div className={styles.feedbackCount}>{feedback.feedbackCount && feedback.feedbackCount}</div>
+                  <div className={styles.device}>{feedback.deviceOS && feedback.deviceOS}</div>
+                  <div className={styles.feedbackCount}>{feedback.score && feedback.score}</div>
                   <div className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</div>
                   <div className={styles.button}>
                     <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>

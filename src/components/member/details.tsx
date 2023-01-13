@@ -4,10 +4,10 @@ import React, { useCallback } from 'react';
 import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.css';
 import styles from '@styles/layout/modal/details.module.css';
-import { Member } from '@types';
+import { MemberDTO } from '@types';
 
 type Props = {
-  member: Member;
+  member: MemberDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 

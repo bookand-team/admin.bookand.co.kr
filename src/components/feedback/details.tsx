@@ -4,10 +4,10 @@ import React, { useCallback } from 'react';
 import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.css';
 import styles from '@styles/layout/modal/details.module.css';
-import { Feedback } from '@types';
+import { FeedbackDTO } from '@types';
 
 type Props = {
-  feedback: Feedback;
+  feedback: FeedbackDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
@@ -39,12 +39,12 @@ const Details = ({ feedback, setOpenModalId }: Props) => {
         <div className={styles.row}>
           <div className={styles.key}>이메일</div>
           <div className={styles.value}>{feedback?.email ? feedback.email : null}</div>
-          <div className={styles.key}>피드백 횟수</div>
-          <div className={styles.value}>{feedback?.feedbackCount ? feedback.feedbackCount : null}</div>
+          <div className={styles.key}>별점 평가</div>
+          <div className={styles.value}>{feedback?.score ? feedback.score : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>디바이스</div>
-          <div className={styles.value}>{feedback?.device ? feedback.device : null}</div>
+          <div className={styles.value}>{feedback?.deviceOS ? feedback.deviceOS : null}</div>
           <div className={styles.key}>유형 분류</div>
           <div className={styles.value}>{feedback?.category ? feedback.category : null}</div>
         </div>

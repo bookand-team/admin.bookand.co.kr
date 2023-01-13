@@ -15,7 +15,7 @@ import pushSlice from '@redux/reducers/push';
 import pushesSlice from '@redux/reducers/pushes';
 import reportsSlice from '@redux/reducers/reports';
 import userSlice from '@redux/reducers/user';
-import { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackState, FeedbacksState, ImageState, MemberState, MembersState, PageState, PushState, PushesState, ReportState, UserState } from '@types';
+import { ArticleState, ArticlesState, BookstoreState, BookstoresState, FeedbackState, FeedbacksState, ImageState, MemberState, MembersState, PageState, PushState, PushesState, ReportsState, UserState } from '@types';
 
 const rootReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -56,7 +56,7 @@ export type RootState = {
   page: PageState;
   push: PushState;
   pushes: PushesState;
-  reports: ReportState;
+  reports: ReportsState;
   user: UserState;
 };
 

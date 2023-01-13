@@ -4,10 +4,10 @@ import React, { useCallback } from 'react';
 import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.css';
 import styles from '@styles/layout/modal/details.module.css';
-import { Bookstore } from '@types';
+import { BookstoreDTO } from '@types';
 
 type Props = {
-  bookstore: Bookstore;
+  bookstore: BookstoreDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
@@ -55,10 +55,16 @@ const Details = ({ bookstore, setOpenModalId }: Props) => {
           <div className={styles.value}>{bookstore?.exposedDate ? bookstore.exposedDate : null}</div>
         </div>
         <div className={styles.row}>
-          <div className={styles.key}>연락처</div>
-          <div className={styles.value}>{bookstore?.contact ? bookstore.contact : null}</div>
+          <div className={styles.key}>주소</div>
+          <div className={styles.value}>{bookstore?.info?.address ? bookstore.info.address : null}</div>
           <div className={styles.key}>최종 수정일자</div>
           <div className={styles.value}>{bookstore?.modifiedDate ? bookstore.modifiedDate : null}</div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.key}>연락처</div>
+          <div className={styles.value}>{bookstore?.info?.contact ? bookstore.info.contact : null}</div>
+          <div className={styles.key}>SNS</div>
+          <div className={styles.value}>{bookstore?.info?.sns ? bookstore.info.sns : null}</div>
         </div>
       </div>
       <div className={buttonStyles.modal_buttons}>

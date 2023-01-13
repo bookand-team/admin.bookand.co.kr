@@ -1,20 +1,21 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
 import buttonStyles from '@styles/layout/button.module.css';
 import styles from '@styles/push/registration.module.css';
-import { PushCategory, TargetDevice, TargetMemberId, TargetRole } from '@types';
+import { PushCategory, DeviceOSFilter, MemberIdFilter, MemberRoleFilter, PushCategoryArr, MemberIdFilterArr, DeviceOSFilterArr, MemberRoleFilterArr } from '@types';
 
 const Registration = () => {
   const router = useRouter();
 
-  // 입력받은 푸시 내용 (제목, 카테고리, 노출범위, 본문)
+  // 입력받은 푸시 내용 (제목, 카테고리, 필터값, 본문)
   const [inputTitle, changeInputTitle] = useInputText('');
-  const [selectCategory, changeSelectCategory] = useInputSelect<PushCategory>('');
-  const [selectTargetMemberId, changeSelectTargetMemberId] = useInputRadio<TargetMemberId>('');
-  const [selectTargetDevice, changeSelectTargetDevice] = useInputRadio<TargetDevice>('');
-  const [selectTargetMemberRole, changeSelectTargetMemberRole] = useInputRadio<TargetRole>('');
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | PushCategory>('');
+  const [selectMemberIdFilter, changeSelectMemberIdFilter] = useInputRadio<MemberIdFilter>('전체');
+  const [selectDeviceOSFilter, changeSelectDeviceOSFilter] = useInputRadio<DeviceOSFilter>('전체');
+  const [selectMemberRoleFilter, changeSelectMemberRoleFilter] = useInputRadio<MemberRoleFilter>('전체');
   const [inputContent, changeInputContent] = useInputTextArea('');
 
   /** 뒤로가기 버튼 - 이전 페이지로 이동 */
@@ -31,17 +32,11 @@ const Registration = () => {
       return alert('제목을 입력해주세요.');
     } else if (selectCategory === '') {
       return alert('카테고리를 선택해주세요.');
-    } else if (selectTargetMemberId === '') {
-      return alert('노출할 멤버 식별자 범위를 선택해주세요.');
-    } else if (selectTargetDevice === '') {
-      return alert('노출할 디바이스를 선택해주세요.');
-    } else if (selectTargetMemberRole === '') {
-      return alert('노출할 멤버 역할을 선택해주세요.');
     } else if (inputContent === '') {
       return alert('본문을 입력해주세요.');
     }
     alert('현재 지원하지 않는 기능입니다.');
-  }, [inputTitle, selectCategory, selectTargetMemberId, selectTargetDevice, selectTargetMemberRole, inputContent]);
+  }, [inputTitle, selectCategory, selectMemberIdFilter, selectDeviceOSFilter, selectMemberRoleFilter, inputContent]);
 
   return (
     <section className={styles.container}>
@@ -50,37 +45,35 @@ const Registration = () => {
       </div>
       <div className={styles.contents}>
         <div className={styles.title}>
-          <input value={inputTitle} onChange={changeInputTitle} placeholder='제목을 입력해주세요.' />
+          <input value={inputTitle} onChange={changeInputTitle} placeholder='제목을 입력해주세요.' spellCheck='false' />
         </div>
         <div className={styles.category}>
           <select value={selectCategory} onChange={changeSelectCategory}>
-            <option value=''>카테고리</option>
-            <option value='업데이트'>업데이트</option>
-            <option value='에러'>에러</option>
-            <option value='프로모션'>프로모션</option>
-            <option value='기타'>기타</option>
+            <option value='' disabled>카테고리</option>
+            {PushCategoryArr.map((value) =>
+              <option key={nanoid()} value={value}>{value}</option>
+            )}
           </select>
         </div>
         <div className={styles.target}>
           <div>
-            <label><input type='radio' name='target_member_id' value='전체' onChange={changeSelectTargetMemberId} />전체</label>
-            <label><input type='radio' name='target_member_id' value='홀수' onChange={changeSelectTargetMemberId} />ID값 홀수</label>
-            <label><input type='radio' name='target_member_id' value='짝수' onChange={changeSelectTargetMemberId} />ID값 짝수</label>
+            {MemberIdFilterArr.map((value, idx) =>
+              <label key={`MIF${idx}`}><input type='radio' name='member id filter' value={value} onChange={changeSelectMemberIdFilter} />{value}</label>
+            )}
           </div>
           <div>
-            <label><input type='radio' name='target_device' value='전체' onChange={changeSelectTargetDevice} />전체</label>
-            <label><input type='radio' name='target_device' value='Android' onChange={changeSelectTargetDevice} />Android</label>
-            <label><input type='radio' name='target_device' value='IOS' onChange={changeSelectTargetDevice} />IOS</label>
+            {DeviceOSFilterArr.map((value, idx) =>
+              <label key={`DOF${idx}`}><input type='radio' name='device os filter' value={value} onChange={changeSelectDeviceOSFilter} />{value}</label>
+            )}
           </div>
           <div>
-            <label><input type='radio' name='target_member_role' value='전체' onChange={changeSelectTargetMemberRole} />전체</label>
-            <label><input type='radio' name='target_member_role' value='일반' onChange={changeSelectTargetMemberRole} />일반</label>
-            <label><input type='radio' name='target_member_role' value='관리자' onChange={changeSelectTargetMemberRole} />관리자</label>
+            {MemberRoleFilterArr.map((value, idx) =>
+              <label key={`MRF${idx}`}><input type='radio' name='member role filter' value={value} onChange={changeSelectMemberRoleFilter} />{value}</label>
+            )}
           </div>
-
         </div>
         <div className={styles.content}>
-          <textarea value={inputContent} onChange={changeInputContent} placeholder='본문을 입력해주세요.' />
+          <textarea value={inputContent} onChange={changeInputContent} placeholder='본문을 입력해주세요.' spellCheck='false' />
         </div>
       </div>
       <div className={buttonStyles.buttons}>

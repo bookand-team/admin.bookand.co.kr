@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -15,7 +16,7 @@ import { RootState } from '@redux/reducers';
 import styles from '@styles/article/management.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
-import { ArticleCategory, ArticleStatus } from '@types';
+import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -26,8 +27,8 @@ const Management = () => {
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
 
   // 선택한 데이터 (카테고리, 노출상태)
-  const [selectCategory, changeSelectCategory] = useInputSelect<ArticleCategory>('');
-  const [selectStatus, changeSelectStatus] = useInputSelect<ArticleStatus>('');
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | ArticleCategory>('');
+  const [selectStatus, changeSelectStatus] = useInputSelect<'' | ArticleStatus>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -76,16 +77,17 @@ const Management = () => {
               <div className={styles.category}>
                 <select value={selectCategory} onChange={changeSelectCategory}>
                   <option value=''>카테고리</option>
-                  <option value='서점소개'>서점소개</option>
-                  <option value='책소개'>책소개</option>
-                  <option value='인터뷰'>인터뷰</option>
+                  {ArticleCategoryArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>노출상태</option>
-                  <option value='노출'>노출</option>
-                  <option value='미노출'>미노출</option>
+                  {ArticleStatusArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.view}>누적뷰수</div>

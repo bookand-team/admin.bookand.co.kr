@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useCallback, useRef } from 'react';
 
@@ -5,7 +6,7 @@ import { useInputSelect } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
 import styles from '@styles/article/extra_contents.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
-import { ArticleCategory, TargetDevice, TargetMemberId } from '@types';
+import { ArticleCategory, ArticleCategoryArr, DeviceOSFilter, DeviceOSFilterArr, MemberIdFilter, MemberIdFilterArr } from '@types';
 
 type PropsType = {
   setStage: Dispatch<SetStateAction<'contents' | 'extra contents'>>;
@@ -13,9 +14,9 @@ type PropsType = {
 
 const ExtraContents = ({ setStage }: PropsType) => {
   // 입력받은 아티클 정보 (카테고리, 노출 디바이스, 노출 멤버 식별자)
-  const [selectCategory, changeSelectCategory] = useInputSelect<ArticleCategory>('');
-  const [selectTargetDevice, changeSelectTargetDevice] = useInputSelect<TargetDevice>('');
-  const [selectTargetMemberId, changeSelectTargetMemberId] = useInputSelect<TargetMemberId>('');
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | ArticleCategory>('');
+  const [selectMemberIdFilter, changeSelectMemberIdFilter] = useInputSelect<MemberIdFilter>('전체');
+  const [selectDeviceOSFilter, changeSelectDeviceOSFilter] = useInputSelect<DeviceOSFilter>('전체');
 
   // 대표 이미지 선택 버튼 선택자
   const mainImageRef = useRef<HTMLInputElement>(null);
@@ -71,9 +72,9 @@ const ExtraContents = ({ setStage }: PropsType) => {
                 <div>카테고리</div>
                 <select value={selectCategory} onChange={changeSelectCategory}>
                   <option value='' disabled>카테고리</option>
-                  <option value='서점소개'>서점소개</option>
-                  <option value='책소개'>책소개</option>
-                  <option value='인터뷰'>인터뷰</option>
+                  {ArticleCategoryArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
             </div>
@@ -81,20 +82,18 @@ const ExtraContents = ({ setStage }: PropsType) => {
               <div className={styles.description}>적용 필터</div>
               <div className={styles.select}>
                 <div>운영체제</div>
-                <select value={selectTargetDevice} onChange={changeSelectTargetDevice}>
-                  <option value='' disabled>Device</option>
-                  <option value='전체'>전체</option>
-                  <option value='Android'>Android</option>
-                  <option value='IOS'>IOS</option>
+                <select value={selectDeviceOSFilter} onChange={changeSelectDeviceOSFilter}>
+                  {DeviceOSFilterArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.select}>
                 <div>사용자</div>
-                <select value={selectTargetMemberId} onChange={changeSelectTargetMemberId}>
-                  <option value='' disabled>Member ID</option>
-                  <option value='전체'>전체</option>
-                  <option value='홀수'>홀수</option>
-                  <option value='짝수'>짝수</option>
+                <select value={selectMemberIdFilter} onChange={changeSelectMemberIdFilter}>
+                  {MemberIdFilterArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
             </div>

@@ -3,23 +3,22 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@redux/reducers';
 import styles from '@styles/common/gnb.module.css';
+import { GNBArr } from '@types';
 
 const Gnb = () => {
   const { section } = useSelector((state: RootState) => state.page);
-
-  const globalMenu = [['dashboard', '대시보드'], ['article', '아티클'], ['bookstore', '서점'], ['member', '회원'], ['push', '푸시'], ['feedback', '피드백'], ['report', '제보서점'], ['notice', '공지사항'], ['terms', '약관 및 정책']];
 
   return (
     <>
       {section !== 'login' &&
         <nav className={styles.gnb}>
           <ul>
-            {globalMenu.map((menu, idx) => {
+            {GNBArr.map((menu, idx) => {
               return (
                 <Link key={idx} href={`/${menu[0]}`}>
                   {section === menu[0]
-                    ? <a className={styles.current}><li>{`${menu[1]}`}</li></a>
-                    : <a><li>{`${menu[1]}`}</li></a>
+                    ? <a className={styles.current}><li>{menu[1]}</li></a>
+                    : <a><li>{menu[1]}</li></a>
                   }
                 </Link>
               );

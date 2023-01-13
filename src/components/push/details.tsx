@@ -4,10 +4,10 @@ import React, { useCallback } from 'react';
 import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.css';
 import styles from '@styles/layout/modal/details.module.css';
-import { Push } from '@types';
+import { PushDTO } from '@types';
 
 type Props = {
-  push: Push;
+  push: PushDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 

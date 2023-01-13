@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -15,7 +16,7 @@ import { RootState } from '@redux/reducers';
 import styles from '@styles/bookstore/management.module.css';
 import buttonStyles from '@styles/layout/button.module.css';
 import tableStyles from '@styles/layout/table.module.css';
-import { BookstoreStatus, BookstoreTheme } from '@types';
+import { BookstoreStatus, BookstoreStatusArr, BookstoreTheme, BookstoreThemeArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
@@ -26,8 +27,8 @@ const Management = () => {
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
 
   // 선택한 데이터 (테마, 노출상태)
-  const [selectTheme, changeSelectTheme] = useInputSelect<BookstoreTheme>('');
-  const [selectStatus, changeSelectStatus] = useInputSelect<BookstoreStatus>('');
+  const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>('');
+  const [selectStatus, changeSelectStatus] = useInputSelect<'' | BookstoreStatus>('');
 
   // 열려있는 모달창 식별자 상태
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -76,19 +77,17 @@ const Management = () => {
               <div className={styles.theme}>
                 <select value={selectTheme} onChange={changeSelectTheme}>
                   <option value=''>테마</option>
-                  <option value='여행'>여행</option>
-                  <option value='애완동물'>애완동물</option>
-                  <option value='역사'>역사</option>
-                  <option value='추리'>추리</option>
-                  <option value='그림'>그림</option>
-                  <option value='음악'>음악</option>
+                  {BookstoreThemeArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.status}>
                 <select value={selectStatus} onChange={changeSelectStatus}>
                   <option value=''>노출상태</option>
-                  <option value='노출'>노출</option>
-                  <option value='미노출'>미노출</option>
+                  {BookstoreStatusArr.map((value) =>
+                    <option key={nanoid()} value={value}>{value}</option>
+                  )}
                 </select>
               </div>
               <div className={styles.view}>누적뷰수</div>
