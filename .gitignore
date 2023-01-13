@@ -4,6 +4,9 @@
 # next.js
 /.next
 
+# complie
+tsconfig.tsbuildinfo
+
 # production
 /build
 
