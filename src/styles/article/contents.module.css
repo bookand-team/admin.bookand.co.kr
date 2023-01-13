@@ -101,35 +101,36 @@
   margin-bottom: 32px;
 }
 
-.viewer {
-  line-height: 1.75;
+.viewer * {
+  line-height: 1.5;
 }
 
 .viewer h1 {
-  font-size: 44px;
+  font-size: 30px;
   font-weight: 800;
 }
 
 .viewer h2 {
-  font-size: 34px;
+  font-size: 26px;
   font-weight: 700;
   margin: 0;
   margin-left: 1px;
+  line-height: 1.75;
 }
 
 .viewer h3 {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
   margin-left: 2px;
 }
 
 .viewer h4 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   margin-left: 3px;
 }
 
 .viewer p {
-  font-size: 16px;
+  font-size: 14px;
   margin-left: 4px;
 }
