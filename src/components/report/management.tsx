@@ -19,7 +19,7 @@ import { ReportStatus, ReportStatusArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
-  const { reports, reportsLength } = useSelector((state: RootState) => state.reports);
+  const { reports, reportsLength } = useSelector((state: RootState) => state.report);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (노출상태)

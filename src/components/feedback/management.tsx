@@ -19,7 +19,7 @@ import { FeedbackCategory, FeedbackCategoryArr } from '@types';
 
 const Management = () => {
   const router = useRouter();
-  const { feedbacks, feedbacksLength } = useSelector((state: RootState) => state.feedbacks);
+  const { feedbacks, feedbacksLength } = useSelector((state: RootState) => state.feedback);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (유형분류)

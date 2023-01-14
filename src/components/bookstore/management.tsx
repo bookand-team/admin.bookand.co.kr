@@ -20,7 +20,7 @@ import { BookstoreStatus, BookstoreStatusArr, BookstoreTheme, BookstoreThemeArr 
 
 const Management = () => {
   const router = useRouter();
-  const { bookstores, bookstoresLength } = useSelector((state: RootState) => state.bookstores);
+  const { bookstores, bookstoresLength } = useSelector((state: RootState) => state.bookstore);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택

@@ -20,7 +20,7 @@ import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } 
 
 const Management = () => {
   const router = useRouter();
-  const { articles, articlesLength } = useSelector((state: RootState) => state.articles);
+  const { articles, articlesLength } = useSelector((state: RootState) => state.article);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택

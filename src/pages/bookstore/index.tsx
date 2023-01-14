@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
 
+import { readBookstores } from '@api/dummy/bookstore';
 import { redirectLoginPage, silentLogin } from '@api/user/silent_login';
 import Management from '@components/bookstore/management';
-import { loadDummyBookstores } from '@redux/reducers/bookstores';
+import { setBookstores } from '@redux/reducers/bookstore';
 import { setPage } from '@redux/reducers/page';
 import { setLoginUser } from '@redux/reducers/user';
 import wrapper from '@redux/store';
@@ -39,8 +40,11 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     status: context.query.status ? context.query.status : null
   }));
 
-  // TODO: 페이지 상태에 따라 필요한 데이터 요청
-  store.dispatch(loadDummyBookstores(store.getState().page));
+  // 필요한 데이터 요청 후 저장
+  const response = await readBookstores(store.getState().page);
+  if (response !== null && typeof response === 'object' && 'bookstores' in response && 'bookstoresLength' in response) {
+    store.dispatch(setBookstores(response));
+  }
 
   // 재발행 refreshToken 전달
   return {

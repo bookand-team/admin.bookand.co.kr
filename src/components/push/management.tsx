@@ -19,7 +19,7 @@ import { PushCategory, PushCategoryArr, PushStatus, PushStatusArr } from '@types
 
 const Management = () => {
   const router = useRouter();
-  const { pushes, pushesLength } = useSelector((state: RootState) => state.pushes);
+  const { pushes, pushesLength } = useSelector((state: RootState) => state.push);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택

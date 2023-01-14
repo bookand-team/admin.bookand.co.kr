@@ -13,8 +13,16 @@ const feedbackSlice = createSlice({
   name: 'feedback',
   initialState,
   reducers: {
-
+    setFeedback: (state, action) => {
+      state.feedback = action.payload.feedback;
+    },
+    setFeedbacks: (state, action) => {
+      state.feedbacks = action.payload.feedbacks;
+      state.feedbacksLength = action.payload.feedbacksLength;
+    }
   }
 });
+
+export const { setFeedback, setFeedbacks } = feedbackSlice.actions;
 
 export default feedbackSlice;

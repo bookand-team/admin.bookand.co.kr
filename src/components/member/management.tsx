@@ -19,7 +19,7 @@ import { MemberRole, MemberRoleArr, MemberStatus, MemberStatusArr } from '@types
 
 const Management = () => {
   const router = useRouter();
-  const { members, membersLength } = useSelector((state: RootState) => state.members);
+  const { members, membersLength } = useSelector((state: RootState) => state.member);
   const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (역할, 상태)

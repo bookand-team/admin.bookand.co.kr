@@ -1,9 +1,10 @@
 import Cookies from 'js-cookie';
 
+import { readPushes } from '@api/dummy/push';
 import { redirectLoginPage, silentLogin } from '@api/user/silent_login';
 import Management from '@components/push/management';
 import { setPage } from '@redux/reducers/page';
-import { loadDummyPushes } from '@redux/reducers/pushes';
+import { setPushes } from '@redux/reducers/push';
 import { setLoginUser } from '@redux/reducers/user';
 import wrapper from '@redux/store';
 import { PagePropsType } from '@types';
@@ -39,8 +40,11 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     status: context.query.status ? context.query.status : null
   }));
 
-  // TODO: 페이지 상태에 따라 필요한 데이터 요청
-  store.dispatch(loadDummyPushes(store.getState().page));
+  // 필요한 데이터 요청 후 저장
+  const response = await readPushes(store.getState().page);
+  if (response !== null && typeof response === 'object' && 'pushes' in response && 'pushesLength' in response) {
+    store.dispatch(setPushes(response));
+  }
 
   // 재발행 refreshToken 전달
   return {

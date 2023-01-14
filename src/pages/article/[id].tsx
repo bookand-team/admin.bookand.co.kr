@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
 
+import { readArticle } from '@api/dummy/article';
 import { redirectLoginPage, silentLogin } from '@api/user/silent_login';
 import Modification from '@components/article/modification';
-import { loadDummyArticle } from '@redux/reducers/acticle';
+import { setArticle } from '@redux/reducers/acticle';
 import { setPage } from '@redux/reducers/page';
 import { setLoginUser } from '@redux/reducers/user';
 import wrapper from '@redux/store';
@@ -34,8 +35,11 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     section: 'article'
   }));
 
-  // TODO: 페이지 상태에 따라 필요한 데이터 요청
-  store.dispatch(loadDummyArticle(context.params?.id));
+  // 필요한 데이터 요청 후 저장
+  const response = await readArticle({ id: context.params?.id as string });
+  if (response !== null && typeof response === 'object' && 'article' in response) {
+    store.dispatch(setArticle(response));
+  }
 
   // 재발행 refreshToken 전달
   return {
