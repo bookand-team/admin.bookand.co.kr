@@ -26,32 +26,6 @@ export interface PushDTO {
 export interface PushState {
   push: PushDTO | null;
 
-  createPushLoading: boolean;
-  createPushDone: unknown;
-  createPushError: unknown;
-
-  readPushLoading: boolean;
-  readPushDone: unknown;
-  readPushError: unknown;
-
-  updatePushLoading: boolean;
-  updatePushDone: unknown;
-  updatePushError: unknown;
-
-  deletePushLoading: boolean;
-  deletePushDone: unknown;
-  deletePushError: unknown;
-}
-
-export interface PushesState {
   pushes: PushDTO[] | null;
   pushesLength: number | null;
-
-  readPushesLoading: boolean;
-  readPushesDone: unknown;
-  readPushesError: unknown;
-
-  deletePushesLoading: boolean;
-  deletePushesDone: unknown;
-  deletePushesError: unknown;
 }

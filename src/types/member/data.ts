@@ -28,20 +28,6 @@ export interface MemberDTO {
 export interface MemberState {
   member: MemberDTO | null;
 
-  readMemberLoading: boolean;
-  readMemberDone: unknown;
-  readMemberError: unknown;
-
-  updateMemberLoading: boolean;
-  updateMemberDone: unknown;
-  updateMemberError: unknown;
-}
-
-export interface MembersState {
   members: MemberDTO[] | null;
   membersLength: number | null;
-
-  readMembersLoading: boolean;
-  readMembersDone: unknown;
-  readMembersError: unknown;
 }

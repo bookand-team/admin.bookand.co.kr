@@ -16,20 +16,6 @@ export interface FeedbackDTO {
 export interface FeedbackState {
   feedback: FeedbackDTO | null;
 
-  readFeedbackLoading: boolean;
-  readFeedbackDone: unknown;
-  readFeedbackError: unknown;
-}
-
-export interface FeedbacksState {
   feedbacks: FeedbackDTO[] | null;
   feedbacksLength: number | null;
-
-  readFeedbacksLoading: boolean;
-  readFeedbacksDone: unknown;
-  readFeedbacksError: unknown;
-
-  deleteFeedbacksLoading: boolean;
-  deleteFeedbacksDone: unknown;
-  deleteFeedbacksError: unknown;
 }

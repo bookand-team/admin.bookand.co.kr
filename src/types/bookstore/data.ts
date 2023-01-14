@@ -29,32 +29,6 @@ export interface BookstoreDTO {
 export interface BookstoreState {
   bookstore: BookstoreDTO | null;
 
-  createBookstoreLoading: boolean;
-  createBookstoreDone: unknown;
-  createBookstoreError: unknown;
-
-  readBookstoreLoading: boolean;
-  readBookstoreDone: unknown;
-  readBookstoreError: unknown;
-
-  updateBookstoreLoading: boolean;
-  updateBookstoreDone: unknown;
-  updateBookstoreError: unknown;
-
-  deleteBookstoreLoading: boolean;
-  deleteBookstoreDone: unknown;
-  deleteBookstoreError: unknown;
-}
-
-export interface BookstoresState {
   bookstores: BookstoreDTO[] | null;
   bookstoresLength: number | null;
-
-  readBookstoresLoading: boolean;
-  readBookstoresDone: unknown;
-  readBookstoresError: unknown;
-
-  deleteBookstoresLoading: boolean;
-  deleteBookstoresDone: unknown;
-  deleteBookstoresError: unknown;
 }

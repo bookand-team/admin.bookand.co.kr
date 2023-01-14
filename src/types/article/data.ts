@@ -27,32 +27,6 @@ export interface ArticleDTO {
 export interface ArticleState {
   article: ArticleDTO | null;
 
-  createArticleLoading: boolean;
-  createArticleDone: unknown;
-  createArticleError: unknown;
-
-  readArticleLoading: boolean;
-  readArticleDone: unknown;
-  readArticleError: unknown;
-
-  updateArticleLoading: boolean;
-  updateArticleDone: unknown;
-  updateArticleError: unknown;
-
-  deleteArticleLoading: boolean;
-  deleteArticleDone: unknown;
-  deleteArticleError: unknown;
-}
-
-export interface ArticlesState {
   articles: ArticleDTO[] | null;
   articlesLength: number | null;
-
-  readArticlesLoading: boolean;
-  readArticlesDone: unknown;
-  readArticlesError: unknown;
-
-  deleteArticlesLoading: boolean;
-  deleteArticlesDone: unknown;
-  deleteArticlesError: unknown;
 }

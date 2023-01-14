@@ -10,7 +10,7 @@ export const GNBArr = [['dashboard', '대시보드'], ['article', '아티클'], 
 export const PageSectionArr = ['login', 'dashboard', 'article', 'bookstore', 'member', 'push', 'feedback', 'report', 'notice', 'terms'] as const;
 export type PageSection = typeof PageSectionArr[number];
 
-export type PageState = {
+export interface PageState {
   section: PageSection | null;
   category: ArticleCategory | FeedbackCategory | PushCategory | null;
   theme: BookstoreTheme | null;
@@ -19,7 +19,7 @@ export type PageState = {
   row: number;
   search: string | null;
   status: ArticleStatus | BookstoreStatus | MemberStatus | PushStatus | ReportStatus | null;
-};
+}
 
 export interface PagePropsType {
   refreshToken: string;

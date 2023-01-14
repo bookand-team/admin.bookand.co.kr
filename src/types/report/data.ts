@@ -11,11 +11,9 @@ export interface ReportDTO {
   exposedDate: string | null;  // 노출 날짜
 }
 
-export interface ReportsState {
+export interface ReportState {
+  report: ReportDTO | null;
+
   reports: ReportDTO[] | null;
   reportsLength: number | null;
-
-  readReportsLoading: boolean;
-  readReportsDone: unknown;
-  readReportsError: unknown;
 }
