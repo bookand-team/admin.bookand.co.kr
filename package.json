@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "author": "Yunsung-Choi",
   "scripts": {
-    "dev": "nodemon server",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint--fix": "next lint --fix"
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^13.1.2",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.0",
     "chart.js": "^3.9.1",
