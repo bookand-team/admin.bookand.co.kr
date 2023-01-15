@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +6,6 @@ import { login } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
 import { AppDispatch } from '@redux/store';
 import styles from '@styles/login/login.module.css';
-import { isLoginSucRes } from '@types';
 
 const Login = () => {
   const router = useRouter();
@@ -24,8 +22,7 @@ const Login = () => {
 
   // 로그인 요청 결과 처리
   useEffect(() => {
-    if (loginDone && isLoginSucRes(loginDone)) {
-      Cookies.set('refreshToken', loginDone.refreshToken);  // refreshToken 저장
+    if (loginDone) {
       router.replace('/dashboard');
     }
   }, [loginDone]);
@@ -36,7 +33,7 @@ const Login = () => {
       <form onSubmit={loginBtnHandler}>
         <input className={styles.id} type='text' name='inputId' placeholder='아이디' required />
         <input className={styles.password} type='password' name='inputPassword' placeholder='비밀번호' required />
-        {loginError !== null && <div className={styles.error_msg}>아이디 또는 비밀번호를 잘못 입력했습니다.</div>}
+        {loginError && <div className={styles.error_msg}>아이디 또는 비밀번호를 잘못 입력했습니다.</div>}
         <button type='submit'>로그인</button>
       </form>
     </section>

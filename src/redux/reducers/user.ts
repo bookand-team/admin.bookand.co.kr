@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { login } from '@redux/actions/user';
-import { isLoginSucRes, UserState } from '@types';
+import { UserState } from '@types';
 
 const initialState: UserState = {
   isLoggedIn: false,
@@ -10,8 +10,8 @@ const initialState: UserState = {
 
   // 로그인
   loginLoading: false,
-  loginDone: null,
-  loginError: null
+  loginDone: false,
+  loginError: false
 };
 
 const userSlice = createSlice({
@@ -28,18 +28,15 @@ const userSlice = createSlice({
     builder.addCase(login.pending, (state) => {
       state.loginLoading = true;
       state.loginDone = false;
-      state.loginError = null;
+      state.loginError = false;
     });
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(login.fulfilled, (state) => {
       state.loginLoading = false;
-      state.loginDone = action.payload;
-      if (isLoginSucRes(action.payload)) {
-        state.token = action.payload;
-      }
+      state.loginDone = true;
     });
-    builder.addCase(login.rejected, (state, action) => {
+    builder.addCase(login.rejected, (state) => {
       state.loginLoading = false;
-      state.loginError = action.payload;
+      state.loginError = true;
     });
   }
 });

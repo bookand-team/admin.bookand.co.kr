@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { isAxiosError } from 'axios';
 
-import { axiosBack } from '@config/axios';
+import { axiosFront } from '@config/axios';
 import { LoginReqDTO } from '@types';
 
 // 로그인
 export const login = createAsyncThunk('login', async (data: LoginReqDTO, { rejectWithValue }) => {
   try {
-    const response = await axiosBack.post('/auth/admin', data);
+    const response = await axiosFront.post('/auth/login', data);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
