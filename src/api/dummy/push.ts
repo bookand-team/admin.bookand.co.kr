@@ -1,4 +1,5 @@
-import { PageState } from '@types';
+import { isReadPushResDTO, isReadPushesResDTO, PageState } from '@types';
+import { controlAxiosError } from '@utils/control_axios_error';
 import { postBody } from '@utils/post_body';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_AXIOS_FRONT_PROTOCOL}${process.env.NEXT_PUBLIC_AXIOS_FRONT_HOST}${process.env.NEXT_PUBLIC_AXIOS_FRONT_COMMON_PATH}`;
@@ -8,9 +9,13 @@ export const readPush = async (param: { id: string; }) => {
   try {
     const response = await fetch(`${baseUrl}/push/${param.id}`);
     const result = await response.json();
-    return result;
+    if (isReadPushResDTO(result)) {
+      return result;
+    } else {
+      return 'Not Vaild Format';
+    }
   } catch (error) {
-    return null;
+    return controlAxiosError(error);
   }
 };
 
@@ -19,9 +24,13 @@ export const readPushes = async (data: Partial<PageState>) => {
   try {
     const response = await fetch(`${baseUrl}/push/search`, postBody(data));
     const result = await response.json();
-    return result;
+    if (isReadPushesResDTO(result)) {
+      return result;
+    } else {
+      return 'Not Vaild Format';
+    }
   } catch (error) {
-    return null;
+    return controlAxiosError(error);
   }
 };
 
@@ -30,8 +39,12 @@ export const readWholePushes = async () => {
   try {
     const response = await fetch(`${baseUrl}/push`);
     const result = await response.json();
-    return result;
+    if (isReadPushesResDTO(result)) {
+      return result;
+    } else {
+      return 'Not Vaild Format';
+    }
   } catch (error) {
-    return null;
+    return controlAxiosError(error);
   }
 };
