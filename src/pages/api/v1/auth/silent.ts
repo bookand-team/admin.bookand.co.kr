@@ -6,8 +6,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'POST') {
-      // 로그인 요청
-      const response = await axiosBack.post('/auth/admin', req.body);
+      // 토큰 재발행 요청
+      const response = await axiosBack.post('/auth/reissue', req.body);
       const tokenData = response.data;
 
       // 토큰정보 형식이 맞는지 확인

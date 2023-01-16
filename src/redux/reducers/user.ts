@@ -30,6 +30,9 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
       state.token = action.payload;
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
     setExpired: (state) => {
       state.expired = true;
     }
@@ -66,6 +69,6 @@ const userSlice = createSlice({
   }
 });
 
-export const { setLoginUser, setExpired } = userSlice.actions;
+export const { setLoginUser, setToken, setExpired } = userSlice.actions;
 
 export default userSlice;

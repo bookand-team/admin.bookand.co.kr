@@ -17,7 +17,7 @@ const DashboardPage = () => {
 
   // 페이지가 호출될 때 만료된 AccessToken을 가진 경우 토큰 재발행 요청
   useEffect(() => {
-    if (user.expired) { dispatch(silentLogin({ refreshToken: user.token!.refreshToken })); }
+    if (user.token && user.expired) { dispatch(silentLogin({ refreshToken: user.token.refreshToken })); }
   }, []);
 
   // 토큰 재발행 요청 결과 처리

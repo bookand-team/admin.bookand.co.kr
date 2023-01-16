@@ -2,7 +2,7 @@ import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { GetServerSidePropsContext } from 'next/types';
 
 import { setPage } from '@redux/reducers/page';
-import { setExpired, setLoginUser } from '@redux/reducers/user';
+import { setExpired, setLoginUser, setToken } from '@redux/reducers/user';
 import { PageSection } from '@types';
 
 /** 서버사이드에서 페이지 상태 설정 */
@@ -20,11 +20,18 @@ export const setPageState = (store: ToolkitStore, context: GetServerSidePropsCon
 };
 
 /** 서버사이드에서 유저 상태 설정 */
-export const setUserState = (store: ToolkitStore, context: GetServerSidePropsContext) => {
-  store.dispatch(setLoginUser({
-    aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
-    refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
-  }));
+export const setUserState = (store: ToolkitStore, context: GetServerSidePropsContext, isLoginPage?: boolean) => {
+  if (isLoginPage) {
+    store.dispatch(setToken({
+      aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
+      refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
+    }));
+  } else {
+    store.dispatch(setLoginUser({
+      aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
+      refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
+    }));
+  }
 };
 
 /** 서버사이드에서 토큰 만료 처리 */
