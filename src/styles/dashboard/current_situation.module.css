@@ -6,10 +6,25 @@
 
 .contents {
   display: flex;
-  width: 1750px;
-  justify-content: space-between;
+  width: 100%;
   flex-wrap: wrap;
   margin: 0 20px;
+  gap: 16px;
+}
+
+.half {
+  display: flex;
+  gap: 16px;
+}
+
+@media screen and (max-width:1750px) {
+  .contents {
+    gap: 24px;
+  }
+
+  .half {
+    gap: 48px;
+  }
 }
 
 .section {
@@ -19,25 +34,15 @@
   border-radius: 30px;
   background-color: #E4E4E4;
   padding: 16px;
-  margin: 16px 9px;
   white-space: nowrap;
-}
-
-@media screen and (max-width:1750px) {
-  .contents {
-    width: 900px;
-  }
 }
 
 .section h4 {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .section p {
-  font-family: 'Roboto';
   font-size: 16px;
-  font-weight: 400;
-  align-items: center;
 }

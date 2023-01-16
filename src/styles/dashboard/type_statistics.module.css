@@ -4,22 +4,24 @@
   margin-bottom: 60px;
 }
 
-.contents {
+.content {
   display: flex;
-  justify-content: space-between;
-  width: 1200px;
+  margin: 0 40px;
+  gap: 10%;
 }
 
-.subcontents {
-  margin: 15px 50px;
+.sub_content {
+  max-width: 550px;
+  width: 40%;
 }
 
-.contents h3 {
+.content h3 {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
-.graphWrapper {
-  width: 400px;
+.sub_content select {
+  width: 100px;
+  outline: none;
 }

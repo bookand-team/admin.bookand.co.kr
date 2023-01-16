@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import CurrentSituation from '@components/dashboard/current_situation';
-import TrendStatistics from '@components/dashboard/trend_statistics';
 import TypeStatistics from '@components/dashboard/type_statistics';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
@@ -30,7 +29,6 @@ const DashboardPage = () => {
     <>
       <CurrentSituation />
       <TypeStatistics />
-      <TrendStatistics />
     </>
   );
 };
