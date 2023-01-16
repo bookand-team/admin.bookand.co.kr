@@ -5,10 +5,17 @@ export interface Token {
 
 export interface UserState {
   isLoggedIn: boolean;
+
   token: Token | null;
+  expired: boolean;
+
   myInfo: unknown;
 
   loginLoading: boolean;
   loginDone: boolean;
   loginError: boolean;
+
+  silentLoginLoading: boolean;
+  silentLoginDone: boolean;
+  silentLoginError: boolean;
 }

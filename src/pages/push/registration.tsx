@@ -1,6 +1,7 @@
 import Registration from '@components/push/registration';
 import wrapper from '@redux/store';
 import { checkToken } from '@utils/check_token';
+import { redirectPage } from '@utils/redirect_page';
 import { setPageState, setUserState } from '@utils/set_initial_state';
 
 const RegistrationPage = () => {
@@ -9,16 +10,13 @@ const RegistrationPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   // 토큰 확인 (미보유시 로그인 페이지 이동)
-  const redirect = checkToken(context);
-  if (redirect) { return redirect; }
+  if (!checkToken(context)) { return redirectPage('/'); }
 
   // 페이지 초기 설정 (페이지 상태, 토큰값)
   setPageState(store, context, 'push');
   setUserState(store, context);
 
-  return {
-    props: {}
-  };
+  return { props: {} };
 });
 
 export default RegistrationPage;

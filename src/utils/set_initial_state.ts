@@ -2,7 +2,7 @@ import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { GetServerSidePropsContext } from 'next/types';
 
 import { setPage } from '@redux/reducers/page';
-import { setLoginUser } from '@redux/reducers/user';
+import { setExpired, setLoginUser } from '@redux/reducers/user';
 import { PageSection } from '@types';
 
 /** 서버사이드에서 페이지 상태 설정 */
@@ -25,4 +25,9 @@ export const setUserState = (store: ToolkitStore, context: GetServerSidePropsCon
     aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
     refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
   }));
+};
+
+/** 서버사이드에서 토큰 만료 처리 */
+export const setTokenExpiration = (store: ToolkitStore) => {
+  store.dispatch(setExpired());
 };

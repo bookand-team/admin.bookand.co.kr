@@ -20,7 +20,3 @@ export interface PageState {
   search: string | null;
   status: ArticleStatus | BookstoreStatus | MemberStatus | PushStatus | ReportStatus | null;
 }
-
-export interface PagePropsType {
-  refreshToken: string;
-}

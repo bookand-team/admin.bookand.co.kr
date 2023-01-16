@@ -1,32 +1,51 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+
 import { readArticle } from '@api/dummy/article';
 import Modification from '@components/article/modification';
+import { useUserState } from '@hooks/use_user_state';
+import { silentLogin } from '@redux/actions/user';
 import { setArticle } from '@redux/reducers/acticle';
 import wrapper from '@redux/store';
 import { checkToken } from '@utils/check_token';
-import { setPageState, setUserState } from '@utils/set_initial_state';
+import { redirectPage } from '@utils/redirect_page';
+import { setPageState, setTokenExpiration, setUserState } from '@utils/set_initial_state';
 
 const DetailsPage = () => {
+  const router = useRouter();
+  const [user, dispatch] = useUserState();
+
+  // 페이지가 호출될 때 만료된 AccessToken을 가진 경우 토큰 재발행 요청
+  useEffect(() => {
+    if (user.expired) { dispatch(silentLogin({ refreshToken: user.token!.refreshToken })); }
+  }, []);
+
+  // 토큰 재발행 요청 결과 처리
+  useEffect(() => {
+    if (user.silentLoginDone) { router.reload(); }
+    if (user.silentLoginError) { router.replace('/'); }
+  }, [user.silentLoginDone, user.silentLoginError]);
+
   return (<Modification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   // 토큰 확인 (미보유시 로그인 페이지 이동)
-  const redirect = checkToken(context);
-  if (redirect) { return redirect; }
+  if (!checkToken(context)) { return redirectPage('/'); }
 
   // 페이지 초기 설정 (페이지 상태, 토큰값)
   setPageState(store, context, 'article');
   setUserState(store, context);
 
   // 데이터 요청 및 저장
-  const response = await readArticle({ id: context.params?.id as string });
-  if (response !== null && typeof response === 'object' && 'article' in response) {
-    store.dispatch(setArticle(response));
+  const result = await readArticle({ id: context.params?.id as string });
+  if (typeof result !== 'string') {
+    store.dispatch(setArticle(result));
+  } else if (result === 'Token Exception') {
+    setTokenExpiration(store);
   }
 
-  return {
-    props: {}
-  };
+  return { props: {} };
 });
 
 export default DetailsPage;
