@@ -1,3 +1,5 @@
+import { DeviceOSChoice } from '../filter';
+
 export const MemberRoleArr = ['일반', '관리자'] as const;
 export type MemberRole = typeof MemberRoleArr[number];
 
@@ -20,6 +22,7 @@ export interface MemberDTO {
   email: string;  // 이메일
   role: MemberRole;  // 역할
   status: MemberStatus;  // 이용 상태
+  deviceOS: DeviceOSChoice;  // 사용 디바이스 OS
   bookmarkArticle: number;  // 북마크한 아티클 수
   bookmarkBookstore: number;  // 북마크한 서점 수
   createdDate: string;  // 가입 날짜

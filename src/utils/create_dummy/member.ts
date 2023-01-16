@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { MemberDisciplineReasonArr, MemberRoleArr, MemberStatusArr } from '@types';
+import { DeviceOSChoiceArr, MemberDisciplineReasonArr, MemberRoleArr, MemberStatusArr } from '@types';
 
 export function CreateDummyMembers() {
   const createdDateList = faker.date.betweens('2021-01-01T00:00:00.000Z', '2023-01-01T00:00:00.000Z', 300);
@@ -13,6 +13,7 @@ export function CreateDummyMembers() {
     const email = faker.internet.email();  // 이메일
     const role = Math.random() < 0.95 ? MemberRoleArr[0] : MemberRoleArr[1];  // 역할
     const status = role === '관리자' ? MemberStatusArr[0] : MemberStatusArr[Math.floor(Math.random() * MemberStatusArr.length)];  // 이용 상태
+    const deviceOS = DeviceOSChoiceArr[Math.floor(Math.random() * DeviceOSChoiceArr.length)];  // 사용 기종
     const bookmarkArticle = Math.floor(Math.random() * 30);  // 북마크한 아티클 수
     const bookmarkBookstore = Math.floor(Math.random() * 30);  // 북마크한 서점 수
     const createdDate = CD;  // 가입 날짜
@@ -27,6 +28,7 @@ export function CreateDummyMembers() {
       email,
       role,
       status,
+      deviceOS,
       bookmarkArticle,
       bookmarkBookstore,
       createdDate,
