@@ -62,76 +62,80 @@ const Management = () => {
   }, [selectCategory, selectStatus]);
 
   return (
-    <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>푸시 관리</h2>
-      </div>
-      <div className={styles.contents}>
-        <div className={tableStyles.table}>
-          <div className={tableStyles.thead}>
-            <div className={tableStyles.tr}>
-              <div className={styles.check}>선택</div>
-              <div className={styles.id}>번호</div>
-              <div className={styles.title}>제목</div>
-              <div className={styles.category}>
-                <select value={selectCategory} onChange={changeSelectCategory}>
-                  <option value=''>카테고리</option>
-                  {PushCategoryArr.map((value) =>
-                    <option key={nanoid()} value={value}>{value}</option>
-                  )}
-                </select>
+    <>
+      {pushes &&
+        <section className={styles.container}>
+          <div className={styles.header}>
+            <h2>푸시 관리</h2>
+          </div>
+          <div className={styles.contents}>
+            <div className={tableStyles.table}>
+              <div className={tableStyles.thead}>
+                <div className={tableStyles.tr}>
+                  <div className={styles.check}>선택</div>
+                  <div className={styles.id}>번호</div>
+                  <div className={styles.title}>제목</div>
+                  <div className={styles.category}>
+                    <select value={selectCategory} onChange={changeSelectCategory}>
+                      <option value=''>카테고리</option>
+                      {PushCategoryArr.map((value) =>
+                        <option key={nanoid()} value={value}>{value}</option>
+                      )}
+                    </select>
+                  </div>
+                  <div className={styles.status}>
+                    <select value={selectStatus} onChange={changeSelectStatus}>
+                      <option value=''>전송상태</option>
+                      {PushStatusArr.map((value) =>
+                        <option key={nanoid()} value={value}>{value}</option>
+                      )}
+                    </select>
+                  </div>
+                  <div className={styles.createdDate}>등록일자</div>
+                  <div className={styles.sentDate}>전송날짜</div>
+                  <div className={styles.button}></div>
+                  <div className={styles.button}></div>
+                </div>
               </div>
-              <div className={styles.status}>
-                <select value={selectStatus} onChange={changeSelectStatus}>
-                  <option value=''>전송상태</option>
-                  {PushStatusArr.map((value) =>
-                    <option key={nanoid()} value={value}>{value}</option>
-                  )}
-                </select>
-              </div>
-              <div className={styles.createdDate}>등록일자</div>
-              <div className={styles.sentDate}>전송날짜</div>
-              <div className={styles.button}></div>
-              <div className={styles.button}></div>
+              <ul className={tableStyles.tbody}>
+                {pushes && pushes.map((push) => {
+                  return (
+                    <li key={push.id} className={checkedBoxIds.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
+                      <div className={styles.check}>
+                        <input type='checkbox' checked={checkedBoxIds.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
+                      </div>
+                      <div className={styles.id}>{push.id && push.id}</div>
+                      <div className={styles.title}>{push.title && push.title}</div>
+                      <div className={styles.category}>{push.category && push.category}</div>
+                      <div className={styles.status}>{push.status && push.status}</div>
+                      <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
+                      <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
+                      <div className={styles.button}>
+                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
+                        <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                          <Details push={push} setOpenModalId={setOpenModalId} />
+                        </Modal>
+                      </div>
+                      <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
+                    </li>
+                  );
+                })}
+                {pushesLength && isRowInsufficient(page, row, pushesLength) && makeEmptyArray(page, row, pushesLength).map((push, idx) => {
+                  return (
+                    <li key={idx} className={tableStyles.tr}></li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
-          <ul className={tableStyles.tbody}>
-            {pushes && pushes.map((push) => {
-              return (
-                <li key={push.id} className={checkedBoxIds.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
-                  <div className={styles.check}>
-                    <input type='checkbox' checked={checkedBoxIds.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
-                  </div>
-                  <div className={styles.id}>{push.id && push.id}</div>
-                  <div className={styles.title}>{push.title && push.title}</div>
-                  <div className={styles.category}>{push.category && push.category}</div>
-                  <div className={styles.status}>{push.status && push.status}</div>
-                  <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
-                  <div className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
-                    <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                      <Details push={push} setOpenModalId={setOpenModalId} />
-                    </Modal>
-                  </div>
-                  <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
-                </li>
-              );
-            })}
-            {pushesLength && isRowInsufficient(page, row, pushesLength) && makeEmptyArray(page, row, pushesLength).map((push, idx) => {
-              return (
-                <li key={idx} className={tableStyles.tr}></li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-      {pushesLength ? <Page contentsLength={pushesLength} /> : null}
-      <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
-        <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
-      </div>
-    </section>
+          {pushesLength ? <Page contentsLength={pushesLength} /> : null}
+          <div className={buttonStyles.buttons}>
+            <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
+            <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
+          </div>
+        </section>
+      }
+    </>
   );
 };
 
