@@ -1,3 +1,5 @@
+import { isAxiosError } from 'axios';
+
 import { axiosBack } from '@config/axios';
 import { isLoginSucRes } from '@types';
 
@@ -16,12 +18,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.setHeader('Set-Cookie', [`accessToken=${tokenData.accessToken}; Path=/; HttpOnly;`, `refreshToken=${tokenData.refreshToken}; Path=/; HttpOnly;`]);
         return res.status(200).end();
       } else {
-        return res.status(401).end();
+        return res.status(400).send('Not Vaild Format');
       }
     } else {
       return res.status(404).end();
     }
   } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        return res.status(error.response.status).json(error.response.data);
+      }
+    }
     return res.status(500).end();
   }
 }

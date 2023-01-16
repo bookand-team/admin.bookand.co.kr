@@ -7,7 +7,7 @@ import { LoginReqDTO, SilentLoginReqDTO } from '@types';
 // 로그인
 export const login = createAsyncThunk('login', async (data: LoginReqDTO, { rejectWithValue }) => {
   try {
-    const response = await axiosFront.post('/auth/login', data);
+    const response = await axiosFront.post('/user/login', data);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -20,7 +20,7 @@ export const login = createAsyncThunk('login', async (data: LoginReqDTO, { rejec
 // 로그인
 export const silentLogin = createAsyncThunk('silentLogin', async (data: SilentLoginReqDTO, { rejectWithValue }) => {
   try {
-    const response = await axiosFront.post('/auth/silent', data);
+    const response = await axiosFront.post('/user/silent', data);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
