@@ -12,8 +12,9 @@ const Header = () => {
   const router = useRouter();
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
-  /** 로그아웃 버튼 - 로그아웃 요청 */
+  /** 로그아웃 버튼 */
   const logoutBtnHandler = useCallback(() => {
+    Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
     router.push('/');
   }, []);
