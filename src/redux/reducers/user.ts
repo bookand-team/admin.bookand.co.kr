@@ -16,7 +16,7 @@ const initialState: UserState = {
   loginDone: false,
   loginError: false,
 
-  // 자동 로그인
+  // 토큰 재발행
   silentLoginLoading: false,
   silentLoginDone: false,
   silentLoginError: false
@@ -52,7 +52,7 @@ const userSlice = createSlice({
       state.loginLoading = false;
       state.loginError = true;
     });
-    // 자동 로그인
+    // 토큰 재발행
     builder.addCase(silentLogin.pending, (state) => {
       state.silentLoginLoading = true;
       state.silentLoginDone = false;

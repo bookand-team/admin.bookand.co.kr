@@ -17,7 +17,7 @@ export const login = createAsyncThunk('login', async (data: LoginReqDTO, { rejec
   }
 });
 
-// 로그인
+// 토큰 재발행
 export const silentLogin = createAsyncThunk('silentLogin', async (data: SilentLoginReqDTO, { rejectWithValue }) => {
   try {
     const response = await axiosFront.post('/user/silent', data);
