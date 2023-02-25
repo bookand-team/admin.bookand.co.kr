@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { login, silentLogin } from '@redux/actions/user';
+import { login, logout, silentLogin } from '@redux/actions/user';
 import { UserState } from '@types';
 
 const initialState: UserState = {
@@ -19,7 +19,12 @@ const initialState: UserState = {
   // 토큰 재발행
   silentLoginLoading: false,
   silentLoginDone: false,
-  silentLoginError: false
+  silentLoginError: false,
+
+  // 로그아웃
+  logoutLoading: false,
+  logoutDone: false,
+  logoutError: false
 };
 
 const userSlice = createSlice({
@@ -65,6 +70,20 @@ const userSlice = createSlice({
     builder.addCase(silentLogin.rejected, (state) => {
       state.silentLoginLoading = false;
       state.silentLoginError = true;
+    });
+    // 로그아웃
+    builder.addCase(logout.pending, (state) => {
+      state.logoutLoading = true;
+      state.logoutDone = false;
+      state.logoutError = false;
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.logoutLoading = false;
+      state.logoutDone = true;
+    });
+    builder.addCase(logout.rejected, (state) => {
+      state.logoutLoading = false;
+      state.logoutError = true;
     });
   }
 });

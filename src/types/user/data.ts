@@ -18,4 +18,8 @@ export interface UserState {
   silentLoginLoading: boolean;
   silentLoginDone: boolean;
   silentLoginError: boolean;
+
+  logoutLoading: boolean;
+  logoutDone: boolean;
+  logoutError: boolean;
 }

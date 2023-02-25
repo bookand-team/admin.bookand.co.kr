@@ -23,12 +23,12 @@ export const setPageState = (store: ToolkitStore, context: GetServerSidePropsCon
 export const setUserState = (store: ToolkitStore, context: GetServerSidePropsContext, isLoginPage?: boolean) => {
   if (isLoginPage) {
     store.dispatch(setToken({
-      aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
+      accessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
       refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
     }));
   } else {
     store.dispatch(setLoginUser({
-      aceessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
+      accessToken: context.req.cookies['accessToken'] ? context.req.cookies['accessToken'] : '',
       refreshToken: context.req.cookies['refreshToken'] ? context.req.cookies['refreshToken'] : ''
     }));
   }
