@@ -22,7 +22,6 @@ const Management = () => {
   const router = useRouter();
   const { bookstores, bookstoresLength } = useSelector((state: RootState) => state.bookstore);
   const { page, row } = useSelector((state: RootState) => state.page);
-  console.log('서점', bookstores);
 
   // checkbox 선택
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
