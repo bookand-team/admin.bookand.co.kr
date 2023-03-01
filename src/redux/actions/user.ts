@@ -15,7 +15,7 @@ export const login = createAsyncThunk('login', async (data: LoginReqDTO, { rejec
       return 'Error: token type error';
     }
     // 프론트서버에 토큰 저장 요청
-    await axiosFront.post('/user/store', tokenData);
+    await axiosFront.post('/user/login', tokenData);
     return 'login success';
   } catch (error) {
     if (isAxiosError(error)) {
@@ -36,7 +36,7 @@ export const silentLogin = createAsyncThunk('silentLogin', async (data: SilentLo
       return 'Error: token type error';
     }
     // 프론트서버에 토큰 저장 요청
-    await axiosFront.post('/user/store', tokenData);
+    await axiosFront.post('/user/login', tokenData);
     return 'reissue success';
   } catch (error) {
     if (isAxiosError(error)) {
