@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
-import buttonStyles from '@styles/components/layout/button.module.scss';
 import styles from '@styles/components/push/modification.module.scss';
+import buttonStyles from '@styles/layout/button.module.scss';
 import { PushCategory, DeviceOSFilter, MemberIdFilter, MemberRoleFilter, MemberIdFilterArr, DeviceOSFilterArr, MemberRoleFilterArr, PushCategoryArr } from '@types';
 
 const Registration = () => {

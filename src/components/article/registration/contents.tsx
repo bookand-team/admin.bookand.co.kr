@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 import imgIcon from '@images/image_icon.svg';
 import styles from '@styles/components/article/contents.module.scss';
-import buttonStyles from '@styles/components/layout/button.module.scss';
+import buttonStyles from '@styles/layout/button.module.scss';
 
 type PropsType = {
   inputTitle: string;

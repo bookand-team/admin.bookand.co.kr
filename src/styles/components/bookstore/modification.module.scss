@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
 .search>div {
   display: flex;
   width: 362px;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #{variables.$bd-gray};
   margin-right: 10px;
 }
 
@@ -25,7 +27,7 @@
   width: 150px;
   text-align: center;
   padding: 9px 0;
-  background-color: #E4E4E4;
+  background-color: #{variables.$bg-text-gray};
 }
 
 .search input {
@@ -37,10 +39,10 @@
 
 .search>button {
   width: 72px;
-  color: #FFFFFF;
+  color: #{variables.$font-white};
   line-height: 100%;
   font-weight: 500;
-  background-color: #333333;
+  background-color: #{variables.$bg-btn-black};
   border: none;
   cursor: pointer;
 }
@@ -59,7 +61,7 @@
 .info>div>div {
   display: flex;
   height: 40px;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
   align-items: center;
 }
 
@@ -72,31 +74,4 @@
   border: none;
   outline: none;
   flex: 1;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.registration {
-  width: 140px;
-  height: 40px;
-  background-color: #333333;
-  color: #FFFFFF;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  margin-right: 22px;
-}
-
-.removal {
-  width: 140px;
-  height: 40px;
-  background-color: #FF0000;
-  color: #FFFFFF;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
 }

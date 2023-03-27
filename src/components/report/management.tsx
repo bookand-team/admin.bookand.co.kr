@@ -12,9 +12,9 @@ import getDisplayTime from '@hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
-import buttonStyles from '@styles/components/layout/button.module.scss';
-import tableStyles from '@styles/components/layout/table.module.scss';
 import styles from '@styles/components/report/management.module.scss';
+import buttonStyles from '@styles/layout/button.module.scss';
+import tableStyles from '@styles/layout/table.module.scss';
 import { ReportStatus, ReportStatusArr } from '@types';
 
 const Management = () => {

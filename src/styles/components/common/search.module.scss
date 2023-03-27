@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   height: 40px;
@@ -6,7 +8,7 @@
 
 .container>div {
   display: flex;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #{variables.$bd-gray};
   margin-right: 16px;
 }
 
@@ -15,7 +17,7 @@
   width: 150px;
   justify-content: center;
   align-items: center;
-  background-color: #E4E4E4;
+  background-color: #{variables.$bg-text-gray};
 }
 
 .container input {

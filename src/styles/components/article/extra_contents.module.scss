@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .background {
   width: calc(600px + 10vw);
   height: calc(300px + 10vh);
@@ -19,7 +21,7 @@
 }
 
 .left {
-  border-right: 1px solid #E9ECEF;
+  border-right: 1px solid #{variables.$bd-light-gray};
 }
 
 .description {
@@ -34,7 +36,7 @@
   justify-content: center;
   width: 100%;
   flex: 2 1 50%;
-  background-color: #E9ECEF;
+  background-color: #{variables.$bg-img-gray};
   gap: 10px;
 }
 
@@ -48,10 +50,10 @@
   height: 30px;
   border: none;
   outline: none;
-  color: #1BC47D;
+  color: #{variables.$font-green};
   font-size: 15px;
   font-weight: 600;
-  background-color: #FFFFFF;
+  background-color: #{variables.$bg-btn-white};
   border-radius: 5px;
 }
 
@@ -67,7 +69,7 @@
   border: none;
   outline: none;
   resize: none;
-  background-color: rgba(230, 230, 230, 0.3);
+  background-color: #{variables.$bg-text-light-gray};
   padding: 14px 20px;
 }
 

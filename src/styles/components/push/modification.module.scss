@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -19,7 +21,7 @@
   font-size: 16px;
   border: none;
   outline: none;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
 }
 
 .category {
@@ -39,7 +41,7 @@
 
 .target>div {
   align-items: center;
-  background-color: #D9D9D9;
+  background-color: #{variables.$bg-text-gray};
   padding: 10px;
   margin-right: 30px;
 }

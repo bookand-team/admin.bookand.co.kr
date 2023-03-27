@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .gnb {
   min-width: 1280px;
   max-width: 1920px;
@@ -18,12 +20,12 @@
   line-height: 40px;
   text-align: center;
   white-space: nowrap;
-  background-color: #F1F1F1;
-  border-left: 1px solid #D9D9D9;
-  border-right: 1px solid #D9D9D9;
+  background-color: #{variables.$bg-gnb};
+  border-left: 1px solid #{variables.$bg-gnb-selected};
+  border-right: 1px solid #{variables.$bg-gnb-selected};
   cursor: pointer;
 }
 
 .current {
-  background-color: #D9D9D9 !important;
+  background-color: #{variables.$bg-gnb-selected} !important;
 }

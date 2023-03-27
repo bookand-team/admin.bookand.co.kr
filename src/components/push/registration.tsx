@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
-import buttonStyles from '@styles/components/layout/button.module.scss';
 import styles from '@styles/components/push/registration.module.scss';
+import buttonStyles from '@styles/layout/button.module.scss';
 import { PushCategory, DeviceOSFilter, MemberIdFilter, MemberRoleFilter, PushCategoryArr, MemberIdFilterArr, DeviceOSFilterArr, MemberRoleFilterArr } from '@types';
 
 const Registration = () => {

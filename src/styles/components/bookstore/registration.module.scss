@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
 .search>div {
   display: flex;
   width: 400px;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #{variables.$bd-gray};
   margin-right: 16px;
 }
 
@@ -25,7 +27,7 @@
   width: 150px;
   text-align: center;
   padding: 9px 0;
-  background-color: #E4E4E4;
+  background-color: #{variables.$bg-text-gray};
 }
 
 .search .value {
@@ -36,10 +38,10 @@
 
 .search>button {
   width: 72px;
-  color: #FFFFFF;
+  color: #{variables.$font-white};
   line-height: 100%;
   font-weight: 500;
-  background-color: #333333;
+  background-color: #{variables.$bg-btn-black};
   border: none;
   cursor: pointer;
 }
@@ -58,7 +60,8 @@
 .info>div>div {
   display: flex;
   height: 40px;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
+  ;
   align-items: center;
 }
 
@@ -93,16 +96,16 @@
   margin: 10px;
 }
 
+.info .main {
+  background-color: #{variables.$bg-img-pink};
+}
+
 .info ul li div {
   display: inline-flex;
   width: 100%;
   height: 100%;
-  background-color: #FCACAC;
+  background-color: #{variables.$bg-img-light-pink};
   align-items: center;
   justify-content: center;
   cursor: pointer;
-}
-
-.info .main {
-  background-color: #F46262;
 }

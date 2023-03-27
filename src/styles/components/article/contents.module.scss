@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   max-height: calc(100vh - 200px);
   flex: 1 1 0;
@@ -24,7 +26,7 @@
   font-weight: 700;
   border: none;
   outline: none;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #{variables.$bd-gray};
 }
 
 .toolbar {
@@ -41,17 +43,17 @@
 
 .toolbar button {
   font-weight: 500;
-  color: #868E96;
+  color: #{variables.$font-light-gray};
   width: 48px;
   height: 48px;
-  background-color: white;
+  background-color: #{variables.$bg-btn-white};
   border: none;
   outline: none;
 }
 
 .toolbar button:hover {
-  color: #212529;
-  background-color: #F8F9FA;
+  color: #{variables.$font-light-gray-hover};
+  background-color: #{variables.$bg-btn-white-hover};
 }
 
 .toolbar button span {
@@ -93,7 +95,7 @@
 .viewer {
   word-break: normal;
   overflow-y: auto;
-  background-color: rgba(230, 230, 230, 0.3);
+  background-color: #{variables.$bg-text-light-gray};
   padding: 8px 20px;
 }
 

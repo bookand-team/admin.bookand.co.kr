@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 .table {
   margin-bottom: 30px;
 }
@@ -22,19 +24,19 @@
 
 .thead .tr {
   font-weight: 600;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #{variables.$bd-black};
 }
 
 .tbody .tr {
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
 }
 
 .tbody .tr:hover {
-  background-color: #F1F1F1;
+  background-color: #{variables.$bg-tr-hover};
 }
 
 .tbody .tr.checked {
-  background-color: #FF9090;
+  background-color: #{variables.$bg-tr-selected};
 }
 
 .tbody .tr>div {

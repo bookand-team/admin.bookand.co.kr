@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -32,7 +34,7 @@
   height: 200px;
   flex-shrink: 0;
   border-radius: 30px;
-  background-color: #E4E4E4;
+  background-color: #{variables.$bg-text-gray};
   padding: 16px;
   white-space: nowrap;
 }

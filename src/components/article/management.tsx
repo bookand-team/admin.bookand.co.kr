@@ -14,8 +14,8 @@ import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/article/management.module.scss';
-import buttonStyles from '@styles/components/layout/button.module.scss';
-import tableStyles from '@styles/components/layout/table.module.scss';
+import buttonStyles from '@styles/layout/button.module.scss';
+import tableStyles from '@styles/layout/table.module.scss';
 import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } from '@types';
 
 const Management = () => {

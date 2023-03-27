@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .background {
   display: flex;
   width: 100%;
@@ -7,5 +9,5 @@
   left: 0;
   z-index: 99;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #{variables.$bg-modal-outside};
 }

@@ -1,7 +1,9 @@
+@use '../../abstracts/variables';
+
 .container {
   min-width: 920px;
   width: calc(920px + 10%);
-  background-color: #FFFFFF;
+  background-color: #{variables.$bg-white};
   z-index: 100;
   padding: 20px 60px 0 60px;
   text-align: left;
@@ -15,7 +17,7 @@
   position: relative;
   left: calc(100% - 32px + 60px - 15px);
   top: calc(-20px + 15px);
-  background-color: #FFFFFF;
+  background-color: #{variables.$bg-btn-white};
   padding: 0;
   cursor: pointer;
 }
@@ -34,8 +36,8 @@
 .contents {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
+  border-top: 1px solid #{variables.$bd-black};
+  border-bottom: 1px solid #{variables.$bd-black};
   white-space: normal;
   word-break: break-all;
 }
@@ -47,7 +49,7 @@
 .row {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
 }
 
 .row .key {
@@ -61,7 +63,7 @@
 .content {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid #{variables.$bd-gray};
 }
 
 .content .key {

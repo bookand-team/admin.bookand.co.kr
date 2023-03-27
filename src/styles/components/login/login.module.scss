@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   margin: auto auto;
 }
@@ -18,7 +20,7 @@
 
 .id {
   height: 50px;
-  border: 1px solid #868686;
+  border: 1px solid #{variables.$bd-dark-gray};
   border-radius: 10px;
   width: 100%;
   padding: 0 20px;
@@ -27,7 +29,7 @@
 
 .password {
   height: 50px;
-  border: 1px solid #868686;
+  border: 1px solid #{variables.$bd-dark-gray};
   border-radius: 10px;
   width: 100%;
   padding: 0 20px;
@@ -36,7 +38,7 @@
 
 .error_msg {
   text-align: center;
-  color: #FF0000;
+  color: #{variables.$font-red};
   font-size: 12px;
   font-weight: 500;
 }
@@ -45,8 +47,8 @@
   height: 50px;
   font-size: 20px;
   font-weight: 500;
-  color: #FFFFFF;
-  background-color: #121212;
+  color: #{variables.$font-white};
+  background-color: #{variables.$bg-btn-dark-black};
   border-radius: 10px;
   margin: 20px 0;
   cursor: pointer;
