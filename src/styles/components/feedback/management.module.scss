@@ -16,11 +16,11 @@
 }
 
 .id {
-  flex: 0 0 50px;
+  flex: 0 0 40px;
 }
 
 .content {
-  flex: 6 0 362px;
+  flex: 6 0 330px;
   text-align: left;
   padding: 0 12px;
 }
@@ -32,19 +32,19 @@
 }
 
 .category {
-  flex: 1 0 120px;
+  flex: 1 0 80px;
 }
 
 .device {
-  flex: 1 0 120px;
-}
-
-.feedbackCount {
   flex: 1 0 100px;
 }
 
+.feedbackCount {
+  flex: 1 0 70px;
+}
+
 .createdDate {
-  flex: 1 0 140px;
+  flex: 1 0 130px;
 }
 
 .button {
