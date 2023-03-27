@@ -1,3 +1,5 @@
+@use '../../abstracts/variables';
+
 .container {
   display: flex;
   align-items: center;
@@ -5,7 +7,7 @@
   min-width: 1280px;
   max-width: 1920px;
   height: 80px;
-  background-color: var(--bg-header);
+  background-color: #{variables.$bg-header};
 }
 
 .logo {

@@ -9,7 +9,7 @@ import leftArrow2Icon from '@images/left_arrow_icon2.svg';
 import rightArrowIcon from '@images/right_arrow_icon.svg';
 import rightArrow2Icon from '@images/right_arrow_icon2.svg';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/common/page.module.css';
+import styles from '@styles/components/common/page.module.scss';
 
 type Props = {
   maxSelection?: number;

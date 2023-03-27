@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { useInputSelect } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/article/extra_contents.module.css';
-import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/components/article/extra_contents.module.scss';
+import buttonStyles from '@styles/components/layout/button.module.scss';
 import { ArticleCategory, ArticleCategoryArr, DeviceOSFilter, DeviceOSFilterArr, MemberIdFilter, MemberIdFilterArr } from '@types';
 
 type PropsType = {

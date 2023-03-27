@@ -1,6 +1,6 @@
 import Doughnut from '@components/dashboard/graph/doughnut';
 import { useInputSelect } from '@hooks/use_input';
-import styles from '@styles/dashboard/type_statistics.module.css';
+import styles from '@styles/components/dashboard/type_statistics.module.scss';
 import { DeviceOSFilter, DeviceOSFilterArr } from '@types';
 
 const withdrawValues = {

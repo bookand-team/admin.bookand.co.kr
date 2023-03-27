@@ -13,9 +13,9 @@ import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout'
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/bookstore/management.module.css';
-import buttonStyles from '@styles/layout/button.module.css';
-import tableStyles from '@styles/layout/table.module.css';
+import styles from '@styles/components/bookstore/management.module.scss';
+import buttonStyles from '@styles/components/layout/button.module.scss';
+import tableStyles from '@styles/components/layout/table.module.scss';
 import { BookstoreStatus, BookstoreStatusArr, BookstoreTheme, BookstoreThemeArr } from '@types';
 
 const Management = () => {

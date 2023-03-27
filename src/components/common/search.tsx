@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 
 import changeQuery from '@hooks/change_query';
 import { useInputText } from '@hooks/use_input';
-import styles from '@styles/common/search.module.css';
-import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/components/common/search.module.scss';
+import buttonStyles from '@styles/components/layout/button.module.scss';
 
 type Props = {
   search: string;

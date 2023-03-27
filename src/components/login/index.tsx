@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
 import { AppDispatch } from '@redux/store';
-import styles from '@styles/login/login.module.css';
+import styles from '@styles/components/login/login.module.scss';
 
 const Login = () => {
   const router = useRouter();

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
 import { AppDispatch } from '@redux/store';
-import styles from '@styles/common/header.module.css';
-import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/components/common/header.module.scss';
+import buttonStyles from '@styles/components/layout/button.module.scss';
 
 const Header = () => {
   const router = useRouter();

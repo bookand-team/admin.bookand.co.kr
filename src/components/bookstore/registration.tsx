@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 
 import { useInputSelect, useInputText } from '@hooks/use_input';
-import styles from '@styles/bookstore/registration.module.css';
-import buttonStyles from '@styles/layout/button.module.css';
+import styles from '@styles/components/bookstore/registration.module.scss';
+import buttonStyles from '@styles/components/layout/button.module.scss';
 import { BookstoreTheme, BookstoreThemeArr } from '@types';
 
 const Registration = () => {
