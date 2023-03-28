@@ -8,7 +8,6 @@ import Page from '@components/common/page';
 import Search from '@components/common/search';
 import Details from '@components/report/details';
 import changeQuery from '@hooks/change_query';
-import getDisplayTime from '@hooks/get_display_time';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
@@ -16,6 +15,7 @@ import styles from '@styles/components/report/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 import tableStyles from '@styles/layout/table.module.scss';
 import { ReportStatus, ReportStatusArr } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 const Management = () => {
   const router = useRouter();

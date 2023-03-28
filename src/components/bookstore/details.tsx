@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { BookstoreDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   bookstore: BookstoreDTO;
@@ -46,19 +47,19 @@ const Details = ({ bookstore, setOpenModalId }: Props) => {
           <div className={styles.key}>테마</div>
           <div className={styles.value}>{bookstore?.theme ? bookstore.theme : null}</div>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{bookstore?.createdDate ? bookstore.createdDate : null}</div>
+          <div className={styles.value}>{bookstore?.createdDate ? getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>노출 상태</div>
           <div className={styles.value}>{bookstore?.status ? bookstore.status : null}</div>
           <div className={styles.key}>노출 일자</div>
-          <div className={styles.value}>{bookstore?.exposedDate ? bookstore.exposedDate : null}</div>
+          <div className={styles.value}>{bookstore?.exposedDate ? getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>주소</div>
           <div className={styles.value}>{bookstore?.info?.address ? bookstore.info.address : null}</div>
           <div className={styles.key}>최종 수정일자</div>
-          <div className={styles.value}>{bookstore?.modifiedDate ? bookstore.modifiedDate : null}</div>
+          <div className={styles.value}>{bookstore?.modifiedDate ? getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>연락처</div>

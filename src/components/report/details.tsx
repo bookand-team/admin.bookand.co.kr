@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { ReportDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   report: ReportDTO;
@@ -46,11 +47,11 @@ const Details = ({ report, setOpenModalId }: Props) => {
           <div className={styles.key}>노출 상태</div>
           <div className={styles.value}>{report?.status ? report.status : null}</div>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{report?.createdDate ? report.createdDate : null}</div>
+          <div className={styles.value}>{report?.createdDate ? getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>노출일자</div>
-          <div className={styles.value}>{report?.exposedDate ? report.exposedDate : null}</div>
+          <div className={styles.value}>{report?.exposedDate ? getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm') : null}</div>
           <div className={styles.key}></div>
           <div className={styles.value}></div>
         </div>

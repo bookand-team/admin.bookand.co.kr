@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { MemberDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   member: MemberDTO;
@@ -52,19 +53,19 @@ const Details = ({ member, setOpenModalId }: Props) => {
           <div className={styles.key}>닉네임</div>
           <div className={styles.value}>{member?.nickname ? member.nickname : null}</div>
           <div className={styles.key}>가입일</div>
-          <div className={styles.value}>{member?.createdDate ? member.createdDate : null}</div>
+          <div className={styles.value}>{member?.createdDate ? getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>이름</div>
           <div className={styles.value}>{member?.name ? member.name : null}</div>
           <div className={styles.key}>최종 접속일</div>
-          <div className={styles.value}>{member?.accessedDate ? member.accessedDate : null}</div>
+          <div className={styles.value}>{member?.accessedDate ? getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>역할</div>
           <div className={styles.value}>{member?.role ? member.role : null}</div>
           <div className={styles.key}>탈퇴일</div>
-          <div className={styles.value}>{member?.withdrawalDate ? member.withdrawalDate : null}</div>
+          <div className={styles.value}>{member?.withdrawalDate ? getDisplayTime(member.withdrawalDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>이용 상태</div>

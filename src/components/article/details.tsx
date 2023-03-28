@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { ArticleDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   article: ArticleDTO;
@@ -46,19 +47,19 @@ const Details = ({ article, setOpenModalId }: Props) => {
           <div className={styles.key}>카테고리</div>
           <div className={styles.value}>{article?.category ? article.category : null}</div>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{article?.createdDate ? article.createdDate : null}</div>
+          <div className={styles.value}>{article?.createdDate ? getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>노출 상태</div>
           <div className={styles.value}>{article?.status ? article.status : null}</div>
           <div className={styles.key}>노출 일자</div>
-          <div className={styles.value}>{article?.exposedDate ? article.exposedDate : null}</div>
+          <div className={styles.value}>{article?.exposedDate ? getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>작성자</div>
           <div className={styles.value}>{article?.writer ? article.writer : null}</div>
           <div className={styles.key}>최종 수정일자</div>
-          <div className={styles.value}>{article?.modifiedDate ? article.modifiedDate : null}</div>
+          <div className={styles.value}>{article?.modifiedDate ? getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
       </div>
       <div className={buttonStyles.modal_buttons}>

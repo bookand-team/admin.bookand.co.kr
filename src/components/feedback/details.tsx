@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { FeedbackDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   feedback: FeedbackDTO;
@@ -34,7 +35,7 @@ const Details = ({ feedback, setOpenModalId }: Props) => {
           <div className={styles.key}>번호</div>
           <div className={styles.value}>{feedback?.id ? feedback.id : null}</div>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{feedback?.createdDate ? feedback.createdDate : null}</div>
+          <div className={styles.value}>{feedback?.createdDate ? getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.key}>이메일</div>

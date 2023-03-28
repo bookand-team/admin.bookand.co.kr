@@ -5,6 +5,7 @@ import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { PushDTO } from '@types';
+import getDisplayTime from '@utils/get_display_time';
 
 type Props = {
   push: PushDTO;
@@ -50,9 +51,9 @@ const Details = ({ push, setOpenModalId }: Props) => {
         </div>
         <div className={styles.row}>
           <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{push?.createdDate ? push.createdDate : null}</div>
+          <div className={styles.value}>{push?.createdDate ? getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
           <div className={styles.key}>전송날짜</div>
-          <div className={styles.value}>{push?.sentDate ? push.sentDate : null}</div>
+          <div className={styles.value}>{push?.sentDate ? getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
         <div className={styles.content}>
           <div className={styles.key}>제목</div>
