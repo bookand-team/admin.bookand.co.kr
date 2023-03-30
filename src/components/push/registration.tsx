@@ -2,6 +2,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
+import SectionHeader from '@components/common/section_header';
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
 import styles from '@styles/components/push/registration.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
@@ -40,9 +41,7 @@ const Registration = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>PUSH 등록</h2>
-      </div>
+      <SectionHeader title='푸시 등록' />
       <div className={styles.contents}>
         <div className={styles.title}>
           <input value={inputTitle} onChange={changeInputTitle} placeholder='제목을 입력해주세요.' spellCheck='false' />

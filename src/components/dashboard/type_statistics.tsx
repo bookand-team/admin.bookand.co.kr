@@ -1,3 +1,4 @@
+import SectionHeader from '@components/common/section_header';
 import Doughnut from '@components/dashboard/graph/doughnut';
 import { useInputSelect } from '@hooks/use_input';
 import styles from '@styles/components/dashboard/type_statistics.module.scss';
@@ -22,9 +23,7 @@ const TypeStatistics = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>유형 통계</h2>
-      </div>
+      <SectionHeader title='유형 통계' />
       <div className={styles.content}>
         <div className={styles.sub_content}>
           <h3>탈퇴회원</h3>

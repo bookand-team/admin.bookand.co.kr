@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Modal from '@components/common/modal';
 import Page from '@components/common/page';
 import Search from '@components/common/search';
+import SectionHeader from '@components/common/section_header';
 import Details from '@components/member/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
@@ -43,10 +44,9 @@ const Management = () => {
     <>
       {members &&
         <section className={styles.container}>
-          <div className={styles.header}>
-            <h2>회원 관리</h2>
-            <Search search='닉네임' />
-          </div>
+          <SectionHeader
+            title='회원 관리'
+            right={<Search search='닉네임' />} />
           <div className={styles.contents}>
             <div className={tableStyles.table}>
               <div className={tableStyles.thead}>

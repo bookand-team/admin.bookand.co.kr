@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import SectionHeader from '@components/common/section_header';
 import { useInputSelect, useInputText } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/bookstore/registration.module.scss';
@@ -81,9 +82,7 @@ const Modification = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>서점 수정</h2>
-      </div>
+      <SectionHeader title='서점 수정' />
       <div className={styles.contents}>
         <div className={styles.search}>
           <div>

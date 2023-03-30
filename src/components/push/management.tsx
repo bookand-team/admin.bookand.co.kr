@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import Modal from '@components/common/modal';
 import Page from '@components/common/page';
+import SectionHeader from '@components/common/section_header';
 import Details from '@components/push/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
@@ -65,9 +66,7 @@ const Management = () => {
     <>
       {pushes &&
         <section className={styles.container}>
-          <div className={styles.header}>
-            <h2>푸시 관리</h2>
-          </div>
+          <SectionHeader title='푸시 관리' />
           <div className={styles.contents}>
             <div className={tableStyles.table}>
               <div className={tableStyles.thead}>

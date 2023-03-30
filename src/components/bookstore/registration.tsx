@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 
+import SectionHeader from '@components/common/section_header';
 import { useInputSelect, useInputText } from '@hooks/use_input';
 import styles from '@styles/components/bookstore/registration.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
@@ -79,9 +80,7 @@ const Registration = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>서점 등록</h2>
-      </div>
+      <SectionHeader title='서점 등록' />
       <div className={styles.contents}>
         <div className={styles.search}>
           <div>

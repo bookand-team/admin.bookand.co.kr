@@ -7,6 +7,7 @@ import Details from '@components/article/details';
 import Modal from '@components/common/modal';
 import Page from '@components/common/page';
 import Search from '@components/common/search';
+import SectionHeader from '@components/common/section_header';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
@@ -65,10 +66,9 @@ const Management = () => {
     <>
       {articles &&
         <section className={styles.container}>
-          <div className={styles.header}>
-            <h2>아티클 관리</h2>
-            <Search search='아티클 제목' />
-          </div>
+          <SectionHeader
+            title='아티클 관리'
+            right={<Search search='아티클 제목' />} />
           <div className={styles.contents}>
             <div className={tableStyles.table}>
               <div className={tableStyles.thead}>

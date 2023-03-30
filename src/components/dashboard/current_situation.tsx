@@ -1,11 +1,10 @@
+import SectionHeader from '@components/common/section_header';
 import styles from '@styles/components/dashboard/current_situation.module.scss';
 
 const CurrentSituation = () => {
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2>현황 통계</h2>
-      </div>
+      <SectionHeader title='현황 통계' />
       <div className={styles.contents}>
         <div className={styles.half}>
           <div className={styles.section}>
