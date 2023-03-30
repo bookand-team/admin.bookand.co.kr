@@ -12,20 +12,16 @@ import buttonStyles from '@styles/layout/button.module.scss';
 const Header = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { isLoggedIn, token, logoutDone } = useSelector((state: RootState) => state.user);
+  const { isLoggedIn, logoutDone } = useSelector((state: RootState) => state.user);
 
   /** 로그아웃 버튼 */
   const logoutBtnHandler = useCallback(() => {
-    if (token) {
-      dispatch(logout(token.accessToken));
-    }
+    dispatch(logout());
   }, []);
 
   // 로그아웃 요청 결과 처리
   useEffect(() => {
-    if (logoutDone) {
-      router.push('/');
-    }
+    if (logoutDone) { router.push('/'); }
   }, [logoutDone]);
 
   return (

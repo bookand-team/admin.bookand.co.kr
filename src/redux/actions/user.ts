@@ -49,11 +49,8 @@ export const silentLogin = createAsyncThunk('silentLogin', async (data: SilentLo
 });
 
 // 로그아웃
-export const logout = createAsyncThunk('logout', async (accessToken: string, { rejectWithValue }) => {
+export const logout = createAsyncThunk('logout', async (data, { rejectWithValue }) => {
   try {
-    // 백엔드서버에 로그아웃 요청
-    await axiosBack.get('/auth/logout', { headers: { Authorization: `Bearer ${accessToken}` } });
-
     // 프론트서버에 토큰 삭제 요청
     await axiosFront.get('/user/logout');
     return 'logout success';
