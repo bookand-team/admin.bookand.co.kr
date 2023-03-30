@@ -1,10 +1,11 @@
 @use '../../abstracts/variables';
+@use '../../abstracts/mixin';
 
-.container {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1920px;
+  max-width: #{variables.$max-vw};
   height: 80px;
   background-color: #{variables.$bg-header};
 }
@@ -12,27 +13,95 @@
 .logo {
   display: flex;
   padding: 18px 24px;
-}
 
-.front {
-  font-size: 32px;
-  font-weight: 700;
-  margin-right: 9px;
-}
+  .front {
+    font-size: 32px;
+    font-weight: 700;
+    margin-right: 9px;
+  }
 
-.back {
-  font-size: 32px;
-  font-weight: 300;
-  white-space: nowrap;
+  .back {
+    font-size: 32px;
+    font-weight: 300;
+    white-space: nowrap;
+
+    @include mixin.sm {
+      display: none;
+    }
+  }
 }
 
 .user {
   display: flex;
   margin: 0 24px;
+
+  @include mixin.sm {
+    display: none;
+  }
+
+  .username {
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 10px;
+  }
 }
 
-.username {
-  font-size: 24px;
-  font-weight: 700;
-  margin-right: 10px;
+.tools {
+  display: none;
+  margin: 0 18px;
+
+  @include mixin.sm {
+    display: flex;
+  }
+
+  button {
+    border: none;
+    background-color: inherit;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.gnb {
+  max-width: #{variables.$max-vw};
+
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  @include mixin.sm {
+    .opend {
+      position: absolute;
+      z-index: 10;
+      flex-direction: column;
+      width: 100%;
+      border-top: 1px solid #{variables.$bd-gray};
+      background-color: #{variables.$bg-gnb};
+    }
+
+    .closed {
+      display: none;
+    }
+  }
+
+  a {
+    flex: 1;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #{variables.$bg-gnb};
+    border-left: 1px solid #{variables.$bg-gnb-selected};
+    border-right: 1px solid #{variables.$bg-gnb-selected};
+    cursor: pointer;
+  }
+
+  .current {
+    background-color: #{variables.$bg-gnb-selected} !important;
+  }
 }
