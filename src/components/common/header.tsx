@@ -65,7 +65,7 @@ const Header = () => {
           </>
         }
       </header>
-      {section &&
+      {section !== 'login' &&
         <nav className={styles.gnb}>
           <ul className={gnbOpend ? styles.opend : styles.closed}>
             {GNBArr.map((menu, idx) => {

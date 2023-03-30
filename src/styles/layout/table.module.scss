@@ -1,45 +1,57 @@
 @use '../abstracts/variables';
 
 .table {
-  margin-bottom: 30px;
+  overflow-x: auto;
+  margin: 15px 0;
 }
 
-.thead select,
-.thead option {
-  border: none;
-  outline: none;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
+.thead {
+  min-width: #{variables.$table-min-width};
+
+  select,
+  option {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tr {
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: 600;
+    border-bottom: 1px solid #{variables.$bd-black};
+  }
 }
 
-.tr {
-  display: flex;
-  height: 40px;
-  justify-content: space-between;
-  text-align: center;
-  align-items: center;
-  white-space: nowrap;
-}
+.tbody {
+  min-width: #{variables.$table-min-width};
 
-.thead .tr {
-  font-weight: 600;
-  border-bottom: 1px solid #{variables.$bd-black};
-}
+  .tr {
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    white-space: nowrap;
+    border-bottom: 1px solid #{variables.$bd-gray};
+  }
 
-.tbody .tr {
-  border-bottom: 1px solid #{variables.$bd-gray};
-}
+  .tr:hover {
+    background-color: #{variables.$bg-tr-hover};
+  }
 
-.tbody .tr:hover {
-  background-color: #{variables.$bg-tr-hover};
-}
+  .tr.checked {
+    background-color: #{variables.$bg-tr-selected};
+  }
 
-.tbody .tr.checked {
-  background-color: #{variables.$bg-tr-selected};
-}
-
-.tbody .tr>div {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  .tr>div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
