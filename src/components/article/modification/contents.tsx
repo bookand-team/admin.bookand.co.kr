@@ -112,7 +112,7 @@ const Contents = ({ inputTitle, changeInputTitle, inputContent, changeInputConte
     <div className={styles.container}>
       <section className={styles.editor}>
         <div className={styles.title}>
-          <input value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' />
+          <input value={inputTitle} onChange={changeInputTitle} placeholder='아티클 제목을 입력해주세요' spellCheck='false' />
         </div>
         <div className={styles.toolbar}>
           <div>
@@ -126,7 +126,7 @@ const Contents = ({ inputTitle, changeInputTitle, inputContent, changeInputConte
             <button onClick={styleBtnHandler('italic')}><span className={styles.italic}>I</span></button>
           </div>
           <div>
-            <input ref={inputImgFileRef} type='file' accept='image/*' hidden onChange={getImageUrl} spellCheck='false' />
+            <input ref={inputImgFileRef} type='file' accept='image/*' hidden onChange={getImageUrl} />
             <button onClick={openFileSelectionWindow}>
               <div className={styles.image}><Image src={imgIcon} alt='이미지 선택 버튼' width={20} height={20} /></div>
             </button>

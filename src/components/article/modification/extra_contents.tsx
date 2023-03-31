@@ -65,7 +65,7 @@ const ExtraContents = ({ setStage }: PropsType) => {
           </div>
           <div className={styles.description}>한줄소개</div>
           <div className={styles.intro}>
-            <textarea placeholder='아티클 한줄소개를 입력해주세요' />
+            <textarea placeholder='아티클 한줄소개를 입력해주세요' spellCheck='false' />
           </div>
         </div>
         <div className={styles.right}>

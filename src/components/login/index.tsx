@@ -31,8 +31,8 @@ const Login = () => {
     <section className={styles.container}>
       <div className={styles.header}>관리자 계정</div>
       <form onSubmit={loginBtnHandler}>
-        <input className={styles.id} type='text' name='inputId' placeholder='아이디' required />
-        <input className={styles.password} type='password' name='inputPassword' placeholder='비밀번호' required />
+        <input className={styles.id} type='text' name='inputId' placeholder='아이디' required spellCheck='false' />
+        <input className={styles.password} type='password' name='inputPassword' placeholder='비밀번호' required spellCheck='false' />
         {loginError && <div className={styles.error_msg}>아이디 또는 비밀번호를 잘못 입력했습니다.</div>}
         <button type='submit'>로그인</button>
       </form>

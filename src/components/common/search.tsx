@@ -34,7 +34,7 @@ const Search = ({ search: searchTarget }: Props) => {
     <form className={styles.container} onSubmit={searchHandler}>
       <div>
         <div>{searchTarget}</div>
-        <input type='text' name='inputSearch' value={searchText} onChange={changeSearchText} />
+        <input type='text' name='inputSearch' value={searchText} onChange={changeSearchText} spellCheck='false' />
       </div>
       <button className={buttonStyles.search} type='submit'>검색</button>
     </form>

@@ -119,7 +119,7 @@ const Registration = () => {
           <div>
             <div>
               <div className={styles.key}>한줄소개</div>
-              <input className={styles.value} value={inputInformation} onChange={changeInputInformation} />
+              <input className={styles.value} value={inputInformation} onChange={changeInputInformation} spellCheck='false' />
             </div>
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>

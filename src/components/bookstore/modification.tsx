@@ -121,7 +121,7 @@ const Modification = () => {
           <div>
             <div>
               <div className={styles.key}>한줄소개</div>
-              <input className={styles.value} value={inputIntroduction} onChange={changeInputIntroduction} />
+              <input className={styles.value} value={inputIntroduction} onChange={changeInputIntroduction} spellCheck='false' />
             </div>
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
