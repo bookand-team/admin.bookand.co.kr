@@ -12,8 +12,7 @@
   option {
     border: none;
     outline: none;
-    font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
   }
 
@@ -24,7 +23,7 @@
     text-align: center;
     align-items: center;
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 700;
     border-bottom: 1px solid #{variables.$bd-black};
   }
 }

@@ -18,15 +18,15 @@
 
 .title {
   display: flex;
-}
 
-.title input {
-  width: 100%;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  outline: none;
-  border-bottom: 1px solid #{variables.$bd-gray};
+  input {
+    width: 100%;
+    font-size: 28px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #{variables.$bd-gray};
+  }
 }
 
 .toolbar {
@@ -34,62 +34,62 @@
   align-items: center;
   margin: 24px 0;
   gap: 16px;
-}
 
-.toolbar div {
-  display: flex;
-  justify-content: center;
-}
+  div {
+    display: flex;
+    justify-content: center;
+  }
 
-.toolbar button {
-  font-weight: 500;
-  color: #{variables.$font-light-gray};
-  width: 48px;
-  height: 48px;
-  background-color: #{variables.$bg-btn-white};
-  border: none;
-  outline: none;
-}
+  button {
+    font-weight: 500;
+    color: #{variables.$font-light-gray};
+    width: 48px;
+    height: 48px;
+    background-color: #{variables.$bg-btn-white};
+    border: none;
+    outline: none;
 
-.toolbar button:hover {
-  color: #{variables.$font-light-gray-hover};
-  background-color: #{variables.$bg-btn-white-hover};
-}
+    &:hover {
+      color: #{variables.$font-light-gray-hover};
+      background-color: #{variables.$bg-btn-white-hover};
+    }
 
-.toolbar button span {
-  font-size: 18px;
-}
+    >span {
+      font-size: 18px;
+    }
 
-.toolbar button span span {
-  font-size: 8px;
-}
+    >span>span {
+      font-size: 8px;
+    }
 
-.toolbar .bord {
-  font-weight: 700;
-}
+    .bord {
+      font-weight: 700;
+    }
 
-.toolbar .italic {
-  font-style: italic;
-}
+    .italic {
+      font-style: italic;
+    }
 
-.toolbar .image {
-  position: relative;
-  top: 2px;
+    .image {
+      position: relative;
+      top: 2px;
+    }
+  }
 }
 
 .content {
   flex: 0 1 100%;
   display: flex;
-}
 
-.content textarea {
-  width: 100%;
-  font-size: 16px;
-  line-height: 1.75;
-  padding: 0;
-  border: none;
-  outline: none;
-  resize: none;
+  textarea {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+    padding: 0;
+    border: none;
+    outline: none;
+    resize: none;
+  }
 }
 
 .viewer {
@@ -97,40 +97,40 @@
   overflow-y: auto;
   background-color: #{variables.$bg-text-light-gray};
   padding: 8px 20px;
-}
 
-.viewer .title_view {
-  margin-bottom: 32px;
-}
+  .title_view {
+    margin-bottom: 32px;
+  }
 
-.viewer * {
-  line-height: 1.5;
-}
+  * {
+    line-height: 1.5;
+  }
 
-.viewer h1 {
-  font-size: 30px;
-  font-weight: 800;
-}
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
 
-.viewer h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-left: 1px;
-}
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-left: 1px;
+  }
 
-.viewer h3 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-left: 2px;
-}
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 2px;
+  }
 
-.viewer h4 {
-  font-size: 18px;
-  font-weight: 500;
-  margin-left: 3px;
-}
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 3px;
+  }
 
-.viewer p {
-  font-size: 14px;
-  margin-left: 4px;
+  p {
+    font-size: 14px;
+    margin-left: 4px;
+  }
 }
