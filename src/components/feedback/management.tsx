@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Modal from '@components/common/modal';
-import Page from '@components/common/page';
+import ResponsivePageNavbar from '@components/common/page_navbar';
 import Search from '@components/common/search';
 import SectionHeader from '@components/common/section_header';
 import Details from '@components/feedback/details';
@@ -95,7 +95,7 @@ const Management = () => {
               </ul>
             </div>
           </div>
-          {feedbacksLength ? <Page contentsLength={feedbacksLength} /> : null}
+          {feedbacksLength ? <ResponsivePageNavbar contentsLength={feedbacksLength} /> : null}
         </section>
       }
     </>

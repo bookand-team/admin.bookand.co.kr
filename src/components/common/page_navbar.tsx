@@ -5,30 +5,33 @@ import { useSelector } from 'react-redux';
 
 import changeQuery from '@hooks/change_query';
 import leftArrowIcon from '@images/left_arrow_icon.svg';
-import leftArrow2Icon from '@images/left_arrow_icon2.svg';
+import leftDoubleArrowIcon from '@images/left_double_arrow_icon.svg';
 import rightArrowIcon from '@images/right_arrow_icon.svg';
-import rightArrow2Icon from '@images/right_arrow_icon2.svg';
+import rightDoubleArrowIcon from '@images/right_double_arrow_icon.svg';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/components/common/page.module.scss';
+import styles from '@styles/components/common/page_navbar.module.scss';
 
-type Props = {
-  maxSelection?: number;
+type PropsType = {
   contentsLength: number;
+  pageNumSize?: number;
+  responsive?: boolean;
 };
 
-const Page = ({ maxSelection = 10, contentsLength }: Props) => {
+const PageNavbar = ({ contentsLength, pageNumSize, responsive }: Required<PropsType>) => {
   const router = useRouter();
   const { page, row } = useSelector((state: RootState) => state.page);
+
+  // const pageNumSize = 
 
   /** 화면에 표시될 page 선택 범위에 맞는 배열 생성 함수 */
   const selectionRange = useCallback(() => {
     const array = [];
     if (page) {
-      for (let i = Math.floor((page - 1) / maxSelection) * maxSelection + 1; i <= Math.floor((page - 1) / maxSelection) * maxSelection + maxSelection && i <= Math.floor((contentsLength - 1) / row) + 1; i++) {
+      for (let i = Math.floor((page - 1) / pageNumSize) * pageNumSize + 1; i <= Math.floor((page - 1) / pageNumSize) * pageNumSize + pageNumSize && i <= Math.floor((contentsLength - 1) / row) + 1; i++) {
         array.push(i);
       }
     } else {
-      for (let i = 1; i <= maxSelection && i <= Math.floor((contentsLength - 1) / row) + 1; i++) {
+      for (let i = 1; i <= pageNumSize && i <= Math.floor((contentsLength - 1) / row) + 1; i++) {
         array.push(i);
       }
     }
@@ -39,7 +42,7 @@ const Page = ({ maxSelection = 10, contentsLength }: Props) => {
   const moveToPreviousPages = useCallback(() => {
     let newQuery;
     if (page > 10) {
-      newQuery = changeQuery(router.query, { page: Math.floor((page - 1) / maxSelection) * maxSelection });
+      newQuery = changeQuery(router.query, { page: Math.floor((page - 1) / pageNumSize) * pageNumSize });
     } else if (page > 1) {
       newQuery = changeQuery(router.query, { page: 1 });
     } else if (page === 1) {
@@ -79,8 +82,8 @@ const Page = ({ maxSelection = 10, contentsLength }: Props) => {
   /** 다음 pages로 이동 */
   const moveToNextPages = useCallback(() => {
     let newQuery;
-    if (Math.floor((page - 1) / maxSelection) * maxSelection + maxSelection + 1 <= Math.floor((contentsLength - 1) / row) + 1) {
-      newQuery = changeQuery(router.query, { page: Math.floor((page - 1) / maxSelection) * maxSelection + maxSelection + 1 });
+    if (Math.floor((page - 1) / pageNumSize) * pageNumSize + pageNumSize + 1 <= Math.floor((contentsLength - 1) / row) + 1) {
+      newQuery = changeQuery(router.query, { page: Math.floor((page - 1) / pageNumSize) * pageNumSize + pageNumSize + 1 });
       router.push({ pathname: router.pathname, query: newQuery });
     } else if (page < Math.floor((contentsLength - 1) / row) + 1) {
       newQuery = changeQuery(router.query, { page: Math.floor((contentsLength - 1) / row) + 1 });
@@ -92,12 +95,12 @@ const Page = ({ maxSelection = 10, contentsLength }: Props) => {
   }, [page, contentsLength]);
 
   return (
-    <nav className={styles.page}>
+    <nav className={`${styles.page} ${responsive && pageNumSize === 5 ? styles.sm : ''}`}>
       <button className={styles.left2} onClick={moveToPreviousPages}>
-        <Image src={leftArrow2Icon} alt='left arrow icon' />
+        <Image src={leftDoubleArrowIcon} alt='left double arrow icon' height={14} width={14} />
       </button>
       <button className={styles.left} onClick={moveToPreviousPage}>
-        <Image src={leftArrowIcon} alt='left arrow icon' />
+        <Image src={leftArrowIcon} alt='left arrow icon' height={15} width={15} />
       </button>
       {selectionRange().map((number) => {
         if ((page === null && number === 1) || (page === number)) {
@@ -111,13 +114,28 @@ const Page = ({ maxSelection = 10, contentsLength }: Props) => {
         }
       })}
       <button className={styles.right} onClick={moveToNextPage}>
-        <Image src={rightArrowIcon} alt='right arrow icon' />
+        <Image src={rightArrowIcon} alt='right arrow icon' height={15} width={15} />
       </button>
       <button className={styles.right2} onClick={moveToNextPages}>
-        <Image src={rightArrow2Icon} alt='right arrow icon' />
+        <Image src={rightDoubleArrowIcon} alt='right double arrow icon' height={14} width={14} />
       </button>
     </nav>
   );
 };
 
-export default Page;
+const ResponsivePageNavbar = ({ contentsLength, pageNumSize }: PropsType) => {
+  return (
+    <>
+      {typeof pageNumSize !== 'undefined'
+        ? <PageNavbar contentsLength={contentsLength} pageNumSize={pageNumSize} responsive={false} />
+        :
+        <>
+          <PageNavbar contentsLength={contentsLength} pageNumSize={5} responsive={true} />
+          <PageNavbar contentsLength={contentsLength} pageNumSize={10} responsive={true} />
+        </>
+      }
+    </>
+  );
+};
+
+export default ResponsivePageNavbar;

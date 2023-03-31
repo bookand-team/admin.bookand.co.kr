@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import Details from '@components/bookstore/details';
 import Modal from '@components/common/modal';
-import Page from '@components/common/page';
+import ResponsivePageNavbar from '@components/common/page_navbar';
 import Search from '@components/common/search';
 import SectionHeader from '@components/common/section_header';
 import changeQuery from '@hooks/change_query';
@@ -135,7 +135,7 @@ const Management = () => {
               </ul>
             </div>
           </div>
-          {bookstoresLength ? <Page contentsLength={bookstoresLength} /> : null}
+          {bookstoresLength ? <ResponsivePageNavbar contentsLength={bookstoresLength} /> : null}
           <div className={buttonStyles.buttons}>
             <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
             <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>

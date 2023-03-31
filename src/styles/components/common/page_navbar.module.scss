@@ -1,0 +1,62 @@
+@use '../../abstracts/variables';
+@use '../../abstracts/mixin';
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+
+  &.sm {
+    display: none;
+  }
+
+  @include mixin.sm {
+    display: none;
+
+    &.sm {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 24px;
+    border: none;
+    background-color: #{variables.$bg-btn-white};
+    cursor: pointer;
+    padding: 1px 2px;
+    margin: 0 8px;
+
+    @include mixin.sm {
+      width: 22px;
+      margin: 0 6px;
+    }
+  }
+}
+
+.current {
+  font-weight: 700;
+}
+
+.left2 {
+  position: relative;
+  top: 1.5px;
+}
+
+.left,
+.right {
+  position: relative;
+  top: 1px;
+}
+
+.right2 {
+  position: relative;
+  top: -0.5px;
+}

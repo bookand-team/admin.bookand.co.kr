@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Modal from '@components/common/modal';
-import Page from '@components/common/page';
+import ResponsivePageNavbar from '@components/common/page_navbar';
 import SectionHeader from '@components/common/section_header';
 import Details from '@components/push/details';
 import changeQuery from '@hooks/change_query';
@@ -127,7 +127,7 @@ const Management = () => {
               </ul>
             </div>
           </div>
-          {pushesLength ? <Page contentsLength={pushesLength} /> : null}
+          {pushesLength ? <ResponsivePageNavbar contentsLength={pushesLength} /> : null}
           <div className={buttonStyles.buttons}>
             <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
             <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
