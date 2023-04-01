@@ -19,4 +19,5 @@ export interface PageState {
   row: number;
   search: string | null;
   status: ArticleStatus | BookstoreStatus | MemberStatus | PushStatus | ReportStatus | null;
+  gnbOpend: boolean;
 }

@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import logoutIcon from '@images/box-arrow-right.svg';
 import menuIcon from '@images/list.svg';
 import { logout } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
+import { setGnbOpend } from '@redux/reducers/page';
 import { AppDispatch } from '@redux/store';
 import styles from '@styles/components/common/header.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
@@ -17,10 +18,7 @@ const Header = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const { isLoggedIn, logoutDone } = useSelector((state: RootState) => state.user);
-  const { section } = useSelector((state: RootState) => state.page);
-
-  // GNB 메뉴 열린 상태
-  const [gnbOpend, setGnbOpend] = useState(false);
+  const { section, gnbOpend } = useSelector((state: RootState) => state.page);
 
   /** 로그아웃 버튼 */
   const logoutBtnHandler = useCallback(() => {
@@ -29,8 +27,8 @@ const Header = () => {
 
   /** GNB 메뉴 버튼 */
   const menuBtnHandler = useCallback(() => {
-    setGnbOpend((prev) => !prev);
-  }, []);
+    dispatch(setGnbOpend(!gnbOpend));
+  }, [gnbOpend]);
 
   // 로그아웃 요청 결과 처리
   useEffect(() => {
@@ -67,7 +65,7 @@ const Header = () => {
       </header>
       {section !== 'login' &&
         <nav className={styles.gnb}>
-          <ul className={gnbOpend ? styles.opend : styles.closed}>
+          <ul className={gnbOpend ? styles.opend : undefined}>
             {GNBArr.map((menu, idx) => {
               return (
                 <Link key={idx} href={`/${menu[0]}`}>

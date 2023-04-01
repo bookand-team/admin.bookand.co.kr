@@ -73,17 +73,18 @@
   }
 
   @include mixin.sm {
+    ul {
+      display: none;
+    }
+
     .opend {
+      display: flex;
       position: absolute;
       z-index: 10;
       flex-direction: column;
       width: 100%;
       border-top: 1px solid #{variables.$bd-gray};
       background-color: #{variables.$bg-gnb};
-    }
-
-    .closed {
-      display: none;
     }
   }
 
