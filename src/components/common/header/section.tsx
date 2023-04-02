@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-import styles from '@styles/components/common/section_header.module.scss';
+import styles from '@styles/components/common/header/section.module.scss';
 
 interface PropsType {
-  title?: string;
+  title: string;
   right?: ReactNode;
 }
 

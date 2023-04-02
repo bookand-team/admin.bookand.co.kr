@@ -4,10 +4,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Details from '@components/bookstore/details';
+import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import Search from '@components/common/search';
-import SectionHeader from '@components/common/section_header';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
@@ -66,9 +65,9 @@ const Management = () => {
     <>
       {bookstores &&
         <section className={styles.container}>
-          <SectionHeader
+          <SectionSearchHeader
             title='서점 관리'
-            right={<Search search='서점명' />} />
+            search='서점명' />
           <div className={styles.contents}>
             <div className={tableStyles.table}>
               <div className={tableStyles.thead}>

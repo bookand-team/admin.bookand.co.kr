@@ -1,4 +1,4 @@
-import SectionHeader from '@components/common/section_header';
+import SectionHeader from '@components/common/header/section';
 import styles from '@styles/components/dashboard/current_situation.module.scss';
 
 const CurrentSituation = () => {

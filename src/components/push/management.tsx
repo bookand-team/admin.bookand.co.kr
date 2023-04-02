@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import SectionHeader from '@components/common/header/section';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import SectionHeader from '@components/common/section_header';
 import Details from '@components/push/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';

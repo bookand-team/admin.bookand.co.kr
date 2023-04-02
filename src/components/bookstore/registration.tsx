@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 
-import SectionHeader from '@components/common/section_header';
+import SectionHeader from '@components/common/header/section';
 import { useInputSelect, useInputText } from '@hooks/use_input';
 import styles from '@styles/components/bookstore/registration.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';

@@ -1,4 +1,4 @@
-import SectionHeader from '@components/common/section_header';
+import SectionHeader from '@components/common/header/section';
 import Doughnut from '@components/dashboard/graph/doughnut';
 import { useInputSelect } from '@hooks/use_input';
 import styles from '@styles/components/dashboard/type_statistics.module.scss';

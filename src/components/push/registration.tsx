@@ -2,7 +2,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-import SectionHeader from '@components/common/section_header';
+import SectionHeader from '@components/common/header/section';
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
 import styles from '@styles/components/push/registration.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';

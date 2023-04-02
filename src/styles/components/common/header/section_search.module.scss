@@ -1,0 +1,82 @@
+@use '../../../abstracts/variables';
+@use '../../../abstracts/mixin';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mixin.sm {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 100%;
+    margin: 25px 20px;
+  }
+}
+
+.search {
+  display: flex;
+  margin-right: 34px;
+
+  @include mixin.sm {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  >span {
+    display: flex;
+    border: 1px solid #{variables.$bd-gray};
+    margin-right: 16px;
+    height: 40px;
+
+    @include mixin.sm {
+      display: none;
+    }
+
+    >span {
+      display: flex;
+      width: 150px;
+      justify-content: center;
+      align-items: center;
+      background-color: #{variables.$bg-text-gray};
+    }
+
+    input {
+      width: 200px;
+      border: none;
+      outline: none;
+      padding: 0 20px;
+    }
+  }
+
+  >div {
+    display: none;
+    height: 40px;
+    width: 100%;
+
+    @include mixin.sm {
+      display: flex;
+      border: 1px solid #{variables.$bd-gray};
+      margin-right: 16px;
+    }
+
+    >span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 16px;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 0 20px;
+    }
+  }
+}

@@ -10,11 +10,11 @@ import { logout } from '@redux/actions/user';
 import { RootState } from '@redux/reducers';
 import { setGnbOpend } from '@redux/reducers/page';
 import { AppDispatch } from '@redux/store';
-import styles from '@styles/components/common/header.module.scss';
+import styles from '@styles/components/common/header/global.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 import { GNBArr } from '@types';
 
-const Header = () => {
+const GlobalHeader = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const { isLoggedIn, logoutDone } = useSelector((state: RootState) => state.user);
@@ -83,4 +83,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default GlobalHeader;
