@@ -7,12 +7,12 @@ import styles from '@styles/layout/modal/details.module.scss';
 import { PushDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-type Props = {
+type PropsType = {
   push: PushDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-const Details = ({ push, setOpenModalId }: Props) => {
+const PushDetails = ({ push, setOpenModalId }: PropsType) => {
   /** 닫기 버튼 - 모달창 닫기 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
@@ -73,4 +73,4 @@ const Details = ({ push, setOpenModalId }: Props) => {
   );
 };
 
-export default Details;
+export default PushDetails;

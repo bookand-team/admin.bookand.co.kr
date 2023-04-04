@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import SectionHeader from '@components/common/header/section';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import Details from '@components/push/details';
+import PushDetails from '@components/push/management/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
@@ -18,7 +18,7 @@ import tableStyles from '@styles/layout/table.module.scss';
 import { PushCategory, PushCategoryArr, PushStatus, PushStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-const Management = () => {
+const PushManagement = () => {
   const router = useRouter();
   const { pushes, pushesLength } = useSelector((state: RootState) => state.push);
   const { page, row } = useSelector((state: RootState) => state.page);
@@ -112,7 +112,7 @@ const Management = () => {
                       <div className={styles.button}>
                         <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
                         <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <Details push={push} setOpenModalId={setOpenModalId} />
+                          <PushDetails push={push} setOpenModalId={setOpenModalId} />
                         </Modal>
                       </div>
                       <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
@@ -138,4 +138,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default PushManagement;

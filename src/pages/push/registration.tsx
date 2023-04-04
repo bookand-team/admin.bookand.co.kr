@@ -1,11 +1,11 @@
-import Registration from '@components/push/registration';
+import PushRegistration from '@components/push/registration';
 import wrapper from '@redux/store';
 import { checkToken } from '@utils/check_token';
 import { redirectPage } from '@utils/redirect_page';
 import { setPageState, setUserState } from '@utils/set_initial_state';
 
-const RegistrationPage = () => {
-  return (<Registration />);
+const PushRegistrationPage = () => {
+  return (<PushRegistration />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
@@ -19,4 +19,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   return { props: {} };
 });
 
-export default RegistrationPage;
+export default PushRegistrationPage;

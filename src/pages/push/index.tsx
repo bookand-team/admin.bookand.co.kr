@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readPushes } from '@api/dummy/push';
-import Management from '@components/push/management';
+import PushManagement from '@components/push/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setPushes } from '@redux/reducers/push';
@@ -26,7 +26,7 @@ const PushPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<PushManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

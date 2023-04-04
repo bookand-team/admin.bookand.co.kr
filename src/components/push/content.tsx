@@ -1,17 +1,19 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import SectionHeader from '@components/common/header/section';
 import { useInputRadio, useInputSelect, useInputText, useInputTextArea } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/components/push/modification.module.scss';
+import styles from '@styles/components/push/content.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 import { PushCategory, DeviceOSFilter, MemberIdFilter, MemberRoleFilter, MemberIdFilterArr, DeviceOSFilterArr, MemberRoleFilterArr, PushCategoryArr } from '@types';
 
-const Registration = () => {
-  const router = useRouter();
+type PropsType = {
+  header: ReactNode;
+  backBtnHandler: () => void;
+};
+
+const PushContent = ({ header, backBtnHandler }: PropsType) => {
   const { push } = useSelector((state: RootState) => state.push);
 
   // 입력받은 푸시 내용 (제목, 카테고리, 필터값, 본문)
@@ -21,13 +23,6 @@ const Registration = () => {
   const [selectDeviceOSFilter, changeSelectDeviceOSFilter] = useInputRadio<DeviceOSFilter>(push?.filter?.deviceOS ? push.filter.deviceOS : '전체');
   const [selectMemberRoleFilter, changeSelectMemberRoleFilter] = useInputRadio<MemberRoleFilter>(push?.filter?.memberRole ? push.filter.memberRole : '전체');
   const [inputContent, changeInputContent] = useInputTextArea(push?.content ? push.content : '');
-
-  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
-  const backBtnHandler = useCallback(() => {
-    if (confirm('수정을 취소하면 수정 중인 PUSH는 저장되지 않습니다.\nPUSH 수정을 취소하시겠습니까?')) {
-      router.back();
-    }
-  }, []);
 
   /** 저장하기 버튼 - 수정사항 저장 요청 */
   const submitBtnHandler = useCallback(() => {
@@ -44,7 +39,7 @@ const Registration = () => {
 
   return (
     <section className={styles.container}>
-      <SectionHeader title='푸시 수정' />
+      {header}
       <div className={styles.contents}>
         <div className={styles.title}>
           <input value={inputTitle} onChange={changeInputTitle} placeholder='제목을 입력해주세요.' spellCheck='false' />
@@ -86,4 +81,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default PushContent;
