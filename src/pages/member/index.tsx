@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readMembers } from '@api/dummy/member';
-import Management from '@components/member/management';
+import MemberManagement from '@components/member/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setMembers } from '@redux/reducers/member';
@@ -26,7 +26,7 @@ const MemberPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<MemberManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

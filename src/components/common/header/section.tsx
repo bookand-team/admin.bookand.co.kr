@@ -2,10 +2,10 @@ import { ReactNode } from 'react';
 
 import styles from '@styles/components/common/header/section.module.scss';
 
-interface PropsType {
+type PropsType = {
   title: string;
   right?: ReactNode;
-}
+};
 
 const SectionHeader = ({ title, right }: PropsType) => {
   return (

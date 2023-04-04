@@ -7,12 +7,12 @@ import styles from '@styles/layout/modal/details.module.scss';
 import { MemberDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-type Props = {
+type PropsType = {
   member: MemberDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-const Details = ({ member, setOpenModalId }: Props) => {
+const MemberDetails = ({ member, setOpenModalId }: PropsType) => {
   /** 닫기 버튼 - 모달창 닫기 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
@@ -83,4 +83,4 @@ const Details = ({ member, setOpenModalId }: Props) => {
   );
 };
 
-export default Details;
+export default MemberDetails;

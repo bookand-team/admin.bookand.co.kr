@@ -2,14 +2,14 @@ import React, { ReactNode, useCallback, useRef } from 'react';
 
 import styles from '@styles/components/common/modal.module.scss';
 
-type Props = {
+type PropsType = {
   children: ReactNode;
   id: number;
   openModalId: number | null;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-const Modal = ({ children, id, openModalId, setOpenModalId }: Props) => {
+const Modal = ({ children, id, openModalId, setOpenModalId }: PropsType) => {
   const modalRef = useRef(null);
 
   const closeModal = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

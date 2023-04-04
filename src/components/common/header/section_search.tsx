@@ -8,10 +8,10 @@ import searchIcon from '@images/search.svg';
 import styles from '@styles/components/common/header/section_search.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 
-interface PropsType {
+type PropsType = {
   title: string;
   search: string;
-}
+};
 
 const SectionSearchHeader = ({ title, search: searchTarget }: PropsType) => {
   const router = useRouter();

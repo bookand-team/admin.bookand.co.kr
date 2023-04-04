@@ -1,5 +1,5 @@
 import SectionHeader from '@components/common/header/section';
-import Doughnut from '@components/dashboard/graph/doughnut';
+import DoughtnutChart from '@components/dashboard/type_statistics/doughnut_chart';
 import { useInputSelect } from '@hooks/use_input';
 import styles from '@styles/components/dashboard/type_statistics.module.scss';
 import { DeviceOSFilter, DeviceOSFilterArr } from '@types';
@@ -33,7 +33,7 @@ const TypeStatistics = () => {
             )}
           </select>
           <div className={styles.graphWrapper}>
-            <Doughnut
+            <DoughtnutChart
               labels={['사용빈도', '콘텐츠', 'UI/UX', '시스템 에러', '개인정보', '기타']}
               values={withdrawValues[selectWithdrawalMember]}
             />
@@ -47,7 +47,7 @@ const TypeStatistics = () => {
             )}
           </select>
           <div className={styles.graphWrapper}>
-            <Doughnut
+            <DoughtnutChart
               labels={['정보오류', '정보누락', '업데이트', '로그인', '보안', 'PUSH', 'UI/UX', '에러', '기타']}
               values={feedbackValues[selectFeedback]}
             />

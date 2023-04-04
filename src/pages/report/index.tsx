@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readReports } from '@api/dummy/report';
-import Management from '@components/report/management';
+import ReportManagement from '@components/report/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setReports } from '@redux/reducers/report';
@@ -26,7 +26,7 @@ const ReportPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<ReportManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

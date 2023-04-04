@@ -4,15 +4,15 @@ import React, { useCallback } from 'react';
 import closeButton from '@images/close_icon.svg';
 import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
-import { FeedbackDTO } from '@types';
+import { ReportDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-type Props = {
-  feedback: FeedbackDTO;
+type PropsType = {
+  report: ReportDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-const Details = ({ feedback, setOpenModalId }: Props) => {
+const ReportDetails = ({ report, setOpenModalId }: PropsType) => {
   /** 닫기 버튼 - 모달창 닫기 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
@@ -29,29 +29,31 @@ const Details = ({ feedback, setOpenModalId }: Props) => {
       <button className={styles.close} onClick={closeBtnHandler}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
-      <h3>피드백 상세 정보</h3>
+      <h3>서점제보 상세 정보</h3>
       <div className={styles.contents}>
         <div className={styles.row}>
           <div className={styles.key}>번호</div>
-          <div className={styles.value}>{feedback?.id ? feedback.id : null}</div>
-          <div className={styles.key}>등록일자</div>
-          <div className={styles.value}>{feedback?.createdDate ? getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
-        </div>
-        <div className={styles.row}>
+          <div className={styles.value}>{report?.id ? report.id : null}</div>
           <div className={styles.key}>이메일</div>
-          <div className={styles.value}>{feedback?.email ? feedback.email : null}</div>
-          <div className={styles.key}>별점 평가</div>
-          <div className={styles.value}>{feedback?.score ? feedback.score : null}</div>
+          <div className={styles.value}>{report?.email ? report.email : null}</div>
         </div>
         <div className={styles.row}>
-          <div className={styles.key}>디바이스</div>
-          <div className={styles.value}>{feedback?.deviceOS ? feedback.deviceOS : null}</div>
-          <div className={styles.key}>유형 분류</div>
-          <div className={styles.value}>{feedback?.category ? feedback.category : null}</div>
+          <div className={styles.key}>서점명</div>
+          <div className={styles.value}>{report?.bookstoreName ? report.bookstoreName : null}</div>
+          <div className={styles.key}>제보요청 수</div>
+          <div className={styles.value}>{report?.reportedCount ? report.reportedCount : null}</div>
         </div>
-        <div className={styles.content}>
-          <div className={styles.key}>내용</div>
-          <div className={styles.value}>{feedback?.content ? feedback.content : null}</div>
+        <div className={styles.row}>
+          <div className={styles.key}>노출 상태</div>
+          <div className={styles.value}>{report?.status ? report.status : null}</div>
+          <div className={styles.key}>등록일자</div>
+          <div className={styles.value}>{report?.createdDate ? getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm') : null}</div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.key}>노출일자</div>
+          <div className={styles.value}>{report?.exposedDate ? getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm') : null}</div>
+          <div className={styles.key}></div>
+          <div className={styles.value}></div>
         </div>
       </div>
       <div className={buttonStyles.modal_buttons}>
@@ -62,4 +64,4 @@ const Details = ({ feedback, setOpenModalId }: Props) => {
   );
 };
 
-export default Details;
+export default ReportDetails;

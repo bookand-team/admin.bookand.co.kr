@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readFeedbacks } from '@api/dummy/feedback';
-import Management from '@components/feedback/management';
+import FeedbackManagement from '@components/feedback/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setFeedbacks } from '@redux/reducers/feedback';
@@ -26,7 +26,7 @@ const FeedbackPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<FeedbackManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

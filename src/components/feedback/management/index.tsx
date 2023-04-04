@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import Details from '@components/feedback/details';
+import FeedbackDetails from '@components/feedback/management/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
@@ -17,7 +17,7 @@ import tableStyles from '@styles/layout/table.module.scss';
 import { FeedbackCategory, FeedbackCategoryArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-const Management = () => {
+const FeedbackManagement = () => {
   const router = useRouter();
   const { feedbacks, feedbacksLength } = useSelector((state: RootState) => state.feedback);
   const { page, row } = useSelector((state: RootState) => state.page);
@@ -80,7 +80,7 @@ const Management = () => {
                       <div className={styles.button}>
                         <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
                         <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <Details feedback={feedback} setOpenModalId={setOpenModalId} />
+                          <FeedbackDetails feedback={feedback} setOpenModalId={setOpenModalId} />
                         </Modal>
                       </div>
                     </li>
@@ -101,4 +101,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default FeedbackManagement;

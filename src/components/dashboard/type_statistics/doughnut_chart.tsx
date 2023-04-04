@@ -35,12 +35,12 @@ const borderColor = [
 
 const borderWidth = 1;
 
-type Props = {
+type PropsType = {
   labels: string[];
   values: number[];
 };
 
-const Doughtnut = ({ labels, values }: Props) => {
+const DoughtnutChart = ({ labels, values }: PropsType) => {
   const data: ChartData<'doughnut'> = {
     labels,
     datasets: [
@@ -57,4 +57,4 @@ const Doughtnut = ({ labels, values }: Props) => {
   );
 };
 
-export default Doughtnut;
+export default DoughtnutChart;

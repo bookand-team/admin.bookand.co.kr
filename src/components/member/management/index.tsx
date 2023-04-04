@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import Details from '@components/member/details';
+import MemberDetails from '@components/member/management/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
@@ -17,7 +17,7 @@ import tableStyles from '@styles/layout/table.module.scss';
 import { MemberRole, MemberRoleArr, MemberStatus, MemberStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-const Management = () => {
+const MemberManagement = () => {
   const router = useRouter();
   const { members, membersLength } = useSelector((state: RootState) => state.member);
   const { page, row } = useSelector((state: RootState) => state.page);
@@ -88,7 +88,7 @@ const Management = () => {
                       <div className={styles.button}>
                         <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(member.id)}>상세정보</button>
                         <Modal id={member.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <Details member={member} setOpenModalId={setOpenModalId} />
+                          <MemberDetails member={member} setOpenModalId={setOpenModalId} />
                         </Modal>
                       </div>
                     </li>
@@ -109,4 +109,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default MemberManagement;

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
-import Details from '@components/report/details';
+import ReportDetails from '@components/report/management/details';
 import changeQuery from '@hooks/change_query';
 import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
@@ -17,7 +17,7 @@ import tableStyles from '@styles/layout/table.module.scss';
 import { ReportStatus, ReportStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-const Management = () => {
+const ReportManagement = () => {
   const router = useRouter();
   const { reports, reportsLength } = useSelector((state: RootState) => state.report);
   const { page, row } = useSelector((state: RootState) => state.page);
@@ -78,7 +78,7 @@ const Management = () => {
                       <div className={styles.button}>
                         <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(report.id)}>상세정보</button>
                         <Modal id={report.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <Details report={report} setOpenModalId={setOpenModalId} />
+                          <ReportDetails report={report} setOpenModalId={setOpenModalId} />
                         </Modal>
                       </div>
                     </li>
@@ -99,4 +99,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default ReportManagement;
