@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readArticles } from '@api/dummy/article';
-import Management from '@components/article/management';
+import ArticleManagement from '@components/article/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setArticles } from '@redux/reducers/acticle';
@@ -26,7 +26,7 @@ const ArticlePage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<ArticleManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

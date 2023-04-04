@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readArticle } from '@api/dummy/article';
-import Modification from '@components/article/modification';
+import ArticleModification from '@components/article/modification';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setArticle } from '@redux/reducers/acticle';
@@ -11,7 +11,7 @@ import { checkToken } from '@utils/check_token';
 import { redirectPage } from '@utils/redirect_page';
 import { setPageState, setTokenExpiration, setUserState } from '@utils/set_initial_state';
 
-const DetailsPage = () => {
+const ArticleModificationPage = () => {
   const router = useRouter();
   const [user, dispatch] = useUserState();
 
@@ -26,7 +26,7 @@ const DetailsPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Modification />);
+  return (<ArticleModification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
@@ -48,4 +48,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   return { props: {} };
 });
 
-export default DetailsPage;
+export default ArticleModificationPage;

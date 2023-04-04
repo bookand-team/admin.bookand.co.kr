@@ -1,25 +1,28 @@
 import Image from 'next/image';
 import React, { useRouter } from 'next/router';
-import { ChangeEvent, Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useSelector } from 'react-redux';
 
+import { useInputText, useInputTextArea } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
-import styles from '@styles/components/article/contents.module.scss';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/components/article/content.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 
 type PropsType = {
-  inputTitle: string;
-  changeInputTitle: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputContent: string;
-  changeInputContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  setInputContent: Dispatch<SetStateAction<string>>;
-  markdownContent: string;
-  setMarkdownContent: Dispatch<SetStateAction<string>>;
-  setStage: Dispatch<SetStateAction<'contents' | 'extra contents'>>;
+  setStage: Dispatch<SetStateAction<'content' | 'extra content'>>;
 };
 
-const Contents = ({ inputTitle, changeInputTitle, inputContent, changeInputContent, setInputContent, markdownContent, setMarkdownContent, setStage }: PropsType) => {
+const ArticleContent = ({ setStage }: PropsType) => {
   const router = useRouter();
+  const { article } = useSelector((state: RootState) => state.article);
+
+  // 입력받은 아티클 정보 (제목, 본문)
+  const [inputTitle, changeInputTitle] = useInputText(article?.title ? article.title : '');
+  const [inputContent, changeInputContent, setInputContent] = useInputTextArea(article?.content ? article.content : '');
+  // 마크다운 형식의 아티클 내용
+  const [markdownContent, setMarkdownContent] = useState('');
 
   // 선택자 (이미지 url 생성 버튼, 아티클 본문 입력구역)
   const inputImgFileRef = useRef<HTMLInputElement>(null);
@@ -100,7 +103,7 @@ const Contents = ({ inputTitle, changeInputTitle, inputContent, changeInputConte
 
   /** 저장하기 버튼 - 다음 단계로 이동 */
   const submitBtnHandler = useCallback(() => {
-    setStage('extra contents');
+    setStage('extra content');
   }, []);
 
   // 입력한 줄바꿈을 마크다운 줄바꿈으로 자동 변환
@@ -158,4 +161,4 @@ const Contents = ({ inputTitle, changeInputTitle, inputContent, changeInputConte
   );
 };
 
-export default Contents;
+export default ArticleContent;

@@ -1,26 +1,22 @@
 import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useCallback, useRef } from 'react';
-import { useSelector } from 'react-redux';
 
 import { useInputSelect } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
-import { RootState } from '@redux/reducers';
-import styles from '@styles/components/article/extra_contents.module.scss';
+import styles from '@styles/components/article/extra_content.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 import { ArticleCategory, ArticleCategoryArr, DeviceOSFilter, DeviceOSFilterArr, MemberIdFilter, MemberIdFilterArr } from '@types';
 
 type PropsType = {
-  setStage: Dispatch<SetStateAction<'contents' | 'extra contents'>>;
+  setStage: Dispatch<SetStateAction<'content' | 'extra content'>>;
 };
 
-const ExtraContents = ({ setStage }: PropsType) => {
-  const { article } = useSelector((state: RootState) => state.article);
-
-  // 입력받은 아티클 정보 (카테고리, 디바이스 운영체제 필터값, 멤버 식별자 필터값)
-  const [selectCategory, changeSelectCategory] = useInputSelect<'' | ArticleCategory>(article?.category ? article.category : '');
-  const [selectDeviceOSFilter, changeSelectDeviceOSFilter] = useInputSelect<DeviceOSFilter>(article?.filter?.deviceOS ? article.filter.deviceOS : '전체');
-  const [selectMemberIdFilter, changeSelectMemberIdFilter] = useInputSelect<MemberIdFilter>(article?.filter?.memberId ? article.filter.memberId : '전체');
+const ArticleExtraContent = ({ setStage }: PropsType) => {
+  // 입력받은 아티클 정보 (카테고리, 노출 디바이스, 노출 멤버 식별자)
+  const [selectCategory, changeSelectCategory] = useInputSelect<'' | ArticleCategory>('');
+  const [selectMemberIdFilter, changeSelectMemberIdFilter] = useInputSelect<MemberIdFilter>('전체');
+  const [selectDeviceOSFilter, changeSelectDeviceOSFilter] = useInputSelect<DeviceOSFilter>('전체');
 
   // 대표 이미지 선택 버튼 선택자
   const mainImageRef = useRef<HTMLInputElement>(null);
@@ -44,7 +40,7 @@ const ExtraContents = ({ setStage }: PropsType) => {
 
   /** 뒤로가기 버튼 - 이전 페이지로 이동 */
   const backBtnHandler = useCallback(() => {
-    setStage('contents');
+    setStage('content');
   }, []);
 
   /** 저장하기 버튼 - 작성한 내용 저장 요청 */
@@ -112,4 +108,4 @@ const ExtraContents = ({ setStage }: PropsType) => {
   );
 };
 
-export default ExtraContents;
+export default ArticleExtraContent;

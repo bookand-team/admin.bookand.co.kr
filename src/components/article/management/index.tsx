@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Details from '@components/article/details';
+import ArticleDetails from '@components/article/management/details';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
 import ResponsivePageNavbar from '@components/common/page_navbar';
@@ -18,7 +18,7 @@ import tableStyles from '@styles/layout/table.module.scss';
 import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-const Management = () => {
+const ArticleManagement = () => {
   const router = useRouter();
   const { articles, articlesLength } = useSelector((state: RootState) => state.article);
   const { page, row } = useSelector((state: RootState) => state.page);
@@ -119,7 +119,7 @@ const Management = () => {
                       <div className={styles.button}>
                         <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
                         <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <Details article={article} setOpenModalId={setOpenModalId} />
+                          <ArticleDetails article={article} setOpenModalId={setOpenModalId} />
                         </Modal>
                       </div>
                       <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button></div>
@@ -145,4 +145,4 @@ const Management = () => {
   );
 };
 
-export default Management;
+export default ArticleManagement;
