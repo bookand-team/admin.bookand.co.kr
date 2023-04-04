@@ -1,25 +1,30 @@
 import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import SectionHeader from '@components/common/header/section';
 import { useInputSelect, useInputText } from '@hooks/use_input';
-import styles from '@styles/components/bookstore/registration.module.scss';
+import { RootState } from '@redux/reducers';
+import styles from '@styles/components/bookstore/content.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
 import { BookstoreTheme, BookstoreThemeArr } from '@types';
 
-const Registration = () => {
-  const router = useRouter();
+type PropsType = {
+  header: ReactNode;
+  backBtnHandler: () => void;
+};
+
+const BookstoreContent = ({ header, backBtnHandler }: PropsType) => {
+  const { bookstore } = useSelector((state: RootState) => state.bookstore);
 
   // 입력받은 추가정보 (한줄소개, 테마, 대표 이미지 미리보기, 서브 이미지들 미리보기)
-  const [inputInformation, changeInputInformation] = useInputText('');
-  const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>('');
-  const [mainImage, setMainImage] = useState('');
-  const [subImages, setSubImages] = useState<string[]>([]);
+  const [inputIntroduction, changeInputIntroduction] = useInputText(bookstore?.introduction ? bookstore.introduction : '');
+  const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>(bookstore?.theme ? bookstore.theme : '');
+  const [mainImageSrc, setMainImageSrc] = useState(bookstore?.mainImage ? bookstore.mainImage : '');
+  const [subImagesSrc, setSubImagesSrc] = useState<string[]>(bookstore?.subImages ? bookstore.subImages : []);
 
   /** 검색 버튼 - 서점이름을 검색해 서점 정보 불러오기 요청 */
-  const searchNameHandler = useCallback(() => {
+  const searchBtnHandler = useCallback(() => {
     // TODO: 서점이름을 검색해 서점 정보 불러오기 요청
     alert('현재 지원하지 않는 기능입니다.');
   }, []);
@@ -39,9 +44,9 @@ const Registration = () => {
   const mainImageBtnHandler = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const result = await createImagePreview(e.target.files[0]);
-      setMainImage(result as string);
+      setMainImageSrc(result as string);
     } else {
-      setMainImage('');
+      setMainImageSrc('');
     }
   }, []);
 
@@ -53,41 +58,33 @@ const Registration = () => {
         const result = await createImagePreview(e.target.files[i]);
         results.push(result);
       }
-      setSubImages(results as string[]);
+      setSubImagesSrc(results as string[]);
     } else {
-      setSubImages([]);
-    }
-  }, []);
-
-  /** 뒤로가기 버튼 - 이전 페이지로 이동 */
-  const backBtnHandler = useCallback(() => {
-    if (confirm('서점 등록을 취소하면 등록 중인 서점은 저장되지 않습니다.\n서점 등록을 취소하시겠습니까?')) {
-      router.back();
+      setSubImagesSrc([]);
     }
   }, []);
 
   /** 저장하기 버튼 - 수정사항 저장 요청 */
   const submitBtnHandler = useCallback(() => {
     // TODO: 수정사항 저장 요청 기능
-    if (inputInformation === '') {
+    if (inputIntroduction === '') {
       return alert('서점 한줄소개를 입력해주세요.');
     } else if (selectTheme === '') {
       return alert('서점 테마를 선택해주세요.');
     }
-    // feature
     alert('현재 지원하지 않는 기능입니다.');
-  }, [inputInformation, selectTheme]);
+  }, [inputIntroduction, selectTheme]);
 
   return (
     <section className={styles.container}>
-      <SectionHeader title='서점 등록' />
+      {header}
       <div className={styles.contents}>
         <div className={styles.search}>
           <div>
             <div className={styles.key}>서점 이름</div>
-            <div className={styles.value} onClick={searchNameHandler}></div>
+            <div className={styles.value} onClick={searchBtnHandler}></div>
           </div>
-          <button onClick={searchNameHandler}>검색</button>
+          <button onClick={searchBtnHandler}>검색</button>
         </div>
         <div className={styles.info}>
           <h3 className={styles.h3}>API 정보관리</h3>
@@ -119,7 +116,7 @@ const Registration = () => {
           <div>
             <div>
               <div className={styles.key}>한줄소개</div>
-              <input className={styles.value} value={inputInformation} onChange={changeInputInformation} spellCheck='false' />
+              <input className={styles.value} value={inputIntroduction} onChange={changeInputIntroduction} spellCheck='false' />
             </div>
             <div>
               <select className={styles.value} value={selectTheme} onChange={changeSelectTheme}>
@@ -139,15 +136,16 @@ const Registration = () => {
             <ul>
               <li>
                 <label htmlFor='main-image'>
-                  {
-                    mainImage
-                      ? <Image src={mainImage} alt='preview-image' width={150} height={150} />
+                  {/* TODO: {
+                    mainImageSrc
+                      ? <Image src={mainImageSrc} alt='preview-image' width={150} height={150} />
                       : <div className={styles.main}>대표 이미지</div>
-                  }
+                  } */}
+                  <div className={styles.main}>대표 이미지</div>
                 </label>
               </li>
-              {
-                subImages.length === 0
+              {/* {
+                subImagesSrc.length === 0
                   ?
                   <>
                     <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
@@ -157,7 +155,7 @@ const Registration = () => {
                     <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
                   </>
                   :
-                  subImages.map((imageSrc) => {
+                  subImagesSrc.map((imageSrc) => {
                     return (
                       <li key={nanoid()}>
                         <label htmlFor='sub-image'>
@@ -166,7 +164,14 @@ const Registration = () => {
                       </li>
                     );
                   })
-              }
+              } */}
+              <>
+                <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+                <li><label htmlFor='sub-image'><div>서브 이미지</div></label></li>
+              </>
             </ul>
           </div>
         </div>
@@ -179,4 +184,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default BookstoreContent;

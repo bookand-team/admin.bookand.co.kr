@@ -7,12 +7,12 @@ import styles from '@styles/layout/modal/details.module.scss';
 import { BookstoreDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
-type Props = {
+type PropsType = {
   bookstore: BookstoreDTO;
   setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-const Details = ({ bookstore, setOpenModalId }: Props) => {
+const BookstoreDetails = ({ bookstore, setOpenModalId }: PropsType) => {
   /** 닫기 버튼 - 모달창 닫기 */
   const closeBtnHandler = useCallback(() => {
     setOpenModalId(null);
@@ -76,4 +76,4 @@ const Details = ({ bookstore, setOpenModalId }: Props) => {
   );
 };
 
-export default Details;
+export default BookstoreDetails;

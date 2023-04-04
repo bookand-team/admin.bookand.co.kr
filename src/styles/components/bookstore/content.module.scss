@@ -17,23 +17,22 @@
 
 .search>div {
   display: flex;
-  width: 362px;
+  width: 400px;
   border: 1px solid #{variables.$bd-gray};
-  margin-right: 10px;
+  margin-right: 16px;
 }
 
-.search>div>div {
+.search .key {
   width: 150px;
   text-align: center;
   padding: 9px 0;
   background-color: #{variables.$bg-text-gray};
 }
 
-.search input {
-  width: 212px;
-  border: none;
-  outline: none;
-  padding-left: 12px;
+.search .value {
+  width: 250px;
+  padding: 9px 0;
+  padding-left: 16px;
 }
 
 .search>button {
@@ -64,13 +63,46 @@
   align-items: center;
 }
 
-.info>div>div>div {
+.info .key {
   width: 100px;
   font-weight: 500;
+  margin-left: 4px;
 }
 
-.info input {
+.info .value {
   border: none;
   outline: none;
   flex: 1;
+}
+
+.info ul {
+  display: flex;
+}
+
+.info select {
+  cursor: pointer;
+}
+
+.info .title {
+  margin-left: 4px;
+}
+
+.info ul li {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+
+.info .main {
+  background-color: #{variables.$bg-img-pink};
+}
+
+.info ul li div {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  background-color: #{variables.$bg-img-light-pink};
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

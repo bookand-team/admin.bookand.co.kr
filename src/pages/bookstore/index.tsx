@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readBookstores } from '@api/dummy/bookstore';
-import Management from '@components/bookstore/management';
+import BookstoreManagement from '@components/bookstore/management';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setBookstores } from '@redux/reducers/bookstore';
@@ -26,7 +26,7 @@ const BookstorePage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Management />);
+  return (<BookstoreManagement />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { readBookstore } from '@api/dummy/bookstore';
-import Modification from '@components/bookstore/modification';
+import BookstoreModification from '@components/bookstore/modification';
 import { useUserState } from '@hooks/use_user_state';
 import { silentLogin } from '@redux/actions/user';
 import { setBookstore } from '@redux/reducers/bookstore';
@@ -11,7 +11,7 @@ import { checkToken } from '@utils/check_token';
 import { redirectPage } from '@utils/redirect_page';
 import { setPageState, setTokenExpiration, setUserState } from '@utils/set_initial_state';
 
-const ModificationPage = () => {
+const BookstoreModificationPage = () => {
   const router = useRouter();
   const [user, dispatch] = useUserState();
 
@@ -26,7 +26,7 @@ const ModificationPage = () => {
     if (user.silentLoginError) { router.replace('/'); }
   }, [user.silentLoginDone, user.silentLoginError]);
 
-  return (<Modification />);
+  return (<BookstoreModification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
@@ -48,4 +48,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   return { props: {} };
 });
 
-export default ModificationPage;
+export default BookstoreModificationPage;
