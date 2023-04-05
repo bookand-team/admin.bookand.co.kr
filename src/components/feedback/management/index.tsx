@@ -14,7 +14,6 @@ import changeQuery from '@hooks/change_query';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/feedback/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { FeedbackCategory, FeedbackCategoryArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -77,7 +76,7 @@ const FeedbackManagement = () => {
                   <span className={styles.feedbackCount}>{feedback.score && feedback.score}</span>
                   <span className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
                     <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <FeedbackDetails feedback={feedback} setOpenModalId={setOpenModalId} />
                     </Modal>

@@ -14,7 +14,6 @@ import changeQuery from '@hooks/change_query';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/report/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { ReportStatus, ReportStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -75,7 +74,7 @@ const ReportManagement = () => {
                   <span className={styles.createdDate}>{report.createdDate && getDisplayTime(report.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.exposedDate}>{report.exposedDate && getDisplayTime(report.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(report.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(report.id)}>상세정보</button>
                     <Modal id={report.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <ReportDetails report={report} setOpenModalId={setOpenModalId} />
                     </Modal>

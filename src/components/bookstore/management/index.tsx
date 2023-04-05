@@ -15,7 +15,6 @@ import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/bookstore/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { BookstoreStatus, BookstoreStatusArr, BookstoreTheme, BookstoreThemeArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -117,12 +116,14 @@ const BookstoreManagement = () => {
                   <span className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
                     <Modal id={bookstore.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <BookstoreDetails bookstore={bookstore} setOpenModalId={setOpenModalId} />
                     </Modal>
                   </span>
-                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button></span>
+                  <span className={styles.button}>
+                    <button className={styles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button>
+                  </span>
                 </ManagementTableRow>
               );
             })}
@@ -130,10 +131,10 @@ const BookstoreManagement = () => {
         }
         contentsLength={bookstoresLength}
       />
-      <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
-        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
-      </div>
+      <nav className={styles.buttons}>
+        <button className={styles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
+        <button className={styles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
+      </nav>
     </section>
   );
 };

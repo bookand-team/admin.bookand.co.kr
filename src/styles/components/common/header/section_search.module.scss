@@ -1,5 +1,6 @@
 @use '../../../abstracts/variables';
 @use '../../../abstracts/mixin';
+@use '../../../layout/button';
 
 .header {
   display: flex;
@@ -78,5 +79,9 @@
       outline: none;
       padding: 0 20px;
     }
+  }
+
+  .search_btn {
+    @include button.search_btn;
   }
 }

@@ -1,7 +1,8 @@
 @use '../../layout/management_table';
+@use '../../layout/button';
 
 .id {
-  @include management_table.fixed_sm
+  @include management_table.fixed_sm;
 }
 
 .nickname {
@@ -18,14 +19,15 @@
 
 .role,
 .status {
-  @include management_table.increasing_sm
+  @include management_table.increasing_sm;
 }
 
 .createdDate,
 .accessedDate {
-  @include management_table.increasing_lg
+  @include management_table.increasing_lg;
 }
 
 .button {
-  @include management_table.fixed_lg
+  @include management_table.fixed_lg;
+  @include button.table_btn_layout;
 }

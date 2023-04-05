@@ -8,7 +8,6 @@ import { useInputText, useInputTextArea } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/article/content.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 
 type PropsType = {
   setStage: Dispatch<SetStateAction<'content' | 'extra content'>>;
@@ -138,10 +137,10 @@ const ArticleContent = ({ setStage }: PropsType) => {
         <div className={styles.content}>
           <textarea ref={contentRef} value={inputContent} onChange={changeInputContent} placeholder='아티클 본문을 입력해주세요' spellCheck='false' />
         </div>
-        <div className={buttonStyles.buttons}>
-          <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
-          <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
-        </div>
+        <nav className={styles.buttons}>
+          <button className={styles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+          <button className={styles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
+        </nav>
       </section>
       <section className={styles.viewer}>
         {inputTitle &&

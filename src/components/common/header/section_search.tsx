@@ -6,7 +6,6 @@ import changeQuery from '@hooks/change_query';
 import { useInputText } from '@hooks/use_input';
 import searchIcon from '@images/search.svg';
 import styles from '@styles/components/common/header/section_search.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 
 type PropsType = {
   title: string;
@@ -45,7 +44,7 @@ const SectionSearchHeader = ({ title, search: searchTarget }: PropsType) => {
           <span className={styles.icon}><Image src={searchIcon} /></span>
           <input type='text' name='inputSearch' value={searchText} onChange={changeSearchText} placeholder={`${searchTarget}으로 검색`} spellCheck='false' />
         </div>
-        <button className={buttonStyles.search} type='submit'>검색</button>
+        <button className={styles.search_btn} type='submit'>검색</button>
       </form>
     </header>
   );

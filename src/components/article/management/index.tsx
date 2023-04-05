@@ -15,7 +15,6 @@ import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/article/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -116,12 +115,14 @@ const ArticleManagement = () => {
                   <span className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
                     <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <ArticleDetails article={article} setOpenModalId={setOpenModalId} />
                     </Modal>
                   </span>
-                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button></span>
+                  <span className={styles.button}>
+                    <button className={styles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button>
+                  </span>
                 </ManagementTableRow>
               );
             })}
@@ -129,10 +130,10 @@ const ArticleManagement = () => {
         }
         contentsLength={articlesLength}
       />
-      <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
-        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
-      </div>
+      <nav className={styles.buttons}>
+        <button className={styles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
+        <button className={styles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
+      </nav>
     </section>
   );
 };

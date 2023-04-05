@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useCallback } from 'react';
 
 import closeButton from '@images/close_icon.svg';
-import buttonStyles from '@styles/layout/button.module.scss';
 import styles from '@styles/layout/modal/details.module.scss';
 import { ArticleDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
@@ -30,7 +29,7 @@ const ArticleDetails = ({ article, setOpenModalId }: PropsType) => {
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
       <h3>아티클 상세 정보</h3>
-      <div className={styles.contents}>
+      <div className={styles.content}>
         <div className={styles.row}>
           <div className={styles.key}>번호</div>
           <div className={styles.value}>{article?.id ? article.id : null}</div>
@@ -62,10 +61,10 @@ const ArticleDetails = ({ article, setOpenModalId }: PropsType) => {
           <div className={styles.value}>{article?.modifiedDate ? getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm') : null}</div>
         </div>
       </div>
-      <div className={buttonStyles.modal_buttons}>
-        <button className={buttonStyles.modal_close_btn} onClick={closeBtnHandler}>닫기</button>
-        <button className={buttonStyles.modal_apply_btn} onClick={submitBtnHandler}>적용</button>
-      </div>
+      <nav className={styles.buttons}>
+        <button className={styles.close_btn} onClick={closeBtnHandler}>닫기</button>
+        <button className={styles.apply_btn} onClick={submitBtnHandler}>적용</button>
+      </nav>
     </section>
   );
 };

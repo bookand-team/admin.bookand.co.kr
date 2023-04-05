@@ -1,0 +1,163 @@
+@use '../abstracts/variables';
+
+// 메인 버튼
+@mixin main_btn_container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+@mixin main_black_btn {
+  width: 140px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-black};
+  color: #{variables.$font-white};
+  border: none;
+  margin: 0 12px;
+}
+
+@mixin main_gray_btn {
+  width: 140px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-gray};
+  color: #{variables.$font-gray};
+  border: none;
+  margin: 0 12px;
+}
+
+@mixin main_red_btn {
+  width: 140px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-red};
+  color: #{variables.$font-white};
+  border: none;
+  margin: 0 12px;
+}
+
+// 모달 버튼
+@mixin modal_btn_container {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+}
+
+@mixin modal_black_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-black};
+  color: #{variables.$font-white};
+  border: none;
+  margin: 0 12px;
+}
+
+@mixin modal_gray_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-gray};
+  color: #{variables.$font-gray};
+  border: none;
+  margin: 0 12px;
+}
+
+@mixin modal_red_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-red};
+  color: #{variables.$font-white};
+  border: none;
+  margin: 0 12px;
+}
+
+@mixin modal_green_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-green};
+  color: #{variables.$font-white};
+  border: none;
+  margin: 0 12px;
+}
+
+// 관리테이블 버튼
+@mixin table_btn_layout {
+
+  .table_details_btn,
+  .table_modify_btn {
+    @include table_black_btn;
+  }
+}
+
+@mixin table_black_btn {
+  width: 70px;
+  height: 30px;
+  background-color: #{variables.$bg-btn-black};
+  color: #{variables.$font-white};
+  border: none;
+}
+
+// 로그인/로그아웃 버튼
+@mixin login_btn {
+  height: 50px;
+  background-color: #{variables.$bg-btn-dark-black};
+  color: #{variables.$font-white};
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+@mixin logout_btn {
+  width: 80px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-red};
+  color: #{variables.$font-white};
+  border: none;
+}
+
+// 검색 버튼
+@mixin search_btn {
+  width: 80px;
+  height: 40px;
+  background-color: #{variables.$bg-btn-black};
+  color: #{variables.$font-white};
+  border: none;
+}
+
+// 메인 버튼 통합 레이아웃
+@mixin main_btn_layout {
+  @include main_btn_container;
+
+  .back_btn {
+    @include main_gray_btn;
+  }
+
+  .register_btn,
+  .submit_btn {
+    @include main_black_btn;
+  }
+
+  .delete_btn {
+    @include main_red_btn;
+  }
+}
+
+// 모달 버튼 통합 레이아웃
+@mixin modal_btn_layout {
+  @include modal_btn_container;
+
+  .close_btn {
+    @include modal_gray_btn;
+  }
+
+  .apply_btn {
+    @include modal_black_btn;
+  }
+
+  .withdraw_btn {
+    @include modal_red_btn;
+  }
+
+  .send_btn {
+    @include modal_green_btn;
+  }
+}

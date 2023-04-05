@@ -5,7 +5,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useCallback, useRef } from 'reac
 import { useInputSelect } from '@hooks/use_input';
 import imgIcon from '@images/image_icon.svg';
 import styles from '@styles/components/article/extra_content.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { ArticleCategory, ArticleCategoryArr, DeviceOSFilter, DeviceOSFilterArr, MemberIdFilter, MemberIdFilterArr } from '@types';
 
 type PropsType = {
@@ -98,10 +97,10 @@ const ArticleExtraContent = ({ setStage }: PropsType) => {
               </div>
             </div>
           </div>
-          <div className={buttonStyles.buttons}>
-            <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
-            <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
-          </div>
+          <nav className={styles.buttons}>
+            <button className={styles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+            <button className={styles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
+          </nav>
         </div>
       </section>
     </div>

@@ -1,55 +1,40 @@
 @use '../../abstracts/variables';
+@use '../../layout/button';
 
 .container {
   margin: auto auto;
-}
 
-.header {
-  font-size: 28px;
-  font-weight: 700;
-  text-align: center;
-  margin: 20px 0;
-}
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+  }
 
-.container form {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0;
-}
+  form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
 
-.id {
-  height: 50px;
-  border: 1px solid #{variables.$bd-dark-gray};
-  border-radius: 10px;
-  width: 100%;
-  padding: 0 20px;
-  margin: 6px 0;
-}
+    input {
+      height: 50px;
+      border: 1px solid #{variables.$bd-dark-gray};
+      border-radius: 10px;
+      width: 100%;
+      padding: 0 20px;
+      margin: 6px 0;
+    }
 
-.password {
-  height: 50px;
-  border: 1px solid #{variables.$bd-dark-gray};
-  border-radius: 10px;
-  width: 100%;
-  padding: 0 20px;
-  margin: 6px 0;
-}
+    div {
+      text-align: center;
+      color: #{variables.$font-red};
+      font-size: 12px;
+      font-weight: 500;
+    }
 
-.error_msg {
-  text-align: center;
-  color: #{variables.$font-red};
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.container button {
-  height: 50px;
-  font-size: 20px;
-  font-weight: 500;
-  color: #{variables.$font-white};
-  background-color: #{variables.$bg-btn-dark-black};
-  border-radius: 10px;
-  margin: 20px 0;
-  cursor: pointer;
+    button {
+      @include button.login_btn;
+    }
+  }
 }

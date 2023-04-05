@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useInputSelect, useInputText } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/bookstore/content.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { BookstoreTheme, BookstoreThemeArr } from '@types';
 
 type PropsType = {
@@ -176,10 +175,10 @@ const BookstoreContent = ({ header, backBtnHandler }: PropsType) => {
           </div>
         </div>
       </div>
-      <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
-        <button className={buttonStyles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
-      </div>
+      <nav className={styles.buttons}>
+        <button className={styles.back_btn} onClick={backBtnHandler}>뒤로가기</button>
+        <button className={styles.submit_btn} onClick={submitBtnHandler}>저장하기</button>
+      </nav>
     </section>
   );
 };

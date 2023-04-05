@@ -15,7 +15,6 @@ import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/push/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { PushCategory, PushCategoryArr, PushStatus, PushStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -110,12 +109,14 @@ const PushManagement = () => {
                   <span className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
                     <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <PushDetails push={push} setOpenModalId={setOpenModalId} />
                     </Modal>
                   </span>
-                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></span>
+                  <span className={styles.button}>
+                    <button className={styles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button>
+                  </span>
                 </ManagementTableRow>
               );
             })}
@@ -124,10 +125,10 @@ const PushManagement = () => {
         }
         contentsLength={pushesLength}
       />
-      <div className={buttonStyles.buttons}>
-        <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
-        <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
-      </div>
+      <nav className={styles.buttons}>
+        <button className={styles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
+        <button className={styles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
+      </nav>
     </section>
   );
 };

@@ -14,7 +14,6 @@ import changeQuery from '@hooks/change_query';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/member/management.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { MemberRole, MemberRoleArr, MemberStatus, MemberStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
@@ -85,7 +84,7 @@ const MemberManagement = () => {
                   <span className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(member.id)}>상세정보</button>
+                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(member.id)}>상세정보</button>
                     <Modal id={member.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
                       <MemberDetails member={member} setOpenModalId={setOpenModalId} />
                     </Modal>

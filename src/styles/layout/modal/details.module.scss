@@ -1,4 +1,5 @@
 @use '../../abstracts/variables';
+@use '../../layout/button';
 
 .container {
   min-width: 920px;
@@ -8,68 +9,56 @@
   padding: 20px 60px 0 60px;
   text-align: left;
   margin: 0 auto;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
 }
 
 .close {
-  border: none;
   width: 32px;
   height: 32px;
   position: relative;
   left: calc(100% - 32px + 60px - 15px);
   top: calc(-20px + 15px);
   background-color: #{variables.$bg-btn-white};
+  border: none;
   padding: 0;
-  cursor: pointer;
 }
 
-.close img {
-  width: 100%;
-  height: 100%;
-}
-
-.container h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
-
-.contents {
+.content {
   display: flex;
   flex-direction: column;
   border-top: 1px solid #{variables.$bd-black};
   border-bottom: 1px solid #{variables.$bd-black};
   white-space: normal;
   word-break: break-all;
-}
 
-.contents>div>div {
-  padding: 20px 12px;
+  >div>div {
+    padding: 20px 12px;
+  }
 }
 
 .row {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #{variables.$bd-gray};
+
+  .key {
+    flex: 1 0 150px;
+  }
+
+  .value {
+    flex: 2 0 300px;
+
+    &.entire {
+      flex: 5 0 750px;
+    }
+  }
 }
 
-.row .key {
-  flex: 1 0 150px;
-}
-
-.row .value {
-  flex: 2 0 300px;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #{variables.$bd-gray};
-}
-
-.content .key {
-  flex: 1 0 150px;
-}
-
-.content .value {
-  flex: 5 0 750px;
+.buttons {
+  @include button.modal_btn_layout;
 }

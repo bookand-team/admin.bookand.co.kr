@@ -1,5 +1,6 @@
 @use '../../../abstracts/variables';
 @use '../../../abstracts/mixin';
+@use '../../../layout/button';
 
 .header {
   display: flex;
@@ -43,6 +44,10 @@
     font-size: 24px;
     font-weight: 700;
     margin-right: 10px;
+  }
+
+  .logout_btn {
+    @include button.logout_btn;
   }
 }
 
@@ -98,7 +103,6 @@
     background-color: #{variables.$bg-gnb};
     border-left: 1px solid #{variables.$bg-gnb-selected};
     border-right: 1px solid #{variables.$bg-gnb-selected};
-    cursor: pointer;
   }
 
   .current {

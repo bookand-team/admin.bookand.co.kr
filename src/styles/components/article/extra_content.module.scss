@@ -1,4 +1,5 @@
 @use '../../abstracts/variables';
+@use '../../layout/button';
 
 .background {
   width: calc(600px + 10vw);
@@ -11,87 +12,92 @@
   height: 100%;
 }
 
-.left,
+.left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  border-right: 1px solid #{variables.$bd-light-gray};
+
+  .description {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0 10px 4px;
+  }
+
+  .main_image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    flex: 2 1 50%;
+    background-color: #{variables.$bg-img-gray};
+    gap: 10px;
+
+    div {
+      display: flex;
+      justify-content: center;
+    }
+
+    .img_btn button {
+      width: 150px;
+      height: 30px;
+      border: none;
+      outline: none;
+      color: #{variables.$font-green};
+      font-size: 15px;
+      font-weight: 700;
+      background-color: #{variables.$bg-btn-white};
+      border-radius: 5px;
+    }
+  }
+
+  .intro {
+    flex: 1 1 25%;
+    display: flex;
+
+    textarea {
+      width: 100%;
+      padding: 0;
+      border: none;
+      outline: none;
+      resize: none;
+      background-color: #{variables.$bg-text-light-gray};
+      padding: 14px 20px;
+    }
+  }
+}
+
 .right {
   width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0 30px;
-}
-
-.left {
-  border-right: 1px solid #{variables.$bd-light-gray};
-}
-
-.description {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 10px 0 10px 4px;
-}
-
-.main_image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  flex: 2 1 50%;
-  background-color: #{variables.$bg-img-gray};
-  gap: 10px;
-}
-
-.main_image div {
-  display: flex;
-  justify-content: center;
-}
-
-.main_image .img_btn button {
-  width: 150px;
-  height: 30px;
-  border: none;
-  outline: none;
-  color: #{variables.$font-green};
-  font-size: 15px;
-  font-weight: 700;
-  background-color: #{variables.$bg-btn-white};
-  border-radius: 5px;
-}
-
-.intro {
-  flex: 1 1 25%;
-  display: flex;
-}
-
-.intro textarea {
-  width: 100%;
-  padding: 0;
-  border: none;
-  outline: none;
-  resize: none;
-  background-color: #{variables.$bg-text-light-gray};
-  padding: 14px 20px;
-}
-
-.right {
   justify-content: space-between;
+
+  .property {
+    margin-bottom: 40px;
+  }
+
+  .select {
+    display: flex;
+    padding-left: 16px;
+    margin: 12px 0;
+
+    div {
+      width: 100px;
+      font-size: 16px;
+    }
+
+    select {
+      flex: 1 1 0;
+      outline: none;
+    }
+  }
 }
 
-.property {
-  margin-bottom: 40px;
-}
-
-.select {
-  display: flex;
-  padding-left: 16px;
-  margin: 12px 0;
-}
-
-.select div {
-  width: 100px;
-  font-size: 16px;
-}
-
-.select select {
-  flex: 1 1 0;
-  outline: none;
+.buttons {
+  @include button.main_btn_layout;
 }

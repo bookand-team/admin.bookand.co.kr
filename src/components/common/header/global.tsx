@@ -11,7 +11,6 @@ import { RootState } from '@redux/reducers';
 import { setGnbOpend } from '@redux/reducers/page';
 import { AppDispatch } from '@redux/store';
 import styles from '@styles/components/common/header/global.module.scss';
-import buttonStyles from '@styles/layout/button.module.scss';
 import { GNBArr } from '@types';
 
 const GlobalHeader = () => {
@@ -50,7 +49,7 @@ const GlobalHeader = () => {
           <>
             <nav className={styles.user}>
               <span className={styles.username}>username</span>
-              <button className={buttonStyles.logout} onClick={logoutBtnHandler}>로그아웃</button>
+              <button className={styles.logout_btn} onClick={logoutBtnHandler}>로그아웃</button>
             </nav>
             <nav className={styles.tools}>
               <button onClick={logoutBtnHandler}>
