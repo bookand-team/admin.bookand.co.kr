@@ -1,45 +1,31 @@
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
-.contents {
-  display: flex;
-  flex-direction: column;
-}
+@use '../../layout/management_table';
 
 .id {
-  flex: 0 0 40px;
+  @include management_table.fixed_sm
 }
 
 .content {
-  flex: 6 0 330px;
+  flex: 5 0 370px;
   text-align: left;
   padding: 0 12px;
 }
 
 .email {
-  flex: 2 0 250px;
+  flex: 1 0 270px;
   text-align: left;
   padding: 0 12px;
 }
 
-.category {
-  flex: 1 0 80px;
-}
-
-.device {
-  flex: 1 0 100px;
-}
-
+.category,
+.device,
 .feedbackCount {
-  flex: 1 0 70px;
+  @include management_table.increasing_sm
 }
 
 .createdDate {
-  flex: 1 0 130px;
+  @include management_table.increasing_lg
 }
 
 .button {
-  flex: 0 0 90px;
+  @include management_table.fixed_lg
 }

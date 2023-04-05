@@ -1,42 +1,31 @@
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
-.contents {
-  display: flex;
-  flex-direction: column;
-}
+@use '../../layout/management_table';
 
 .id {
-  flex: 0 0 40px;
+  @include management_table.fixed_sm
 }
 
 .nickname {
-  flex: 2 0 330px;
+  flex: 2 0 325px;
   text-align: left;
   padding: 0 12px;
 }
 
 .email {
-  flex: 2 0 250px;
+  flex: 2 0 270px;
   text-align: left;
   padding: 0 12px;
 }
 
-.role {
-  flex: 1 0 80px;
-}
-
+.role,
 .status {
-  flex: 1 0 80px;
+  @include management_table.increasing_sm
 }
 
 .createdDate,
 .accessedDate {
-  flex: 1 0 130px;
+  @include management_table.increasing_lg
 }
 
 .button {
-  flex: 0 0 90px;
+  @include management_table.fixed_lg
 }

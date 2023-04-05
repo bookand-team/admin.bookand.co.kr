@@ -1,0 +1,15 @@
+@mixin fixed_sm {
+  flex: 0 0 35px;
+}
+
+@mixin fixed_lg {
+  flex: 0 0 90px;
+}
+
+@mixin increasing_sm {
+  flex: 1 0 80px;
+}
+
+@mixin increasing_lg {
+  flex: 1 0 125px;
+}

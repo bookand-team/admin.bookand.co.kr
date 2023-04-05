@@ -1,0 +1,114 @@
+@use '../../../abstracts/variables';
+@use '../../../abstracts/mixin';
+
+.table {
+  overflow-x: auto;
+  margin: 15px 0;
+
+  .thead {
+    display: flex;
+    min-width: #{variables.$table-min-width};
+    height: 40px;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: 700;
+    border-bottom: 1px solid #{variables.$bd-black};
+
+    select,
+    option {
+      border: none;
+      outline: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+
+  .tbody {
+    min-width: #{variables.$table-min-width};
+
+    .tr {
+      display: flex;
+      height: 40px;
+      justify-content: space-between;
+      text-align: center;
+      align-items: center;
+      white-space: nowrap;
+      border-bottom: 1px solid #{variables.$bd-gray};
+    }
+
+    .tr:hover {
+      background-color: #{variables.$bg-tr-hover};
+    }
+
+    .tr.checked {
+      background-color: #{variables.$bg-tr-selected};
+    }
+
+    .tr>span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+
+  &.sm {
+    display: none;
+  }
+
+  @include mixin.sm {
+    display: none;
+
+    &.sm {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 24px;
+    border: none;
+    background-color: #{variables.$bg-btn-white};
+    cursor: pointer;
+    padding: 1px 2px;
+    margin: 0 8px;
+
+    @include mixin.sm {
+      width: 22px;
+      margin: 0 6px;
+    }
+  }
+
+  .current {
+    font-weight: 700;
+  }
+
+  .left2 {
+    position: relative;
+    top: 1.5px;
+  }
+
+  .left,
+  .right {
+    position: relative;
+    top: 1px;
+  }
+
+  .right2 {
+    position: relative;
+    top: -0.5px;
+  }
+}

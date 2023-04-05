@@ -5,22 +5,22 @@ import { useSelector } from 'react-redux';
 
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
-import ResponsivePageNavbar from '@components/common/page_navbar';
+import ManagementTable from '@components/common/table/management';
+import ManagementTableBody from '@components/common/table/management/body';
+import ManagementTableHead from '@components/common/table/management/head';
+import ManagementTableRow from '@components/common/table/management/row';
 import MemberDetails from '@components/member/management/details';
 import changeQuery from '@hooks/change_query';
-import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/member/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
-import tableStyles from '@styles/layout/table.module.scss';
 import { MemberRole, MemberRoleArr, MemberStatus, MemberStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 const MemberManagement = () => {
   const router = useRouter();
   const { members, membersLength } = useSelector((state: RootState) => state.member);
-  const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (역할, 상태)
   const [selectRole, changeSelectRole] = useInputSelect<'' | MemberRole>('');
@@ -39,73 +39,65 @@ const MemberManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectRole, selectStatus]);
 
+  if (!members) return;
   return (
-    <>
-      {members &&
-        <section className={styles.container}>
-          <SectionSearchHeader
-            title='회원 관리'
-            search='닉네임' />
-          <div className={styles.contents}>
-            <div className={tableStyles.table}>
-              <div className={tableStyles.thead}>
-                <div className={tableStyles.tr}>
-                  <div className={styles.id}>번호</div>
-                  <div className={styles.nickname}>닉네임</div>
-                  <div className={styles.email}>접속 이메일</div>
-                  <div className={styles.role}>
-                    <select value={selectRole} onChange={changeSelectRole}>
-                      <option value=''>역할</option>
-                      {MemberRoleArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.status}>
-                    <select value={selectStatus} onChange={changeSelectStatus}>
-                      <option value=''>이용상태</option>
-                      {MemberStatusArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.createdDate}>가입일</div>
-                  <div className={styles.accessedDate}>접속일</div>
-                  <div className={styles.button}></div>
-                </div>
-              </div>
-              <ul className={tableStyles.tbody}>
-                {members && members.map((member) => {
-                  return (
-                    <li key={member.id} className={tableStyles.tr}>
-                      <div className={styles.id}>{member.id && member.id}</div>
-                      <div className={styles.nickname}>{member.nickname && member.nickname}</div>
-                      <div className={styles.email}>{member.email && member.email}</div>
-                      <div className={styles.role}>{member.role && member.role}</div>
-                      <div className={styles.status}>{member.status && member.status}</div>
-                      <div className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.button}>
-                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(member.id)}>상세정보</button>
-                        <Modal id={member.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <MemberDetails member={member} setOpenModalId={setOpenModalId} />
-                        </Modal>
-                      </div>
-                    </li>
-                  );
-                })}
-                {membersLength && isRowInsufficient(page, row, membersLength) && makeEmptyArray(page, row, membersLength).map((member, idx) => {
-                  return (
-                    <li key={idx} className={tableStyles.tr}></li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {membersLength ? <ResponsivePageNavbar contentsLength={membersLength} /> : null}
-        </section>
-      }
-    </>
+    <section className={styles.container}>
+      <SectionSearchHeader
+        title='회원 관리'
+        search='닉네임' />
+      <ManagementTable
+        head={
+          <ManagementTableHead>
+            <span className={styles.id}>번호</span>
+            <span className={styles.nickname}>닉네임</span>
+            <span className={styles.email}>접속 이메일</span>
+            <span className={styles.role}>
+              <select value={selectRole} onChange={changeSelectRole}>
+                <option value=''>역할</option>
+                {MemberRoleArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.status}>
+              <select value={selectStatus} onChange={changeSelectStatus}>
+                <option value=''>이용상태</option>
+                {MemberStatusArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.createdDate}>가입일</span>
+            <span className={styles.accessedDate}>접속일</span>
+            <span className={styles.button} />
+          </ManagementTableHead>
+        }
+        body={
+          <ManagementTableBody contentsLength={membersLength}>
+            {members && members.map((member) => {
+              return (
+                <ManagementTableRow key={member.id} checked={false}>
+                  <span className={styles.id}>{member.id && member.id}</span>
+                  <span className={styles.nickname}>{member.nickname && member.nickname}</span>
+                  <span className={styles.email}>{member.email && member.email}</span>
+                  <span className={styles.role}>{member.role && member.role}</span>
+                  <span className={styles.status}>{member.status && member.status}</span>
+                  <span className={styles.createdDate}>{member.createdDate && getDisplayTime(member.createdDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.accessedDate}>{member.accessedDate && getDisplayTime(member.accessedDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(member.id)}>상세정보</button>
+                    <Modal id={member.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <MemberDetails member={member} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </span>
+                </ManagementTableRow>
+              );
+            })}
+          </ManagementTableBody>
+        }
+        contentsLength={membersLength}
+      />
+    </section>
   );
 };
 

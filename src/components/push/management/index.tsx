@@ -5,23 +5,24 @@ import { useSelector } from 'react-redux';
 
 import SectionHeader from '@components/common/header/section';
 import Modal from '@components/common/modal';
-import ResponsivePageNavbar from '@components/common/page_navbar';
+import ManagementTable from '@components/common/table/management';
+import ManagementTableBody from '@components/common/table/management/body';
+import ManagementTableHead from '@components/common/table/management/head';
+import ManagementTableRow from '@components/common/table/management/row';
 import PushDetails from '@components/push/management/details';
 import changeQuery from '@hooks/change_query';
-import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/push/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
-import tableStyles from '@styles/layout/table.module.scss';
 import { PushCategory, PushCategoryArr, PushStatus, PushStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 const PushManagement = () => {
   const router = useRouter();
   const { pushes, pushesLength } = useSelector((state: RootState) => state.push);
-  const { page, row } = useSelector((state: RootState) => state.page);
+  const { page } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
@@ -62,79 +63,72 @@ const PushManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory, selectStatus]);
 
+  if (!pushes) return;
   return (
-    <>
-      {pushes &&
-        <section className={styles.container}>
-          <SectionHeader title='푸시 관리' />
-          <div className={styles.contents}>
-            <div className={tableStyles.table}>
-              <div className={tableStyles.thead}>
-                <div className={tableStyles.tr}>
-                  <div className={styles.check}>선택</div>
-                  <div className={styles.id}>번호</div>
-                  <div className={styles.title}>제목</div>
-                  <div className={styles.category}>
-                    <select value={selectCategory} onChange={changeSelectCategory}>
-                      <option value=''>카테고리</option>
-                      {PushCategoryArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.status}>
-                    <select value={selectStatus} onChange={changeSelectStatus}>
-                      <option value=''>전송상태</option>
-                      {PushStatusArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.createdDate}>등록일자</div>
-                  <div className={styles.sentDate}>전송날짜</div>
-                  <div className={styles.button}></div>
-                  <div className={styles.button}></div>
-                </div>
-              </div>
-              <ul className={tableStyles.tbody}>
-                {pushes && pushes.map((push) => {
-                  return (
-                    <li key={push.id} className={checkedBoxIds.includes(push.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
-                      <div className={styles.check}>
-                        <input type='checkbox' checked={checkedBoxIds.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
-                      </div>
-                      <div className={styles.id}>{push.id && push.id}</div>
-                      <div className={styles.title}>{push.title && push.title}</div>
-                      <div className={styles.category}>{push.category && push.category}</div>
-                      <div className={styles.status}>{push.status && push.status}</div>
-                      <div className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.button}>
-                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
-                        <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <PushDetails push={push} setOpenModalId={setOpenModalId} />
-                        </Modal>
-                      </div>
-                      <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></div>
-                    </li>
-                  );
-                })}
-                {pushesLength && isRowInsufficient(page, row, pushesLength) && makeEmptyArray(page, row, pushesLength).map((push, idx) => {
-                  return (
-                    <li key={idx} className={tableStyles.tr}></li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {pushesLength ? <ResponsivePageNavbar contentsLength={pushesLength} /> : null}
-          <div className={buttonStyles.buttons}>
-            <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
-            <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
-          </div>
-        </section>
-      }
-    </>
+    <section className={styles.container}>
+      <SectionHeader title='푸시 관리' />
+      <ManagementTable
+        head={
+          <ManagementTableHead>
+            <span className={styles.check}>선택</span>
+            <span className={styles.id}>번호</span>
+            <span className={styles.title}>제목</span>
+            <span className={styles.category}>
+              <select value={selectCategory} onChange={changeSelectCategory}>
+                <option value=''>카테고리</option>
+                {PushCategoryArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.status}>
+              <select value={selectStatus} onChange={changeSelectStatus}>
+                <option value=''>전송상태</option>
+                {PushStatusArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.createdDate}>등록일자</span>
+            <span className={styles.sentDate}>전송날짜</span>
+            <span className={styles.button} />
+            <span className={styles.button} />
+          </ManagementTableHead>
+        }
+        body={
+          <ManagementTableBody contentsLength={pushesLength}>
+            {pushes && pushes.map((push) => {
+              return (
+                <ManagementTableRow key={push.id} checked={checkedBoxIds.includes(push.id)}>
+                  <span className={styles.check}>
+                    <input type='checkbox' checked={checkedBoxIds.includes(push.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, push.id)} />
+                  </span>
+                  <span className={styles.id}>{push.id && push.id}</span>
+                  <span className={styles.title}>{push.title && push.title}</span>
+                  <span className={styles.category}>{push.category && push.category}</span>
+                  <span className={styles.status}>{push.status && push.status}</span>
+                  <span className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
+                    <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <PushDetails push={push} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </span>
+                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button></span>
+                </ManagementTableRow>
+              );
+            })}
+          </ManagementTableBody>
+
+        }
+        contentsLength={pushesLength}
+      />
+      <div className={buttonStyles.buttons}>
+        <button className={buttonStyles.register_btn} onClick={routePage('/push/registration')}>새 푸시 생성</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteHandler}>선택 푸시 삭제</button>
+      </div>
+    </section>
   );
 };
 

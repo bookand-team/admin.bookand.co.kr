@@ -1,40 +1,26 @@
-.container {
-  display: flex;
-  flex-direction: column;
-}
+@use '../../layout/management_table';
 
-.contents {
-  display: flex;
-  flex-direction: column;
-}
-
-.check {
-  flex: 0 0 40px;
-}
-
+.check,
 .id {
-  flex: 0 0 40px;
+  @include management_table.fixed_sm
 }
 
 .title {
-  flex: 7 0 350px;
+  flex: 4 0 470px;
   text-align: left;
   padding: 0 12px;
 }
 
-.category {
-  flex: 1 0 80px;
-}
-
+.category,
 .status {
-  flex: 1 0 80px;
+  @include management_table.increasing_sm
 }
 
 .createdDate,
 .sentDate {
-  flex: 1 0 130px;
+  @include management_table.increasing_lg
 }
 
 .button {
-  flex: 0 0 90px;
+  @include management_table.fixed_lg
 }

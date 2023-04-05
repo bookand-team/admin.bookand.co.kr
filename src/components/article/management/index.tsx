@@ -6,22 +6,23 @@ import { useSelector } from 'react-redux';
 import ArticleDetails from '@components/article/management/details';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
-import ResponsivePageNavbar from '@components/common/page_navbar';
+import ManagementTable from '@components/common/table/management';
+import ManagementTableBody from '@components/common/table/management/body';
+import ManagementTableHead from '@components/common/table/management/head';
+import ManagementTableRow from '@components/common/table/management/row';
 import changeQuery from '@hooks/change_query';
-import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/article/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
-import tableStyles from '@styles/layout/table.module.scss';
 import { ArticleCategory, ArticleCategoryArr, ArticleStatus, ArticleStatusArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 const ArticleManagement = () => {
   const router = useRouter();
   const { articles, articlesLength } = useSelector((state: RootState) => state.article);
-  const { page, row } = useSelector((state: RootState) => state.page);
+  const { page } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
@@ -61,87 +62,78 @@ const ArticleManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory, selectStatus]);
 
+  if (!articles) return;
   return (
-    <>
-      {articles &&
-        <section className={styles.container}>
-          <SectionSearchHeader
-            title='아티클 관리'
-            search='아티클 제목' />
-          <div className={styles.contents}>
-            <div className={tableStyles.table}>
-              <div className={tableStyles.thead}>
-                <div className={tableStyles.tr}>
-                  <div className={styles.check}>선택</div>
-                  <div className={styles.id}>번호</div>
-                  <div className={styles.title}>아티클 제목</div>
-                  <div className={styles.category}>
-                    <select value={selectCategory} onChange={changeSelectCategory}>
-                      <option value=''>카테고리</option>
-                      {ArticleCategoryArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.status}>
-                    <select value={selectStatus} onChange={changeSelectStatus}>
-                      <option value=''>노출상태</option>
-                      {ArticleStatusArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.view}>누적뷰수</div>
-                  <div className={styles.bookmark}>북마크수</div>
-                  <div className={styles.createdDate}>등록일자</div>
-                  <div className={styles.exposedDate}>노출일자</div>
-                  <div className={styles.modifiedDate}>최종 수정일자</div>
-                  <div className={styles.button}></div>
-                  <div className={styles.button}></div>
-                </div>
-              </div>
-              <ul className={tableStyles.tbody}>
-                {articles && articles.map((article) => {
-                  return (
-                    <li key={article.id} className={checkedBoxIds.includes(article.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
-                      <div className={styles.check}>
-                        <input type='checkbox' checked={checkedBoxIds.includes(article.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, article.id)} />
-                      </div>
-                      <div className={styles.id}>{article.id && article.id}</div>
-                      <div className={styles.title}>{article.title && article.title}</div>
-                      <div className={styles.category}>{article.category && article.category}</div>
-                      <div className={styles.status}>{article.status && article.status}</div>
-                      <div className={styles.view}>{article.view && article.view}</div>
-                      <div className={styles.bookmark}>{article.bookmark && article.bookmark}</div>
-                      <div className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.button}>
-                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
-                        <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <ArticleDetails article={article} setOpenModalId={setOpenModalId} />
-                        </Modal>
-                      </div>
-                      <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button></div>
-                    </li>
-                  );
-                })}
-                {articlesLength && isRowInsufficient(page, row, articlesLength) && makeEmptyArray(page, row, articlesLength).map((article, idx) => {
-                  return (
-                    <li key={idx} className={tableStyles.tr}></li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {articlesLength ? <ResponsivePageNavbar contentsLength={articlesLength} /> : null}
-          <div className={buttonStyles.buttons}>
-            <button className={buttonStyles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
-            <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
-          </div>
-        </section>
-      }
-    </>
+    <section className={styles.container}>
+      <SectionSearchHeader
+        title='아티클 관리'
+        search='아티클 제목' />
+      <ManagementTable
+        head={
+          <ManagementTableHead>
+            <span className={styles.check}>선택</span>
+            <span className={styles.id}>번호</span>
+            <span className={styles.title}>아티클 제목</span>
+            <span className={styles.category}>
+              <select value={selectCategory} onChange={changeSelectCategory}>
+                <option value=''>카테고리</option>
+                {ArticleCategoryArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.status}>
+              <select value={selectStatus} onChange={changeSelectStatus}>
+                <option value=''>노출상태</option>
+                {ArticleStatusArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.view}>누적뷰수</span>
+            <span className={styles.bookmark}>북마크수</span>
+            <span className={styles.createdDate}>등록일자</span>
+            <span className={styles.exposedDate}>노출일자</span>
+            <span className={styles.modifiedDate}>최종 수정일자</span>
+            <span className={styles.button} />
+            <span className={styles.button} />
+          </ManagementTableHead>}
+        body={
+          <ManagementTableBody contentsLength={articlesLength}>
+            {articles && articles.map((article) => {
+              return (
+                <ManagementTableRow key={article.id} checked={checkedBoxIds.includes(article.id)}>
+                  <span className={styles.check}>
+                    <input type='checkbox' checked={checkedBoxIds.includes(article.id)} onChange={(event) => checkBoxHandler(event.target.checked, article.id)} />
+                  </span>
+                  <span className={styles.id}>{article.id && article.id}</span>
+                  <span className={styles.title}>{article.title && article.title}</span>
+                  <span className={styles.category}>{article.category && article.category}</span>
+                  <span className={styles.status}>{article.status && article.status}</span>
+                  <span className={styles.view}>{article.view && article.view}</span>
+                  <span className={styles.bookmark}>{article.bookmark && article.bookmark}</span>
+                  <span className={styles.createdDate}>{article.createdDate && getDisplayTime(article.createdDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
+                    <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <ArticleDetails article={article} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </span>
+                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button></span>
+                </ManagementTableRow>
+              );
+            })}
+          </ManagementTableBody>
+        }
+        contentsLength={articlesLength}
+      />
+      <div className={buttonStyles.buttons}>
+        <button className={buttonStyles.register_btn} onClick={routePage('/article/registration')}>새 아티클 작성</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 아티클 삭제</button>
+      </div>
+    </section>
   );
 };
 

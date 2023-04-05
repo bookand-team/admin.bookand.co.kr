@@ -9,19 +9,17 @@ import leftDoubleArrowIcon from '@images/left_double_arrow_icon.svg';
 import rightArrowIcon from '@images/right_arrow_icon.svg';
 import rightDoubleArrowIcon from '@images/right_double_arrow_icon.svg';
 import { RootState } from '@redux/reducers';
-import styles from '@styles/components/common/page_navbar.module.scss';
+import styles from '@styles/components/common/table/management.module.scss';
 
 type PropsType = {
   contentsLength: number;
   pageNumSize?: number;
-  responsive?: boolean;
+  mobile: boolean;
 };
 
-const PageNavbar = ({ contentsLength, pageNumSize, responsive }: Required<PropsType>) => {
+const Pagination = ({ contentsLength, pageNumSize, mobile }: Required<PropsType>) => {
   const router = useRouter();
   const { page, row } = useSelector((state: RootState) => state.page);
-
-  // const pageNumSize = 
 
   /** 화면에 표시될 page 선택 범위에 맞는 배열 생성 함수 */
   const selectionRange = useCallback(() => {
@@ -95,7 +93,7 @@ const PageNavbar = ({ contentsLength, pageNumSize, responsive }: Required<PropsT
   }, [page, contentsLength]);
 
   return (
-    <nav className={`${styles.page} ${responsive && pageNumSize === 5 ? styles.sm : ''}`}>
+    <nav className={styles.pagination + (mobile ? ` ${styles.sm}` : '')}>
       <button className={styles.left2} onClick={moveToPreviousPages}>
         <Image src={leftDoubleArrowIcon} alt='left double arrow icon' height={14} width={14} />
       </button>
@@ -104,14 +102,9 @@ const PageNavbar = ({ contentsLength, pageNumSize, responsive }: Required<PropsT
       </button>
       {selectionRange().map((number) => {
         if ((page === null && number === 1) || (page === number)) {
-          return (
-            <button className={styles.current} key={number} onClick={moveToNumberPage(number)}>{number}</button>
-          );
-        } else {
-          return (
-            <button key={number} onClick={moveToNumberPage(number)}>{number}</button>
-          );
+          return <button className={styles.current} key={number} onClick={moveToNumberPage(number)}>{number}</button>;
         }
+        return <button key={number} onClick={moveToNumberPage(number)}>{number}</button>;
       })}
       <button className={styles.right} onClick={moveToNextPage}>
         <Image src={rightArrowIcon} alt='right arrow icon' height={15} width={15} />
@@ -123,19 +116,13 @@ const PageNavbar = ({ contentsLength, pageNumSize, responsive }: Required<PropsT
   );
 };
 
-const ResponsivePageNavbar = ({ contentsLength, pageNumSize }: PropsType) => {
+const ResponsivePagination = ({ contentsLength, pageNumSize }: Pick<PropsType, 'contentsLength' | 'pageNumSize'>) => {
   return (
     <>
-      {typeof pageNumSize !== 'undefined'
-        ? <PageNavbar contentsLength={contentsLength} pageNumSize={pageNumSize} responsive={false} />
-        :
-        <>
-          <PageNavbar contentsLength={contentsLength} pageNumSize={5} responsive={true} />
-          <PageNavbar contentsLength={contentsLength} pageNumSize={10} responsive={true} />
-        </>
-      }
+      <Pagination contentsLength={contentsLength} pageNumSize={5} mobile={true} />
+      <Pagination contentsLength={contentsLength} pageNumSize={pageNumSize !== undefined ? pageNumSize : 10} mobile={false} />
     </>
   );
 };
 
-export default ResponsivePageNavbar;
+export default ResponsivePagination;

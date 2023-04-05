@@ -5,22 +5,22 @@ import { useSelector } from 'react-redux';
 
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
-import ResponsivePageNavbar from '@components/common/page_navbar';
+import ManagementTable from '@components/common/table/management';
+import ManagementTableBody from '@components/common/table/management/body';
+import ManagementTableHead from '@components/common/table/management/head';
+import ManagementTableRow from '@components/common/table/management/row';
 import FeedbackDetails from '@components/feedback/management/details';
 import changeQuery from '@hooks/change_query';
-import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/feedback/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
-import tableStyles from '@styles/layout/table.module.scss';
 import { FeedbackCategory, FeedbackCategoryArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 const FeedbackManagement = () => {
   const router = useRouter();
   const { feedbacks, feedbacksLength } = useSelector((state: RootState) => state.feedback);
-  const { page, row } = useSelector((state: RootState) => state.page);
 
   // 선택한 데이터 (유형분류)
   const [selectCategory, changeSelectCategory] = useInputSelect<'' | FeedbackCategory>('');
@@ -38,66 +38,58 @@ const FeedbackManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory]);
 
+  if (!feedbacks) return;
   return (
-    <>
-      {feedbacks &&
-        <section className={styles.container}>
-          <SectionSearchHeader
-            title='피드백 관리'
-            search='피드백 내용' />
-          <div className={styles.contents}>
-            <div className={tableStyles.table}>
-              <div className={tableStyles.thead}>
-                <div className={tableStyles.tr}>
-                  <div className={styles.id}>번호</div>
-                  <div className={styles.content}>내용</div>
-                  <div className={styles.email}>이메일</div>
-                  <div className={styles.category}>
-                    <select value={selectCategory} onChange={changeSelectCategory}>
-                      <option value=''>유형분류</option>
-                      {FeedbackCategoryArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.device}>디바이스 유형</div>
-                  <div className={styles.feedbackCount}>별점 평가</div>
-                  <div className={styles.createdDate}>등록일자</div>
-                  <div className={styles.button}></div>
-                </div>
-              </div>
-              <ul className={tableStyles.tbody}>
-                {feedbacks && feedbacks.map((feedback) => {
-                  return (
-                    <li key={feedback.id} className={tableStyles.tr}>
-                      <div className={styles.id}>{feedback.id && feedback.id}</div>
-                      <div className={styles.content}>{feedback.content && feedback.content}</div>
-                      <div className={styles.email}>{feedback.email && feedback.email}</div>
-                      <div className={styles.category}>{feedback.category && feedback.category}</div>
-                      <div className={styles.device}>{feedback.deviceOS && feedback.deviceOS}</div>
-                      <div className={styles.feedbackCount}>{feedback.score && feedback.score}</div>
-                      <div className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.button}>
-                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
-                        <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <FeedbackDetails feedback={feedback} setOpenModalId={setOpenModalId} />
-                        </Modal>
-                      </div>
-                    </li>
-                  );
-                })}
-                {feedbacksLength && isRowInsufficient(page, row, feedbacksLength) && makeEmptyArray(page, row, feedbacksLength).map((feedback, idx) => {
-                  return (
-                    <li key={idx} className={tableStyles.tr}></li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {feedbacksLength ? <ResponsivePageNavbar contentsLength={feedbacksLength} /> : null}
-        </section>
-      }
-    </>
+    <section className={styles.container}>
+      <SectionSearchHeader
+        title='피드백 관리'
+        search='피드백 내용' />
+      <ManagementTable
+        head={
+          <ManagementTableHead>
+            <span className={styles.id}>번호</span>
+            <span className={styles.content}>내용</span>
+            <span className={styles.email}>이메일</span>
+            <span className={styles.category}>
+              <select value={selectCategory} onChange={changeSelectCategory}>
+                <option value=''>유형분류</option>
+                {FeedbackCategoryArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.device}>디바이스</span>
+            <span className={styles.feedbackCount}>별점 평가</span>
+            <span className={styles.createdDate}>등록일자</span>
+            <span className={styles.button} />
+          </ManagementTableHead>
+        }
+        body={
+          <ManagementTableBody contentsLength={feedbacksLength}>
+            {feedbacks && feedbacks.map((feedback) => {
+              return (
+                <ManagementTableRow key={feedback.id} checked={false}>
+                  <span className={styles.id}>{feedback.id && feedback.id}</span>
+                  <span className={styles.content}>{feedback.content && feedback.content}</span>
+                  <span className={styles.email}>{feedback.email && feedback.email}</span>
+                  <span className={styles.category}>{feedback.category && feedback.category}</span>
+                  <span className={styles.device}>{feedback.deviceOS && feedback.deviceOS}</span>
+                  <span className={styles.feedbackCount}>{feedback.score && feedback.score}</span>
+                  <span className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
+                    <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <FeedbackDetails feedback={feedback} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </span>
+                </ManagementTableRow>
+              );
+            })}
+          </ManagementTableBody>
+        }
+        contentsLength={feedbacksLength}
+      />
+    </section>
   );
 };
 

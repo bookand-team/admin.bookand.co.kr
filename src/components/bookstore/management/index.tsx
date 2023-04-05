@@ -6,22 +6,23 @@ import { useSelector } from 'react-redux';
 import BookstoreDetails from '@components/bookstore/management/details';
 import SectionSearchHeader from '@components/common/header/section_search';
 import Modal from '@components/common/modal';
-import ResponsivePageNavbar from '@components/common/page_navbar';
+import ManagementTable from '@components/common/table/management';
+import ManagementTableBody from '@components/common/table/management/body';
+import ManagementTableHead from '@components/common/table/management/head';
+import ManagementTableRow from '@components/common/table/management/row';
 import changeQuery from '@hooks/change_query';
-import { isRowInsufficient, makeEmptyArray } from '@hooks/maintain_table_layout';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/bookstore/management.module.scss';
 import buttonStyles from '@styles/layout/button.module.scss';
-import tableStyles from '@styles/layout/table.module.scss';
 import { BookstoreStatus, BookstoreStatusArr, BookstoreTheme, BookstoreThemeArr } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 const BookstoreManagement = () => {
   const router = useRouter();
   const { bookstores, bookstoresLength } = useSelector((state: RootState) => state.bookstore);
-  const { page, row } = useSelector((state: RootState) => state.page);
+  const { page } = useSelector((state: RootState) => state.page);
 
   // checkbox 선택
   const [checkedBoxIds, checkBoxHandler] = multiCheckBoxHandler(page);
@@ -61,87 +62,79 @@ const BookstoreManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectTheme, selectStatus]);
 
+  if (!bookstores) return;
   return (
-    <>
-      {bookstores &&
-        <section className={styles.container}>
-          <SectionSearchHeader
-            title='서점 관리'
-            search='서점명' />
-          <div className={styles.contents}>
-            <div className={tableStyles.table}>
-              <div className={tableStyles.thead}>
-                <div className={tableStyles.tr}>
-                  <div className={styles.check}>선택</div>
-                  <div className={styles.id}>번호</div>
-                  <div className={styles.name}>서점명</div>
-                  <div className={styles.theme}>
-                    <select value={selectTheme} onChange={changeSelectTheme}>
-                      <option value=''>테마</option>
-                      {BookstoreThemeArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.status}>
-                    <select value={selectStatus} onChange={changeSelectStatus}>
-                      <option value=''>노출상태</option>
-                      {BookstoreStatusArr.map((value) =>
-                        <option key={nanoid()} value={value}>{value}</option>
-                      )}
-                    </select>
-                  </div>
-                  <div className={styles.view}>누적뷰수</div>
-                  <div className={styles.bookmark}>북마크수</div>
-                  <div className={styles.createdDate}>등록일자</div>
-                  <div className={styles.exposedDate}>노출일자</div>
-                  <div className={styles.modifiedDate}>최종 수정일자</div>
-                  <div className={styles.button}></div>
-                  <div className={styles.button}></div>
-                </div>
-              </div>
-              <ul className={tableStyles.tbody}>
-                {bookstores && bookstores.map((bookstore) => {
-                  return (
-                    <li key={bookstore.id} className={checkedBoxIds.includes(bookstore.id) ? `${tableStyles.tr} ${tableStyles.checked}` : tableStyles.tr}>
-                      <div className={styles.check}>
-                        <input type='checkbox' checked={checkedBoxIds.includes(bookstore.id) ? true : false} onChange={(event) => checkBoxHandler(event.target.checked, bookstore.id)} />
-                      </div>
-                      <div className={styles.id}>{bookstore.id && bookstore.id}</div>
-                      <div className={styles.name}>{bookstore.name && bookstore.name}</div>
-                      <div className={styles.theme}>{bookstore.theme && bookstore.theme}</div>
-                      <div className={styles.status}>{bookstore.status && bookstore.status}</div>
-                      <div className={styles.view}>{bookstore.view && bookstore.view}</div>
-                      <div className={styles.bookmark}>{bookstore.bookmark && bookstore.bookmark}</div>
-                      <div className={styles.createdDate}>{bookstore.createdDate && getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</div>
-                      <div className={styles.button}>
-                        <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
-                        <Modal id={bookstore.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                          <BookstoreDetails bookstore={bookstore} setOpenModalId={setOpenModalId} />
-                        </Modal>
-                      </div>
-                      <div className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button></div>
-                    </li>
-                  );
-                })}
-                {bookstoresLength && isRowInsufficient(page, row, bookstoresLength) && makeEmptyArray(page, row, bookstoresLength).map((bookstore, idx) => {
-                  return (
-                    <li key={idx} className={tableStyles.tr}></li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {bookstoresLength ? <ResponsivePageNavbar contentsLength={bookstoresLength} /> : null}
-          <div className={buttonStyles.buttons}>
-            <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
-            <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
-          </div>
-        </section>
-      }
-    </>
+    <section className={styles.container}>
+      <SectionSearchHeader
+        title='서점 관리'
+        search='서점명' />
+      <ManagementTable
+        head={
+          <ManagementTableHead>
+            <span className={styles.check}>선택</span>
+            <span className={styles.id}>번호</span>
+            <span className={styles.name}>서점명</span>
+            <span className={styles.theme}>
+              <select value={selectTheme} onChange={changeSelectTheme}>
+                <option value=''>테마</option>
+                {BookstoreThemeArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.status}>
+              <select value={selectStatus} onChange={changeSelectStatus}>
+                <option value=''>노출상태</option>
+                {BookstoreStatusArr.map((value) =>
+                  <option key={nanoid()} value={value}>{value}</option>
+                )}
+              </select>
+            </span>
+            <span className={styles.view}>누적뷰수</span>
+            <span className={styles.bookmark}>북마크수</span>
+            <span className={styles.createdDate}>등록일자</span>
+            <span className={styles.exposedDate}>노출일자</span>
+            <span className={styles.modifiedDate}>최종 수정일자</span>
+            <span className={styles.button} />
+            <span className={styles.button} />
+          </ManagementTableHead>
+        }
+        body={
+          <ManagementTableBody contentsLength={bookstoresLength}>
+            {bookstores && bookstores.map((bookstore) => {
+              return (
+                <ManagementTableRow key={bookstore.id} checked={checkedBoxIds.includes(bookstore.id)}>
+                  <span className={styles.check}>
+                    <input type='checkbox' checked={checkedBoxIds.includes(bookstore.id)} onChange={(event) => checkBoxHandler(event.target.checked, bookstore.id)} />
+                  </span>
+                  <span className={styles.id}>{bookstore.id && bookstore.id}</span>
+                  <span className={styles.name}>{bookstore.name && bookstore.name}</span>
+                  <span className={styles.theme}>{bookstore.theme && bookstore.theme}</span>
+                  <span className={styles.status}>{bookstore.status && bookstore.status}</span>
+                  <span className={styles.view}>{bookstore.view && bookstore.view}</span>
+                  <span className={styles.bookmark}>{bookstore.bookmark && bookstore.bookmark}</span>
+                  <span className={styles.createdDate}>{bookstore.createdDate && getDisplayTime(bookstore.createdDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
+                  <span className={styles.button}>
+                    <button className={buttonStyles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
+                    <Modal id={bookstore.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
+                      <BookstoreDetails bookstore={bookstore} setOpenModalId={setOpenModalId} />
+                    </Modal>
+                  </span>
+                  <span className={styles.button}><button className={buttonStyles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button></span>
+                </ManagementTableRow>
+              );
+            })}
+          </ManagementTableBody>
+        }
+        contentsLength={bookstoresLength}
+      />
+      <div className={buttonStyles.buttons}>
+        <button className={buttonStyles.register_btn} onClick={routePage('/bookstore/registration')}>새 서점 등록</button>
+        <button className={buttonStyles.delete_btn} onClick={deleteBtnHandler}>선택 서점 삭제</button>
+      </div>
+    </section>
   );
 };
 
