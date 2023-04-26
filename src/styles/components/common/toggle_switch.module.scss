@@ -1,0 +1,38 @@
+@use '../../abstracts/variables';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    width: 3.2rem;
+    height: 1.6rem;
+    display: block;
+    position: relative;
+    border-radius: 2rem;
+    background-color: #{variables.$bg-btn-gray};
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+  }
+
+  .toggle:checked+label {
+    background: #{variables.$bg-btn-green};
+
+    .ball {
+      left: calc(100% - 1.45rem);
+    }
+  }
+
+  .ball {
+    width: 1.3rem;
+    height: 1.3rem;
+    position: absolute;
+    top: 50%;
+    left: 0.15rem;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #{variables.$bg-white};
+    transition: all 0.2s ease-in;
+  }
+}
