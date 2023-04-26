@@ -37,7 +37,7 @@ const ReportManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectStatus]);
 
-  if (!reports) return;
+  if (!reports) return <></>;
   return (
     <section className={styles.container}>
       <SectionSearchHeader

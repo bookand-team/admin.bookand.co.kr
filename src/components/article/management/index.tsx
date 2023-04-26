@@ -61,7 +61,7 @@ const ArticleManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory, selectStatus]);
 
-  if (!articles) return;
+  if (!articles) return <></>;
   return (
     <section className={styles.container}>
       <SectionSearchHeader

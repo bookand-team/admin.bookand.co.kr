@@ -62,7 +62,7 @@ const PushManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory, selectStatus]);
 
-  if (!pushes) return;
+  if (!pushes) return <></>;
   return (
     <section className={styles.container}>
       <SectionHeader title='푸시 관리' />

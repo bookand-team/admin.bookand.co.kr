@@ -37,7 +37,7 @@ const FeedbackManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectCategory]);
 
-  if (!feedbacks) return;
+  if (!feedbacks) return <></>;
   return (
     <section className={styles.container}>
       <SectionSearchHeader

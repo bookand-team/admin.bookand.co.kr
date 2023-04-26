@@ -61,7 +61,7 @@ const BookstoreManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectTheme, selectStatus]);
 
-  if (!bookstores) return;
+  if (!bookstores) return <></>;
   return (
     <section className={styles.container}>
       <SectionSearchHeader

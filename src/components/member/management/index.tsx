@@ -38,7 +38,7 @@ const MemberManagement = () => {
     router.push({ pathname: router.pathname, query: newQuery });
   }, [selectRole, selectStatus]);
 
-  if (!members) return;
+  if (!members) return <></>;
   return (
     <section className={styles.container}>
       <SectionSearchHeader
