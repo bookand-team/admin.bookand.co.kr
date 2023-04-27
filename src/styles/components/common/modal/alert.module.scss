@@ -1,0 +1,51 @@
+@use '../../../abstracts/variables';
+@use '../../../layout/button';
+
+.background {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  align-items: center;
+  background-color: #{variables.$bg-alert-outside};
+}
+
+.container {
+  width: 400px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #{variables.$bg-white};
+  border: 1px solid #{variables.$bd-dark-gray};
+  z-index: 100;
+  padding-top: 45px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+  text-align: center;
+
+  header {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+
+    button {
+      @include button.modal_green_btn;
+    }
+
+    .warning {
+      @include button.modal_red_btn;
+    }
+
+    .default {
+      @include button.modal_black_btn;
+    }
+  }
+}
