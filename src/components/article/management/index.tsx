@@ -1,17 +1,18 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import ArticleDetails from '@components/article/management/details';
 import SectionSearchHeader from '@components/common/header/section_search';
-import Modal from '@components/common/modal';
+import DetailsModal from '@components/common/modal/details';
 import ManagementTable from '@components/common/table/management';
 import ManagementTableBody from '@components/common/table/management/body';
 import ManagementTableHead from '@components/common/table/management/head';
 import ManagementTableRow from '@components/common/table/management/row';
 import changeQuery from '@hooks/change_query';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
+import { useDetailsModal } from '@hooks/use_details_modal';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/article/management.module.scss';
@@ -30,13 +31,8 @@ const ArticleManagement = () => {
   const [selectCategory, changeSelectCategory] = useInputSelect<'' | ArticleCategory>('');
   const [selectStatus, changeSelectStatus] = useInputSelect<'' | ArticleStatus>('');
 
-  // 열려있는 모달창 식별자 상태
-  const [openModalId, setOpenModalId] = useState<number | null>(null);
-
-  /** 상세정보 버튼 - 모달창 열기 */
-  const detailsBtnHandler = useCallback((id: number) => () => {
-    setOpenModalId(id);
-  }, []);
+  // 상세정보 모달창 상태 관리: [열린 모달창 번호, 모달창 열기, 모달창 닫기]
+  const [openModalId, openModal, closeModal] = useDetailsModal();
 
   /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
   const routePage = useCallback((url: string) => () => {
@@ -115,10 +111,10 @@ const ArticleManagement = () => {
                   <span className={styles.exposedDate}>{article.exposedDate && getDisplayTime(article.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.modifiedDate}>{article.modifiedDate && getDisplayTime(article.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(article.id)}>상세정보</button>
-                    <Modal id={article.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                      <ArticleDetails article={article} setOpenModalId={setOpenModalId} />
-                    </Modal>
+                    <button className={styles.table_details_btn} onClick={openModal(article.id)}>상세정보</button>
+                    <DetailsModal id={article.id} openModalId={openModalId} closeModal={closeModal}>
+                      <ArticleDetails article={article} closeModal={closeModal} />
+                    </DetailsModal>
                   </span>
                   <span className={styles.button}>
                     <button className={styles.table_modify_btn} onClick={routePage(`/article/${article.id}`)}>수정</button>

@@ -1,22 +1,17 @@
 import Image from 'next/image';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 import closeButton from '@images/close_icon.svg';
-import styles from '@styles/layout/modal/details.module.scss';
+import styles from '@styles/components/common/modal/details.module.scss';
 import { MemberDTO } from '@types';
 import getDisplayTime from '@utils/get_display_time';
 
 type PropsType = {
   member: MemberDTO;
-  setOpenModalId: React.Dispatch<React.SetStateAction<number | null>>;
+  closeModal: () => void;
 };
 
-const MemberDetails = ({ member, setOpenModalId }: PropsType) => {
-  /** 닫기 버튼 - 모달창 닫기 */
-  const closeBtnHandler = useCallback(() => {
-    setOpenModalId(null);
-  }, []);
-
+const MemberDetails = ({ member, closeModal }: PropsType) => {
   /** 적용 버튼 - 수정사항 저장 요청 */
   const submitBtnHandler = useCallback(() => {
     // TODO: 수정사항 저장 요청 기능
@@ -31,7 +26,7 @@ const MemberDetails = ({ member, setOpenModalId }: PropsType) => {
 
   return (
     <section className={styles.container}>
-      <button className={styles.close} onClick={closeBtnHandler}>
+      <button className={styles.close} onClick={closeModal}>
         <Image src={closeButton} alt='close button' width={32} height={32} />
       </button>
       <h3>회원 상세 정보</h3>
@@ -74,7 +69,7 @@ const MemberDetails = ({ member, setOpenModalId }: PropsType) => {
         </div>
       </div>
       <nav className={styles.buttons}>
-        <button className={styles.close_btn} onClick={closeBtnHandler}>닫기</button>
+        <button className={styles.close_btn} onClick={closeModal}>닫기</button>
         <button className={styles.apply_btn} onClick={submitBtnHandler}>적용</button>
         <button className={styles.withdraw_btn} onClick={withdrawBtnHandler}>탈퇴</button>
       </nav>
