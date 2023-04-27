@@ -1,10 +1,10 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import SectionHeader from '@components/common/header/section';
-import Modal from '@components/common/modal';
+import DetailsModal from '@components/common/modal/details';
 import ManagementTable from '@components/common/table/management';
 import ManagementTableBody from '@components/common/table/management/body';
 import ManagementTableHead from '@components/common/table/management/head';
@@ -12,6 +12,7 @@ import ManagementTableRow from '@components/common/table/management/row';
 import PushDetails from '@components/push/management/details';
 import changeQuery from '@hooks/change_query';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
+import { useDetailsModal } from '@hooks/use_details_modal';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/push/management.module.scss';
@@ -30,13 +31,8 @@ const PushManagement = () => {
   const [selectCategory, changeSelectCategory] = useInputSelect<'' | PushCategory>('');
   const [selectStatus, changeSelectStatus] = useInputSelect<'' | PushStatus>('');
 
-  // 열려있는 모달창 식별자 상태
-  const [openModalId, setOpenModalId] = useState<number | null>(null);
-
-  /** 상세정보 버튼 - 모달창 열기 */
-  const detailsBtnHandler = useCallback((id: number) => () => {
-    setOpenModalId(id);
-  }, []);
+  // 상세정보 모달창 상태 관리: [열린 모달창 번호, 모달창 열기, 모달창 닫기]
+  const [openModalId, openModal, closeModal] = useDetailsModal();
 
   /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
   const routePage = useCallback((url: string) => () => {
@@ -109,10 +105,10 @@ const PushManagement = () => {
                   <span className={styles.createdDate}>{push.createdDate && getDisplayTime(push.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.sentDate}>{push.sentDate && getDisplayTime(push.sentDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(push.id)}>상세정보</button>
-                    <Modal id={push.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                      <PushDetails push={push} setOpenModalId={setOpenModalId} />
-                    </Modal>
+                    <button className={styles.table_details_btn} onClick={openModal(push.id)}>상세정보</button>
+                    <DetailsModal id={push.id} openModalId={openModalId} closeModal={closeModal}>
+                      <PushDetails push={push} closeModal={closeModal} />
+                    </DetailsModal>
                   </span>
                   <span className={styles.button}>
                     <button className={styles.table_modify_btn} onClick={routePage(`/push/${push.id}`)}>수정</button>

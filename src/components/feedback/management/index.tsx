@@ -1,16 +1,17 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import SectionSearchHeader from '@components/common/header/section_search';
-import Modal from '@components/common/modal';
+import DetailsModal from '@components/common/modal/details';
 import ManagementTable from '@components/common/table/management';
 import ManagementTableBody from '@components/common/table/management/body';
 import ManagementTableHead from '@components/common/table/management/head';
 import ManagementTableRow from '@components/common/table/management/row';
 import FeedbackDetails from '@components/feedback/management/details';
 import changeQuery from '@hooks/change_query';
+import { useDetailsModal } from '@hooks/use_details_modal';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/feedback/management.module.scss';
@@ -24,13 +25,8 @@ const FeedbackManagement = () => {
   // 선택한 데이터 (유형분류)
   const [selectCategory, changeSelectCategory] = useInputSelect<'' | FeedbackCategory>('');
 
-  // 열려있는 모달창 식별자 상태
-  const [openModalId, setOpenModalId] = useState<number | null>(null);
-
-  /** 상세정보 버튼 - 모달창 열기 */
-  const detailsBtnHandler = useCallback((id: number) => () => {
-    setOpenModalId(id);
-  }, []);
+  // 상세정보 모달창 상태 관리: [열린 모달창 번호, 모달창 열기, 모달창 닫기]
+  const [openModalId, openModal, closeModal] = useDetailsModal();
 
   useEffect(() => {
     const newQuery = changeQuery(router.query, { category: selectCategory });
@@ -76,10 +72,10 @@ const FeedbackManagement = () => {
                   <span className={styles.feedbackCount}>{feedback.score && feedback.score}</span>
                   <span className={styles.createdDate}>{feedback.createdDate && getDisplayTime(feedback.createdDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(feedback.id)}>상세정보</button>
-                    <Modal id={feedback.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                      <FeedbackDetails feedback={feedback} setOpenModalId={setOpenModalId} />
-                    </Modal>
+                    <button className={styles.table_details_btn} onClick={openModal(feedback.id)}>상세정보</button>
+                    <DetailsModal id={feedback.id} openModalId={openModalId} closeModal={closeModal}>
+                      <FeedbackDetails feedback={feedback} closeModal={closeModal} />
+                    </DetailsModal>
                   </span>
                 </ManagementTableRow>
               );

@@ -1,17 +1,18 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import BookstoreDetails from '@components/bookstore/management/details';
 import SectionSearchHeader from '@components/common/header/section_search';
-import Modal from '@components/common/modal';
+import DetailsModal from '@components/common/modal/details';
 import ManagementTable from '@components/common/table/management';
 import ManagementTableBody from '@components/common/table/management/body';
 import ManagementTableHead from '@components/common/table/management/head';
 import ManagementTableRow from '@components/common/table/management/row';
 import changeQuery from '@hooks/change_query';
 import multiCheckBoxHandler from '@hooks/multi_checkbox_handler';
+import { useDetailsModal } from '@hooks/use_details_modal';
 import { useInputSelect } from '@hooks/use_input';
 import { RootState } from '@redux/reducers';
 import styles from '@styles/components/bookstore/management.module.scss';
@@ -30,13 +31,8 @@ const BookstoreManagement = () => {
   const [selectTheme, changeSelectTheme] = useInputSelect<'' | BookstoreTheme>('');
   const [selectStatus, changeSelectStatus] = useInputSelect<'' | BookstoreStatus>('');
 
-  // 열려있는 모달창 식별자 상태
-  const [openModalId, setOpenModalId] = useState<number | null>(null);
-
-  /** 상세정보 버튼 - 모달창 열기 */
-  const detailsBtnHandler = useCallback((id: number) => () => {
-    setOpenModalId(id);
-  }, []);
+  // 상세정보 모달창 상태 관리: [열린 모달창 번호, 모달창 열기, 모달창 닫기]
+  const [openModalId, openModal, closeModal] = useDetailsModal();
 
   /** 수정 버튼, 생성 버튼 - 원하는 페이지로 이동 */
   const routePage = useCallback((url: string) => () => {
@@ -116,10 +112,10 @@ const BookstoreManagement = () => {
                   <span className={styles.exposedDate}>{bookstore.exposedDate && getDisplayTime(bookstore.exposedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.modifiedDate}>{bookstore.modifiedDate && getDisplayTime(bookstore.modifiedDate, 'yyyy-mm-dd hh:mm')}</span>
                   <span className={styles.button}>
-                    <button className={styles.table_details_btn} onClick={detailsBtnHandler(bookstore.id)}>상세정보</button>
-                    <Modal id={bookstore.id} openModalId={openModalId} setOpenModalId={setOpenModalId}>
-                      <BookstoreDetails bookstore={bookstore} setOpenModalId={setOpenModalId} />
-                    </Modal>
+                    <button className={styles.table_details_btn} onClick={openModal(bookstore.id)}>상세정보</button>
+                    <DetailsModal id={bookstore.id} openModalId={openModalId} closeModal={closeModal}>
+                      <BookstoreDetails bookstore={bookstore} closeModal={closeModal} />
+                    </DetailsModal>
                   </span>
                   <span className={styles.button}>
                     <button className={styles.table_modify_btn} onClick={routePage(`/bookstore/${bookstore.id}`)}>수정</button>
