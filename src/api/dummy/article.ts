@@ -1,5 +1,5 @@
 import { isReadArticleResDTO, isReadArticlesResDTO, PageState } from '@types';
-import { controlAxiosError } from '@utils/control_axios_error';
+import { axiosErrorHandler } from '@utils/error_handler';
 import { postBody } from '@utils/post_body';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_AXIOS_FRONT_PROTOCOL}${process.env.NEXT_PUBLIC_AXIOS_FRONT_HOST}${process.env.NEXT_PUBLIC_AXIOS_FRONT_COMMON_PATH}`;
@@ -15,7 +15,7 @@ export const readArticle = async (param: { id: string; }) => {
       return 'Not Vaild Format';
     }
   } catch (error) {
-    return controlAxiosError(error);
+    return axiosErrorHandler(error);
   }
 };
 
@@ -30,7 +30,7 @@ export const readArticles = async (data: Partial<PageState>) => {
       return 'Not Vaild Format';
     }
   } catch (error) {
-    return controlAxiosError(error);
+    return axiosErrorHandler(error);
   }
 };
 
@@ -45,6 +45,6 @@ export const readWholeArticles = async () => {
       return 'Not Vaild Format';
     }
   } catch (error) {
-    return controlAxiosError(error);
+    return axiosErrorHandler(error);
   }
 };
