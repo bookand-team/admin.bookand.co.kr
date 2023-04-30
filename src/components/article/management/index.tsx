@@ -94,7 +94,7 @@ const ArticleManagement = () => {
             <span className={styles.button} />
           </ManagementTableHead>}
         body={
-          <ManagementTableBody contentsLength={articlesLength}>
+          <ManagementTableBody>
             {articles && articles.map((article) => {
               return (
                 <ManagementTableRow key={article.id} checked={checkedBoxIds.includes(article.id)}>

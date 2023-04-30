@@ -95,7 +95,7 @@ const BookstoreManagement = () => {
           </ManagementTableHead>
         }
         body={
-          <ManagementTableBody contentsLength={bookstoresLength}>
+          <ManagementTableBody>
             {bookstores && bookstores.map((bookstore) => {
               return (
                 <ManagementTableRow key={bookstore.id} checked={checkedBoxIds.includes(bookstore.id)}>

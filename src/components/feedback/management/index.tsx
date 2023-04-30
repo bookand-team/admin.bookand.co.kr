@@ -60,7 +60,7 @@ const FeedbackManagement = () => {
           </ManagementTableHead>
         }
         body={
-          <ManagementTableBody contentsLength={feedbacksLength}>
+          <ManagementTableBody>
             {feedbacks && feedbacks.map((feedback) => {
               return (
                 <ManagementTableRow key={feedback.id} checked={false}>

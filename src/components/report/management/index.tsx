@@ -58,7 +58,7 @@ const ReportManagement = () => {
           </ManagementTableHead>
         }
         body={
-          <ManagementTableBody contentsLength={reportsLength}>
+          <ManagementTableBody>
             {reports && reports.map((report) => {
               return (
                 <ManagementTableRow key={report.id}>

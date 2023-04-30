@@ -68,7 +68,7 @@ const MemberManagement = () => {
           </ManagementTableHead>
         }
         body={
-          <ManagementTableBody contentsLength={membersLength}>
+          <ManagementTableBody>
             {members && members.map((member) => {
               return (
                 <ManagementTableRow key={member.id} checked={false}>

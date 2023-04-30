@@ -91,7 +91,7 @@ const PushManagement = () => {
           </ManagementTableHead>
         }
         body={
-          <ManagementTableBody contentsLength={pushesLength}>
+          <ManagementTableBody>
             {pushes && pushes.map((push) => {
               return (
                 <ManagementTableRow key={push.id} checked={checkedBoxIds.includes(push.id)}>
