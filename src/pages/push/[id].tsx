@@ -3,13 +3,11 @@ import { useEffect } from 'react';
 
 import { readPush } from '@api/dummy/push';
 import PushModification from '@components/push/modification';
+import { getToken, setPageState, setTokenExpiration, setUserState, redirectPage } from '@hooks/use_server_side';
 import { useUserState } from '@hooks/use_user_state';
-import { silentLogin } from '@redux/actions/user';
+import { reissueToken } from '@redux/actions/user';
 import { setPush } from '@redux/reducers/push';
 import wrapper from '@redux/store';
-import { checkToken } from '@utils/check_token';
-import { redirectPage } from '@utils/redirect_page';
-import { setPageState, setTokenExpiration, setUserState } from '@utils/set_initial_state';
 
 const PushModificationPage = () => {
   const router = useRouter();
@@ -17,25 +15,26 @@ const PushModificationPage = () => {
 
   // 페이지가 호출될 때 만료된 AccessToken을 가진 경우 토큰 재발행 요청
   useEffect(() => {
-    if (user.token && user.expired) { dispatch(silentLogin({ refreshToken: user.token.refreshToken })); }
+    if (user.token && user.expired) { dispatch(reissueToken({ refreshToken: user.token.refreshToken })); }
   }, []);
 
   // 토큰 재발행 요청 결과 처리
   useEffect(() => {
-    if (user.silentLoginDone) { router.reload(); }
-    if (user.silentLoginError) { router.replace('/'); }
-  }, [user.silentLoginDone, user.silentLoginError]);
+    if (user.reissueTokenDone) { router.reload(); }
+    if (user.reissueTokenError) { router.replace('/'); }
+  }, [user.reissueTokenDone, user.reissueTokenError]);
 
   return (<PushModification />);
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
-  // 토큰 확인 (미보유시 로그인 페이지 이동)
-  if (!checkToken(context)) { return redirectPage('/'); }
-
-  // 페이지 초기 설정 (페이지 상태, 토큰값)
+  // 페이지 상태 설정
   setPageState(store, context, 'push');
-  setUserState(store, context);
+
+  // 유저 상태 설정
+  const token = getToken(context);
+  if (!token) { return redirectPage('/'); }  // 토큰이 없는 경우 로그인 페이지로 이동
+  setUserState(store, token);
 
   // 데이터 요청 및 저장
   const result = await readPush({ id: context.params?.id as string });

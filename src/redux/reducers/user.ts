@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { login, logout, silentLogin } from '@redux/actions/user';
+import { login, logout, reissueToken } from '@redux/actions/user';
 import { UserState } from '@types';
 
 const initialState: UserState = {
@@ -17,9 +17,9 @@ const initialState: UserState = {
   loginError: false,
 
   // 토큰 재발행
-  silentLoginLoading: false,
-  silentLoginDone: false,
-  silentLoginError: false,
+  reissueTokenLoading: false,
+  reissueTokenDone: false,
+  reissueTokenError: false,
 
   // 로그아웃
   logoutLoading: false,
@@ -31,15 +31,16 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setLoginUser: (state, action) => {
-      state.isLoggedIn = true;
-      state.token = action.payload;
+    setUser: (state, action: {
+      payload: Pick<UserState, 'isLoggedIn' | 'token' | 'expired'>;
+      type: string;
+    }) => {
+      state.isLoggedIn = action.payload.isLoggedIn;
+      state.token = action.payload.token;
+      state.expired = action.payload.expired;
     },
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-    setExpired: (state) => {
-      state.expired = true;
+    setExpired: (state, action) => {
+      state.expired = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -49,27 +50,35 @@ const userSlice = createSlice({
       state.loginDone = false;
       state.loginError = false;
     });
-    builder.addCase(login.fulfilled, (state) => {
+    builder.addCase(login.fulfilled, (state, action) => {
       state.loginLoading = false;
       state.loginDone = true;
+      state.isLoggedIn = true;
+      state.token = action.payload;
     });
-    builder.addCase(login.rejected, (state) => {
+    builder.addCase(login.rejected, (state, action) => {
       state.loginLoading = false;
-      state.loginError = true;
+      state.loginError = action.payload;
+      state.isLoggedIn = false;
+      state.token = null;
     });
     // 토큰 재발행
-    builder.addCase(silentLogin.pending, (state) => {
-      state.silentLoginLoading = true;
-      state.silentLoginDone = false;
-      state.silentLoginError = false;
+    builder.addCase(reissueToken.pending, (state) => {
+      state.reissueTokenLoading = true;
+      state.reissueTokenDone = false;
+      state.reissueTokenError = false;
     });
-    builder.addCase(silentLogin.fulfilled, (state) => {
-      state.silentLoginLoading = false;
-      state.silentLoginDone = true;
+    builder.addCase(reissueToken.fulfilled, (state, action) => {
+      state.reissueTokenLoading = false;
+      state.reissueTokenDone = true;
+      state.isLoggedIn = true;
+      state.token = action.payload;
     });
-    builder.addCase(silentLogin.rejected, (state) => {
-      state.silentLoginLoading = false;
-      state.silentLoginError = true;
+    builder.addCase(reissueToken.rejected, (state, action) => {
+      state.reissueTokenLoading = false;
+      state.reissueTokenError = action.payload;
+      state.isLoggedIn = false;
+      state.token = null;
     });
     // 로그아웃
     builder.addCase(logout.pending, (state) => {
@@ -80,14 +89,17 @@ const userSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.logoutLoading = false;
       state.logoutDone = true;
+      state.isLoggedIn = false;
+      state.token = null;
     });
-    builder.addCase(logout.rejected, (state) => {
+    builder.addCase(logout.rejected, (state, action) => {
       state.logoutLoading = false;
-      state.logoutError = true;
+      state.logoutError = action.payload;
+      state.isLoggedIn = true;
     });
   }
 });
 
-export const { setLoginUser, setToken, setExpired } = userSlice.actions;
+export const { setUser, setExpired } = userSlice.actions;
 
 export default userSlice;

@@ -33,7 +33,7 @@ const Login = () => {
       <form onSubmit={loginBtnHandler}>
         <input type='text' name='inputId' placeholder='아이디' required spellCheck='false' />
         <input type='password' name='inputPassword' placeholder='비밀번호' required spellCheck='false' />
-        {loginError && <div>아이디 또는 비밀번호를 잘못 입력했습니다.</div>}
+        {loginError ? <div>아이디 또는 비밀번호를 잘못 입력했습니다.</div> : null}
         <button type='submit'>로그인</button>
       </form>
     </section>
