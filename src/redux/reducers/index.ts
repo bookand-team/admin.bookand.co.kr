@@ -1,7 +1,7 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
-import articleSlice from '@redux/reducers/acticle';
+import articleSlice from '@redux/reducers/article';
 import bookstoreSlice from '@redux/reducers/bookstore';
 import feedbackSlice from '@redux/reducers/feedback';
 import imageSlice from '@redux/reducers/image';
