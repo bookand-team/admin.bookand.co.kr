@@ -73,6 +73,7 @@ const userSlice = createSlice({
       state.reissueTokenDone = true;
       state.isLoggedIn = true;
       state.token = action.payload;
+      state.expired = false;
     });
     builder.addCase(reissueToken.rejected, (state, action) => {
       state.reissueTokenLoading = false;

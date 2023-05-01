@@ -1,28 +1,37 @@
 @use '../../layout/management_table';
 @use '../../layout/button';
 
+.container {
+  min-height: 700px;
+}
+
 .check,
 .id {
   @include management_table.fixed_sm;
 }
 
 .name {
-  flex: 7 0 185px;
+  flex: 3 0 200px;
   text-align: left;
   padding: 0 12px;
 }
 
-.theme,
-.status,
-.view,
-.bookmark {
+.theme {
+  @include management_table.increasing_lg;
+}
+
+.view {
   @include management_table.increasing_sm;
 }
 
 .createdDate,
-.exposedDate,
+.displayDate,
 .modifiedDate {
   @include management_table.increasing_lg;
+}
+
+.status {
+  @include management_table.fixed_lg;
 }
 
 .button {

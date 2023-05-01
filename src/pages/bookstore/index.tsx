@@ -1,28 +1,50 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { readBookstores } from '@api/dummy/bookstore';
 import BookstoreManagement from '@components/bookstore/management';
-import { getToken, setPageState, setTokenExpiration, setUserState, redirectPage } from '@hooks/use_server_side';
-import { useUserState } from '@hooks/use_user_state';
+import { getToken, setPageState, setUserState, redirectPage } from '@hooks/use_server_side';
+import { readBookstoreList } from '@redux/actions/bookstore';
 import { reissueToken } from '@redux/actions/user';
-import { setBookstores } from '@redux/reducers/bookstore';
-import wrapper from '@redux/store';
+import { RootState } from '@redux/reducers';
+import { setExpired } from '@redux/reducers/user';
+import wrapper, { AppDispatch } from '@redux/store';
+import { BookstoreStatusKey } from '@types';
 
 const BookstorePage = () => {
-  const router = useRouter();
-  const [user, dispatch] = useUserState();
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.user);
+  const page = useSelector((state: RootState) => state.page);
+  const { readBookstoreListError } = useSelector((state: RootState) => state.bookstore);
 
-  // 페이지가 호출될 때 만료된 AccessToken을 가진 경우 토큰 재발행 요청
-  useEffect(() => {
-    if (user.token && user.expired) { dispatch(reissueToken({ refreshToken: user.token.refreshToken })); }
-  }, []);
+  /** 서점 목록 조회  */
+  const readListData = useCallback(async () => {
+    // 만료된 토큰인 경우 토큰 재발행
+    if (user.expired) { await dispatch(reissueToken({ refreshToken: user.token!.refreshToken })); }
 
-  // 토큰 재발행 요청 결과 처리
+    // 서점 목록 조회
+    dispatch(readBookstoreList({
+      params: {
+        page: page.page,
+        size: 10,
+        search: page.search ? page.search : '',
+        theme: page.theme ? page.theme : '',
+        status: page.status ? page.status as BookstoreStatusKey : ''
+      },
+      headers: {
+        Authorization: `Bearer ${user.token!.accessToken}`
+      }
+    }));
+  }, [page, user.token, user.expired]);
+
+  // 페이지 상태가 변할때마다 정보 다시 불러오기
   useEffect(() => {
-    if (user.reissueTokenDone) { router.reload(); }
-    if (user.reissueTokenError) { router.replace('/'); }
-  }, [user.reissueTokenDone, user.reissueTokenError]);
+    readListData();
+  }, [page, user.token, user.expired]);
+
+  // 서점 목록 조회 실패 처리
+  useEffect(() => {
+    if (readBookstoreListError && readBookstoreListError === '만료된 JWT입니다.') { dispatch(setExpired(true)); }
+  }, [readBookstoreListError]);
 
   return (<BookstoreManagement />);
 };
@@ -35,14 +57,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   const token = getToken(context);
   if (!token) { return redirectPage('/'); }  // 토큰이 없는 경우 로그인 페이지로 이동
   setUserState(store, token);
-
-  // 데이터 요청 및 저장
-  const result = await readBookstores(store.getState().page);
-  if (typeof result !== 'string') {
-    store.dispatch(setBookstores(result));
-  } else if (result === 'Token Exception') {
-    setTokenExpiration(store);
-  }
 
   return { props: {} };
 });
