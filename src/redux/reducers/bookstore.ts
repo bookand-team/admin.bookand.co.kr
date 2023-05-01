@@ -20,12 +20,7 @@ const bookstoreSlice = createSlice({
   name: 'bookstore',
   initialState,
   reducers: {
-    setBookstore: (state, action) => {
-      state.bookstore = action.payload.bookstore;
-    },
-    setBookstores: (state, action) => {
-      state.bookstoreList = action.payload.bookstores;
-    }
+
   },
   extraReducers: (builder) => {
     // 서점 목록 조회
@@ -50,7 +45,5 @@ const bookstoreSlice = createSlice({
     });
   }
 });
-
-export const { setBookstore, setBookstores } = bookstoreSlice.actions;
 
 export default bookstoreSlice;

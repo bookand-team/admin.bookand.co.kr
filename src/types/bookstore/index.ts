@@ -24,6 +24,17 @@ export const BookstoreStatusValueList = BookstoreStatusMapping.map((keyword) => 
 export type BookstoreStatusKey = typeof BookstoreStatusKeyList[number];
 export type BookstoreStatusValue = typeof BookstoreStatusValueList[number];
 
+// 서점 등록 정보
+export interface BookstoreProperty {
+  address: string;  // 주소
+  businessHours: string;  // 영업 시간
+  contact: string;  // 전화 번호
+  facility: string;  // 시설 정보
+  latitude: string;  // 위도 정보
+  longitude: string;  // 경도 정보
+  sns: string;  // SNS 정보
+}
+
 // 서점 목록 조회 요청 파라미터
 export interface ReadBookstoreListReqDTO {
   params: {
@@ -50,18 +61,10 @@ export interface ReadBookstoreReqDTO {
 export interface BookstoreDTO {
   id: number;  // 식별자
   name: string;  // 이름
-  info: {  // api 등록 정보
-    address: string;  // 주소
-    businessHours: string;  // 영업 시간
-    contact: string;  // 전화 번호
-    facility: string;  // 시설 정보
-    latitude: string;  // 위도 정보
-    longitude: string;  // 경도 정보
-    sns: string;  // SNS 정보
-  };
+  info: BookstoreProperty;  // api 등록 정보
   introduction: string;  // 한줄 소개
-  theme: BookstoreThemeValue[];  // 테마
-  themeList: BookstoreThemeValue[];  // 테마
+  theme: BookstoreThemeKey[];  // 테마
+  themeList: BookstoreThemeKey[];  // 테마
   status: BookstoreStatusKey;  // 노출 상태
   view: number;  // 조회수
   isBookmark: boolean;

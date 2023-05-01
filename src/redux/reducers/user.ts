@@ -53,14 +53,11 @@ const userSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loginLoading = false;
       state.loginDone = true;
-      state.isLoggedIn = true;
       state.token = action.payload;
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loginLoading = false;
       state.loginError = action.payload;
-      state.isLoggedIn = false;
-      state.token = null;
     });
     // 토큰 재발행
     builder.addCase(reissueToken.pending, (state) => {
@@ -71,15 +68,12 @@ const userSlice = createSlice({
     builder.addCase(reissueToken.fulfilled, (state, action) => {
       state.reissueTokenLoading = false;
       state.reissueTokenDone = true;
-      state.isLoggedIn = true;
       state.token = action.payload;
       state.expired = false;
     });
     builder.addCase(reissueToken.rejected, (state, action) => {
       state.reissueTokenLoading = false;
       state.reissueTokenError = action.payload;
-      state.isLoggedIn = false;
-      state.token = null;
     });
     // 로그아웃
     builder.addCase(logout.pending, (state) => {
@@ -90,13 +84,10 @@ const userSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.logoutLoading = false;
       state.logoutDone = true;
-      state.isLoggedIn = false;
-      state.token = null;
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.logoutLoading = false;
       state.logoutError = action.payload;
-      state.isLoggedIn = true;
     });
   }
 });
