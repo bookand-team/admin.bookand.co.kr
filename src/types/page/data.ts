@@ -1,5 +1,5 @@
 import { ArticleCategory, ArticleStatus } from '../article';
-import { BookstoreStatus, BookstoreTheme } from '../bookstore';
+import { BookstoreStatusKey, BookstoreThemeKey } from '../bookstore';
 import { FeedbackCategory } from '../feedback';
 import { MemberRole, MemberStatus } from '../member';
 import { PushCategory, PushStatus } from '../push';
@@ -13,11 +13,11 @@ export type PageSection = typeof PageSectionArr[number];
 export interface PageState {
   section: PageSection | null;
   category: ArticleCategory | FeedbackCategory | PushCategory | null;
-  theme: BookstoreTheme | null;
+  theme: BookstoreThemeKey | null;
   page: number;
   role: MemberRole | null;
   row: number;
   search: string | null;
-  status: ArticleStatus | BookstoreStatus | MemberStatus | PushStatus | ReportStatus | null;
+  status: ArticleStatus | BookstoreStatusKey | MemberStatus | PushStatus | ReportStatus | null;
   gnbOpend: boolean;
 }

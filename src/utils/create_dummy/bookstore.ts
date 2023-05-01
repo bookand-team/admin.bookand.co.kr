@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { BookstoreStatusArr, BookstoreThemeArr } from '@types';
+import { BookstoreStatusValueList, BookstoreThemeValueList } from '@types';
 
 export function CreateDummyBookstores() {
   const createdDateList = faker.date.betweens('2021-01-01T00:00:00.000Z', '2023-01-01T00:00:00.000Z', 500);
@@ -16,11 +16,11 @@ export function CreateDummyBookstores() {
       facility: faker.lorem.words(Math.floor(Math.random() * 4)),
       sns: faker.internet.url()
     };
-    const theme = BookstoreThemeArr[Math.floor(Math.random() * BookstoreThemeArr.length)];  // 테마
+    const theme = BookstoreThemeValueList[Math.floor(Math.random() * BookstoreThemeValueList.length)];  // 테마
     const introduction = faker.lorem.sentence();  // 한줄 소개
     const mainImage = faker.internet.url();  // 대표 이미지
     const subImages = [faker.internet.url(), faker.internet.url()];  // 서브 이미지들
-    const status = Math.random() < 0.9 ? BookstoreStatusArr[0] : BookstoreStatusArr[1];  // 노출 상태
+    const status = Math.random() < 0.9 ? BookstoreStatusValueList[0] : BookstoreStatusValueList[1];  // 노출 상태
     const view = Math.floor(Math.random() * 200);  // 조회수
     const bookmark = Math.floor(Math.random() * view);  // 북마크한 사람 수
     const createdDate = CD;  // 등록 날짜

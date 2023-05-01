@@ -1,12 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { readBookstore, readBookstoreList } from '@redux/actions/bookstore';
 import { BookstoreState } from '@types';
 
 const initialState: BookstoreState = {
   bookstore: null,
+  bookstoreList: null,
 
-  bookstores: null,
-  bookstoresLength: null
+  // 서점 목록 조회
+  readBookstoreListDone: false,
+  readBookstoreListError: null,
+
+  // 서점 조회
+  readBookstoreDone: false,
+  readBookstoreError: null
 };
 
 const bookstoreSlice = createSlice({
@@ -17,9 +24,30 @@ const bookstoreSlice = createSlice({
       state.bookstore = action.payload.bookstore;
     },
     setBookstores: (state, action) => {
-      state.bookstores = action.payload.bookstores;
-      state.bookstoresLength = action.payload.bookstoresLength;
+      state.bookstoreList = action.payload.bookstores;
     }
+  },
+  extraReducers: (builder) => {
+    // 서점 목록 조회
+    builder.addCase(readBookstoreList.fulfilled, (state, action) => {
+      state.readBookstoreListDone = true;
+      state.readBookstoreListError = null;
+      state.bookstoreList = action.payload.bookstore;
+    });
+    builder.addCase(readBookstoreList.rejected, (state, action) => {
+      state.readBookstoreListDone = false;
+      state.readBookstoreListError = action.payload;
+    });
+    // 서점 조회
+    builder.addCase(readBookstore.fulfilled, (state, action) => {
+      state.readBookstoreDone = true;
+      state.readBookstoreError = null;
+      state.bookstore = action.payload;
+    });
+    builder.addCase(readBookstore.rejected, (state, action) => {
+      state.readBookstoreDone = false;
+      state.readBookstoreError = action.payload;
+    });
   }
 });
 
